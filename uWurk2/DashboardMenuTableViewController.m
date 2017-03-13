@@ -131,7 +131,7 @@
     // Navigation logic may go here, for example:
     // Create the next view controller.
     
-    NSDictionary *d = [self.menuArray objectAtIndex:indexPath.row];
+///    NSDictionary *d = [self.menuArray objectAtIndex:indexPath.row];
     
 //    Class v = NSClassFromString([d objectForKey:@"ViewController"]);
 //    UIViewController *childViewControllerNew = nil;

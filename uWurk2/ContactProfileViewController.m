@@ -23,8 +23,8 @@
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSString *tips;
-    NSString *time;
+///    NSString *tips;
+///    NSString *time;
     self.lblEmployeeName.text = [NSString stringWithFormat:@"%@:",[self.searchUserDict objectForKey:@"first_name"]];
     self.lblNameInterest.text = [NSString stringWithFormat:@"Based on %@'s interest in this position, you will receive a YES or NO reply.",[self.searchUserDict objectForKey:@"first_name"]];
     self.lblEmployer.text = [self.appDelegate.user objectForKey:@"company"];

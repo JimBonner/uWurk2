@@ -80,7 +80,7 @@
     NSString *trimmedValue = [value stringByTrimmingCharactersInSet:
                               [NSCharacterSet whitespaceCharacterSet]];
     if([trimmedValue length]>0){
-        NSString *s = [self.appDelegate.user objectForKey:key];
+///        NSString *s = [self.appDelegate.user objectForKey:key];
 //        if(![value isEqualToString:[self.appDelegate.user objectForKey:key]])
             [paramDict setObject:value forKey:key];
     }

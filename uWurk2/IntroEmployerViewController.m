@@ -107,7 +107,7 @@
                       [manager POST:@"http://uwurk.tscserver.com/api/v1/register" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
                           
                           NSLog(@"JSON: %@", responseObject);
-                          BOOL bValid = [self validateResponse:responseObject];
+///                          BOOL bValid = [self validateResponse:responseObject];
                           if([((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] != nil){
                               [self saveUserDefault:[((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] Key:@"api_auth_token"];
                               
