@@ -145,8 +145,8 @@
 		9B214CB51C2FCBB00063BC0E /* RefineSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefineSearchViewController.m; sourceTree = "<group>"; };
 		9B3760881C0C7DD900E9FB7D /* ContactProfileNotifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactProfileNotifyViewController.h; sourceTree = "<group>"; };
 		9B3760891C0C7DD900E9FB7D /* ContactProfileNotifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactProfileNotifyViewController.m; sourceTree = "<group>"; };
-		9B37608B1C0C866A00E9FB7D /* EmployeeWhatDoIDoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeWhatDoIDoViewController.h; sourceTree = "<group>"; };
-		9B37608C1C0C866A00E9FB7D /* EmployeeWhatDoIDoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeWhatDoIDoViewController.m; sourceTree = "<group>"; };
+		9B37608B1C0C866A00E9FB7D /* EmployeeWhatDoIDoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmployeeWhatDoIDoViewController.h; path = ../uWurk2/EmployeeWhatDoIDoViewController.h; sourceTree = "<group>"; };
+		9B37608C1C0C866A00E9FB7D /* EmployeeWhatDoIDoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmployeeWhatDoIDoViewController.m; path = ../uWurk2/EmployeeWhatDoIDoViewController.m; sourceTree = "<group>"; };
 		9B379C881B950FD500EB4E2D /* uWurk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = uWurk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B379C8C1B950FD500EB4E2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B379C8D1B950FD500EB4E2D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -156,28 +156,28 @@
 		9B379CA11B950FD500EB4E2D /* uWurk2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = uWurk2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B379CA61B950FD500EB4E2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B379CA71B950FD500EB4E2D /* uWurk2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = uWurk2Tests.m; sourceTree = "<group>"; };
-		9B379CB31B95197600EB4E2D /* EmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeViewController.h; sourceTree = "<group>"; };
-		9B379CB41B95197600EB4E2D /* EmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeViewController.m; sourceTree = "<group>"; };
-		9B379CB91B95217700EB4E2D /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
-		9B379CBA1B95217700EB4E2D /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
-		9B379CBC1B95247600EB4E2D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		9B379CBD1B95247600EB4E2D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		9B379CF11B97DF3A00EB4E2D /* IntroEmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroEmployeeViewController.h; sourceTree = "<group>"; };
-		9B379CF21B97DF3A00EB4E2D /* IntroEmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroEmployeeViewController.m; sourceTree = "<group>"; };
-		9B379CF41B97EAB800EB4E2D /* IntroEmployerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroEmployerViewController.h; sourceTree = "<group>"; };
-		9B379CF51B97EAB800EB4E2D /* IntroEmployerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroEmployerViewController.m; sourceTree = "<group>"; };
+		9B379CB31B95197600EB4E2D /* EmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmployeeViewController.h; path = ../uWurk2/EmployeeViewController.h; sourceTree = "<group>"; };
+		9B379CB41B95197600EB4E2D /* EmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmployeeViewController.m; path = ../uWurk2/EmployeeViewController.m; sourceTree = "<group>"; };
+		9B379CB91B95217700EB4E2D /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroViewController.h; path = ../uWurk2/IntroViewController.h; sourceTree = "<group>"; };
+		9B379CBA1B95217700EB4E2D /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroViewController.m; path = ../uWurk2/IntroViewController.m; sourceTree = "<group>"; };
+		9B379CBC1B95247600EB4E2D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ../uWurk2/LoginViewController.h; sourceTree = "<group>"; };
+		9B379CBD1B95247600EB4E2D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = ../uWurk2/LoginViewController.m; sourceTree = "<group>"; };
+		9B379CF11B97DF3A00EB4E2D /* IntroEmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroEmployeeViewController.h; path = ../uWurk2/IntroEmployeeViewController.h; sourceTree = "<group>"; };
+		9B379CF21B97DF3A00EB4E2D /* IntroEmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroEmployeeViewController.m; path = ../uWurk2/IntroEmployeeViewController.m; sourceTree = "<group>"; };
+		9B379CF41B97EAB800EB4E2D /* IntroEmployerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroEmployerViewController.h; path = ../uWurk2/IntroEmployerViewController.h; sourceTree = "<group>"; };
+		9B379CF51B97EAB800EB4E2D /* IntroEmployerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroEmployerViewController.m; path = ../uWurk2/IntroEmployerViewController.m; sourceTree = "<group>"; };
 		9B379CF71B97F6E500EB4E2D /* EmployeeStep1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeStep1ViewController.h; sourceTree = "<group>"; };
 		9B379CF81B97F6E500EB4E2D /* EmployeeStep1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeStep1ViewController.m; sourceTree = "<group>"; };
-		9B3C29A91C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeRegisterThanksViewController.h; sourceTree = "<group>"; };
-		9B3C29AA1C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeRegisterThanksViewController.m; sourceTree = "<group>"; };
-		9B3C29AC1C41F55300EF0296 /* EmployerRegisterThanksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerRegisterThanksViewController.h; sourceTree = "<group>"; };
-		9B3C29AD1C41F55300EF0296 /* EmployerRegisterThanksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerRegisterThanksViewController.m; sourceTree = "<group>"; };
-		9B3EE1451B9F4DFA001D3C37 /* ListSelectorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListSelectorTableViewController.h; sourceTree = "<group>"; };
-		9B3EE1461B9F4DFA001D3C37 /* ListSelectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListSelectorTableViewController.m; sourceTree = "<group>"; };
+		9B3C29A91C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmployeeRegisterThanksViewController.h; path = ../uWurk2/EmployeeRegisterThanksViewController.h; sourceTree = "<group>"; };
+		9B3C29AA1C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmployeeRegisterThanksViewController.m; path = ../uWurk2/EmployeeRegisterThanksViewController.m; sourceTree = "<group>"; };
+		9B3C29AC1C41F55300EF0296 /* EmployerRegisterThanksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmployerRegisterThanksViewController.h; path = ../uWurk2/EmployerRegisterThanksViewController.h; sourceTree = "<group>"; };
+		9B3C29AD1C41F55300EF0296 /* EmployerRegisterThanksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmployerRegisterThanksViewController.m; path = ../uWurk2/EmployerRegisterThanksViewController.m; sourceTree = "<group>"; };
+		9B3EE1451B9F4DFA001D3C37 /* ListSelectorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListSelectorTableViewController.h; path = ../uWurk2/ListSelectorTableViewController.h; sourceTree = "<group>"; };
+		9B3EE1461B9F4DFA001D3C37 /* ListSelectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListSelectorTableViewController.m; path = ../uWurk2/ListSelectorTableViewController.m; sourceTree = "<group>"; };
 		9B3EE1481B9F6D80001D3C37 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		9B3EE1491B9F6D80001D3C37 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
-		9B3EE14E1BA367BE001D3C37 /* ReferralProgramViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferralProgramViewController.h; sourceTree = "<group>"; };
-		9B3EE14F1BA367BE001D3C37 /* ReferralProgramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReferralProgramViewController.m; sourceTree = "<group>"; };
+		9B3EE14E1BA367BE001D3C37 /* ReferralProgramViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReferralProgramViewController.h; path = ../uWurk2/ReferralProgramViewController.h; sourceTree = "<group>"; };
+		9B3EE14F1BA367BE001D3C37 /* ReferralProgramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReferralProgramViewController.m; path = ../uWurk2/ReferralProgramViewController.m; sourceTree = "<group>"; };
 		9B3EE1831BAA2788001D3C37 /* ProfileEditStep1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileEditStep1ViewController.h; sourceTree = "<group>"; };
 		9B3EE1841BAA2788001D3C37 /* ProfileEditStep1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileEditStep1ViewController.m; sourceTree = "<group>"; };
 		9B3EE1861BAA27B2001D3C37 /* ProfileEditStep2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileEditStep2ViewController.h; sourceTree = "<group>"; };
@@ -213,8 +213,8 @@
 		9B8B992F1BB7B104005821EB /* SearchResultProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultProfileViewController.m; sourceTree = "<group>"; };
 		9BBC0B6B1BD482D8003327ED /* EmployeeStepSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeStepSetupViewController.h; sourceTree = "<group>"; };
 		9BBC0B6C1BD482D8003327ED /* EmployeeStepSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeStepSetupViewController.m; sourceTree = "<group>"; };
-		9BD16A561BE6E319006BAF69 /* ListSelectorStringsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListSelectorStringsTableViewController.h; sourceTree = "<group>"; };
-		9BD16A571BE6E319006BAF69 /* ListSelectorStringsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListSelectorStringsTableViewController.m; sourceTree = "<group>"; };
+		9BD16A561BE6E319006BAF69 /* ListSelectorStringsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListSelectorStringsTableViewController.h; path = ../uWurk2/ListSelectorStringsTableViewController.h; sourceTree = "<group>"; };
+		9BD16A571BE6E319006BAF69 /* ListSelectorStringsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListSelectorStringsTableViewController.m; path = ../uWurk2/ListSelectorStringsTableViewController.m; sourceTree = "<group>"; };
 		9BD16A5D1BEC4102006BAF69 /* MailFoldersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailFoldersViewController.h; sourceTree = "<group>"; };
 		9BD16A5E1BEC4102006BAF69 /* MailFoldersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailFoldersViewController.m; sourceTree = "<group>"; };
 		9BD16A601BEC4119006BAF69 /* MailMessagesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailMessagesTableViewController.h; sourceTree = "<group>"; };
@@ -280,8 +280,8 @@
 		DC9EC4071C5C67AD0096169F /* IndustryPositionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndustryPositionViewController.m; sourceTree = "<group>"; };
 		DCA4AE711C41B592007B7F1B /* Mail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Mail.storyboard; sourceTree = "<group>"; };
 		DCA4AE731C41B6E6007B7F1B /* EmployeeProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EmployeeProfile.storyboard; sourceTree = "<group>"; };
-		DCA4AE751C41CD53007B7F1B /* ListMultiSelectorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListMultiSelectorTableViewController.h; sourceTree = "<group>"; };
-		DCA4AE761C41CD53007B7F1B /* ListMultiSelectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListMultiSelectorTableViewController.m; sourceTree = "<group>"; };
+		DCA4AE751C41CD53007B7F1B /* ListMultiSelectorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListMultiSelectorTableViewController.h; path = ../uWurk2/ListMultiSelectorTableViewController.h; sourceTree = "<group>"; };
+		DCA4AE761C41CD53007B7F1B /* ListMultiSelectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListMultiSelectorTableViewController.m; path = ../uWurk2/ListMultiSelectorTableViewController.m; sourceTree = "<group>"; };
 		DCA4AF701C4BE3DF007B7F1B /* GeneralViews.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GeneralViews.storyboard; sourceTree = "<group>"; };
 		DCA4AF731C4BE93B007B7F1B /* SaveSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveSearchViewController.h; sourceTree = "<group>"; };
 		DCA4AF741C4BE93B007B7F1B /* SaveSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveSearchViewController.m; sourceTree = "<group>"; };
@@ -308,6 +308,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1ED53B641E7736320054EFCA /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9B379CB91B95217700EB4E2D /* IntroViewController.h */,
+				9B379CBA1B95217700EB4E2D /* IntroViewController.m */,
+				9B379CBC1B95247600EB4E2D /* LoginViewController.h */,
+				9B379CBD1B95247600EB4E2D /* LoginViewController.m */,
+				9B3EE14E1BA367BE001D3C37 /* ReferralProgramViewController.h */,
+				9B3EE14F1BA367BE001D3C37 /* ReferralProgramViewController.m */,
+				9B379CF41B97EAB800EB4E2D /* IntroEmployerViewController.h */,
+				9B379CF51B97EAB800EB4E2D /* IntroEmployerViewController.m */,
+				9B3C29AC1C41F55300EF0296 /* EmployerRegisterThanksViewController.h */,
+				9B3C29AD1C41F55300EF0296 /* EmployerRegisterThanksViewController.m */,
+				9BD16A561BE6E319006BAF69 /* ListSelectorStringsTableViewController.h */,
+				9BD16A571BE6E319006BAF69 /* ListSelectorStringsTableViewController.m */,
+				9B3EE1451B9F4DFA001D3C37 /* ListSelectorTableViewController.h */,
+				9B3EE1461B9F4DFA001D3C37 /* ListSelectorTableViewController.m */,
+				DCA4AE751C41CD53007B7F1B /* ListMultiSelectorTableViewController.h */,
+				DCA4AE761C41CD53007B7F1B /* ListMultiSelectorTableViewController.m */,
+				9B3C29A91C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.h */,
+				9B3C29AA1C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.m */,
+				9B379CF11B97DF3A00EB4E2D /* IntroEmployeeViewController.h */,
+				9B379CF21B97DF3A00EB4E2D /* IntroEmployeeViewController.m */,
+				9B379CB31B95197600EB4E2D /* EmployeeViewController.h */,
+				9B379CB41B95197600EB4E2D /* EmployeeViewController.m */,
+				9B37608B1C0C866A00E9FB7D /* EmployeeWhatDoIDoViewController.h */,
+				9B37608C1C0C866A00E9FB7D /* EmployeeWhatDoIDoViewController.m */,
+			);
+			name = ViewControllers;
+			path = ../Pods;
+			sourceTree = "<group>";
+		};
 		57BC6448572285618DFBB48F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +347,7 @@
 				F9592C9E1B6D36DDD77124F0 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		98F8C277F04B8C2E2D8E0A0D /* Frameworks */ = {
@@ -364,7 +397,6 @@
 				9B379C8A1B950FD500EB4E2D /* uWurk2 */,
 				9B379CA41B950FD500EB4E2D /* uWurk2Tests */,
 				9B379C891B950FD500EB4E2D /* Products */,
-				57BC6448572285618DFBB48F /* Pods */,
 				98F8C277F04B8C2E2D8E0A0D /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -393,33 +425,8 @@
 				9B3EE1921BAA2860001D3C37 /* EditEmployeeProfile */,
 				DC8185681BADA0A500EF2436 /* DashboardMenu */,
 				9BD16A5C1BEC401E006BAF69 /* Mail */,
-				9B379CB91B95217700EB4E2D /* IntroViewController.h */,
-				9B379CBA1B95217700EB4E2D /* IntroViewController.m */,
-				9B379CBC1B95247600EB4E2D /* LoginViewController.h */,
-				9B379CBD1B95247600EB4E2D /* LoginViewController.m */,
-				9B3EE14E1BA367BE001D3C37 /* ReferralProgramViewController.h */,
-				9B3EE14F1BA367BE001D3C37 /* ReferralProgramViewController.m */,
-				9B379CF41B97EAB800EB4E2D /* IntroEmployerViewController.h */,
-				9B379CF51B97EAB800EB4E2D /* IntroEmployerViewController.m */,
-				9B3C29AC1C41F55300EF0296 /* EmployerRegisterThanksViewController.h */,
-				9B3C29AD1C41F55300EF0296 /* EmployerRegisterThanksViewController.m */,
-				9BD16A561BE6E319006BAF69 /* ListSelectorStringsTableViewController.h */,
-				9BD16A571BE6E319006BAF69 /* ListSelectorStringsTableViewController.m */,
-				9B3EE1451B9F4DFA001D3C37 /* ListSelectorTableViewController.h */,
-				9B3EE1461B9F4DFA001D3C37 /* ListSelectorTableViewController.m */,
-				DCA4AE751C41CD53007B7F1B /* ListMultiSelectorTableViewController.h */,
-				DCA4AE761C41CD53007B7F1B /* ListMultiSelectorTableViewController.m */,
-				9B3C29A91C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.h */,
-				9B3C29AA1C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.m */,
-				9B379CF11B97DF3A00EB4E2D /* IntroEmployeeViewController.h */,
-				9B379CF21B97DF3A00EB4E2D /* IntroEmployeeViewController.m */,
-				9B379CB31B95197600EB4E2D /* EmployeeViewController.h */,
-				9B379CB41B95197600EB4E2D /* EmployeeViewController.m */,
-				9B37608B1C0C866A00E9FB7D /* EmployeeWhatDoIDoViewController.h */,
-				9B37608C1C0C866A00E9FB7D /* EmployeeWhatDoIDoViewController.m */,
+				1ED53B641E7736320054EFCA /* ViewControllers */,
 				9B379C8B1B950FD500EB4E2D /* Supporting Files */,
-				DC7322DB1C35F28A004EE713 /* PhotoImageView.h */,
-				DC7322DC1C35F28A004EE713 /* PhotoImageView.m */,
 			);
 			path = uWurk2;
 			sourceTree = "<group>";
@@ -427,6 +434,9 @@
 		9B379C8B1B950FD500EB4E2D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DC7322DB1C35F28A004EE713 /* PhotoImageView.h */,
+				DC7322DC1C35F28A004EE713 /* PhotoImageView.m */,
+				57BC6448572285618DFBB48F /* Pods */,
 				DC01B7BC1C34904200F0CA5D /* uWurk2-Info-prefix.pch */,
 				DC6A07C41C0B76FD007FDEE1 /* RobotoCondensed-Bold.ttf */,
 				DC6A07C51C0B76FD007FDEE1 /* RobotoCondensed-BoldItalic.ttf */,
