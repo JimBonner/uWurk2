@@ -1,0 +1,37 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "F52C8E74C047FD9AA540FD8585670FDAE5718BB5",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "32C5337B378BF3656118630848D53A484B7B93F8" : 0,
+    "F275A9C8F3D156C419666D7BF8F96F928A69222E" : 0,
+    "F52C8E74C047FD9AA540FD8585670FDAE5718BB5" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C6BDDE7D-DAE8-4673-8CCA-99123CF763BD",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "32C5337B378BF3656118630848D53A484B7B93F8" : "uWurk2",
+    "F275A9C8F3D156C419666D7BF8F96F928A69222E" : "uWurk",
+    "F52C8E74C047FD9AA540FD8585670FDAE5718BB5" : "uWurk2\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "uWurk2",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "uWurk2.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:bonro001\/uWurk-2.0.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "32C5337B378BF3656118630848D53A484B7B93F8"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/bonro001\/uWurk.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F275A9C8F3D156C419666D7BF8F96F928A69222E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:bonro001\/uWurk-2.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F52C8E74C047FD9AA540FD8585670FDAE5718BB5"
+    }
+  ]
+}

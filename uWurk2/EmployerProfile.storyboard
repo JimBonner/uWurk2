@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="RobotoCondensed-Bold.ttf">
+            <string>RobotoCondensed-Bold</string>
+            <string>RobotoCondensed-Bold</string>
+        </mutableArray>
+    </customFonts>
+    <scenes>
+        <!--Employer Dashboard Saved Searches View Controller-->
+        <scene sceneID="F8y-4G-b2L">
+            <objects>
+                <viewController storyboardIdentifier="EmployerDashboardSavedSearchesViewController" id="BmA-AD-8xm" customClass="EmployerDashboardSavedSearchesViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ab2-OP-MXm"/>
+                        <viewControllerLayoutGuide type="bottom" id="FIp-Tg-UkN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fvb-3q-hH2">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6rD-4Q-F1X">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="kn3-0c-TEw">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="42"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="SAVED SEARCHES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JsF-ZS-BKo">
+                                            <rect key="frame" x="30" y="10" width="269" height="26"/>
+                                            <fontDescription key="fontDescription" name="RobotoCondensed-Bold" family="Roboto Condensed" pointSize="18"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uTx-7K-Uog">
+                                            <rect key="frame" x="0.0" y="37" width="600" height="5"/>
+                                            <color key="backgroundColor" red="1" green="0.84079437430000004" blue="0.25805730719999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="5" id="ygE-h1-O2Q"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="uTx-7K-Uog" firstAttribute="leading" secondItem="kn3-0c-TEw" secondAttribute="leading" id="4UT-vn-EZe"/>
+                                        <constraint firstItem="JsF-ZS-BKo" firstAttribute="leading" secondItem="kn3-0c-TEw" secondAttribute="leading" constant="30" id="9Np-tN-D0X"/>
+                                        <constraint firstItem="JsF-ZS-BKo" firstAttribute="top" secondItem="kn3-0c-TEw" secondAttribute="top" constant="10" id="EL1-on-wGh"/>
+                                        <constraint firstAttribute="trailing" secondItem="uTx-7K-Uog" secondAttribute="trailing" id="Obl-5C-bu1"/>
+                                        <constraint firstAttribute="bottom" secondItem="uTx-7K-Uog" secondAttribute="bottom" id="ed3-tL-MBE"/>
+                                        <constraint firstItem="uTx-7K-Uog" firstAttribute="top" secondItem="JsF-ZS-BKo" secondAttribute="bottom" constant="1" id="iqv-0b-iaW"/>
+                                    </constraints>
+                                </view>
+                                <connections>
+                                    <outlet property="dataSource" destination="BmA-AD-8xm" id="pF4-Ub-M8b"/>
+                                    <outlet property="delegate" destination="BmA-AD-8xm" id="gfL-Dx-DGe"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6rD-4Q-F1X" firstAttribute="top" secondItem="ab2-OP-MXm" secondAttribute="bottom" id="c3U-lV-tjP"/>
+                            <constraint firstItem="FIp-Tg-UkN" firstAttribute="top" secondItem="6rD-4Q-F1X" secondAttribute="bottom" id="dr9-Xg-Fhq"/>
+                            <constraint firstItem="6rD-4Q-F1X" firstAttribute="leading" secondItem="fvb-3q-hH2" secondAttribute="leading" id="kK6-gG-hn2"/>
+                            <constraint firstAttribute="trailing" secondItem="6rD-4Q-F1X" secondAttribute="trailing" id="yKL-6L-xE7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="6rD-4Q-F1X" id="iJw-yb-JxA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v6Y-a1-mvl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="424" y="519"/>
+        </scene>
+        <!--Employer Dashboard Recent Searches View Controller-->
+        <scene sceneID="kdj-22-tqS">
+            <objects>
+                <viewController storyboardIdentifier="EmployerDashboardRecentSearchesViewController" id="idg-4T-aZZ" customClass="EmployerDashboardRecentSearchesViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eVt-sd-wsr"/>
+                        <viewControllerLayoutGuide type="bottom" id="KTE-Wz-lFy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xwN-CJ-2IZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7g1-PG-CSf">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="oAV-Jk-MH4">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="42"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="RECENT SEARCHES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="41A-Gp-T9R">
+                                            <rect key="frame" x="30" y="10" width="269" height="26"/>
+                                            <fontDescription key="fontDescription" name="RobotoCondensed-Bold" family="Roboto Condensed" pointSize="18"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9iS-eT-AAA">
+                                            <rect key="frame" x="0.0" y="37" width="600" height="5"/>
+                                            <color key="backgroundColor" red="1" green="0.84079437430000004" blue="0.25805730719999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="5" id="0Go-cz-0YM"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="41A-Gp-T9R" firstAttribute="leading" secondItem="oAV-Jk-MH4" secondAttribute="leading" constant="30" id="9jp-Ia-UaU"/>
+                                        <constraint firstItem="9iS-eT-AAA" firstAttribute="leading" secondItem="oAV-Jk-MH4" secondAttribute="leading" id="KFH-OC-onq"/>
+                                        <constraint firstItem="41A-Gp-T9R" firstAttribute="top" secondItem="oAV-Jk-MH4" secondAttribute="top" constant="10" id="YoO-pS-sHN"/>
+                                        <constraint firstItem="9iS-eT-AAA" firstAttribute="top" secondItem="41A-Gp-T9R" secondAttribute="bottom" constant="1" id="g7Q-AW-KHi"/>
+                                        <constraint firstAttribute="bottom" secondItem="9iS-eT-AAA" secondAttribute="bottom" id="kkF-kT-INs"/>
+                                        <constraint firstAttribute="trailing" secondItem="9iS-eT-AAA" secondAttribute="trailing" id="lzo-VL-4Cs"/>
+                                    </constraints>
+                                </view>
+                                <connections>
+                                    <outlet property="dataSource" destination="idg-4T-aZZ" id="Ewr-aw-RBu"/>
+                                    <outlet property="delegate" destination="idg-4T-aZZ" id="Zbb-BJ-PAE"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="7g1-PG-CSf" secondAttribute="trailing" id="Brh-F4-YPc"/>
+                            <constraint firstItem="7g1-PG-CSf" firstAttribute="top" secondItem="eVt-sd-wsr" secondAttribute="bottom" id="FcR-A6-siw"/>
+                            <constraint firstItem="KTE-Wz-lFy" firstAttribute="top" secondItem="7g1-PG-CSf" secondAttribute="bottom" id="Lvr-zb-Fm0"/>
+                            <constraint firstItem="7g1-PG-CSf" firstAttribute="leading" secondItem="xwN-CJ-2IZ" secondAttribute="leading" id="Q4U-9B-m22"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="7g1-PG-CSf" id="hu4-2h-dNi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xld-sj-KZz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="424" y="519"/>
+        </scene>
+    </scenes>
+</document>

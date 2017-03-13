@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>MenuText</key>
+		<string>Dashboard</string>
+	</dict>
+	<dict>
+		<key>MenuText</key>
+		<string>CONTACT INFO</string>
+		<key>ViewController</key>
+		<string>ProfileEditStep1</string>
+	</dict>
+	<dict>
+		<key>MenuText</key>
+		<string>PERSONAL INFO</string>
+		<key>ViewController</key>
+		<string>ProfileEditStep3</string>
+	</dict>
+	<dict>
+		<key>MenuText</key>
+		<string>BIO</string>
+		<key>ViewController</key>
+		<string>ProfileEditMyBio</string>
+	</dict>
+	<dict>
+		<key>MenuText</key>
+		<string>LOCATION/MONEY</string>
+		<key>ViewController</key>
+		<string>ProfileEditStep2</string>
+	</dict>
+	<dict>
+		<key>MenuText</key>
+		<string>JOBS</string>
+		<key>ViewController</key>
+		<string>ProfileEditExperienceList</string>
+	</dict>
+	<dict>
+		<key>MenuText</key>
+		<string>EDUCATION</string>
+		<key>ViewController</key>
+		<string>ProfileEditEducationList</string>
+	</dict>
+	<dict>
+		<key>MenuText</key>
+		<string>PHOTOS</string>
+		<key>ViewController</key>
+		<string>ProfileEditPhotos</string>
+	</dict>
+	<dict>
+		<key>MenuText</key>
+		<string>PREFERENCES</string>
+		<key>ViewController</key>
+		<string>ProfileEditPreferences</string>
+	</dict>
+	<dict>
+		<key>MenuText</key>
+		<string>LOGOUT</string>
+		<key>ViewController</key>
+		<string>LogoutViewController</string>
+	</dict>
+</array>
+</plist>

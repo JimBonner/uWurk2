@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>MenuText</key>
+		<string>Dashboard</string>
+	</dict>
+	<dict>
+		<key>MenuText</key>
+		<string>SAVED SEARCHES</string>
+		<key>ViewController</key>
+		<string>EmployerDashboardSavedSearchesViewController</string>
+		<key>Storyboard</key>
+		<string>EmployerProfile</string>
+		<key>Indent</key>
+		<string>1</string>
+	</dict>
+	<dict>
+		<key>MenuText</key>
+		<string>RECENT SEARCHES</string>
+		<key>ViewController</key>
+		<string>EmployerDashboardRecentSearchesViewController</string>
+		<key>Indent</key>
+		<string>1</string>
+	</dict>
+	<dict>
+		<key>MenuText</key>
+		<string>CONTACT INFO</string>
+		<key>ViewController</key>
+		<string>EmployerDashboardContactViewController</string>
+		<key>Indent</key>
+		<string>1</string>
+	</dict>
+	<dict>
+		<key>MenuText</key>
+		<string>COMPANY INFO</string>
+		<key>ViewController</key>
+		<string>EmployerDashboardCompanyInfoViewController</string>
+	</dict>
+	<dict>
+		<key>MenuText</key>
+		<string>PREFERENCES</string>
+		<key>ViewController</key>
+		<string>EmployeeDashboardBioViewController</string>
+	</dict>
+	<dict>
+		<key>MenuText</key>
+		<string>LOGOUT</string>
+		<key>ViewController</key>
+		<string>LogoutViewController</string>
+	</dict>
+</array>
+</plist>
