@@ -35,7 +35,7 @@
     self.viewPersonality.layer.cornerRadius = 5;
     self.viewTextView.layer.borderWidth = 1;
     self.viewTextView.layer.borderColor = [UIColor blackColor].CGColor;
-    [self assignValue:[self.appDelegate.user objectForKey:@"biography"] control:self.textView];
+///    [self assignValue:[self.appDelegate.user objectForKey:@"biography"] control:self.textView];
     long len = 2000 - self.textView.text.length;
     self.charsRemaining.text=[NSString stringWithFormat:@"%li characters remaining",len];
 }
