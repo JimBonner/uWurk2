@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		54686E6F478E2A47349B24F6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 656CB5EB299775487090A64C /* libPods.a */; };
+		1E0DC3DF1E7739E6009ECCB6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0DC3DE1E7739E6009ECCB6 /* UIKit.framework */; };
+		1E0DC3E11E773A19009ECCB6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0DC3E01E773A19009ECCB6 /* SystemConfiguration.framework */; };
+		1E0DC3E31E773A2C009ECCB6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0DC3E21E773A2C009ECCB6 /* Security.framework */; };
+		1E0DC3E51E773A56009ECCB6 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0DC3E41E773A56009ECCB6 /* MobileCoreServices.framework */; };
+		1E0DC3E71E773A64009ECCB6 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0DC3E61E773A64009ECCB6 /* ImageIO.framework */; };
+		1E0DC3E91E773A86009ECCB6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0DC3E81E773A86009ECCB6 /* Foundation.framework */; };
+		1E0DC3EB1E773A99009ECCB6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0DC3EA1E773A99009ECCB6 /* CoreGraphics.framework */; };
+		1E0DC3ED1E773AE5009ECCB6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0DC3EC1E773AE5009ECCB6 /* libPods.a */; };
 		9B0452591C02B80C00B33526 /* EmployeeStep6ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0452581C02B80C00B33526 /* EmployeeStep6ViewController.m */; };
 		9B04525C1C03101900B33526 /* ContactProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B04525B1C03101900B33526 /* ContactProfileViewController.m */; };
 		9B04525F1C03165800B33526 /* MessageSentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B04525E1C03165800B33526 /* MessageSentViewController.m */; };
@@ -112,7 +119,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		656CB5EB299775487090A64C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E0DC3DE1E7739E6009ECCB6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1E0DC3E01E773A19009ECCB6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		1E0DC3E21E773A2C009ECCB6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		1E0DC3E41E773A56009ECCB6 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		1E0DC3E61E773A64009ECCB6 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		1E0DC3E81E773A86009ECCB6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1E0DC3EA1E773A99009ECCB6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1E0DC3EC1E773AE5009ECCB6 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "../../Library/Developer/Xcode/DerivedData/uWurk2-diktffzfdgrxymgrefleqskkagsh/Build/Products/Debug-iphonesimulator/libPods.a"; sourceTree = "<group>"; };
 		9B0452571C02B80C00B33526 /* EmployeeStep6ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeStep6ViewController.h; sourceTree = "<group>"; };
 		9B0452581C02B80C00B33526 /* EmployeeStep6ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeStep6ViewController.m; sourceTree = "<group>"; };
 		9B04525A1C03101900B33526 /* ContactProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactProfileViewController.h; sourceTree = "<group>"; };
@@ -294,7 +308,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54686E6F478E2A47349B24F6 /* libPods.a in Frameworks */,
+				1E0DC3ED1E773AE5009ECCB6 /* libPods.a in Frameworks */,
+				1E0DC3EB1E773A99009ECCB6 /* CoreGraphics.framework in Frameworks */,
+				1E0DC3E91E773A86009ECCB6 /* Foundation.framework in Frameworks */,
+				1E0DC3E71E773A64009ECCB6 /* ImageIO.framework in Frameworks */,
+				1E0DC3E51E773A56009ECCB6 /* MobileCoreServices.framework in Frameworks */,
+				1E0DC3E31E773A2C009ECCB6 /* Security.framework in Frameworks */,
+				1E0DC3E11E773A19009ECCB6 /* SystemConfiguration.framework in Frameworks */,
+				1E0DC3DF1E7739E6009ECCB6 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,7 +374,14 @@
 		98F8C277F04B8C2E2D8E0A0D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				656CB5EB299775487090A64C /* libPods.a */,
+				1E0DC3EC1E773AE5009ECCB6 /* libPods.a */,
+				1E0DC3EA1E773A99009ECCB6 /* CoreGraphics.framework */,
+				1E0DC3E81E773A86009ECCB6 /* Foundation.framework */,
+				1E0DC3E61E773A64009ECCB6 /* ImageIO.framework */,
+				1E0DC3E41E773A56009ECCB6 /* MobileCoreServices.framework */,
+				1E0DC3E21E773A2C009ECCB6 /* Security.framework */,
+				1E0DC3E01E773A19009ECCB6 /* SystemConfiguration.framework */,
+				1E0DC3DE1E7739E6009ECCB6 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
