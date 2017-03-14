@@ -71,8 +71,6 @@
     }
     [self loginWithUser:self.txtEmail.text  password:self.txtPassword.text];
     
-    
-    
 }
 
 - (IBAction)pressClickHere:(id)sender {
