@@ -71,6 +71,8 @@
                             <constraint firstAttribute="trailing" secondItem="6rD-4Q-F1X" secondAttribute="trailing" id="yKL-6L-xE7"/>
                         </constraints>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="tableView" destination="6rD-4Q-F1X" id="iJw-yb-JxA"/>
                     </connections>
@@ -136,6 +138,8 @@
                             <constraint firstItem="7g1-PG-CSf" firstAttribute="leading" secondItem="xwN-CJ-2IZ" secondAttribute="leading" id="Q4U-9B-m22"/>
                         </constraints>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="tableView" destination="7g1-PG-CSf" id="hu4-2h-dNi"/>
                     </connections>
