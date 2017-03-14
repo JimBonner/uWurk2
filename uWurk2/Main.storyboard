@@ -577,7 +577,7 @@
                                                         <rect key="frame" x="8" y="52" width="244" height="78"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="ADD YOUR LOGO!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ez2-VQ-xXK">
-                                                                <rect key="frame" x="68" y="7" width="109" height="27"/>
+                                                                <rect key="frame" x="67.5" y="7" width="109" height="27"/>
                                                                 <fontDescription key="fontDescription" name="RobotoCondensed-BoldItalic" family="Roboto Condensed" pointSize="16"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -3164,14 +3164,14 @@ If you don’t find quality candidates today, check back soon.</string>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="It includes a link to activate your account. If you don’t see it, check your spam or promotions folder." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6HY-yi-wyM">
-                                                <rect key="frame" x="20" y="305" width="280" height="49"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It includes a link to activate your account. If you don’t see it, check your spam or promotions folder." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6HY-yi-wyM">
+                                                <rect key="frame" x="20" y="305" width="335" height="33"/>
                                                 <fontDescription key="fontDescription" name="RobotoCondensed-Light" family="Roboto Condensed" pointSize="14"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hdt-Qj-bKt">
-                                                <rect key="frame" x="14" y="377" width="298" height="54"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hdt-Qj-bKt">
+                                                <rect key="frame" x="20" y="358" width="335" height="54"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wrong email address?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJ2-yw-aRG">
                                                         <rect key="frame" x="14" y="19" width="140" height="17"/>
@@ -3193,6 +3193,9 @@ If you don’t find quality candidates today, check back soon.</string>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="54" id="jok-R7-LoB"/>
+                                                </constraints>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3267,8 +3270,8 @@ If you don’t find quality candidates today, check back soon.</string>
                                                     <constraint firstAttribute="height" constant="140" id="Jnb-LP-Vig"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A confirmation email was sent to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BDi-uG-Jth">
-                                                <rect key="frame" x="65" y="254" width="246" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A confirmation email was sent to" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BDi-uG-Jth">
+                                                <rect key="frame" x="64" y="254" width="247" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="T4B-D6-8YQ"/>
                                                 </constraints>
@@ -3322,10 +3325,8 @@ If you don’t find quality candidates today, check back soon.</string>
                                             <constraint firstItem="yZE-n4-iIe" firstAttribute="leading" secondItem="qup-il-hql" secondAttribute="leading" constant="30" id="0qd-nt-Ttz"/>
                                             <constraint firstItem="BXo-uR-eHf" firstAttribute="top" secondItem="yZE-n4-iIe" secondAttribute="bottom" constant="14" id="2qx-7J-Sal"/>
                                             <constraint firstItem="BXo-uR-eHf" firstAttribute="leading" secondItem="qup-il-hql" secondAttribute="leading" constant="20" id="7vu-0v-v1a"/>
-                                            <constraint firstAttribute="bottom" secondItem="kct-cb-jUj" secondAttribute="bottom" constant="191" id="ARJ-8N-4c7"/>
-                                            <constraint firstAttribute="bottom" secondItem="Cgh-MD-IFA" secondAttribute="bottom" constant="187" id="DDe-ZJ-jn3"/>
                                             <constraint firstItem="Cgh-MD-IFA" firstAttribute="leading" secondItem="kct-cb-jUj" secondAttribute="trailing" constant="1" id="DgX-5o-QqX"/>
-                                            <constraint firstItem="BDi-uG-Jth" firstAttribute="leading" secondItem="qup-il-hql" secondAttribute="leading" constant="65" id="Fzg-X5-zEB"/>
+                                            <constraint firstItem="BDi-uG-Jth" firstAttribute="leading" secondItem="qup-il-hql" secondAttribute="leading" constant="64" id="Fzg-X5-zEB"/>
                                             <constraint firstAttribute="trailing" secondItem="yZE-n4-iIe" secondAttribute="trailing" constant="30" id="JIJ-my-Dld"/>
                                             <constraint firstItem="RCZ-df-y3n" firstAttribute="leading" secondItem="qup-il-hql" secondAttribute="leading" constant="20" id="Mtc-8h-rwv"/>
                                             <constraint firstAttribute="trailing" secondItem="Cgh-MD-IFA" secondAttribute="trailing" constant="53" id="O2h-FU-ADB"/>
@@ -4774,7 +4775,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COMPANY INFO" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8PE-iU-owz">
-                                                        <rect key="frame" x="130.5" y="10.5" width="114.5" height="21"/>
+                                                        <rect key="frame" x="131" y="10.5" width="114.5" height="21"/>
                                                         <fontDescription key="fontDescription" name="RobotoCondensed-Bold" family="Roboto Condensed" pointSize="18"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -4875,7 +4876,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                                         </constraints>
                                                     </view>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smiley-yellow" translatesAutoresizingMaskIntoConstraints="NO" id="Y8h-tI-pm7">
-                                                        <rect key="frame" x="212" y="7" width="38" height="38"/>
+                                                        <rect key="frame" x="267" y="7" width="38" height="38"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="38" id="PoD-E3-gCF"/>
                                                             <constraint firstAttribute="height" constant="38" id="pAz-bV-szJ"/>
@@ -4892,7 +4893,6 @@ If you don’t find quality candidates today, check back soon.</string>
                                                 <color key="backgroundColor" red="0.53624445199966431" green="0.7595294713973999" blue="0.75524705648422241" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="155" id="09S-D1-6VW"/>
-                                                    <constraint firstItem="Y8h-tI-pm7" firstAttribute="leading" secondItem="mj7-mT-Xi6" secondAttribute="trailing" constant="178" id="3yc-1t-duQ"/>
                                                     <constraint firstAttribute="trailing" secondItem="Y8h-tI-pm7" secondAttribute="trailing" constant="10" id="I5O-ig-TR3"/>
                                                     <constraint firstItem="dSu-y8-ler" firstAttribute="top" secondItem="mj7-mT-Xi6" secondAttribute="bottom" constant="26" id="KMQ-FB-SbL"/>
                                                     <constraint firstAttribute="bottom" secondItem="dSu-y8-ler" secondAttribute="bottom" constant="20" id="NS3-H4-5Gs"/>
@@ -6206,17 +6206,17 @@ If you don’t find quality candidates today, check back soon.</string>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2S7-b4-vDk">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="750"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dFw-gG-wwu">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="750"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dFw-gG-wwu">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="742"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="I'M DONE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMb-Cy-oha">
-                                                <rect key="frame" x="125" y="645" width="70" height="19"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I'M DONE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMb-Cy-oha">
+                                                <rect key="frame" x="125" y="636" width="70" height="18"/>
                                                 <fontDescription key="fontDescription" name="RobotoCondensed-Light" family="Roboto Condensed" pointSize="15"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="REFER FRIENDS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JO7-X2-wOc">
-                                                <rect key="frame" x="103" y="593" width="115" height="24"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REFER FRIENDS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JO7-X2-wOc">
+                                                <rect key="frame" x="103" y="598" width="115" height="18"/>
                                                 <fontDescription key="fontDescription" name="RobotoCondensed-Light" family="Roboto Condensed" pointSize="15"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -6248,8 +6248,8 @@ If you don’t find quality candidates today, check back soon.</string>
                                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="RETURN TO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Wc-Ri-62D">
-                                                <rect key="frame" x="122" y="489" width="77" height="19"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RETURN TO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Wc-Ri-62D">
+                                                <rect key="frame" x="122" y="489" width="77" height="18"/>
                                                 <fontDescription key="fontDescription" name="RobotoCondensed-Light" family="Roboto Condensed" pointSize="15"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -6277,8 +6277,8 @@ If you don’t find quality candidates today, check back soon.</string>
                                                     <constraint firstAttribute="height" constant="1" id="q8t-n8-1Yc"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UbL-xL-BDC">
-                                                <rect key="frame" x="115" y="509" width="90" height="24"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UbL-xL-BDC">
+                                                <rect key="frame" x="115" y="508" width="90" height="28"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="JIy-Ue-qcH"/>
                                                 </constraints>
@@ -6290,8 +6290,8 @@ If you don’t find quality candidates today, check back soon.</string>
                                                     <action selector="pressProfile:" destination="ZM0-ic-gmF" eventType="touchUpInside" id="8vI-6z-Lqc"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Lb-qZ-zzM">
-                                                <rect key="frame" x="130" y="545" width="60" height="60"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Lb-qZ-zzM">
+                                                <rect key="frame" x="130" y="544" width="60" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="1Mh-7Z-8ri"/>
                                                     <constraint firstAttribute="height" constant="60" id="Wzp-v7-5q6"/>
@@ -6301,8 +6301,8 @@ If you don’t find quality candidates today, check back soon.</string>
                                                     <action selector="pressRefer:" destination="ZM0-ic-gmF" eventType="touchUpInside" id="dnu-PF-xxp"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfu-xs-O6n">
-                                                <rect key="frame" x="115" y="666" width="90" height="24"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfu-xs-O6n">
+                                                <rect key="frame" x="115" y="658" width="90" height="28"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="Wku-DC-xc2"/>
                                                 </constraints>
@@ -6314,8 +6314,8 @@ If you don’t find quality candidates today, check back soon.</string>
                                                     <action selector="pressLogOut:" destination="ZM0-ic-gmF" eventType="touchUpInside" id="jcT-RN-y74"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="............................................................" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yKO-2I-zHX">
-                                                <rect key="frame" x="68" y="534" width="184" height="18"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="............................................................" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yKO-2I-zHX">
+                                                <rect key="frame" x="28" y="533" width="264" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="Wu9-Uq-gGA"/>
                                                 </constraints>
@@ -6323,8 +6323,8 @@ If you don’t find quality candidates today, check back soon.</string>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="............................................................" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5x-FR-fht">
-                                                <rect key="frame" x="68" y="619" width="184" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="............................................................" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5x-FR-fht">
+                                                <rect key="frame" x="28" y="618" width="264" height="15"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
