@@ -72,9 +72,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LookupCell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LookupCellTable"];
     if(cell == nil)
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LookupCell"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LookupCellTable"];
     
     if(self.bUseArray) {
         NSArray *row = [self.json objectAtIndex:indexPath.row];

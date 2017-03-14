@@ -15,6 +15,7 @@
 		1E0DC3E91E773A86009ECCB6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0DC3E81E773A86009ECCB6 /* Foundation.framework */; };
 		1E0DC3EB1E773A99009ECCB6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0DC3EA1E773A99009ECCB6 /* CoreGraphics.framework */; };
 		1E0DC3ED1E773AE5009ECCB6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0DC3EC1E773AE5009ECCB6 /* libPods.a */; };
+		1EAE1B901E78738100BE2C11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B497CA91BACA21300BE59B6 /* Main.storyboard */; };
 		9B0452591C02B80C00B33526 /* EmployeeStep6ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0452581C02B80C00B33526 /* EmployeeStep6ViewController.m */; };
 		9B04525C1C03101900B33526 /* ContactProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B04525B1C03101900B33526 /* ContactProfileViewController.m */; };
 		9B04525F1C03165800B33526 /* MessageSentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B04525E1C03165800B33526 /* MessageSentViewController.m */; };
@@ -53,7 +54,6 @@
 		9B3EE1911BAA2852001D3C37 /* ProfileEditStep5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EE1901BAA2852001D3C37 /* ProfileEditStep5ViewController.m */; };
 		9B3EE19B1BAB9DC4001D3C37 /* ProfileEditBioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EE19A1BAB9DC4001D3C37 /* ProfileEditBioViewController.m */; };
 		9B3EE19E1BABA23D001D3C37 /* ProfileEditPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EE19D1BABA23D001D3C37 /* ProfileEditPreferencesViewController.m */; };
-		9B497CAA1BACA21300BE59B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B497CA91BACA21300BE59B6 /* Main.storyboard */; };
 		9B89BE211C3E311F00B4262C /* EmployerStep0ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B89BE201C3E311F00B4262C /* EmployerStep0ViewController.m */; };
 		9B8B98E71BB12241005821EB /* ProfileEditWorkExperienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B8B98E61BB12241005821EB /* ProfileEditWorkExperienceViewController.m */; };
 		9B8B98EF1BB20133005821EB /* FPPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B8B98EA1BB20133005821EB /* FPPopoverController.m */; };
@@ -769,13 +769,13 @@
 				DC6A07CD1C0B76FD007FDEE1 /* RobotoCondensed-Light.ttf in Resources */,
 				DCA4AF711C4BE3DF007B7F1B /* GeneralViews.storyboard in Resources */,
 				DC6A07CB1C0B76FD007FDEE1 /* RobotoCondensed-BoldItalic.ttf in Resources */,
+				1EAE1B901E78738100BE2C11 /* Main.storyboard in Resources */,
 				DC6A07CC1C0B76FD007FDEE1 /* RobotoCondensed-Italic.ttf in Resources */,
 				DCA4AE741C41B6E6007B7F1B /* EmployeeProfile.storyboard in Resources */,
 				9B379C991B950FD500EB4E2D /* Images.xcassets in Resources */,
 				DC81856F1BADA0C100EF2436 /* employerMenu.plist in Resources */,
 				DCA4AE721C41B592007B7F1B /* Mail.storyboard in Resources */,
 				DC6A07CF1C0B76FD007FDEE1 /* RobotoCondensed-Regular.ttf in Resources */,
-				9B497CAA1BACA21300BE59B6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
