@@ -449,8 +449,8 @@
 				9B379C901B950FD500EB4E2D /* AppDelegate.m */,
 				9B379C981B950FD500EB4E2D /* Images.xcassets */,
 				9BEA1B251B9A4FCA0017D87A /* Register */,
-				9B0C71331C7770A6003DB760 /* EditEmployerProfile */,
 				9B3EE1921BAA2860001D3C37 /* EditEmployeeProfile */,
+				9B0C71331C7770A6003DB760 /* EditEmployerProfile */,
 				DC8185681BADA0A500EF2436 /* DashboardMenu */,
 				9BD16A5C1BEC401E006BAF69 /* Mail */,
 				1ED53B641E7736320054EFCA /* ViewControllers */,
@@ -592,8 +592,8 @@
 		9BEA1B251B9A4FCA0017D87A /* Register */ = {
 			isa = PBXGroup;
 			children = (
-				9BEA1B271B9A96B50017D87A /* Employer */,
 				9BEA1B261B9A4FD60017D87A /* Employee */,
+				9BEA1B271B9A96B50017D87A /* Employer */,
 			);
 			name = Register;
 			sourceTree = "<group>";
