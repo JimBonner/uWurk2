@@ -332,14 +332,16 @@
 		1ED53B641E7736320054EFCA /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				9B379CF11B97DF3A00EB4E2D /* IntroEmployeeViewController.h */,
+				9B379CF21B97DF3A00EB4E2D /* IntroEmployeeViewController.m */,
+				9B379CF41B97EAB800EB4E2D /* IntroEmployerViewController.h */,
+				9B379CF51B97EAB800EB4E2D /* IntroEmployerViewController.m */,
 				9B379CB91B95217700EB4E2D /* IntroViewController.h */,
 				9B379CBA1B95217700EB4E2D /* IntroViewController.m */,
 				9B379CBC1B95247600EB4E2D /* LoginViewController.h */,
 				9B379CBD1B95247600EB4E2D /* LoginViewController.m */,
 				9B3EE14E1BA367BE001D3C37 /* ReferralProgramViewController.h */,
 				9B3EE14F1BA367BE001D3C37 /* ReferralProgramViewController.m */,
-				9B379CF41B97EAB800EB4E2D /* IntroEmployerViewController.h */,
-				9B379CF51B97EAB800EB4E2D /* IntroEmployerViewController.m */,
 				9B3C29AC1C41F55300EF0296 /* EmployerRegisterThanksViewController.h */,
 				9B3C29AD1C41F55300EF0296 /* EmployerRegisterThanksViewController.m */,
 				9BD16A561BE6E319006BAF69 /* ListSelectorStringsTableViewController.h */,
@@ -350,8 +352,6 @@
 				DCA4AE761C41CD53007B7F1B /* ListMultiSelectorTableViewController.m */,
 				9B3C29A91C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.h */,
 				9B3C29AA1C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.m */,
-				9B379CF11B97DF3A00EB4E2D /* IntroEmployeeViewController.h */,
-				9B379CF21B97DF3A00EB4E2D /* IntroEmployeeViewController.m */,
 				9B379CB31B95197600EB4E2D /* EmployeeViewController.h */,
 				9B379CB41B95197600EB4E2D /* EmployeeViewController.m */,
 				9B37608B1C0C866A00E9FB7D /* EmployeeWhatDoIDoViewController.h */,

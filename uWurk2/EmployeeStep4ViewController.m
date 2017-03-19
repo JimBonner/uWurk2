@@ -274,19 +274,19 @@
     
     [myController setParameters:nil];
     if (self.btnHighSchool.isSelected) {
-        [myController setUrl:@"http://uwurk.tscserver.com/employee/form-options"];
+        [myController setUrl:@"http://uwurk.tscserver.com/api/v1/high_schools"];
         [myController setParameters:@{@"state_id":[self.btnState titleForState:UIControlStateSelected],@"city":[self.btnCity titleForState:UIControlStateSelected],@"type":@"high_schools"}];
         myController.bPost = TRUE;
         myController.bUseArray = TRUE;
     }
     if (self.btnCollege.isSelected) {
-        [myController setUrl:@"http://uwurk.tscserver.com/employee/form-options"];
+        [myController setUrl:@"http://uwurk.tscserver.com/api/v1/colleges"];
         [myController setParameters:@{@"state_id":[self.btnState titleForState:UIControlStateSelected],@"type":@"colleges"}];
         myController.bPost = TRUE;
         myController.bUseArray = TRUE;
     }
     if (self.btnTradeSchool.isSelected) {
-        [myController setUrl:@"http://uwurk.tscserver.com/api/v1/form-options"];
+        [myController setUrl:@"http://uwurk.tscserver.com/api/v1/trade_schools"];
         [myController setParameters:@{@"state_id":[self.btnState titleForState:UIControlStateSelected]}];
     }
     // Come back for schools

@@ -29,7 +29,10 @@
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.viewCommunication.layer.cornerRadius = 10;
+    
     [self assignValue:[self.appDelegate.user objectForKey:@"email"] control:self.txtEmail];
+    [self.txtEmail setText:[self getUserDefault:@"email_Text"]];
+    [self.txtEmail setEnabled:NO];
     [self assignValue:[self.appDelegate.user objectForKey:@"first_name"] control:self.txtFirstName];
     [self assignValue:[self.appDelegate.user objectForKey:@"last_name"] control:self.txtLastName];
     [self assignValue:[self.appDelegate.user objectForKey:@"birthdate"] control:self.txtBirthDate];

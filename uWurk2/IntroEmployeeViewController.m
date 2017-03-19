@@ -11,6 +11,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "EmployeeStepSetupViewController.h"
+#import "EmployeeStep1ViewController.h"
 
 @interface IntroEmployeeViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *emailText;
@@ -42,9 +43,10 @@
             if([self validateResponse:responseObject]){
                 
                 // Update the user object
-                EmployeeRegisterThanksViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeRegisterThanksView"];
-                [myController setEmail:self.emailText.text];
+                EmployeeStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeStep1ViewController"];
+                [self saveUserDefault:[self.emailText text] Key:@"email_Text"];
                 [self.navigationController pushViewController:myController animated:TRUE];
+                
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
