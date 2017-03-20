@@ -11,6 +11,8 @@
 
 @interface EmployeeStep1ViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *txtEmail;
+@property (weak, nonatomic) IBOutlet UITextField *txtPassword;
+@property (weak, nonatomic) IBOutlet UITextField *txtVerifyPassword;
 @property (weak, nonatomic) IBOutlet UITextField *txtFirstName;
 @property (weak, nonatomic) IBOutlet UITextField *txtLastName;
 @property (weak, nonatomic) IBOutlet UITextField *txtBirthDate;
@@ -31,8 +33,11 @@
     self.viewCommunication.layer.cornerRadius = 10;
     
     [self assignValue:[self.appDelegate.user objectForKey:@"email"] control:self.txtEmail];
-    [self.txtEmail setText:[self getUserDefault:@"email_Text"]];
+    [self.txtEmail setAlpha:0.2];
     [self.txtEmail setEnabled:NO];
+    [self assignValue:[self.appDelegate.user objectForKey:@"password"] control:self.txtPassword];
+    [self assignValue:[self.appDelegate.user objectForKey:@"password"] control:self.txtVerifyPassword];
+    
     [self assignValue:[self.appDelegate.user objectForKey:@"first_name"] control:self.txtFirstName];
     [self assignValue:[self.appDelegate.user objectForKey:@"last_name"] control:self.txtLastName];
     [self assignValue:[self.appDelegate.user objectForKey:@"birthdate"] control:self.txtBirthDate];
@@ -75,15 +80,18 @@
 - (IBAction)changeCheckBox:(UIButton *)sender {
     [sender setSelected:!sender.selected];
 }
+
 - (IBAction)nextPress:(id)sender {
     // Did data get updated?
     
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     
+    [self updateParamDict:params value:self.txtEmail.text key:@"email"];
+    [self updateParamDict:params value:self.txtPassword.text key:@"password"];
+
     [self updateParamDict:params value:self.txtFirstName.text key:@"first_name"];
     [self updateParamDict:params value:self.txtLastName.text key:@"last_name"];
-    [self updateParamDict:params value:self.txtEmail.text key:@"email"];
     [self updateParamDict:params value:self.txtBirthDate.text key:@"birthdate"];
     [self updateParamDict:params value:self.txtPhone.text key:@"cell_phone"];
     [self updateParamDict:params value:self.btnGenderMale.selected ? @"m" : @"f" key:@"gender"];
@@ -103,6 +111,12 @@
     [Error appendString:@"To continue, complete the missing information:"];
     if (self.txtEmail.text.length == 0) {
         [Error appendString:@"\n\nEmail Address"];
+    }
+    if (self.txtPassword.text.length == 0) {
+        [Error appendString:@"\n\nChange Password"];
+    }
+    if (self.txtVerifyPassword.text.length == 0) {
+        [Error appendString:@"\n\nVerify Password"];
     }
     if (self.txtFirstName.text.length == 0) {
         [Error appendString:@"\n\nFirst Name"];

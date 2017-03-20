@@ -44,7 +44,7 @@
                 
                 // Update the user object
                 EmployeeStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeStep1ViewController"];
-                [self saveUserDefault:[self.emailText text] Key:@"email_Text"];
+                [self.appDelegate.user setObject:[self.emailText text] forKey:@"email"];
                 [self.navigationController pushViewController:myController animated:TRUE];
                 
             }
