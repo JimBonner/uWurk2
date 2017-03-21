@@ -3,3 +3,5 @@ Host: uwurk.tscserver.com
 Username: uwurkdev
 Password: 92giUf2!
 Database: uwurkdev
+
+JimB iPhone UUID: 3956556dbdc4612be4945966b624ff2416a8eb28

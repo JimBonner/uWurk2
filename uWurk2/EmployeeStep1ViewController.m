@@ -57,8 +57,8 @@
     }
     if([[self.appDelegate.user objectForKey:@"contact_method_id"]  intValue] == 2)
     {
-        self.btnText.selected = TRUE;
         self.btnEmail.selected = FALSE;
+        self.btnText.selected = TRUE;
     }
     else if([[self.appDelegate.user objectForKey:@"contact_method_id"]  intValue] == 3)
     {
@@ -70,20 +70,29 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.appDelegate.user setObject:[self.txtEmail text] forKey:@"email"];
+    
     [self.appDelegate.user setObject:[self.txtPassword text] forKey:@"password"];
     [self.appDelegate.user setObject:[self.txtVerifyPassword text] forKey:@"verifyPW"];
     [self.appDelegate.user setObject:[self.txtFirstName text] forKey:@"first_name"];
     [self.appDelegate.user setObject:[self.txtLastName text] forKey:@"last_name"];
     [self.appDelegate.user setObject:[self.txtBirthDate text] forKey:@"birthdate"];
     [self.appDelegate.user setObject:[self.txtPhone text] forKey:@"cell_phone"];
-    //[self.appDelegate.user setObject:[self.txtEmail text] forKey:@"email"];
-    //[self.appDelegate.user setObject:[self.txtEmail text] forKey:@"email"];
-    //[self.appDelegate.user setObject:[self.txtEmail text] forKey:@"email"];
-    //[self.appDelegate.user setObject:[self.txtEmail text] forKey:@"email"];
-    //[self.appDelegate.user setObject:[self.txtEmail text] forKey:@"email"];
-    
-    
+    [self.appDelegate.user setObject:self.btnGenderMale.selected ? @"m" : @"f" forKey:@"gender"];
+    if(!self.btnEmail.selected && !self.btnText.selected) {
+        [self.appDelegate.user setObject:@"0" forKey:@"contact_method_id"];
+    }
+    else if(self.btnEmail.selected && !self.btnText.selected)
+    {
+        [self.appDelegate.user setObject:@"1" forKey:@"contact_method_id"];
+    }
+    else if(!self.btnEmail.selected && self.btnText.selected)
+    {
+        [self.appDelegate.user setObject:@"2" forKey:@"contact_method_id"];
+    }
+    else if(self.btnEmail.selected && self.btnText.selected)
+    {
+        [self.appDelegate.user setObject:@"3" forKey:@"contact_method_id"];
+    }
 }
 
 - (IBAction)changeCheckBox:(UIButton *)sender {

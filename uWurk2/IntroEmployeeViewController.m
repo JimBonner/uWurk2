@@ -25,6 +25,7 @@
     [self.navigationController setNavigationBarHidden:false];
     // Do any additional setup after loading the view.
     [self saveUserDefault:@"1" Key:@"register_Active"];
+    [self.emailText setText:[self getUserDefault:@"email"]];
 }
 
 - (void)didReceiveMemoryWarning {
