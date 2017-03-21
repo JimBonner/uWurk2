@@ -30,26 +30,35 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)pressEmailRegister:(id)sender {
+- (IBAction)pressEmailRegister:(id)sender
+{
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:self.emailText.text forKey:@"email"];
     [params setObject:@"employer" forKey:@"type"];
-
-    
-    if([params count]){
+    if([params count])
+    {
         [manager POST:@"http://uwurk.tscserver.com/api/v1/register" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
             if([self validateResponse:responseObject]){
                 
                 // Update the user object
                 
-                
                 EmployerRegisterThanksViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerRegisterThanksView"];
                 [myController setEmail:self.emailText.text];
                 [self.navigationController pushViewController:myController animated:TRUE];
             }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            else
+            {
+                UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Error"
+                                                                 message:[responseObject objectForKey:@"message"]
+                                                                delegate:self
+                                                       cancelButtonTitle:@"OK"
+                                                       otherButtonTitles: nil];
+                [alert show];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error)
+        {
             NSLog(@"Error: %@", error);
             UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Error"
                                                              message:@"Unable to contact server"
@@ -84,7 +93,8 @@
               startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
                                            id result, NSError *error) {
                   
-                  if ([FBSDKAccessToken currentAccessToken]) {
+                  if ([FBSDKAccessToken currentAccessToken])
+                  {
                       
                       __block NSString *email = [result objectForKey:@"email"];
                       
@@ -104,11 +114,12 @@
                       [parameters setObject:@"employer" forKey:@"type"];
                       [parameters setObject:@1 forKey:@"facebook"];
                       
-                      [manager POST:@"http://uwurk.tscserver.com/api/v1/register" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                          
+                      [manager POST:@"http://uwurk.tscserver.com/api/v1/register" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
+                      {
                           NSLog(@"JSON: %@", responseObject);
-///                          BOOL bValid = [self validateResponse:responseObject];
-                          if([((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] != nil){
+                          if([self validateResponse:responseObject] &&
+                             [((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] != nil)
+                          {
                               [self saveUserDefault:[((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] Key:@"api_auth_token"];
                               
                               EmployerStep0ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"IntroEmployer"];
@@ -117,7 +128,8 @@
                               [nav popToRootViewControllerAnimated:FALSE];
                               [nav pushViewController:myController animated:TRUE];
                           }
-                          else {
+                          else
+                          {
                               UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Error"
                                                                                message:[responseObject objectForKey:@"message"]
                                                                               delegate:self
@@ -127,7 +139,6 @@
                               [self.navigationController popViewControllerAnimated:TRUE];
                               
                           }
-                          
                       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                           NSLog(@"Error: %@", error);
                           UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Error"

@@ -63,7 +63,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
 -(AFHTTPRequestOperationManager*)getManager{
     AFHTTPRequestOperationManager *manager = [self getManagerNoAuth];
     [manager.requestSerializer setValue:[self getUserDefault:@"api_auth_token"] forHTTPHeaderField:@"API-AUTH"];
@@ -100,20 +99,26 @@
 
 
 
--(BOOL) validateResponse:(NSDictionary*)response{
-    if([response isKindOfClass:[NSDictionary class]]){
-        NSLog(@"%@",response);
-        
+-(BOOL) validateResponse:(NSDictionary*)response
+{
+    if([response isKindOfClass:[NSDictionary class]])
+    {
         id n = [response valueForKey:@"result"];
-        if([n isKindOfClass:[NSNumber class]]){
-            if([((NSNumber*)n) isEqual:@1]){
-                if([response objectForKey:@"user"]){
+        if([n isKindOfClass:[NSNumber class]])
+        {
+            if([((NSNumber*)n) isEqual:@1])
+            {
+                if([response objectForKey:@"user"])
+                {
                     NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
                     // Clean up this null nonsense
-                    for (NSString* key in [response objectForKey:@"user"]) {
+                    for (NSString* key in [response objectForKey:@"user"])
+                    {
                         id value = [[response objectForKey:@"user"] objectForKey:key];
                         if(![value isEqual:[NSNull null]])
+                        {
                             [tempDict setObject:value forKey:key];
+                        }
                     }
                     [self.appDelegate setUser:tempDict];
                 }
@@ -122,9 +127,10 @@
         }
     }
     else
+    {
         return FALSE;
-    
-    return TRUE;
+    }
+    return FALSE;
 }
 
 -(void)setupUXforUser{

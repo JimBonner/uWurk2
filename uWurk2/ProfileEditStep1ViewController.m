@@ -20,8 +20,8 @@
 @property (weak, nonatomic) IBOutlet RadioButton *btnGenderFemale;
 @property (weak, nonatomic) IBOutlet UIButton *btnEmail;
 @property (weak, nonatomic) IBOutlet UIButton *btnText;
-@property (weak, nonatomic) IBOutlet UIView *viewTip;
-@property (weak, nonatomic) IBOutlet UIView *viewCommunication;
+@property (weak, nonatomic) IBOutlet UIView   *viewTip;
+@property (weak, nonatomic) IBOutlet UIView   *viewCommunication;
 @property (weak, nonatomic) IBOutlet UIButton *btnSaveChanges;
 
 @end

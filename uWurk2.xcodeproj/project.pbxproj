@@ -658,10 +658,10 @@
 			isa = PBXGroup;
 			children = (
 				9B497CA91BACA21300BE59B6 /* Main.storyboard */,
-				DCA4AE711C41B592007B7F1B /* Mail.storyboard */,
 				DCA4AE731C41B6E6007B7F1B /* EmployeeProfile.storyboard */,
-				DCA4AF701C4BE3DF007B7F1B /* GeneralViews.storyboard */,
 				DC40DA031C4C514C0037D612 /* EmployerProfile.storyboard */,
+				DCA4AF701C4BE3DF007B7F1B /* GeneralViews.storyboard */,
+				DCA4AE711C41B592007B7F1B /* Mail.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";

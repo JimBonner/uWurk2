@@ -1,0 +1,5 @@
+
+Host: uwurk.tscserver.com
+Username: uwurkdev
+Password: 92giUf2!
+Database: uwurkdev

@@ -131,10 +131,12 @@
     [self updateParamDict:params value:self.textView.text key:@"biography"];
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
-    if (self.btnBioSkip.selected == NO && self.textView.text.length == 0) {
+    if (self.btnBioSkip.selected == NO && self.textView.text.length == 0)
+    {
         [Error appendString:@"\n\nEnter Bio or Select Skip"];
     }
-    if ((Error.length) > 50) {
+    if ((Error.length) > 50)
+    {
         UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"OOPS!"
                                                          message:Error
                                                         delegate:self
@@ -142,42 +144,49 @@
                                                otherButtonTitles: nil];
         [alert show];
     }
-    else {
-    if([params count]){
-        [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"JSON: %@", responseObject);
-            if([self validateResponse:responseObject]){
-                NSData *imageData = UIImageJPEGRepresentation(self.photo, 0.5);
-                [manager POST:@"http://uwurk.tscserver.com/api/v1/photos" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-                    [formData appendPartWithFileData:imageData name:@"photo_file" fileName:@"photo.jpg" mimeType:@"image/jpeg"];
-                } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
-                    [self.navigationController setViewControllers:@[myController] animated:YES];
-                    
-                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                    NSLog(@"Error: %@", error);
-                    UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Error"
-                                                                     message:@"Unable to contact server"
-                                                                    delegate:self
-                                                           cancelButtonTitle:@"OK"
-                                                           otherButtonTitles: nil];
-                    [alert show];
-                }];
-            }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
-            UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Error"
-                                                             message:@"Unable to contact server"
-                                                            delegate:self
-                                                   cancelButtonTitle:@"OK"
-                                                   otherButtonTitles: nil];
-            [alert show];
-        }];
-    }
-    else{
-        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
-        [self.navigationController setViewControllers:@[myController] animated:YES];
+    else
+    {
+        if([params count])
+        {
+            [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
+            {
+                NSLog(@"JSON: %@", responseObject);
+                if([self validateResponse:responseObject]){
+                    NSData *imageData = UIImageJPEGRepresentation(self.photo, 0.5);
+                    [manager POST:@"http://uwurk.tscserver.com/api/v1/photos" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
+                    {
+                        [formData appendPartWithFileData:imageData name:@"photo_file" fileName:@"photo.jpg" mimeType:@"image/jpeg"];
+                    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
+                        [self.navigationController setViewControllers:@[myController] animated:YES];
+                        
+                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                        NSLog(@"Error: %@", error);
+                        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Error"
+                                                                         message:@"Unable to contact server"
+                                                                        delegate:self
+                                                               cancelButtonTitle:@"OK"
+                                                               otherButtonTitles: nil];
+                        [alert show];
+                    }];
+                }
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error)
+            {
+                NSLog(@"Error: %@", error);
+                UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Error"
+                                                                 message:@"Unable to contact server"
+                                                                delegate:self
+                                                       cancelButtonTitle:@"OK"
+                                                       otherButtonTitles: nil];
+                [alert show];
+            }];
+        }
+        else
+        {
+            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
+            [self.navigationController setViewControllers:@[myController] animated:YES];
+        }
     }
 }
-}
+
 @end

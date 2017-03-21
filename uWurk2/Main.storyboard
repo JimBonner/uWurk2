@@ -287,7 +287,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A GREAT PHOTO AND BIO MAKES ALL THE DIFFERENCE!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BnX-VR-5FD">
-                                                <rect key="frame" x="30" y="78" width="260" height="38"/>
+                                                <rect key="frame" x="30" y="78" width="260" height="37.5"/>
                                                 <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="16"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -5442,7 +5442,7 @@ If you don’t find quality candidates today, check back soon.</string>
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1sd-tj-XQK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1sd-tj-XQK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -7871,7 +7871,7 @@ If you don’t find quality candidates today, check back soon.</string>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2CT-1p-wV5">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="1700"/>
                                 <subviews>
-                                    <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tt7-XX-h4v">
+                                    <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tt7-XX-h4v" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="1700"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join uWurk." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ses-DA-8AY">
@@ -8035,9 +8035,17 @@ If you don’t find quality candidates today, check back soon.</string>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="How It Works" translatesAutoresizingMaskIntoConstraints="NO" id="Kmt-Z6-GVX">
                                                 <rect key="frame" x="30" y="30" width="260" height="53"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="260" id="YCD-Yf-KgC"/>
+                                                    <constraint firstAttribute="height" constant="53" id="gM3-O9-9C4"/>
+                                                </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOW IT WORKS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RdG-Kc-1PV">
                                                 <rect key="frame" x="30" y="36" width="260" height="26"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="26" id="74E-ag-ajf"/>
+                                                    <constraint firstAttribute="width" constant="260" id="Y63-jf-bCf"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="22"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -8134,7 +8142,6 @@ If you don’t find quality candidates today, check back soon.</string>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="RdG-Kc-1PV" secondAttribute="trailing" constant="30" id="2CQ-Gh-Kxu"/>
                                             <constraint firstAttribute="trailing" secondItem="yLd-Gc-0gi" secondAttribute="trailing" constant="30" id="2Dk-C8-HLN"/>
                                             <constraint firstItem="ApI-fL-OvU" firstAttribute="top" secondItem="1S1-d0-PTY" secondAttribute="bottom" constant="8" id="3dW-o6-O3w"/>
                                             <constraint firstAttribute="trailing" secondItem="Ses-DA-8AY" secondAttribute="trailing" constant="30" id="3iA-9z-ZXy"/>
@@ -8162,10 +8169,11 @@ If you don’t find quality candidates today, check back soon.</string>
                                             <constraint firstItem="zrR-em-hHz" firstAttribute="top" secondItem="JmX-iw-VkV" secondAttribute="bottom" constant="48" id="OYr-w8-ooX"/>
                                             <constraint firstItem="OOh-fJ-uTv" firstAttribute="top" secondItem="Ses-DA-8AY" secondAttribute="bottom" constant="-2" id="Oed-IL-lZG"/>
                                             <constraint firstItem="JmX-iw-VkV" firstAttribute="leading" secondItem="Tt7-XX-h4v" secondAttribute="leading" constant="30" id="Q7Q-fU-exk"/>
+                                            <constraint firstItem="RdG-Kc-1PV" firstAttribute="centerX" secondItem="Tt7-XX-h4v" secondAttribute="centerX" id="QXJ-8P-eKj"/>
                                             <constraint firstItem="ccE-3V-zhc" firstAttribute="leading" secondItem="Tt7-XX-h4v" secondAttribute="leading" constant="30" id="Rew-MO-Rdn"/>
                                             <constraint firstAttribute="trailing" secondItem="1S1-d0-PTY" secondAttribute="trailing" constant="30" id="Sps-5H-6W3"/>
                                             <constraint firstItem="1S1-d0-PTY" firstAttribute="top" secondItem="Pmc-d7-eAG" secondAttribute="bottom" constant="90" id="WgY-Ku-DdJ"/>
-                                            <constraint firstItem="RdG-Kc-1PV" firstAttribute="leading" secondItem="Tt7-XX-h4v" secondAttribute="leading" constant="30" id="WiG-Fs-jMb"/>
+                                            <constraint firstItem="Kmt-Z6-GVX" firstAttribute="centerX" secondItem="Tt7-XX-h4v" secondAttribute="centerX" id="Wi9-Sc-94x"/>
                                             <constraint firstItem="NXo-Zf-9C9" firstAttribute="top" secondItem="ccE-3V-zhc" secondAttribute="bottom" constant="3" id="YE3-i7-cBX"/>
                                             <constraint firstAttribute="trailing" secondItem="DBA-0W-wC5" secondAttribute="trailing" constant="30" id="bR3-zn-Pj9"/>
                                             <constraint firstItem="1S1-d0-PTY" firstAttribute="leading" secondItem="Tt7-XX-h4v" secondAttribute="leading" constant="30" id="buT-Dg-rzX"/>
@@ -8173,7 +8181,6 @@ If you don’t find quality candidates today, check back soon.</string>
                                             <constraint firstItem="DBA-0W-wC5" firstAttribute="top" secondItem="859-0M-2WG" secondAttribute="bottom" constant="3" id="dIG-7I-Mcd"/>
                                             <constraint firstItem="1ke-dY-qND" firstAttribute="leading" secondItem="Pmc-d7-eAG" secondAttribute="trailing" constant="6" id="djl-xw-yBI"/>
                                             <constraint firstItem="Pmc-d7-eAG" firstAttribute="leading" secondItem="Tt7-XX-h4v" secondAttribute="leading" constant="30" id="dlI-GN-iHt"/>
-                                            <constraint firstAttribute="trailing" secondItem="Kmt-Z6-GVX" secondAttribute="trailing" constant="30" id="dsq-nw-fFq"/>
                                             <constraint firstAttribute="trailing" secondItem="ApI-fL-OvU" secondAttribute="trailing" constant="30" id="e7T-Pl-kCp"/>
                                             <constraint firstItem="JEy-af-bmt" firstAttribute="leading" secondItem="Tt7-XX-h4v" secondAttribute="leading" constant="30" id="eT5-TR-r84"/>
                                             <constraint firstItem="JmX-iw-VkV" firstAttribute="top" secondItem="Kmt-Z6-GVX" secondAttribute="bottom" constant="35" id="fX5-zO-0Pk"/>
@@ -8189,7 +8196,6 @@ If you don’t find quality candidates today, check back soon.</string>
                                             <constraint firstItem="Pmc-d7-eAG" firstAttribute="top" secondItem="yLd-Gc-0gi" secondAttribute="bottom" constant="32" id="mqJ-Qh-8XX"/>
                                             <constraint firstAttribute="trailing" secondItem="JEy-af-bmt" secondAttribute="trailing" constant="30" id="piZ-YE-9Ng"/>
                                             <constraint firstItem="ccE-3V-zhc" firstAttribute="top" secondItem="DBA-0W-wC5" secondAttribute="bottom" constant="5" id="qPc-a3-W0V"/>
-                                            <constraint firstItem="Kmt-Z6-GVX" firstAttribute="leading" secondItem="Tt7-XX-h4v" secondAttribute="leading" constant="30" id="r4q-Re-Jh1"/>
                                             <constraint firstItem="j4r-dD-XwY" firstAttribute="leading" secondItem="Tt7-XX-h4v" secondAttribute="leading" constant="30" id="uqB-6d-v55"/>
                                             <constraint firstAttribute="trailing" secondItem="9yz-6V-Ggh" secondAttribute="trailing" constant="30" id="vTH-aX-DPZ"/>
                                             <constraint firstItem="pKn-Dq-sun" firstAttribute="leading" secondItem="Tt7-XX-h4v" secondAttribute="leading" constant="140" id="vhS-fm-Ogd"/>
@@ -8227,7 +8233,7 @@ If you don’t find quality candidates today, check back soon.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1L0-rD-7eu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2896" y="-590"/>
+            <point key="canvasLocation" x="-3044" y="-592"/>
         </scene>
         <!--Intro Employer View Controller-->
         <scene sceneID="oZG-iL-lob">

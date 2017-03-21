@@ -36,8 +36,7 @@
     [self.txtEmail setAlpha:0.2];
     [self.txtEmail setEnabled:NO];
     [self assignValue:[self.appDelegate.user objectForKey:@"password"] control:self.txtPassword];
-    [self assignValue:[self.appDelegate.user objectForKey:@"password"] control:self.txtVerifyPassword];
-    
+    [self assignValue:[self.appDelegate.user objectForKey:@"verifyPW"] control:self.txtVerifyPassword];
     [self assignValue:[self.appDelegate.user objectForKey:@"first_name"] control:self.txtFirstName];
     [self assignValue:[self.appDelegate.user objectForKey:@"last_name"] control:self.txtLastName];
     [self assignValue:[self.appDelegate.user objectForKey:@"birthdate"] control:self.txtBirthDate];
@@ -68,15 +67,25 @@
     }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.appDelegate.user setObject:[self.txtEmail text] forKey:@"email"];
+    [self.appDelegate.user setObject:[self.txtPassword text] forKey:@"password"];
+    [self.appDelegate.user setObject:[self.txtVerifyPassword text] forKey:@"verifyPW"];
+    [self.appDelegate.user setObject:[self.txtFirstName text] forKey:@"first_name"];
+    [self.appDelegate.user setObject:[self.txtLastName text] forKey:@"last_name"];
+    [self.appDelegate.user setObject:[self.txtBirthDate text] forKey:@"birthdate"];
+    [self.appDelegate.user setObject:[self.txtPhone text] forKey:@"cell_phone"];
+    //[self.appDelegate.user setObject:[self.txtEmail text] forKey:@"email"];
+    //[self.appDelegate.user setObject:[self.txtEmail text] forKey:@"email"];
+    //[self.appDelegate.user setObject:[self.txtEmail text] forKey:@"email"];
+    //[self.appDelegate.user setObject:[self.txtEmail text] forKey:@"email"];
+    //[self.appDelegate.user setObject:[self.txtEmail text] forKey:@"email"];
+    
+    
 }
-*/
+
 - (IBAction)changeCheckBox:(UIButton *)sender {
     [sender setSelected:!sender.selected];
 }
@@ -89,7 +98,6 @@
     
     [self updateParamDict:params value:self.txtEmail.text key:@"email"];
     [self updateParamDict:params value:self.txtPassword.text key:@"password"];
-
     [self updateParamDict:params value:self.txtFirstName.text key:@"first_name"];
     [self updateParamDict:params value:self.txtLastName.text key:@"last_name"];
     [self updateParamDict:params value:self.txtBirthDate.text key:@"birthdate"];
@@ -146,11 +154,8 @@
     if([params count]){
         [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
-            if([self validateResponse:responseObject]){
-                
-                // Update the user object
-                
-                
+            if([self validateResponse:responseObject])
+            {
                 UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup2"];
                 [self.navigationController pushViewController:myController animated:TRUE];
                 
