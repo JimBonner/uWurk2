@@ -28,7 +28,8 @@
 
 @implementation EmployeeStep1ViewController
 
--(void) viewWillAppear:(BOOL)animated{
+-(void) viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     self.viewCommunication.layer.cornerRadius = 10;
     
@@ -45,8 +46,12 @@
         self.btnGenderMale.selected = TRUE;
     else if([[self.appDelegate.user objectForKey:@"gender"] isEqualToString:@"f"])
         self.btnGenderFemale.selected = TRUE;
-    [self.btnText setSelected:[[self.appDelegate.user objectForKey:@"contact_text"]intValue]];
-    [self.btnEmail setSelected:[[self.appDelegate.user objectForKey:@"contact_email"]intValue]];
+    if([[self.appDelegate.user objectForKey:@"contact_text"] isEqualToString:@"1"]) {
+        self.btnText.selected  = TRUE;
+    }
+    if([[self.appDelegate.user objectForKey:@"contact_email"] isEqualToString:@"1"]) {
+        self.btnEmail.selected  = TRUE;
+    }
 }
 
 - (IBAction)changeCheckBox:(UIButton *)sender {
@@ -115,7 +120,7 @@
             [self.appDelegate.user setObject:[self.txtPhone text] forKey:@"cell_phone"];
             [self.appDelegate.user setObject:self.btnGenderMale.selected ? @"m" : @"f" forKey:@"gender"];
             [self.appDelegate.user setObject:self.btnText.selected ? @"1" : @"0" forKey:@"contact_text"];
-            [self.appDelegate.user setObject:self.btnEmail.selected ? @"1" : @"0" forKey:@"contact_mail"];
+            [self.appDelegate.user setObject:self.btnEmail.selected ? @"1" : @"0" forKey:@"contact_email"];
             
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"JSON: %@", responseObject);
