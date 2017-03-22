@@ -45,54 +45,8 @@
         self.btnGenderMale.selected = TRUE;
     else if([[self.appDelegate.user objectForKey:@"gender"] isEqualToString:@"f"])
         self.btnGenderFemale.selected = TRUE;
-    if([[self.appDelegate.user objectForKey:@"contact_method_id"]  intValue] == 0)
-    {
-        self.btnEmail.selected = FALSE;
-        self.btnText.selected = FALSE;
-    }
-    else if([[self.appDelegate.user objectForKey:@"contact_method_id"]  intValue] == 1)
-    {
-        self.btnEmail.selected = TRUE;
-        self.btnText.selected = FALSE;
-    }
-    if([[self.appDelegate.user objectForKey:@"contact_method_id"]  intValue] == 2)
-    {
-        self.btnEmail.selected = FALSE;
-        self.btnText.selected = TRUE;
-    }
-    else if([[self.appDelegate.user objectForKey:@"contact_method_id"]  intValue] == 3)
-    {
-        self.btnEmail.selected = TRUE;
-        self.btnText.selected = TRUE;
-    }
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    [self.appDelegate.user setObject:[self.txtPassword text] forKey:@"password"];
-    [self.appDelegate.user setObject:[self.txtVerifyPassword text] forKey:@"verifyPW"];
-    [self.appDelegate.user setObject:[self.txtFirstName text] forKey:@"first_name"];
-    [self.appDelegate.user setObject:[self.txtLastName text] forKey:@"last_name"];
-    [self.appDelegate.user setObject:[self.txtBirthDate text] forKey:@"birthdate"];
-    [self.appDelegate.user setObject:[self.txtPhone text] forKey:@"cell_phone"];
-    [self.appDelegate.user setObject:self.btnGenderMale.selected ? @"m" : @"f" forKey:@"gender"];
-    if(!self.btnEmail.selected && !self.btnText.selected) {
-        [self.appDelegate.user setObject:@"0" forKey:@"contact_method_id"];
-    }
-    else if(self.btnEmail.selected && !self.btnText.selected)
-    {
-        [self.appDelegate.user setObject:@"1" forKey:@"contact_method_id"];
-    }
-    else if(!self.btnEmail.selected && self.btnText.selected)
-    {
-        [self.appDelegate.user setObject:@"2" forKey:@"contact_method_id"];
-    }
-    else if(self.btnEmail.selected && self.btnText.selected)
-    {
-        [self.appDelegate.user setObject:@"3" forKey:@"contact_method_id"];
-    }
+    [self.btnText setSelected:[[self.appDelegate.user objectForKey:@"contact_text"]intValue]];
+    [self.btnEmail setSelected:[[self.appDelegate.user objectForKey:@"contact_email"]intValue]];
 }
 
 - (IBAction)changeCheckBox:(UIButton *)sender {
@@ -112,18 +66,9 @@
     [self updateParamDict:params value:self.txtBirthDate.text key:@"birthdate"];
     [self updateParamDict:params value:self.txtPhone.text key:@"cell_phone"];
     [self updateParamDict:params value:self.btnGenderMale.selected ? @"m" : @"f" key:@"gender"];
-    if(self.btnEmail.isSelected && self.btnText.isSelected) {
-        [self updateParamDict:params value:@"3" key:@"contact_method_id"];
-    }
-    else if(self.btnText.isSelected) {
-        [self updateParamDict:params value:@"2" key:@"contact_method_id"];
-    }
-    else if(self.btnEmail.isSelected) {
-        [self updateParamDict:params value:@"1" key:@"contact_method_id"];
-    }
-    else {
-        [self updateParamDict:params value:@"0" key:@"contact_method_id"];
-    }
+    [self updateParamDict:params value:self.btnText.selected ? @"1" : @"0" key:@"contact_text"];
+    [self updateParamDict:params value:self.btnEmail.selected ? @"1" : @"0" key:@"contact_email"];
+
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
     if (self.txtEmail.text.length == 0) {
@@ -158,32 +103,43 @@
                                                otherButtonTitles: nil];
         [alert show];
     }
-    else {
-    
-    if([params count]){
-        [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"JSON: %@", responseObject);
-            if([self validateResponse:responseObject])
-            {
-                UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup2"];
-                [self.navigationController pushViewController:myController animated:TRUE];
-                
-            }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
-            UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Error"
-                                                             message:@"Unable to contact server"
-                                                            delegate:self
-                                                   cancelButtonTitle:@"OK"
-                                                   otherButtonTitles: nil];
-            [alert show];
-        }];
+    else
+    {
+        if([params count])
+        {
+            [self.appDelegate.user setObject:[self.txtPassword text] forKey:@"password"];
+            [self.appDelegate.user setObject:[self.txtVerifyPassword text] forKey:@"verifyPW"];
+            [self.appDelegate.user setObject:[self.txtFirstName text] forKey:@"first_name"];
+            [self.appDelegate.user setObject:[self.txtLastName text] forKey:@"last_name"];
+            [self.appDelegate.user setObject:[self.txtBirthDate text] forKey:@"birthdate"];
+            [self.appDelegate.user setObject:[self.txtPhone text] forKey:@"cell_phone"];
+            [self.appDelegate.user setObject:self.btnGenderMale.selected ? @"m" : @"f" forKey:@"gender"];
+            [self.appDelegate.user setObject:self.btnText.selected ? @"1" : @"0" forKey:@"contact_text"];
+            [self.appDelegate.user setObject:self.btnEmail.selected ? @"1" : @"0" forKey:@"contact_mail"];
+            
+            [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"JSON: %@", responseObject);
+                if([self validateResponse:responseObject])
+                {
+                    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup2"];
+                    [self.navigationController pushViewController:myController animated:TRUE];
+                    
+                }
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Error: %@", error);
+                UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Error"
+                                                                 message:@"Unable to contact server"
+                                                                delegate:self
+                                                       cancelButtonTitle:@"OK"
+                                                       otherButtonTitles: nil];
+                [alert show];
+            }];
+        }
+        else{
+            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup2"];
+            [self.navigationController pushViewController:myController animated:TRUE];
+        }
     }
-    else{
-        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup2"];
-        [self.navigationController pushViewController:myController animated:TRUE];
-    }
-}
 }
 
 @end

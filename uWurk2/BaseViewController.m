@@ -49,6 +49,7 @@
         control.text = value;
     }
 }
+
 -(void)assignValueTextView:(NSString*)value control:(UITextView*)control {
     if(![value isEqual:[NSNull null]]){
         control.text = value;
