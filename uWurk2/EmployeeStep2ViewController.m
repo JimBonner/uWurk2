@@ -11,8 +11,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtMiles;
 @property (weak, nonatomic) IBOutlet UITextField *txtZip;
 @property (weak, nonatomic) IBOutlet UITextField *txtHourly;
-@property (weak, nonatomic) IBOutlet UIButton *btnTips;
-@property (weak, nonatomic) IBOutlet UIButton *btnHourly;
+@property (weak, nonatomic) IBOutlet UIButton    *btnTips;
+@property (weak, nonatomic) IBOutlet UIButton    *btnHourly;
 
 @end
 
@@ -23,28 +23,18 @@
     return [NSMutableArray arrayWithArray:array];
 }
 
--(void) viewWillAppear:(BOOL)animated{
+-(void) viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
-    NSArray *availabilityArray = [self.appDelegate.user objectForKey:@"availability"];
-    if([availabilityArray count] > 0) {
-        NSDictionary *firstAvailabilityItem = [availabilityArray objectAtIndex:0];
-        [self assignValue:[[firstAvailabilityItem objectForKey:@"miles"] stringValue] control:self.txtMiles];
-        [self assignValue:[firstAvailabilityItem objectForKey:@"zip"] control:self.txtZip];
-    }
+    [self assignValue:[self.appDelegate.user objectForKey:@"miles(0)"] control:self.txtMiles];
+    [self assignValue:[self.appDelegate.user objectForKey:@"zip(0)"] control:self.txtZip];
     [self assignValue:[self.appDelegate.user objectForKey:@"hourly_wage"] control:self.txtHourly];
-    
-    if ([self.appDelegate.user objectForKey:@"hourly_wage"] == (id)[NSNull null] || [[self.appDelegate.user objectForKey:@"hourly_wage"]length] == 0 ) {
-        self.btnHourly.selected = FALSE;
+    if([self.appDelegate.user objectForKey:@"hourlySelected"]) {
+        [self.btnHourly setSelected:TRUE];
     }
-    else {
-        self.btnHourly.selected = TRUE;
+    if([self.appDelegate.user objectForKey:@"tipsSelected"]) {
+        [self.btnTips setSelected:TRUE];
     }
-    
-    if([[self.appDelegate.user objectForKey:@"tipped_position"]  intValue] == 0)
-        self.btnTips.selected = FALSE;
-
-    else if([[self.appDelegate.user objectForKey:@"tipped_position"]  intValue] == 1)
-        self.btnTips.selected = TRUE;
 }
 
 - (IBAction)changeCheckBox:(UIButton *)sender {
@@ -55,16 +45,30 @@
 }
 
 - (IBAction)nextPress:(id)sender {
-    // Did data get updated?
+    
+    [self.appDelegate.user setObject:[self.txtMiles text] forKey:@"miles(0)"];
+    [self.appDelegate.user setObject:[self.txtZip   text] forKey:@"zip(0)"];
+    [self.appDelegate.user setObject:[self.txtHourly text] forKey:@"hourly_wage"];
+    [self.appDelegate.user setObject:self.btnHourly.selected ? @"1" : @"0" forKey:@"hourlySelected"];
+    [self.appDelegate.user setObject:self.btnTips.selected ? @"1" : @"0" forKey:@"tipsSelected"];
     
     AFHTTPRequestOperationManager *manager = [self getManager];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    [params setObject:[self.txtMiles text] forKey:@"miles"];
-    [params setObject:[self.txtZip text] forKey:@"zip"];
-    [params setObject:self.txtHourly.text forKey:@"hourly_wage"];
-///    [params setObject:@"tips" forKey:@"wage_type"];
-    [self updateParamDict:params value:self.btnTips.selected ? @"1" : @"0" key:@"tipped_position"];
+    [params setObject:[self.txtMiles text] forKey:@"miles[0]"];
+    [params setObject:[self.txtZip text] forKey:@"zip[0]"];
+    NSMutableArray *wageArray = [[NSMutableArray alloc]init];
+    if(self.btnHourly.selected) {
+        [wageArray addObject:@"hourly"];
+        [params setObject:self.txtHourly.text forKey:@"hourly_wage"];
+    }
+    if(self.btnTips.selected) {
+        [wageArray addObject:@"tips"];
+    }
+    if([wageArray count]) {
+        [params setObject:wageArray forKey:@"wage_type"];
+    }
+    
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
     if (self.txtMiles.text.length ==0) {
@@ -73,7 +77,7 @@
     if (self.txtZip.text.length ==0) {
         [Error appendString:@"\n\nZip Code"];
     }
-    if (self.btnHourly.selected == YES && self.txtHourly.text.length ==0) {
+    if (self.btnHourly.selected == YES && self.txtHourly.text.length == 0) {
         [Error appendString:@"\n\nHourly Wage"];
     }
     if (self.btnHourly.selected == NO && self.btnTips.selected == NO) {
@@ -91,19 +95,6 @@
     {
         if([params count])
         {
-            NSMutableArray *availabilityArray = [[NSMutableArray alloc]init];
-            NSMutableDictionary *firstAvailabilityItem = [[NSMutableDictionary alloc]init];
-            [firstAvailabilityItem setObject:[self.txtMiles text] forKey:@"miles"];
-            [firstAvailabilityItem setObject:[self.txtZip text] forKey:@"zip"];
-            [availabilityArray setObject:firstAvailabilityItem atIndexedSubscript:0];
-            [self.appDelegate.user setObject:availabilityArray forKey:@"availability"];
-            [self.appDelegate.user setObject:[self.txtHourly text] forKey:@"hourly_wage"];
-            if(!self.btnTips.selected) {
-                [self.appDelegate.user setObject:@"0" forKey:@"tips"];
-            } else {
-                [self.appDelegate.user setObject:@"1" forKey:@"tips"];
-            }
-            
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"JSON: %@", responseObject);
                 if([self validateResponse:responseObject]){

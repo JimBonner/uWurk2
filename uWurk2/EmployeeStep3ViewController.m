@@ -85,6 +85,7 @@
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.viewCool.layer.cornerRadius = 5;
+    
     if([[self.appDelegate.user objectForKey:@"has_drivers_license"]  intValue] == 1)
         self.btnDLYes.selected = TRUE;
     else if([[self.appDelegate.user objectForKey:@"has_drivers_license"]  intValue] == 0)
