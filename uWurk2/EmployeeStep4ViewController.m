@@ -103,7 +103,8 @@
 }
 */
 
-- (IBAction)highSchoolPress:(id)sender {
+- (IBAction)highSchoolPress:(id)sender
+{
     self.cnstrntCityHeight.constant = 30;
     self.heightAttended.constant = 100;
     [self.btnGraduated setTitle:@"Graduated" forState:UIControlStateNormal];
@@ -133,6 +134,7 @@
          }
      }];
 }
+
 - (IBAction)collegePress:(id)sender {
     self.btnCity.alpha = 0;
     self.heightAttended.constant = 100;
@@ -163,6 +165,7 @@
          }
      }];
 }
+
 - (IBAction)tradeSchoolPress:(id)sender {
     self.btnCity.alpha = 0;
     self.heightAttended.constant = 100;
@@ -195,6 +198,7 @@
          
      }];
 }
+
 - (IBAction)gedPress:(id)sender {
     self.viewSchool.alpha = 0;
     [self.btnGraduated setTitle:@"Completed GED" forState:UIControlStateNormal];
@@ -222,7 +226,8 @@
      }];
 }
 
-- (IBAction)statePress:(id)sender {
+- (IBAction)statePress:(id)sender
+{
     [self.btnSchool setTitle:@"Select School" forState:UIControlStateNormal];
     [self.btnSchool setTitle:@"Select School" forState:UIControlStateHighlighted];
     [self.btnSchool setTitle:@"Select School" forState:UIControlStateSelected];
@@ -231,7 +236,6 @@
     [self.btnCity setTitle:@"Select City" forState:UIControlStateSelected];
     
     ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
-    
     
     [myController setParameters:nil];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/states"];
@@ -253,7 +257,6 @@
     
     ListSelectorStringsTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelectorStrings"];
     
-    
     [myController setParameters:@{@"state_id":[self.btnState titleForState:UIControlStateSelected]}];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/cities"];
     // Come back for city
@@ -271,8 +274,8 @@
     
     ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
     
-    
     [myController setParameters:nil];
+    
     if (self.btnHighSchool.isSelected) {
         [myController setUrl:@"http://uwurk.tscserver.com/api/v1/high_schools"];
         [myController setParameters:@{@"state_id":[self.btnState titleForState:UIControlStateSelected],@"city":[self.btnCity titleForState:UIControlStateSelected],@"type":@"high_schools"}];
@@ -282,8 +285,8 @@
     if (self.btnCollege.isSelected) {
         [myController setUrl:@"http://uwurk.tscserver.com/api/v1/colleges"];
         [myController setParameters:@{@"state_id":[self.btnState titleForState:UIControlStateSelected],@"type":@"colleges"}];
-        myController.bPost = TRUE;
-        myController.bUseArray = TRUE;
+        myController.bPost = FALSE;
+        myController.bUseArray = FALSE;
     }
     if (self.btnTradeSchool.isSelected) {
         [myController setUrl:@"http://uwurk.tscserver.com/api/v1/trade_schools"];

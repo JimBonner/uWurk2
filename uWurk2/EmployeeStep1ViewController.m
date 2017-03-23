@@ -33,6 +33,9 @@
     [super viewWillAppear:animated];
     self.viewCommunication.layer.cornerRadius = 10;
     
+    [self.appDelegate.user setObject:[self getUserDefault:@"email"] forKey:@"email"];
+    [self.appDelegate.user setObject:[self getUserDefault:@"api_auth_token"] forKey:@"api_auth_token"];
+    
     [self assignValue:[self.appDelegate.user objectForKey:@"email"] control:self.txtEmail];
     [self.txtEmail setAlpha:0.2];
     [self.txtEmail setEnabled:NO];
@@ -119,9 +122,7 @@
             [self.appDelegate.user setObject:[self.txtBirthDate text] forKey:@"birthdate"];
             [self.appDelegate.user setObject:[self.txtPhone text] forKey:@"cell_phone"];
             [self.appDelegate.user setObject:self.btnGenderMale.selected ? @"m" : @"f" forKey:@"gender"];
-            [self.appDelegate.user setObject:self.btnText.selected ? @"1" : @"0" forKey:@"contact_text"];
-            [self.appDelegate.user setObject:self.btnEmail.selected ? @"1" : @"0" forKey:@"contact_email"];
-            
+
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"JSON: %@", responseObject);
                 if([self validateResponse:responseObject])
