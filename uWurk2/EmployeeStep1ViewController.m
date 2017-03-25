@@ -45,15 +45,22 @@
     [self assignValue:[self.appDelegate.user objectForKey:@"last_name"] control:self.txtLastName];
     [self assignValue:[self.appDelegate.user objectForKey:@"birthdate"] control:self.txtBirthDate];
     [self assignValue:[self.appDelegate.user objectForKey:@"cell_phone"] control:self.txtPhone];
-    if([[self.appDelegate.user objectForKey:@"gender"] isEqualToString:@"m"])
-        self.btnGenderMale.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"gender"] isEqualToString:@"f"])
+    if([[self.appDelegate.user objectForKey:@"gender"] isEqualToString:@"f"]) {
+        self.btnGenderMale.selected = FALSE;
         self.btnGenderFemale.selected = TRUE;
+    } else {
+        self.btnGenderMale.selected = TRUE;
+        self.btnGenderFemale.selected = FALSE;
+    }
     if([[self.appDelegate.user objectForKey:@"contact_text"] isEqualToString:@"1"]) {
-        self.btnText.selected  = TRUE;
+        self.btnText.selected = TRUE;
+    } else {
+        self.btnText.selected = FALSE;
     }
     if([[self.appDelegate.user objectForKey:@"contact_email"] isEqualToString:@"1"]) {
         self.btnEmail.selected  = TRUE;
+    } else {
+        self.btnEmail.selected = FALSE;
     }
 }
 
@@ -61,9 +68,18 @@
     [sender setSelected:!sender.selected];
 }
 
-- (IBAction)nextPress:(id)sender {
-    // Did data get updated?
-    
+- (IBAction)nextPress:(id)sender
+{
+    [self.appDelegate.user setObject:[self.txtPassword text] forKey:@"password"];
+    [self.appDelegate.user setObject:[self.txtVerifyPassword text] forKey:@"verifyPW"];
+    [self.appDelegate.user setObject:[self.txtFirstName text] forKey:@"first_name"];
+    [self.appDelegate.user setObject:[self.txtLastName text] forKey:@"last_name"];
+    [self.appDelegate.user setObject:[self.txtBirthDate text] forKey:@"birthdate"];
+    [self.appDelegate.user setObject:[self.txtPhone text] forKey:@"cell_phone"];
+    [self.appDelegate.user setObject:self.btnGenderMale.selected ? @"m" : @"f" forKey:@"gender"];
+    [self.appDelegate.user setObject:self.btnText.selected ? @"1" : @"0" forKey:@"contact_text"];
+    [self.appDelegate.user setObject:self.btnEmail.selected ? @"1" : @"0" forKey:@"contact_email"];
+   
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     
@@ -122,6 +138,8 @@
             [self.appDelegate.user setObject:[self.txtBirthDate text] forKey:@"birthdate"];
             [self.appDelegate.user setObject:[self.txtPhone text] forKey:@"cell_phone"];
             [self.appDelegate.user setObject:self.btnGenderMale.selected ? @"m" : @"f" forKey:@"gender"];
+            [self.appDelegate.user setObject:self.btnText.selected ? @"1" : @"0" forKey:@"contact_text"];
+            [self.appDelegate.user setObject:self.btnEmail.selected ? @"1" : @"0" forKey:@"contact_email"];
 
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"JSON: %@", responseObject);

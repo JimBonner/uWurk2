@@ -43,7 +43,7 @@
     self.params = [[NSMutableDictionary alloc] init];
     self.eduId = @"edu_id[0]";
     NSArray *educationArray = [self.appDelegate.user objectForKey:@"education"];
-    if([educationArray count] >0) {
+    if([educationArray count] > 0) {
         NSDictionary *firstEducationItem = [educationArray objectAtIndex:0];
         [self.params setObject:[firstEducationItem objectForKey:@"id"] forKey:self.eduId];
         if([[firstEducationItem objectForKey:@"type"] isEqualToString:@"high_school"])
@@ -93,16 +93,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 - (IBAction)highSchoolPress:(id)sender
 {
     self.cnstrntCityHeight.constant = 30;
@@ -135,7 +125,8 @@
      }];
 }
 
-- (IBAction)collegePress:(id)sender {
+- (IBAction)collegePress:(id)sender
+{
     self.btnCity.alpha = 0;
     self.heightAttended.constant = 100;
     [self.btnGraduated setTitle:@"Graduated" forState:UIControlStateNormal];
@@ -166,7 +157,8 @@
      }];
 }
 
-- (IBAction)tradeSchoolPress:(id)sender {
+- (IBAction)tradeSchoolPress:(id)sender
+{
     self.btnCity.alpha = 0;
     self.heightAttended.constant = 100;
     [self.btnGraduated setTitle:@"Graduated" forState:UIControlStateNormal];
@@ -194,12 +186,11 @@
                  self.viewCurrent.alpha = 1;
                  [self.view layoutIfNeeded];}];
          }
-         
-         
      }];
 }
 
-- (IBAction)gedPress:(id)sender {
+- (IBAction)gedPress:(id)sender
+{
     self.viewSchool.alpha = 0;
     [self.btnGraduated setTitle:@"Completed GED" forState:UIControlStateNormal];
     self.viewAttended.alpha = 0;
@@ -239,7 +230,6 @@
     
     [myController setParameters:nil];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/states"];
-    // Come back for states
     [myController setDisplay:@"description"];
     [myController setKey:@"id"];
     [myController setDelegate:self];
@@ -268,31 +258,31 @@
     [myController setTitle:@"Cities"];
     
     [self.navigationController pushViewController:myController animated:TRUE];
-    
 }
+
 - (IBAction)schoolPress:(id)sender {
     
     ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
     
-    [myController setParameters:nil];
-    
     if (self.btnHighSchool.isSelected) {
         [myController setUrl:@"http://uwurk.tscserver.com/api/v1/high_schools"];
-        [myController setParameters:@{@"state_id":[self.btnState titleForState:UIControlStateSelected],@"city":[self.btnCity titleForState:UIControlStateSelected],@"type":@"high_schools"}];
-        myController.bPost = TRUE;
+        [myController setParameters:@{@"state_id":[self.btnState titleForState:UIControlStateSelected],
+                                      @"city":[self.btnCity titleForState:UIControlStateSelected],
+                                      @"type":@"high_schools"}];
+        myController.bPost = FALSE;
         myController.bUseArray = TRUE;
     }
     if (self.btnCollege.isSelected) {
         [myController setUrl:@"http://uwurk.tscserver.com/api/v1/colleges"];
-        [myController setParameters:@{@"state_id":[self.btnState titleForState:UIControlStateSelected],@"type":@"colleges"}];
+        [myController setParameters:@{@"state":[self.btnState titleForState:UIControlStateSelected]}];
         myController.bPost = FALSE;
-        myController.bUseArray = FALSE;
+        myController.bUseArray = TRUE;
     }
     if (self.btnTradeSchool.isSelected) {
         [myController setUrl:@"http://uwurk.tscserver.com/api/v1/trade_schools"];
         [myController setParameters:@{@"state_id":[self.btnState titleForState:UIControlStateSelected]}];
     }
-    // Come back for schools
+    
     [myController setDisplay:@"description"];
     [myController setKey:@"id"];
     [myController setDelegate:self];
@@ -301,7 +291,6 @@
     [myController setTitle:@"Schools"];
     
     [self.navigationController pushViewController:myController animated:TRUE];
-    
 }
 
 - (IBAction)nextPress:(id)sender {

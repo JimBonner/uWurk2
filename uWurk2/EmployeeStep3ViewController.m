@@ -37,7 +37,6 @@
 - (IBAction)addLanguagePress:(id)sender {
     ListMultiSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListMultiSelector"];
     
-    
     [myController setParameters:nil];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/languages"];
     [myController setDisplay:@"description"];
@@ -129,6 +128,7 @@
         self.viewBdyArt.alpha = 0;
         [self.view layoutIfNeeded];
     }
+    
     if(!self.langDict) {
         self.langDict = [NSMutableDictionary new];
         
@@ -195,9 +195,17 @@
 }
 
 
-- (IBAction)nextPress:(id)sender {
-    // Did data get updated?
-    
+- (IBAction)nextPress:(id)sender
+{
+    [self.appDelegate.user setObject:self.btnDLYes.selected ? @"1" : @"0" forKey:@"has_drivers_license"];
+    [self.appDelegate.user setObject:self.btnVetYes.selected ? @"1" : @"0" forKey:@"is_veteran"];
+    [self.appDelegate.user setObject:self.btnFluEngYes.selected ? @"1" : @"0" forKey:@"fluent_english"];
+    [self.appDelegate.user setObject:self.btnBodyArtYes.selected ? @"1" : @"0" forKey:@"has_body_art"];
+    [self.appDelegate.user setObject:self.btnEarGauges.selected ? @"1" : @"0" forKey:@"has_ear_gauge"];
+    [self.appDelegate.user setObject:self.btnFacialPiercing.selected ? @"1" : @"0" forKey:@"has_facial_piercing"];
+    [self.appDelegate.user setObject:self.btnTattoo.selected ? @"1" : @"0" forKey:@"has_tattoo"];
+    [self.appDelegate.user setObject:self.btnTonguePiercing.selected ? @"1" : @"0" forKey:@"has_tongue_piercing"];
+
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     

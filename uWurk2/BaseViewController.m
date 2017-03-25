@@ -109,20 +109,6 @@
         {
             if([((NSNumber*)n) isEqual:@1])
             {
-                if([response objectForKey:@"user"])
-                {
-                    NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
-                    // Clean up this null nonsense
-                    for (NSString* key in [response objectForKey:@"user"])
-                    {
-                        id value = [[response objectForKey:@"user"] objectForKey:key];
-                        if(![value isEqual:[NSNull null]])
-                        {
-                            [tempDict setObject:value forKey:key];
-                        }
-                    }
-                    [self.appDelegate setUser:tempDict];
-                }
                 return TRUE;
             }
         }

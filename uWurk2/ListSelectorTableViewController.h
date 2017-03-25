@@ -21,8 +21,8 @@
 @property (nonatomic, retain) NSString *key;
 @property (nonatomic, retain) NSDictionary *parameters;
 @property (nonatomic, retain) NSString *url;
-@property(nonatomic,assign)id delegate;
-@property(nonatomic, retain) NSMutableArray *collectionViewArray;
+@property (nonatomic, assign) id delegate;
+@property (nonatomic, retain) NSMutableArray *collectionViewArray;
 @property (nonatomic, retain) UIButton *sender;
 @property (assign) BOOL bPost;
 @property (assign) BOOL bUseArray;

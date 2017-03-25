@@ -12,6 +12,7 @@
 
 
 @interface BaseViewController : UIViewController
+
 @property (nonatomic, retain) AppDelegate *appDelegate;
 
 -(void)assignValueTextView:(NSString*)value control:(UITextView*)control;

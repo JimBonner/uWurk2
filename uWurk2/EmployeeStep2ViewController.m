@@ -7,6 +7,7 @@
 //
 
 #import "EmployeeStep2ViewController.h"
+
 @interface EmployeeStep2ViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *txtMiles;
 @property (weak, nonatomic) IBOutlet UITextField *txtZip;
@@ -18,22 +19,21 @@
 
 @implementation EmployeeStep2ViewController
 
--(NSMutableArray *)availabiltyArray1:(NSArray *)array
-{
-    return [NSMutableArray arrayWithArray:array];
-}
-
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self assignValue:[self.appDelegate.user objectForKey:@"miles(0)"] control:self.txtMiles];
     [self assignValue:[self.appDelegate.user objectForKey:@"zip(0)"] control:self.txtZip];
     [self assignValue:[self.appDelegate.user objectForKey:@"hourly_wage"] control:self.txtHourly];
-    if([self.appDelegate.user objectForKey:@"hourlySelected"]) {
+    if([[self.appDelegate.user objectForKey:@"hourlySelected"] isEqualToString:@"1"]) {
         [self.btnHourly setSelected:TRUE];
+    } else {
+        [self.btnHourly setSelected:FALSE];
     }
-    if([self.appDelegate.user objectForKey:@"tipsSelected"]) {
+    if([[self.appDelegate.user objectForKey:@"tipsSelected"] isEqualToString:@"1"]) {
         [self.btnTips setSelected:TRUE];
+    } else {
+        [self.btnTips setSelected:FALSE];
     }
 }
 

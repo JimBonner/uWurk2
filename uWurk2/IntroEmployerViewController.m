@@ -20,7 +20,8 @@
 
 @implementation IntroEmployerViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:false];
     // Do any additional setup after loading the view.

@@ -31,12 +31,13 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)viewDidAppear:(BOOL)animated{
+-(void)viewDidAppear:(BOOL)animated
+{
     [super viewDidAppear:animated];
     
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     
     if(self.bPost) {
         [manager POST:self.url parameters:self.parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -94,27 +95,24 @@
         if(self.bUseArray) {
             NSArray *row = [self.json objectAtIndex:indexPath.row];
             item.jobDesc = [row objectAtIndex:1];
-            item.jobID = [row objectAtIndex:0];
+            item.jobID   = [row objectAtIndex:0];
         }
         else {
             NSDictionary *row = [self.json objectAtIndex:indexPath.row];
             item.jobDesc = [row objectForKey:self.display];
-            item.jobID = [row objectForKey:self.key];
-            
+            item.jobID   = [row objectForKey:self.key];
         }
         [self.collectionViewArray addObject:item];
     }
     else {
         if(self.bUseArray) {
             NSArray *row = [self.json objectAtIndex:indexPath.row];
-            
             [self.sender setTitle:[row objectAtIndex:1] forState:UIControlStateNormal];
             [self.sender setTitle:[row objectAtIndex:1] forState:UIControlStateHighlighted];
             [self.sender setTitle:[row objectAtIndex:0] forState:UIControlStateSelected];
         }
         else {
             NSDictionary *row = [self.json objectAtIndex:indexPath.row];
-            
             [self.sender setTitle:[row objectForKey:self.display] forState:UIControlStateNormal];
             [self.sender setTitle:[row objectForKey:self.display] forState:UIControlStateHighlighted];
             [self.sender setTitle:[row objectForKey:self.key] forState:UIControlStateSelected];

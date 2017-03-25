@@ -21,7 +21,7 @@
 @property (nonatomic, retain) NSString *key;
 @property (nonatomic, retain) NSDictionary *parameters;
 @property (nonatomic, retain) NSString *url;
-@property(nonatomic,assign)id delegate;
+@property (nonatomic, assign) id delegate;
 @property (nonatomic, retain) UIButton *sender;
 
 @end
