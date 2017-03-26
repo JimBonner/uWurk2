@@ -52,6 +52,8 @@
     [self.appDelegate.user setObject:self.btnHourly.selected ? @"1" : @"0" forKey:@"hourlySelected"];
     [self.appDelegate.user setObject:self.btnTips.selected ? @"1" : @"0" forKey:@"tipsSelected"];
     
+    [self saveUserDefault:self.appDelegate.user Key:@"user_data"];
+    
     AFHTTPRequestOperationManager *manager = [self getManager];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];

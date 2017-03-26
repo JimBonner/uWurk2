@@ -125,7 +125,12 @@
     }
 }
 
-- (IBAction)nextPress:(id)sender {
+- (IBAction)nextPress:(id)sender
+{
+    // Did data get updated?
+    
+    [self saveUserDefault:self.appDelegate.user Key:@"user_data"];
+    
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [self updateParamDict:params value:self.textView.text key:@"biography"];

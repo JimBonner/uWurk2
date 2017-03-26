@@ -20,12 +20,17 @@
 
 @implementation IntroEmployeeViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:false];
     // Do any additional setup after loading the view.
     [self saveUserDefault:@"1" Key:@"register_Active"];
     [self.emailText setText:[self getUserDefault:@"email"]];
+
+    NSDictionary *test = [[NSDictionary alloc]initWithDictionary:[self getUserDefault:@"user_data]"]];
+
+    self.appDelegate.user = [[NSMutableDictionary alloc]initWithDictionary:[self getUserDefault:@"user_data]"]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,7 +44,7 @@
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:self.emailText.text forKey:@"email"];
     [params setObject:@"employee" forKey:@"type"];
-    
+
     if([params count]){
         [manager POST:@"http://uwurk.tscserver.com/api/v1/register" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
         {
@@ -53,6 +58,8 @@
                     [self saveUserDefault:[responseObject objectForKey:@"api_auth_token"] Key:@"api_auth_token"];
                     [self.appDelegate.user setObject:[self getUserDefault:@"email"] forKey:@"email"];
                     [self.appDelegate.user setObject:[self getUserDefault:@"api_auth_token"] forKey:@"api_auth_token"];
+
+                    [self saveUserDefault:self.appDelegate.user Key:@"user_data"];
                 }
                 
                 EmployeeStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeStep1ViewController"];

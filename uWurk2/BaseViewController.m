@@ -283,10 +283,10 @@
 #pragma mark -
 #pragma mark User Defaults
 
--(void)saveUserDefault:(NSString*)object Key:(NSString*)key
+-(void)saveUserDefault:(NSString *)object Key:(NSString *)key
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    if([object length] == 0)
+    if(object == nil)
         [prefs setObject:nil forKey:key];
     else
         [prefs setObject:object forKey:key];
@@ -294,9 +294,48 @@
     [prefs synchronize];
 }
 
--(NSString*)getUserDefault:(NSString*)key
+-(NSString *)getUserDefault:(NSString *)key
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    return [prefs stringForKey:key];
+    return [prefs objectForKey:key];
 }
+
+#pragma mark -
+#pragma mark NSMutableDictionary Conversion(s)
+
+- (NSString *)NSMutableDictionaryToString:(NSMutableDictionary *)dictionary
+{
+    NSError *err;
+    NSData  *jsonData = [NSJSONSerialization  dataWithJSONObject:dictionary
+                                                         options:0
+                                                           error:&err];
+    NSString *string = [[NSString alloc] initWithData:jsonData
+                                             encoding:NSUTF8StringEncoding];
+    NSLog(@"%@",string);
+    
+    return string;
+}
+
+- (NSMutableDictionary *)StringToNSMutableDictionary:(NSString *)string
+{
+    NSError *err;
+    NSData  *data =[string dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *tempDict = nil;
+    NSMutableDictionary *dictionary = nil;
+    if(data!=nil){
+        tempDict = (NSDictionary *)[NSJSONSerialization
+                                    JSONObjectWithData:data
+                                               options:NSJSONReadingMutableContainers
+                                                 error:&err];
+        dictionary = [tempDict mutableCopy];
+    }
+    return dictionary;
+}
+
+- (void)saveUserDefaultForNSMutableDictionary:(NSMutableDictionary *)object Key:(NSString *)key
+{
+
+}
+
+
 @end

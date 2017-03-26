@@ -79,6 +79,8 @@
     [self.appDelegate.user setObject:self.btnGenderMale.selected ? @"m" : @"f" forKey:@"gender"];
     [self.appDelegate.user setObject:self.btnText.selected ? @"1" : @"0" forKey:@"contact_text"];
     [self.appDelegate.user setObject:self.btnEmail.selected ? @"1" : @"0" forKey:@"contact_email"];
+    
+    [self saveUserDefault:self.appDelegate.user Key:@"user_data"];
    
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];

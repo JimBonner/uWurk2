@@ -78,8 +78,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LookupCellTable"];
     
     if(self.bUseArray) {
-        NSArray *row = [self.json objectAtIndex:indexPath.row];
-        cell.textLabel.text = [row objectAtIndex:1];
+        NSDictionary *row = [self.json objectAtIndex:indexPath.row];
+        cell.textLabel.text = [row objectForKey:self.display];
     }
     else {
         NSDictionary *row = [self.json objectAtIndex:indexPath.row];
@@ -93,9 +93,9 @@
     if(self.collectionViewArray) {
         ExperienceFilterItem *item = [ExperienceFilterItem new];
         if(self.bUseArray) {
-            NSArray *row = [self.json objectAtIndex:indexPath.row];
-            item.jobDesc = [row objectAtIndex:1];
-            item.jobID   = [row objectAtIndex:0];
+            NSDictionary *row = [self.json objectAtIndex:indexPath.row];
+            item.jobDesc = [row objectForKey:self.display];
+            item.jobID   = [row objectForKey:self.key];
         }
         else {
             NSDictionary *row = [self.json objectAtIndex:indexPath.row];
@@ -106,10 +106,11 @@
     }
     else {
         if(self.bUseArray) {
-            NSArray *row = [self.json objectAtIndex:indexPath.row];
-            [self.sender setTitle:[row objectAtIndex:1] forState:UIControlStateNormal];
-            [self.sender setTitle:[row objectAtIndex:1] forState:UIControlStateHighlighted];
-            [self.sender setTitle:[row objectAtIndex:0] forState:UIControlStateSelected];
+            NSDictionary *row = [self.json objectAtIndex:indexPath.row];
+            [self.sender setTitle:[row objectForKey:self.display] forState:UIControlStateNormal];
+            [self.sender setTitle:[row objectForKey:self.display] forState:UIControlStateHighlighted];
+            [self.sender setTitle:[row objectForKey:self.key] forState:UIControlStateSelected];
+;
         }
         else {
             NSDictionary *row = [self.json objectAtIndex:indexPath.row];

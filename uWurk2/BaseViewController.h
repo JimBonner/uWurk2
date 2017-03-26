@@ -16,8 +16,10 @@
 @property (nonatomic, retain) AppDelegate *appDelegate;
 
 -(void)assignValueTextView:(NSString*)value control:(UITextView*)control;
--(void)saveUserDefault:(NSString*)object Key:(NSString*)key;
--(NSString*)getUserDefault:(NSString*)key;
+-(void)saveUserDefault:(NSString *)object Key:(NSString*)key;
+-(NSString *)getUserDefault:(NSString*)key;
+-(NSString *)NSMutableDictionaryToString:(NSMutableDictionary *)dictionary;
+-(NSMutableDictionary *)StringToNSMutableDictionary:(NSString *)string;
 -(BOOL) validateResponse:(NSDictionary*)response;
 -(AFHTTPRequestOperationManager*)getManager;
 -(AFHTTPRequestOperationManager*)getManagerNoAuth;

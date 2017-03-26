@@ -167,8 +167,11 @@
     
 }
 
-- (IBAction)nextPress:(id)sender {
+- (IBAction)nextPress:(id)sender
+{
     // Did data get updated?
+    
+    [self saveUserDefault:self.appDelegate.user Key:@"user_data"];
     
     AFHTTPRequestOperationManager *manager = [self getManager];
     [self.params setObject:self.txtCompany.text forKey:@"company[0]"];

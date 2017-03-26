@@ -275,6 +275,7 @@
     if (self.btnCollege.isSelected) {
         [myController setUrl:@"http://uwurk.tscserver.com/api/v1/colleges"];
         [myController setParameters:@{@"state":[self.btnState titleForState:UIControlStateSelected]}];
+        [myController setJsonGroup:@"colleges"];
         myController.bPost = FALSE;
         myController.bUseArray = TRUE;
     }
@@ -286,15 +287,17 @@
     [myController setDisplay:@"description"];
     [myController setKey:@"id"];
     [myController setDelegate:self];
-    [myController setJsonGroup:@"options"];
     [myController setSender:self.btnSchool];
     [myController setTitle:@"Schools"];
     
     [self.navigationController pushViewController:myController animated:TRUE];
 }
 
-- (IBAction)nextPress:(id)sender {
+- (IBAction)nextPress:(id)sender
+{
     // Did data get updated?
+    
+    [self saveUserDefault:self.appDelegate.user Key:@"user_data"];
     
     AFHTTPRequestOperationManager *manager = [self getManager];
     if (self.btnHighSchool.isSelected){
