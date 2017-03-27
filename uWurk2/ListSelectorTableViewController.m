@@ -42,7 +42,6 @@
     if(self.bPost) {
         [manager POST:self.url parameters:self.parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             self.json = [NSMutableArray arrayWithArray:[responseObject objectForKey:self.jsonGroup]];
-//            [self.json removeObjectAtIndex:0];
             [self.tableView reloadData];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
@@ -51,7 +50,6 @@
     else {
         [manager GET:self.url parameters:self.parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             self.json = [NSMutableArray arrayWithArray:[responseObject objectForKey:self.jsonGroup]];
-//            [self.json removeObjectAtIndex:0];
             [self.tableView reloadData];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
