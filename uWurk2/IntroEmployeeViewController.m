@@ -28,9 +28,8 @@
     [self saveUserDefault:@"1" Key:@"register_Active"];
     [self.emailText setText:[self getUserDefault:@"email"]];
 
-    NSDictionary *test = [[NSDictionary alloc]initWithDictionary:[self getUserDefault:@"user_data]"]];
-
-    self.appDelegate.user = [[NSMutableDictionary alloc]initWithDictionary:[self getUserDefault:@"user_data]"]];
+    NSDictionary *dict = [NSDictionary dictionaryWithDictionary:[self getUserDefault:@"user_data"]];
+    [self.appDelegate setUser:[dict mutableCopy]];
 }
 
 - (void)didReceiveMemoryWarning {

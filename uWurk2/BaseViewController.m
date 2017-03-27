@@ -283,7 +283,7 @@
 #pragma mark -
 #pragma mark User Defaults
 
--(void)saveUserDefault:(NSString *)object Key:(NSString *)key
+-(void)saveUserDefault:(id)object Key:(NSString *)key
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     if(object == nil)
@@ -294,7 +294,7 @@
     [prefs synchronize];
 }
 
--(NSString *)getUserDefault:(NSString *)key
+-(id)getUserDefault:(NSString *)key
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     return [prefs objectForKey:key];
@@ -331,11 +331,5 @@
     }
     return dictionary;
 }
-
-- (void)saveUserDefaultForNSMutableDictionary:(NSMutableDictionary *)object Key:(NSString *)key
-{
-
-}
-
 
 @end
