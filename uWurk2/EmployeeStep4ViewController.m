@@ -12,6 +12,7 @@
 #import "ListSelectorStringsTableViewController.h"
 
 @interface EmployeeStep4ViewController ()
+
 @property (weak, nonatomic) IBOutlet RadioButton *btnHighSchool;
 @property (weak, nonatomic) IBOutlet RadioButton *btnCollege;
 @property (weak, nonatomic) IBOutlet RadioButton *btnTradeSchool;

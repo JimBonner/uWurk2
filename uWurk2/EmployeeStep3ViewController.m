@@ -10,7 +10,8 @@
 #import "RadioButton.h"
 #import "ListMultiSelectorTableViewController.h"
 
-@interface EmployeeStep3ViewController () <ListMultiSelectorTableViewControllerProtocol>
+@interface EmployeeStep3ViewController () //<ListMultiSelectorTableViewControllerProtocol>
+
 @property (weak, nonatomic) IBOutlet RadioButton *btnDLYes;
 @property (weak, nonatomic) IBOutlet RadioButton *btnDLNo;
 @property (weak, nonatomic) IBOutlet RadioButton *btnVetYes;
@@ -97,11 +98,6 @@
         self.btnFluEngYes.selected = TRUE; }
     else if([[self.appDelegate.user objectForKey:@"fluent_english"] intValue] == 0) {
         self.btnFluEngNo.selected  = TRUE; }
-    if([[self.appDelegate.user objectForKey:@"addl_languages"] count] > 0) {
-        self.lblLanguages.text = [self.appDelegate.user objectForKey:@"addl_languages"];
-    } else {
-        self.lblLanguages.text = @"";
-    }
     if([[self.appDelegate.user objectForKey:@"has_body_art"] intValue] == 1) {
         self.btnBodyArtYes.selected = TRUE; }
     else if([[self.appDelegate.user objectForKey:@"has_body_art"] intValue] == 0) {
@@ -149,8 +145,13 @@
         [self SelectionMade:self.langDict displayString:displayString];
     }
 
-    if([self.lblLanguages.text length] > 0)
-       [self.addLanguage setTitle:@"Modify Languages" forState:UIControlStateNormal];
+    if([self.lblLanguages.text length] > 0) {
+        [self.addLanguage setTitle:@"Modify Languages" forState:UIControlStateNormal];
+        [self.appDelegate.user setObject:self.lblLanguages.text forKey:@"addl_languages"];
+    } else {
+        [self.addLanguage setTitle:@"Add Languages" forState:UIControlStateNormal];
+        [self.appDelegate.user setObject:@"" forKey:@"addl_languages"];
+    }
 }
 /*
 #pragma mark - Navigation
