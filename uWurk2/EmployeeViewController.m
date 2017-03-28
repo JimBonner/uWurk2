@@ -129,13 +129,13 @@
     NSArray *educationArray = [self.appDelegate.user objectForKey:@"education"];
     if([educationArray count] >0) {
         NSDictionary *firstEducationItem = [educationArray objectAtIndex:0];
-        if ([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 1) {
+        if ([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 1) {
             SchoolStatus1 = @"Enrolled";
         }
-        if ([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 2) {
+        if ([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 2) {
             SchoolStatus1 = @"Graduated";
         }
-        if ([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 3) {
+        if ([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 3) {
             SchoolStatus1 = @"Attended";
         }
         self.lblEdu1.text = [NSString stringWithFormat:@"%@: %@", SchoolStatus1,[firstEducationItem objectForKey:@"school"]];
@@ -225,52 +225,52 @@
     NSString *FacePierce;
     NSString *TonguePierce;
     NSString *Gauges;
-    if ([[self.appDelegate.user objectForKey:@"has_body_art"]  intValue] == 0) {
+    if ([[self.appDelegate.user objectForKey:@"has_body_art"] intValue] == 0) {
         BodyArt = @"No Body Art";
     }
-    if ([[self.appDelegate.user objectForKey:@"has_tattoo"]  intValue] == 0) {
+    if ([[self.appDelegate.user objectForKey:@"has_tattoo"] intValue] == 0) {
         Tattoos = @"";
     }
-    if ([[self.appDelegate.user objectForKey:@"has_tattoo"]  intValue] == 1) {
+    if ([[self.appDelegate.user objectForKey:@"has_tattoo"] intValue] == 1) {
         Tattoos = @"Tattoos";
     }
-    if ([[self.appDelegate.user objectForKey:@"has_facial_piercing"]  intValue] == 0) {
+    if ([[self.appDelegate.user objectForKey:@"has_facial_piercing"] intValue] == 0) {
         FacePierce = @"";
     }
-    if ([[self.appDelegate.user objectForKey:@"has_facial_piercing"]  intValue] == 1) {
+    if ([[self.appDelegate.user objectForKey:@"has_facial_piercing"] intValue] == 1) {
         FacePierce = @"Facial Piercings";
     }
-    if ([[self.appDelegate.user objectForKey:@"has_tongue_piercing"]  intValue] == 0) {
+    if ([[self.appDelegate.user objectForKey:@"has_tongue_piercing"] intValue] == 0) {
         TonguePierce = @"";
     }
-    if ([[self.appDelegate.user objectForKey:@"has_tongue_piercing"]  intValue] == 1) {
+    if ([[self.appDelegate.user objectForKey:@"has_tongue_piercing"] intValue] == 1) {
         TonguePierce = @"Tongue Piercing";
     }
-    if ([[self.appDelegate.user objectForKey:@"has_ear_gauge"]  intValue] == 0) {
+    if ([[self.appDelegate.user objectForKey:@"has_ear_gauge"] intValue] == 0) {
         Gauges = @"";
     }
-    if ([[self.appDelegate.user objectForKey:@"has_ear_gauge"]  intValue] == 1) {
+    if ([[self.appDelegate.user objectForKey:@"has_ear_gauge"] intValue] == 1) {
         Gauges = @"Gauges";
     }
-    if ([[self.appDelegate.user objectForKey:@"has_body_art"]  intValue] == 1) {
+    if ([[self.appDelegate.user objectForKey:@"has_body_art"] intValue] == 1) {
         BodyArt = [NSString stringWithFormat:@"Has %@, %@, %@, %@", Tattoos, FacePierce, TonguePierce, Gauges];
     }
-    if ([[self.appDelegate.user objectForKey:@"has_drivers_license"]  intValue] == 0) {
+    if ([[self.appDelegate.user objectForKey:@"has_drivers_license"] intValue] == 0) {
         DriversLicense = @"No Valid Drivers License";
     }
-    if ([[self.appDelegate.user objectForKey:@"has_drivers_license"]  intValue] == 1) {
+    if ([[self.appDelegate.user objectForKey:@"has_drivers_license"] intValue] == 1) {
         DriversLicense = @"Has Valid Drivers License";
     }
-    if ([[self.appDelegate.user objectForKey:@"fluent_english"]  intValue] == 0) {
+    if ([[self.appDelegate.user objectForKey:@"fluent_english"] intValue] == 0) {
         Language = @"";
     }
-    if ([[self.appDelegate.user objectForKey:@"fluent_english"]  intValue] == 1) {
+    if ([[self.appDelegate.user objectForKey:@"fluent_english"] intValue] == 1) {
         Language = @"English";
     }
-    if ([[self.appDelegate.user objectForKey:@"is_veteran"]  intValue] == 0) {
+    if ([[self.appDelegate.user objectForKey:@"is_veteran"] intValue] == 0) {
         Veteran = @"Not a Military Veteran";
     }
-    if ([[self.appDelegate.user objectForKey:@"is_veteran"]  intValue] == 1) {
+    if ([[self.appDelegate.user objectForKey:@"is_veteran"] intValue] == 1) {
         Veteran = @"Is a Military Veteran";
     }
     self.lblInfoBio.text = [NSString stringWithFormat:@"VISIBLE BODY ART:\n%@\n\nDRIVERS LICENSE:\n%@\n\nSPEAKS FLUENT:\n%@\n\nVETERAN:\n%@",BodyArt, DriversLicense, Language ,Veteran];
@@ -364,13 +364,13 @@
     NSArray *educationArray = [self.appDelegate.user objectForKey:@"education"];
     if([educationArray count] >1) {
         NSDictionary *secondEducationItem = [educationArray objectAtIndex:1];
-        if ([[secondEducationItem objectForKey:@"school_status_id"]  intValue] == 1) {
+        if ([[secondEducationItem objectForKey:@"school_status_id"] intValue] == 1) {
             SchoolStatus2 = @"Enrolled";
         }
-        if ([[secondEducationItem objectForKey:@"school_status_id"]  intValue] == 2) {
+        if ([[secondEducationItem objectForKey:@"school_status_id"] intValue] == 2) {
             SchoolStatus2 = @"Graduated";
         }
-        if ([[secondEducationItem objectForKey:@"school_status_id"]  intValue] == 3) {
+        if ([[secondEducationItem objectForKey:@"school_status_id"] intValue] == 3) {
             SchoolStatus2 = @"Attended";
         }
         self.lblEdu2.text = [NSString stringWithFormat:@"%@: %@", SchoolStatus2,[secondEducationItem objectForKey:@"school"]];
@@ -389,13 +389,13 @@
     }
     if([educationArray count] >2) {
         NSDictionary *thirdEducationItem = [educationArray objectAtIndex:2];
-        if ([[thirdEducationItem objectForKey:@"school_status_id"]  intValue] == 1) {
+        if ([[thirdEducationItem objectForKey:@"school_status_id"] intValue] == 1) {
             SchoolStatus2 = @"Enrolled";
         }
-        if ([[thirdEducationItem objectForKey:@"school_status_id"]  intValue] == 2) {
+        if ([[thirdEducationItem objectForKey:@"school_status_id"] intValue] == 2) {
             SchoolStatus2 = @"Graduated";
         }
-        if ([[thirdEducationItem objectForKey:@"school_status_id"]  intValue] == 3) {
+        if ([[thirdEducationItem objectForKey:@"school_status_id"] intValue] == 3) {
             SchoolStatus2 = @"Attended";
         }
         self.lblEdu3.text = [NSString stringWithFormat:@"%@: %@", SchoolStatus3,[thirdEducationItem objectForKey:@"school"]];

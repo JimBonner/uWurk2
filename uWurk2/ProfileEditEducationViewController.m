@@ -58,13 +58,13 @@
     if([eduArray count] >=1) {
         self.educationCount = @"2";
         NSDictionary *firstEduItem = [eduArray objectAtIndex:0];
-        if ([[firstEduItem objectForKey:@"school_status_id"]  intValue] == 1) {
+        if ([[firstEduItem objectForKey:@"school_status_id"] intValue] == 1) {
             SchoolStatus1 = @"Enrolled";
         }
-        if ([[firstEduItem objectForKey:@"school_status_id"]  intValue] == 2) {
+        if ([[firstEduItem objectForKey:@"school_status_id"] intValue] == 2) {
             SchoolStatus1 = @"Graduated";
         }
-        if ([[firstEduItem objectForKey:@"school_status_id"]  intValue] == 3) {
+        if ([[firstEduItem objectForKey:@"school_status_id"] intValue] == 3) {
             SchoolStatus1 = @"Attended";
         }
         [self.params setObject:[firstEduItem objectForKey:@"id"] forKey:@"edu_id[0]"];
@@ -87,13 +87,13 @@
     if([eduArray count] >=2) {
         self.educationCount = @"3";
         NSDictionary *secondEduItem = [eduArray objectAtIndex:1];
-        if ([[secondEduItem objectForKey:@"school_status_id"]  intValue] == 1) {
+        if ([[secondEduItem objectForKey:@"school_status_id"] intValue] == 1) {
             SchoolStatus2 = @"Enrolled";
         }
-        if ([[secondEduItem objectForKey:@"school_status_id"]  intValue] == 2) {
+        if ([[secondEduItem objectForKey:@"school_status_id"] intValue] == 2) {
             SchoolStatus2 = @"Graduated";
         }
-        if ([[secondEduItem objectForKey:@"school_status_id"]  intValue] == 3) {
+        if ([[secondEduItem objectForKey:@"school_status_id"] intValue] == 3) {
             SchoolStatus2 = @"Attended";
         }
         [self.params setObject:[secondEduItem objectForKey:@"id"] forKey:@"edu_id[1]"];
@@ -115,13 +115,13 @@
     if([eduArray count] >=3) {
         self.educationCount = @"4";
         NSDictionary *thirdEduItem = [eduArray objectAtIndex:2];
-        if ([[thirdEduItem objectForKey:@"school_status_id"]  intValue] == 1) {
+        if ([[thirdEduItem objectForKey:@"school_status_id"] intValue] == 1) {
             SchoolStatus3 = @"Enrolled";
         }
-        if ([[thirdEduItem objectForKey:@"school_status_id"]  intValue] == 2) {
+        if ([[thirdEduItem objectForKey:@"school_status_id"] intValue] == 2) {
             SchoolStatus3 = @"Graduated";
         }
-        if ([[thirdEduItem objectForKey:@"school_status_id"]  intValue] == 3) {
+        if ([[thirdEduItem objectForKey:@"school_status_id"] intValue] == 3) {
             SchoolStatus3 = @"Attended";
         }
         [self.params setObject:[thirdEduItem objectForKey:@"id"] forKey:@"edu_id[2]"];
@@ -143,13 +143,13 @@
     if([eduArray count] >=4) {
         self.educationCount = @"5";
         NSDictionary *fourthEduItem = [eduArray objectAtIndex:3];
-        if ([[fourthEduItem objectForKey:@"school_status_id"]  intValue] == 1) {
+        if ([[fourthEduItem objectForKey:@"school_status_id"] intValue] == 1) {
             SchoolStatus4 = @"Enrolled";
         }
-        if ([[fourthEduItem objectForKey:@"school_status_id"]  intValue] == 2) {
+        if ([[fourthEduItem objectForKey:@"school_status_id"] intValue] == 2) {
             SchoolStatus4 = @"Graduated";
         }
-        if ([[fourthEduItem objectForKey:@"school_status_id"]  intValue] == 3) {
+        if ([[fourthEduItem objectForKey:@"school_status_id"] intValue] == 3) {
             SchoolStatus4 = @"Attended";
         }
         [self.params setObject:[fourthEduItem objectForKey:@"id"] forKey:@"edu_id[3]"];
@@ -170,13 +170,13 @@
     if([eduArray count] >=5) {
         self.btnAddSchool.enabled = NO;
         NSDictionary *fifthEduItem = [eduArray objectAtIndex:4];
-        if ([[fifthEduItem objectForKey:@"school_status_id"]  intValue] == 1) {
+        if ([[fifthEduItem objectForKey:@"school_status_id"] intValue] == 1) {
             SchoolStatus5 = @"Enrolled";
         }
-        if ([[fifthEduItem objectForKey:@"school_status_id"]  intValue] == 2) {
+        if ([[fifthEduItem objectForKey:@"school_status_id"] intValue] == 2) {
             SchoolStatus5 = @"Graduated";
         }
-        if ([[fifthEduItem objectForKey:@"school_status_id"]  intValue] == 3) {
+        if ([[fifthEduItem objectForKey:@"school_status_id"] intValue] == 3) {
             SchoolStatus5 = @"Attended";
         }
         [self.params setObject:[fifthEduItem objectForKey:@"id"] forKey:@"edu_id[4]"];

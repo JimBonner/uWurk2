@@ -48,7 +48,7 @@
         self.viewWorkExp.alpha = 0;
         
     }
-    if([[self.appDelegate.user objectForKey:@"has_no_experience"]  intValue] == 0){
+    if([[self.appDelegate.user objectForKey:@"has_no_experience"] intValue] == 0){
         self.btnExperienceYes.selected = TRUE;
         self.cnstrntNoExpViewHeight.constant = 0;
         self.viewNoExp.alpha = 0;
@@ -64,13 +64,13 @@
         [self assignValue:[firstExperienceItem objectForKey:@"company"] control:self.txtCompany];
         if([[firstExperienceItem objectForKey:@"status"] intValue] ==1)
             self.btnCurrentJob.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"status"]  intValue] == 2)
+        if([[firstExperienceItem objectForKey:@"status"] intValue] == 2)
             self.btnPreviousJob.selected = TRUE;
         if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 1)
             self.btnUnderYear.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"job_length"]  intValue] == 2)
+        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 2)
             self.btnYear2Year.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"job_length"]  intValue] == 3)
+        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 3)
             self.btnOver2Year.selected = TRUE;
     }
     else {

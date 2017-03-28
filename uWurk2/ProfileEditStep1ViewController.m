@@ -55,22 +55,22 @@
         self.btnGenderMale.selected = TRUE;
     else if([[self.appDelegate.user objectForKey:@"gender"] isEqualToString:@"f"])
         self.btnGenderFemale.selected = TRUE;
-    if([[self.appDelegate.user objectForKey:@"contact_method_id"]  intValue] == 0)
+    if([[self.appDelegate.user objectForKey:@"contact_method_id"] intValue] == 0)
     {
         self.btnEmail.selected = FALSE;
         self.btnText.selected = FALSE;
     }
-    else if([[self.appDelegate.user objectForKey:@"contact_method_id"]  intValue] == 1)
+    else if([[self.appDelegate.user objectForKey:@"contact_method_id"] intValue] == 1)
     {
         self.btnEmail.selected = TRUE;
         self.btnText.selected = FALSE;
     }
-    if([[self.appDelegate.user objectForKey:@"contact_method_id"]  intValue] == 2)
+    if([[self.appDelegate.user objectForKey:@"contact_method_id"] intValue] == 2)
     {
         self.btnText.selected = TRUE;
         self.btnEmail.selected = FALSE;
     }
-    else if([[self.appDelegate.user objectForKey:@"contact_method_id"]  intValue] == 3)
+    else if([[self.appDelegate.user objectForKey:@"contact_method_id"] intValue] == 3)
     {
         self.btnEmail.selected = TRUE;
         self.btnText.selected = TRUE;

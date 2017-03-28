@@ -63,19 +63,19 @@
     if([expArray count] >=1) {
         self.experienceCount = @"1";
         NSDictionary *firstExpItem = [expArray objectAtIndex:0];
-        if ([[firstExpItem objectForKey:@"job_length"]  intValue] == 1) {
+        if ([[firstExpItem objectForKey:@"job_length"] intValue] == 1) {
             JobLength1 = @"Under 1 Year";
         }
-        if ([[firstExpItem objectForKey:@"job_length"]  intValue] == 2) {
+        if ([[firstExpItem objectForKey:@"job_length"] intValue] == 2) {
             JobLength1 = @"1-2 Years";
         }
-        if ([[firstExpItem objectForKey:@"job_length"]  intValue] == 3) {
+        if ([[firstExpItem objectForKey:@"job_length"] intValue] == 3) {
             JobLength1 = @"Over 2 Years";
         }
-        if ([[firstExpItem objectForKey:@"status"]  intValue] == 1) {
+        if ([[firstExpItem objectForKey:@"status"] intValue] == 1) {
             JobStatus1 = @"Current";
         }
-        if ([[firstExpItem objectForKey:@"status"]  intValue] == 2) {
+        if ([[firstExpItem objectForKey:@"status"] intValue] == 2) {
             JobStatus1 = @"Previous";
         }
         [self.params setObject:[firstExpItem objectForKey:@"id"] forKey:@"exp_id[0]"];
@@ -98,20 +98,20 @@
     if([expArray count] >=2) {
         self.experienceCount = @"2";
         NSDictionary *secondExpItem = [expArray objectAtIndex:1];
-        if ([[secondExpItem objectForKey:@"job_length"]  intValue] == 1) {
+        if ([[secondExpItem objectForKey:@"job_length"] intValue] == 1) {
             JobLength2 = @"Under 1 Year";
         }
-        if ([[secondExpItem objectForKey:@"job_length"]  intValue] == 2) {
+        if ([[secondExpItem objectForKey:@"job_length"] intValue] == 2) {
             JobLength2 = @"1-2 Years";
         }
-        if ([[secondExpItem objectForKey:@"job_length"]  intValue] == 3) {
+        if ([[secondExpItem objectForKey:@"job_length"] intValue] == 3) {
             JobLength2 = @"Over 2 Years";
         }
-        if ([[secondExpItem objectForKey:@"status"]  intValue] == 1) {
+        if ([[secondExpItem objectForKey:@"status"] intValue] == 1) {
             JobStatus2 = @"Current";
         }
         if ([[secondExpItem
-              objectForKey:@"status"]  intValue] == 2) {
+              objectForKey:@"status"] intValue] == 2) {
             JobStatus2 = @"Previous";
         }
         [self.params setObject:[secondExpItem objectForKey:@"id"] forKey:@"exp_id[1]"];
@@ -132,19 +132,19 @@
     if([expArray count] >=3) {
         self.experienceCount = @"3";
         NSDictionary *thirdExpItem = [expArray objectAtIndex:2];
-        if ([[thirdExpItem objectForKey:@"job_length"]  intValue] == 1) {
+        if ([[thirdExpItem objectForKey:@"job_length"] intValue] == 1) {
             JobLength3 = @"Under 1 Year";
         }
-        if ([[thirdExpItem objectForKey:@"job_length"]  intValue] == 2) {
+        if ([[thirdExpItem objectForKey:@"job_length"] intValue] == 2) {
             JobLength3 = @"1-2 Years";
         }
-        if ([[thirdExpItem objectForKey:@"job_length"]  intValue] == 3) {
+        if ([[thirdExpItem objectForKey:@"job_length"] intValue] == 3) {
             JobLength3 = @"Over 2 Years";
         }
-        if ([[thirdExpItem objectForKey:@"status"]  intValue] == 1) {
+        if ([[thirdExpItem objectForKey:@"status"] intValue] == 1) {
             JobStatus3 = @"Current";
         }
-        if ([[thirdExpItem objectForKey:@"status"]  intValue] == 2) {
+        if ([[thirdExpItem objectForKey:@"status"] intValue] == 2) {
             JobStatus3 = @"Previous";
         }
         [self.params setObject:[thirdExpItem objectForKey:@"id"] forKey:@"exp_id[2]"];
@@ -165,19 +165,19 @@
     if([expArray count] >=4) {
         self.experienceCount = @"4";
         NSDictionary *fourthExpItem = [expArray objectAtIndex:3];
-        if ([[fourthExpItem objectForKey:@"job_length"]  intValue] == 1) {
+        if ([[fourthExpItem objectForKey:@"job_length"] intValue] == 1) {
             JobLength4 = @"Under 1 Year";
         }
-        if ([[fourthExpItem objectForKey:@"job_length"]  intValue] == 2) {
+        if ([[fourthExpItem objectForKey:@"job_length"] intValue] == 2) {
             JobLength4 = @"1-2 Years";
         }
-        if ([[fourthExpItem objectForKey:@"job_length"]  intValue] == 3) {
+        if ([[fourthExpItem objectForKey:@"job_length"] intValue] == 3) {
             JobLength4 = @"Over 2 Years";
         }
-        if ([[fourthExpItem objectForKey:@"status"]  intValue] == 1) {
+        if ([[fourthExpItem objectForKey:@"status"] intValue] == 1) {
             JobStatus4 = @"Current";
         }
-        if ([[fourthExpItem objectForKey:@"status"]  intValue] == 2) {
+        if ([[fourthExpItem objectForKey:@"status"] intValue] == 2) {
             JobStatus4 = @"Previous";
         }
         [self.params setObject:[fourthExpItem objectForKey:@"id"] forKey:@"exp_id[3]"];
@@ -198,19 +198,19 @@
     if([expArray count] >=5) {
         self.btnAddExp.enabled = NO;
         NSDictionary *fifthExpItem = [expArray objectAtIndex:4];
-        if ([[fifthExpItem objectForKey:@"job_length"]  intValue] == 1) {
+        if ([[fifthExpItem objectForKey:@"job_length"] intValue] == 1) {
             JobLength5 = @"Under 1 Year";
         }
-        if ([[fifthExpItem objectForKey:@"job_length"]  intValue] == 2) {
+        if ([[fifthExpItem objectForKey:@"job_length"] intValue] == 2) {
             JobLength5 = @"1-2 Years";
         }
-        if ([[fifthExpItem objectForKey:@"job_length"]  intValue] == 3) {
+        if ([[fifthExpItem objectForKey:@"job_length"] intValue] == 3) {
             JobLength5 = @"Over 2 Years";
         }
-        if ([[fifthExpItem objectForKey:@"status"]  intValue] == 1) {
+        if ([[fifthExpItem objectForKey:@"status"] intValue] == 1) {
             JobStatus5 = @"Current";
         }
-        if ([[fifthExpItem objectForKey:@"status"]  intValue] == 2) {
+        if ([[fifthExpItem objectForKey:@"status"] intValue] == 2) {
             JobStatus5 = @"Previous";
         }
         [self.params setObject:[fifthExpItem objectForKey:@"id"] forKey:@"exp_id[4]"];

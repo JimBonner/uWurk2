@@ -85,38 +85,43 @@
     [super viewWillAppear:animated];
     self.viewCool.layer.cornerRadius = 5;
     
-    if([[self.appDelegate.user objectForKey:@"has_drivers_license"]  intValue] == 1)
-        self.btnDLYes.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"has_drivers_license"]  intValue] == 0)
-        self.btnDLNo.selected = TRUE;
-    if([[self.appDelegate.user objectForKey:@"is_veteran"]  intValue] == 1)
-        self.btnVetYes.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"is_veteran"]  intValue] == 0)
-        self.btnVetNo.selected = TRUE;
-    if([[self.appDelegate.user objectForKey:@"fluent_english"]  intValue] == 1)
-        self.btnFluEngYes.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"fluent_english"]  intValue] == 0)
-        self.btnFluEngNo.selected = TRUE;
-    if([[self.appDelegate.user objectForKey:@"has_body_art"]  intValue] == 1)
-        self.btnBodyArtYes.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"has_body_art"]  intValue] == 0)
-        self.btnBodyArtNo.selected = TRUE;
-    if([[self.appDelegate.user objectForKey:@"has_ear_gauge"]  intValue] == 1)
-        self.btnEarGauges.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"has_ear_gauge"]  intValue] == 0)
-        self.btnEarGauges.selected = FALSE;
-    if([[self.appDelegate.user objectForKey:@"has_facial_piercing"]  intValue] == 1)
-        self.btnFacialPiercing.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"has_facial_piercing"]  intValue] == 0)
-        self.btnFacialPiercing.selected = FALSE;
-    if([[self.appDelegate.user objectForKey:@"has_tattoo"]  intValue] == 1)
-        self.btnTattoo.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"has_tattoo"]  intValue] == 0)
-        self.btnTattoo.selected = FALSE;
-    if([[self.appDelegate.user objectForKey:@"has_tongue_piercing"]  intValue] == 1)
-        self.btnTonguePiercing.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"has_tongue_piercing"]  intValue] == 0)
-        self.btnTonguePiercing.selected = FALSE;
+    if([[self.appDelegate.user objectForKey:@"has_drivers_license"] intValue] == 1) {
+        self.btnDLYes.selected = TRUE; }
+    else if([[self.appDelegate.user objectForKey:@"has_drivers_license"] intValue] == 0) {
+        self.btnDLNo.selected  = TRUE; }
+    if([[self.appDelegate.user objectForKey:@"is_veteran"] intValue] == 1) {
+        self.btnVetYes.selected = TRUE; }
+    else if([[self.appDelegate.user objectForKey:@"is_veteran"] intValue] == 0) {
+        self.btnVetNo.selected  = TRUE; }
+    if([[self.appDelegate.user objectForKey:@"fluent_english"] intValue] == 1) {
+        self.btnFluEngYes.selected = TRUE; }
+    else if([[self.appDelegate.user objectForKey:@"fluent_english"] intValue] == 0) {
+        self.btnFluEngNo.selected  = TRUE; }
+    if([[self.appDelegate.user objectForKey:@"addl_languages"] count] > 0) {
+        self.lblLanguages.text = [self.appDelegate.user objectForKey:@"addl_languages"];
+    } else {
+        self.lblLanguages.text = @"";
+    }
+    if([[self.appDelegate.user objectForKey:@"has_body_art"] intValue] == 1) {
+        self.btnBodyArtYes.selected = TRUE; }
+    else if([[self.appDelegate.user objectForKey:@"has_body_art"] intValue] == 0) {
+        self.btnBodyArtNo.selected  = TRUE; }
+    if([[self.appDelegate.user objectForKey:@"has_ear_gauge"] intValue] == 1) {
+        self.btnEarGauges.selected = TRUE; }
+    else if([[self.appDelegate.user objectForKey:@"has_ear_gauge"] intValue] == 0) {
+        self.btnEarGauges.selected = FALSE; }
+    if([[self.appDelegate.user objectForKey:@"has_facial_piercing"] intValue] == 1) {
+        self.btnFacialPiercing.selected = TRUE; }
+    else if([[self.appDelegate.user objectForKey:@"has_facial_piercing"] intValue] == 0) {
+        self.btnFacialPiercing.selected = FALSE; }
+    if([[self.appDelegate.user objectForKey:@"has_tattoo"] intValue] == 1) {
+        self.btnTattoo.selected = TRUE; }
+    else if([[self.appDelegate.user objectForKey:@"has_tattoo"] intValue] == 0) {
+        self.btnTattoo.selected = FALSE; }
+    if([[self.appDelegate.user objectForKey:@"has_tongue_piercing"] intValue] == 1) {
+        self.btnTonguePiercing.selected = TRUE; }
+    else if([[self.appDelegate.user objectForKey:@"has_tongue_piercing"] intValue] == 0) {
+        self.btnTonguePiercing.selected = FALSE; }
     if (self.btnBodyArtYes.isSelected) {
         self.cnstrntBodyArtHeight.constant = 333;
         self.viewBdyArt.alpha = 1;
@@ -200,8 +205,8 @@
     [self.appDelegate.user setObject:self.btnDLYes.selected ? @"1" : @"0" forKey:@"has_drivers_license"];
     [self.appDelegate.user setObject:self.btnVetYes.selected ? @"1" : @"0" forKey:@"is_veteran"];
     [self.appDelegate.user setObject:self.btnFluEngYes.selected ? @"1" : @"0" forKey:@"fluent_english"];
+    [self.appDelegate.user setObject:self.lblLanguages.text forKey:@"addl_languages"];
     [self.appDelegate.user setObject:self.btnBodyArtYes.selected ? @"1" : @"0" forKey:@"has_body_art"];
-    [self.appDelegate.user setObject:self.btnEarGauges.selected ? @"1" : @"0" forKey:@"has_ear_gauge"];
     [self.appDelegate.user setObject:self.btnFacialPiercing.selected ? @"1" : @"0" forKey:@"has_facial_piercing"];
     [self.appDelegate.user setObject:self.btnTattoo.selected ? @"1" : @"0" forKey:@"has_tattoo"];
     [self.appDelegate.user setObject:self.btnTonguePiercing.selected ? @"1" : @"0" forKey:@"has_tongue_piercing"];
@@ -220,7 +225,7 @@
     [self updateParamDict:params value:self.btnTattoo.selected ? @"1" : @"0" key:@"has_tattoo"];
     [self updateParamDict:params value:self.btnTonguePiercing.selected ? @"1" : @"0" key:@"has_tongue_piercing"];
     if([self.lblLanguages.text length] > 0) {
-    [params setObject:self.langDict.allKeys forKey:@"other_languages"];
+        [params setObject:self.langDict.allKeys forKey:@"other_languages"];
     }
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];

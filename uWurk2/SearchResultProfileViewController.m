@@ -51,7 +51,7 @@
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if ([[self.searchedUserDict objectForKey:@"is_favorite"]  intValue] == 1) {
+    if ([[self.searchedUserDict objectForKey:@"is_favorite"] intValue] == 1) {
         self.btnFavorite.selected = TRUE;
     }
     AFHTTPRequestOperationManager *manager = [self getManager];
@@ -72,7 +72,7 @@
                 
                 NSArray *photoArray = [[responseObject objectForKey:@"user"] objectForKey:@"photos"];
                 for(NSDictionary *photoDict in photoArray) {
-                    if([[photoDict objectForKey:@"for_profile"]  intValue] == 1) {
+                    if([[photoDict objectForKey:@"for_profile"] intValue] == 1) {
                         NSURL *photoURL =[NSURL URLWithString:[NSString stringWithFormat:@"http://uwurk.tscserver.com%@",[photoDict objectForKey:@"url"]]];
                         
                         UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];
@@ -98,9 +98,9 @@
                 NSInteger age = [ageComponents year];
             
             self.lblName.text = [NSString stringWithFormat:@"%@ %@",[self.json objectForKey:@"first_name"], [self.json objectForKey:@"last_name"]];
-            if ([[self.json objectForKey:@"tipped_position"]  intValue] == 1) {
+            if ([[self.json objectForKey:@"tipped_position"] intValue] == 1) {
                 TipWork = @"or Tips";
-            }if ([[self.json objectForKey:@"tipped_position"]  intValue] == 0) {
+            }if ([[self.json objectForKey:@"tipped_position"] intValue] == 0) {
                 TipWork = @"";
             }
             self.lblAgeWage.text = [NSString stringWithFormat:@"Age: %ld  |  $%@/hr %@",(long)age, [self.json objectForKey:@"hourly_wage"], TipWork];
@@ -108,10 +108,10 @@
             NSArray *experienceArray = [self.json objectForKey:@"experience"];
             if([experienceArray count] >0) {
                 NSDictionary *firstExperienceItem = [experienceArray objectAtIndex:0];
-                if ([[firstExperienceItem objectForKey:@"status"]  intValue] == 1) {
+                if ([[firstExperienceItem objectForKey:@"status"] intValue] == 1) {
                     JobStatus1 = @"Current";
                 }
-                if ([[firstExperienceItem objectForKey:@"status"]  intValue] == 2) {
+                if ([[firstExperienceItem objectForKey:@"status"] intValue] == 2) {
                     JobStatus1 = @"Previous";
                 }
                 self.lblExp1.text = [NSString stringWithFormat:@"%@: %@, %@", JobStatus1,[firstExperienceItem objectForKey:@"company"], [firstExperienceItem objectForKey:@"position"]];
@@ -124,13 +124,13 @@
             NSArray *educationArray = [self.json objectForKey:@"education"];
             if([educationArray count] >0) {
                 NSDictionary *firstEducationItem = [educationArray objectAtIndex:0];
-                if ([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 1) {
+                if ([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 1) {
                     SchoolStatus1 = @"Enrolled";
                 }
-                if ([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 2) {
+                if ([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 2) {
                     SchoolStatus1 = @"Graduated";
                 }
-                if ([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 3) {
+                if ([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 3) {
                     SchoolStatus1 = @"Attended";
                 }
                 self.lblEdu1.text = [NSString stringWithFormat:@"%@: %@", SchoolStatus1,[firstEducationItem objectForKey:@"school"]];
@@ -192,52 +192,52 @@
     NSString *FacePierce;
     NSString *TonguePierce;
     NSString *Gauges;
-    if ([[self.json objectForKey:@"has_body_art"]  intValue] == 0) {
+    if ([[self.json objectForKey:@"has_body_art"] intValue] == 0) {
         BodyArt = @"No Body Art";
     }
-    if ([[self.json objectForKey:@"has_tattoo"]  intValue] == 0) {
+    if ([[self.json objectForKey:@"has_tattoo"] intValue] == 0) {
         Tattoos = @"";
     }
-    if ([[self.json objectForKey:@"has_tattoo"]  intValue] == 1) {
+    if ([[self.json objectForKey:@"has_tattoo"] intValue] == 1) {
         Tattoos = @"Tattoos";
     }
-    if ([[self.json objectForKey:@"has_facial_piercing"]  intValue] == 0) {
+    if ([[self.json objectForKey:@"has_facial_piercing"] intValue] == 0) {
         FacePierce = @"";
     }
-    if ([[self.json objectForKey:@"has_facial_piercing"]  intValue] == 1) {
+    if ([[self.json objectForKey:@"has_facial_piercing"] intValue] == 1) {
         FacePierce = @"Facial Piercings";
     }
-    if ([[self.json objectForKey:@"has_tongue_piercing"]  intValue] == 0) {
+    if ([[self.json objectForKey:@"has_tongue_piercing"] intValue] == 0) {
         TonguePierce = @"";
     }
-    if ([[self.json objectForKey:@"has_tongue_piercing"]  intValue] == 1) {
+    if ([[self.json objectForKey:@"has_tongue_piercing"] intValue] == 1) {
         TonguePierce = @"Tongue Piercing";
     }
-    if ([[self.json objectForKey:@"has_ear_gauge"]  intValue] == 0) {
+    if ([[self.json objectForKey:@"has_ear_gauge"] intValue] == 0) {
         Gauges = @"";
     }
-    if ([[self.json objectForKey:@"has_ear_gauge"]  intValue] == 1) {
+    if ([[self.json objectForKey:@"has_ear_gauge"] intValue] == 1) {
         Gauges = @"Gauges";
     }
-    if ([[self.json objectForKey:@"has_body_art"]  intValue] == 1) {
+    if ([[self.json objectForKey:@"has_body_art"] intValue] == 1) {
         BodyArt = [NSString stringWithFormat:@"Has %@, %@, %@, %@", Tattoos, FacePierce, TonguePierce, Gauges];
     }
-    if ([[self.json objectForKey:@"has_drivers_license"]  intValue] == 0) {
+    if ([[self.json objectForKey:@"has_drivers_license"] intValue] == 0) {
         DriversLicense = @"No Valid Drivers License";
     }
-    if ([[self.json objectForKey:@"has_drivers_license"]  intValue] == 1) {
+    if ([[self.json objectForKey:@"has_drivers_license"] intValue] == 1) {
         DriversLicense = @"Has Valid Drivers License";
     }
-    if ([[self.json objectForKey:@"fluent_english"]  intValue] == 0) {
+    if ([[self.json objectForKey:@"fluent_english"] intValue] == 0) {
         Language = @"";
     }
-    if ([[self.json objectForKey:@"fluent_english"]  intValue] == 1) {
+    if ([[self.json objectForKey:@"fluent_english"] intValue] == 1) {
         Language = @"English";
     }
-    if ([[self.json objectForKey:@"is_veteran"]  intValue] == 0) {
+    if ([[self.json objectForKey:@"is_veteran"] intValue] == 0) {
         Veteran = @"Not a Military Veteran";
     }
-    if ([[self.json objectForKey:@"is_veteran"]  intValue] == 1) {
+    if ([[self.json objectForKey:@"is_veteran"] intValue] == 1) {
         Veteran = @"Is a Military Veteran";
     }
     self.lblInfoBio.text = [NSString stringWithFormat:@"VISIBLE BODY ART:\n%@\nDRIVERS LICENSE:\n%@\nSPEAKS FLUENT:\n%@\nVETERAN:\n%@",BodyArt, DriversLicense, Language ,Veteran];
@@ -325,13 +325,13 @@
         NSArray *educationArray = [self.json objectForKey:@"education"];
         if([educationArray count] >1) {
             NSDictionary *secondEducationItem = [educationArray objectAtIndex:1];
-            if ([[secondEducationItem objectForKey:@"school_status_id"]  intValue] == 1) {
+            if ([[secondEducationItem objectForKey:@"school_status_id"] intValue] == 1) {
                 SchoolStatus2 = @"Enrolled";
             }
-            if ([[secondEducationItem objectForKey:@"school_status_id"]  intValue] == 2) {
+            if ([[secondEducationItem objectForKey:@"school_status_id"] intValue] == 2) {
                 SchoolStatus2 = @"Graduated";
             }
-            if ([[secondEducationItem objectForKey:@"school_status_id"]  intValue] == 3) {
+            if ([[secondEducationItem objectForKey:@"school_status_id"] intValue] == 3) {
                 SchoolStatus2 = @"Attended";
             }
             self.lblEdu2.text = [NSString stringWithFormat:@"%@: %@", SchoolStatus2,[secondEducationItem objectForKey:@"school"]];
@@ -350,13 +350,13 @@
         }
         if([educationArray count] >2) {
             NSDictionary *thirdEducationItem = [educationArray objectAtIndex:2];
-            if ([[thirdEducationItem objectForKey:@"school_status_id"]  intValue] == 1) {
+            if ([[thirdEducationItem objectForKey:@"school_status_id"] intValue] == 1) {
                 SchoolStatus2 = @"Enrolled";
             }
-            if ([[thirdEducationItem objectForKey:@"school_status_id"]  intValue] == 2) {
+            if ([[thirdEducationItem objectForKey:@"school_status_id"] intValue] == 2) {
                 SchoolStatus2 = @"Graduated";
             }
-            if ([[thirdEducationItem objectForKey:@"school_status_id"]  intValue] == 3) {
+            if ([[thirdEducationItem objectForKey:@"school_status_id"] intValue] == 3) {
                 SchoolStatus2 = @"Attended";
             }
             self.lblEdu3.text = [NSString stringWithFormat:@"%@: %@", SchoolStatus3,[thirdEducationItem objectForKey:@"school"]];
@@ -405,38 +405,38 @@
         NSArray *experienceArray = [self.json objectForKey:@"experience"];
         if([experienceArray count] >0) {
             NSDictionary *firstExperienceItem = [experienceArray objectAtIndex:0];
-            if ([[firstExperienceItem objectForKey:@"job_length"]  intValue] == 1) {
+            if ([[firstExperienceItem objectForKey:@"job_length"] intValue] == 1) {
                 JobLength1 = @"Under 1 Year";
             }
-            if ([[firstExperienceItem objectForKey:@"job_length"]  intValue] == 2) {
+            if ([[firstExperienceItem objectForKey:@"job_length"] intValue] == 2) {
                 JobLength1 = @"1-2 Years";
             }
-            if ([[firstExperienceItem objectForKey:@"job_length"]  intValue] == 3) {
+            if ([[firstExperienceItem objectForKey:@"job_length"] intValue] == 3) {
                 JobLength1 = @"Over 2 Years";
             }
-            if ([[firstExperienceItem objectForKey:@"status"]  intValue] == 1) {
+            if ([[firstExperienceItem objectForKey:@"status"] intValue] == 1) {
                 JobStatus1 = @"Current";
             }
-            if ([[firstExperienceItem objectForKey:@"status"]  intValue] == 2) {
+            if ([[firstExperienceItem objectForKey:@"status"] intValue] == 2) {
                 JobStatus1 = @"Previous";
             }
             self.lblExp1.text = [NSString stringWithFormat:@"%@: %@, %@ [ %@ ]", JobStatus1,[firstExperienceItem objectForKey:@"company"], [firstExperienceItem objectForKey:@"position"], JobLength1];
         }
         if([experienceArray count] >1) {
             NSDictionary *secondExperienceItem = [experienceArray objectAtIndex:1];
-            if ([[secondExperienceItem objectForKey:@"job_length"]  intValue] == 1) {
+            if ([[secondExperienceItem objectForKey:@"job_length"] intValue] == 1) {
                 JobLength2 = @"Under 1 Year";
             }
-            if ([[secondExperienceItem objectForKey:@"job_length"]  intValue] == 2) {
+            if ([[secondExperienceItem objectForKey:@"job_length"] intValue] == 2) {
                 JobLength2 = @"1-2 Years";
             }
-            if ([[secondExperienceItem objectForKey:@"job_length"]  intValue] == 3) {
+            if ([[secondExperienceItem objectForKey:@"job_length"] intValue] == 3) {
                 JobLength2 = @"Over 2 Years";
             }
-            if ([[secondExperienceItem objectForKey:@"status"]  intValue] == 1) {
+            if ([[secondExperienceItem objectForKey:@"status"] intValue] == 1) {
                 JobStatus2 = @"Current";
             }
-            if ([[secondExperienceItem objectForKey:@"status"]  intValue] == 2) {
+            if ([[secondExperienceItem objectForKey:@"status"] intValue] == 2) {
                 JobStatus2 = @"Previous";
             }
             self.lblExp2.text = [NSString stringWithFormat:@"%@: %@, %@ [ %@ ]", JobStatus2,[secondExperienceItem objectForKey:@"company"], [secondExperienceItem objectForKey:@"position"], JobLength2];
@@ -455,19 +455,19 @@
         }
         if([experienceArray count] >2) {
             NSDictionary *thirdExperinceItem = [experienceArray objectAtIndex:2];
-            if ([[thirdExperinceItem objectForKey:@"job_length"]  intValue] == 1) {
+            if ([[thirdExperinceItem objectForKey:@"job_length"] intValue] == 1) {
                 JobLength3 = @"Under 1 Year";
             }
-            if ([[thirdExperinceItem objectForKey:@"job_length"]  intValue] == 2) {
+            if ([[thirdExperinceItem objectForKey:@"job_length"] intValue] == 2) {
                 JobLength3 = @"1-2 Years";
             }
-            if ([[thirdExperinceItem objectForKey:@"job_length"]  intValue] == 3) {
+            if ([[thirdExperinceItem objectForKey:@"job_length"] intValue] == 3) {
                 JobLength3 = @"Over 2 Years";
             }
-            if ([[thirdExperinceItem objectForKey:@"status"]  intValue] == 1) {
+            if ([[thirdExperinceItem objectForKey:@"status"] intValue] == 1) {
                 JobStatus3 = @"Current";
             }
-            if ([[thirdExperinceItem objectForKey:@"status"]  intValue] == 2) {
+            if ([[thirdExperinceItem objectForKey:@"status"] intValue] == 2) {
                 JobStatus3 = @"Previous";
             }
             self.lblExp3.text = [NSString stringWithFormat:@"%@: %@, %@ [ %@ ]", JobStatus3,[thirdExperinceItem objectForKey:@"company"], [thirdExperinceItem objectForKey:@"position"], JobLength3];
@@ -489,10 +489,10 @@
         NSArray *experienceArray = [self.json objectForKey:@"experience"];
         if([experienceArray count] >0) {
             NSDictionary *firstExperienceItem = [experienceArray objectAtIndex:0];
-            if ([[firstExperienceItem objectForKey:@"status"]  intValue] == 1) {
+            if ([[firstExperienceItem objectForKey:@"status"] intValue] == 1) {
                 JobStatus1 = @"Current";
             }
-            if ([[firstExperienceItem objectForKey:@"status"]  intValue] == 2) {
+            if ([[firstExperienceItem objectForKey:@"status"] intValue] == 2) {
                 JobStatus1 = @"Previous";
             }
             self.lblExp1.text = [NSString stringWithFormat:@"%@: %@, %@", JobStatus1,[firstExperienceItem objectForKey:@"company"], [firstExperienceItem objectForKey:@"position"]];

@@ -39,7 +39,7 @@
     [super viewDidLoad];
     self.params = [[NSMutableDictionary alloc] init];
     NSArray *experienceArray = [self.appDelegate.user objectForKey:@"experience"];
-    if ([self.expEditCount  intValue] == 0) {
+    if ([self.expEditCount intValue] == 0) {
         self.expId = @"exp_id[0]";
         self.company = @"company[0]";
         self.status = @"status[0]";
@@ -56,18 +56,18 @@
         [self.btnIndustry setTitle:[firstExperienceItem objectForKey:@"industry_id"] forState:UIControlStateSelected];
         [self.params setObject:[firstExperienceItem objectForKey:@"id"] forKey:self.expId];
         [self assignValue:[firstExperienceItem objectForKey:@"company"] control:self.txtCompany];
-        if([[firstExperienceItem objectForKey:@"status"]  intValue] == 1)
+        if([[firstExperienceItem objectForKey:@"status"] intValue] == 1)
             self.btnCurrentJob.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"status"]  intValue] == 2)
+        if([[firstExperienceItem objectForKey:@"status"] intValue] == 2)
             self.btnPreviousJob.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"job_length"]  intValue] == 1)
+        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 1)
             self.btnUnderYear.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"job_length"]  intValue] == 2)
+        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 2)
             self.btnYear2Year.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"job_length"]  intValue] == 3)
+        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 3)
             self.btnOver2Year.selected = TRUE;
     }
-    if ([self.expEditCount  intValue] == 1) {
+    if ([self.expEditCount intValue] == 1) {
         self.expId = @"exp_id[1]";
         self.company = @"company[1]";
         self.status = @"status[1]";
@@ -94,18 +94,18 @@
         [self.btnIndustry setTitle:[firstExperienceItem objectForKey:@"industry_id"] forState:UIControlStateSelected];
         [self.params setObject:[firstExperienceItem objectForKey:@"id"] forKey:self.expId];
         [self assignValue:[firstExperienceItem objectForKey:@"company"] control:self.txtCompany];
-        if([[firstExperienceItem objectForKey:@"status"]  intValue] == 1)
+        if([[firstExperienceItem objectForKey:@"status"] intValue] == 1)
             self.btnCurrentJob.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"status"]  intValue] == 2)
+        if([[firstExperienceItem objectForKey:@"status"] intValue] == 2)
             self.btnPreviousJob.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"job_length"]  intValue] == 1)
+        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 1)
             self.btnUnderYear.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"job_length"]  intValue] == 2)
+        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 2)
             self.btnYear2Year.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"job_length"]  intValue] == 3)
+        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 3)
             self.btnOver2Year.selected = TRUE;
     }
-    if ([self.expEditCount  intValue] == 2) {
+    if ([self.expEditCount intValue] == 2) {
         self.expId = @"exp_id[2]";
         self.company = @"company[2]";
         self.status = @"status[2]";
@@ -142,18 +142,18 @@
         [self.btnIndustry setTitle:[firstExperienceItem objectForKey:@"industry_id"] forState:UIControlStateSelected];
         [self.params setObject:[firstExperienceItem objectForKey:@"id"] forKey:self.expId];
         [self assignValue:[firstExperienceItem objectForKey:@"company"] control:self.txtCompany];
-        if([[firstExperienceItem objectForKey:@"status"]  intValue] == 1)
+        if([[firstExperienceItem objectForKey:@"status"] intValue] == 1)
             self.btnCurrentJob.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"status"]  intValue] == 2)
+        if([[firstExperienceItem objectForKey:@"status"] intValue] == 2)
             self.btnPreviousJob.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"job_length"]  intValue] == 1)
+        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 1)
             self.btnUnderYear.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"job_length"]  intValue] == 2)
+        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 2)
             self.btnYear2Year.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"job_length"]  intValue] == 3)
+        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 3)
             self.btnOver2Year.selected = TRUE;
     }
-    if ([self.expEditCount  intValue] == 3) {
+    if ([self.expEditCount intValue] == 3) {
         self.expId = @"exp_id[3]";
         self.company = @"company[3]";
         self.status = @"status[3]";
@@ -200,18 +200,18 @@
         [self.btnIndustry setTitle:[firstExperienceItem objectForKey:@"industry_id"] forState:UIControlStateSelected];
         [self.params setObject:[firstExperienceItem objectForKey:@"id"] forKey:self.expId];
         [self assignValue:[firstExperienceItem objectForKey:@"company"] control:self.txtCompany];
-        if([[firstExperienceItem objectForKey:@"status"]  intValue] == 1)
+        if([[firstExperienceItem objectForKey:@"status"] intValue] == 1)
             self.btnCurrentJob.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"status"]  intValue] == 2)
+        if([[firstExperienceItem objectForKey:@"status"] intValue] == 2)
             self.btnPreviousJob.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"job_length"]  intValue] == 1)
+        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 1)
             self.btnUnderYear.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"job_length"]  intValue] == 2)
+        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 2)
             self.btnYear2Year.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"job_length"]  intValue] == 3)
+        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 3)
             self.btnOver2Year.selected = TRUE;
     }
-    if ([self.expEditCount  intValue] == 4) {
+    if ([self.expEditCount intValue] == 4) {
         self.expId = @"exp_id[4]";
         self.company = @"company[4]";
         self.status = @"status[4]";
@@ -268,15 +268,15 @@
         [self.btnIndustry setTitle:[firstExperienceItem objectForKey:@"industry_id"] forState:UIControlStateSelected];
         [self.params setObject:[firstExperienceItem objectForKey:@"id"] forKey:self.expId];
         [self assignValue:[firstExperienceItem objectForKey:@"company"] control:self.txtCompany];
-        if([[firstExperienceItem objectForKey:@"status"]  intValue] == 1)
+        if([[firstExperienceItem objectForKey:@"status"] intValue] == 1)
             self.btnCurrentJob.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"status"]  intValue] == 2)
+        if([[firstExperienceItem objectForKey:@"status"] intValue] == 2)
             self.btnPreviousJob.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"job_length"]  intValue] == 1)
+        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 1)
             self.btnUnderYear.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"job_length"]  intValue] == 2)
+        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 2)
             self.btnYear2Year.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"job_length"]  intValue] == 3)
+        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 3)
             self.btnOver2Year.selected = TRUE;
     }
 
@@ -289,7 +289,7 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     NSArray *experienceArray = [self.appDelegate.user objectForKey:@"experience"];
-    if ([self.expCount  intValue] == 0) {
+    if ([self.expCount intValue] == 0) {
         self.expId = @"exp_id[0]";
         self.company = @"company[0]";
         self.status = @"status[0]";
@@ -301,7 +301,7 @@
         self.remove = @"remove[0]";
         [self.params setObject:@"" forKey:self.expId];
     }
-    if ([self.expCount  intValue] == 1) {
+    if ([self.expCount intValue] == 1) {
         self.expId = @"exp_id[1]";
         self.company = @"company[1]";
         self.status = @"status[1]";
@@ -323,7 +323,7 @@
         [self.params setObject:[firstExpItem objectForKey:@"job_length"] forKey:@"job_length[0]"];
         [self.params setObject:@"0" forKey:@"remove[0]"];
     }
-    if ([self.expCount  intValue] == 2) {
+    if ([self.expCount intValue] == 2) {
         self.expId = @"exp_id[2]";
         self.company = @"company[2]";
         self.status = @"status[2]";
@@ -355,7 +355,7 @@
         [self.params setObject:[secondExpItem objectForKey:@"job_length"] forKey:@"job_length[1]"];
         [self.params setObject:@"0" forKey:@"remove[1]"];
     }
-    if ([self.expCount  intValue] == 3) {
+    if ([self.expCount intValue] == 3) {
         self.expId = @"exp_id[3]";
         self.company = @"company[3]";
         self.status = @"status[3]";
@@ -397,7 +397,7 @@
         [self.params setObject:[secondExpItem objectForKey:@"job_length"] forKey:@"job_length[2]"];
         [self.params setObject:@"0" forKey:@"remove[2]"];
     }
-    if ([self.expCount  intValue] == 4) {
+    if ([self.expCount intValue] == 4) {
         self.expId = @"exp_id[4]";
         self.company = @"company[4]";
         self.status = @"status[4]";

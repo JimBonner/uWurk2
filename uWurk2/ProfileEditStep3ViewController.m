@@ -52,37 +52,37 @@
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
         self.viewCool.layer.cornerRadius = 5;
-    if([[self.appDelegate.user objectForKey:@"has_drivers_license"]  intValue] == 1)
+    if([[self.appDelegate.user objectForKey:@"has_drivers_license"] intValue] == 1)
         self.btnDLYes.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"has_drivers_license"]  intValue] == 0)
+    else if([[self.appDelegate.user objectForKey:@"has_drivers_license"] intValue] == 0)
         self.btnDLNo.selected = TRUE;
-    if([[self.appDelegate.user objectForKey:@"is_veteran"]  intValue] == 1)
+    if([[self.appDelegate.user objectForKey:@"is_veteran"] intValue] == 1)
         self.btnVetYes.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"is_veteran"]  intValue] == 0)
+    else if([[self.appDelegate.user objectForKey:@"is_veteran"] intValue] == 0)
         self.btnVetNo.selected = TRUE;
-    if([[self.appDelegate.user objectForKey:@"fluent_english"]  intValue] == 1)
+    if([[self.appDelegate.user objectForKey:@"fluent_english"] intValue] == 1)
         self.btnFluEngYes.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"fluent_english"]  intValue] == 0)
+    else if([[self.appDelegate.user objectForKey:@"fluent_english"] intValue] == 0)
         self.btnFluEngNo.selected = TRUE;
-    if([[self.appDelegate.user objectForKey:@"has_body_art"]  intValue] == 1)
+    if([[self.appDelegate.user objectForKey:@"has_body_art"] intValue] == 1)
         self.btnBodyArtYes.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"has_body_art"]  intValue] == 0)
+    else if([[self.appDelegate.user objectForKey:@"has_body_art"] intValue] == 0)
         self.btnBodyArtNo.selected = TRUE;
-    if([[self.appDelegate.user objectForKey:@"has_ear_gauge"]  intValue] == 1)
+    if([[self.appDelegate.user objectForKey:@"has_ear_gauge"] intValue] == 1)
         self.btnEarGauges.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"has_ear_gauge"]  intValue] == 0)
+    else if([[self.appDelegate.user objectForKey:@"has_ear_gauge"] intValue] == 0)
         self.btnEarGauges.selected = FALSE;
-    if([[self.appDelegate.user objectForKey:@"has_facial_piercing"]  intValue] == 1)
+    if([[self.appDelegate.user objectForKey:@"has_facial_piercing"] intValue] == 1)
         self.btnFacialPiercing.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"has_facial_piercing"]  intValue] == 0)
+    else if([[self.appDelegate.user objectForKey:@"has_facial_piercing"] intValue] == 0)
         self.btnFacialPiercing.selected = FALSE;
-    if([[self.appDelegate.user objectForKey:@"has_tattoo"]  intValue] == 1)
+    if([[self.appDelegate.user objectForKey:@"has_tattoo"] intValue] == 1)
         self.btnTattoo.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"has_tattoo"]  intValue] == 0)
+    else if([[self.appDelegate.user objectForKey:@"has_tattoo"] intValue] == 0)
         self.btnTattoo.selected = FALSE;
-    if([[self.appDelegate.user objectForKey:@"has_tongue_piercing"]  intValue] == 1)
+    if([[self.appDelegate.user objectForKey:@"has_tongue_piercing"] intValue] == 1)
         self.btnTonguePiercing.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"has_tongue_piercing"]  intValue] == 0)
+    else if([[self.appDelegate.user objectForKey:@"has_tongue_piercing"] intValue] == 0)
         self.btnTonguePiercing.selected = FALSE;
     if (self.btnBodyArtYes.isSelected) {
         self.heightBodyArt.constant = 333;

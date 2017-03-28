@@ -69,7 +69,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MailMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MailMessageCell" forIndexPath:indexPath];
     NSDictionary *parmdic = [self.json objectAtIndex:indexPath.row];
-    if ([[parmdic objectForKey:@"discussion_status"]  intValue] == 1) {
+    if ([[parmdic objectForKey:@"discussion_status"] intValue] == 1) {
         cell.lblPosition.text = @"View Position";
         cell.lblPosition.font = [UIFont fontWithName:@"RobotoCondensed-Bold" size:17];
         cell.lblSubject.text = @"NEW EMPLOYER!";
@@ -107,7 +107,7 @@
         cell.viewYesNoWidth.constant = 17;
     }
     else {
-        if ([parmdic objectForKey:@"employee_interest"] != (id)[NSNull null]  && [[parmdic objectForKey:@"employee_interest"]  intValue] == 1) {
+        if ([parmdic objectForKey:@"employee_interest"] != (id)[NSNull null]  && [[parmdic objectForKey:@"employee_interest"] intValue] == 1) {
             [cell.imageYesNo setImage:imageyes];
         }
         else {
@@ -124,7 +124,7 @@
         [self.navigationController pushViewController:myController animated:TRUE];
     }
     else {
-        if ([[dict objectForKey:@"discussion_status"]  intValue] == 1) {
+        if ([[dict objectForKey:@"discussion_status"] intValue] == 1) {
             ViewJobMessageViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewJobMessage"];
             [myController setMailMessagedict:dict];
             [self.navigationController pushViewController:myController animated:TRUE];

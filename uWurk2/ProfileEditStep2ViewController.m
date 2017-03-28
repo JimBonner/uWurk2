@@ -133,10 +133,10 @@
     else {
         self.btnHourly.selected = TRUE;
     }
-    if([[self.appDelegate.user objectForKey:@"tipped_position"]  intValue] == 0)
+    if([[self.appDelegate.user objectForKey:@"tipped_position"] intValue] == 0)
         self.btnTips.selected = FALSE;
     
-    else if([[self.appDelegate.user objectForKey:@"tipped_position"]  intValue] == 1)
+    else if([[self.appDelegate.user objectForKey:@"tipped_position"] intValue] == 1)
         self.btnTips.selected = TRUE;
 }
 - (IBAction)pressRemove:(UIButton *)sender {

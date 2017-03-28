@@ -51,7 +51,7 @@
     [super viewDidLoad];
     self.params = [[NSMutableDictionary alloc] init];
     NSArray *eduArray = [self.appDelegate.user objectForKey:@"education"];
-    if ([self.eduEditCount  intValue] == 0) {
+    if ([self.eduEditCount intValue] == 0) {
         self.eduId = @"edu_id[0]";
         self.schoolLevel = @"school_level[0]";
         self.status = @"status[0]";
@@ -93,15 +93,15 @@
             [self.btnState setTitle:[firstEducationItem objectForKey:@"state_id"] forState:UIControlStateSelected];
             [self.btnCity setTitle:[firstEducationItem objectForKey:@"city"] forState:UIControlStateNormal];
         }
-        if([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 1)
+        if([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 1)
             self.btnEnrolled.selected = TRUE;
-        else if([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 2)
+        else if([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 2)
             self.btnGraduated.selected = TRUE;
-        else if([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 3)
+        else if([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 3)
             self.btnAttended.selected = TRUE;
         
     }
-    if ([self.eduEditCount  intValue] == 1) {
+    if ([self.eduEditCount intValue] == 1) {
         self.eduId = @"edu_id[1]";
         self.schoolLevel = @"school_level[1]";
         self.status = @"status[1]";
@@ -153,14 +153,14 @@
             [self.btnState setTitle:[firstEducationItem objectForKey:@"state_id"] forState:UIControlStateSelected];
             [self.btnCity setTitle:[firstEducationItem objectForKey:@"city"] forState:UIControlStateNormal];
         }
-        if([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 1)
+        if([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 1)
             self.btnEnrolled.selected = TRUE;
-        else if([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 2)
+        else if([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 2)
             self.btnGraduated.selected = TRUE;
-        else if([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 3)
+        else if([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 3)
             self.btnAttended.selected = TRUE;
     }
-    if ([self.eduEditCount  intValue] == 2) {
+    if ([self.eduEditCount intValue] == 2) {
         self.eduId = @"edu_id[2]";
         self.schoolLevel = @"school_level[2]";
         self.status = @"status[2]";
@@ -222,15 +222,15 @@
             [self.btnState setTitle:[firstEducationItem objectForKey:@"state_id"] forState:UIControlStateSelected];
             [self.btnCity setTitle:[firstEducationItem objectForKey:@"city"] forState:UIControlStateNormal];
         }
-        if([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 1)
+        if([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 1)
             self.btnEnrolled.selected = TRUE;
-        else if([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 2)
+        else if([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 2)
             self.btnGraduated.selected = TRUE;
-        else if([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 3)
+        else if([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 3)
             self.btnAttended.selected = TRUE;
         
     }
-    if ([self.eduEditCount  intValue] == 3) {
+    if ([self.eduEditCount intValue] == 3) {
         self.eduId = @"edu_id[3]";
         self.schoolLevel = @"school_level[3]";
         self.status = @"status[3]";
@@ -302,15 +302,15 @@
             [self.btnState setTitle:[firstEducationItem objectForKey:@"state_id"] forState:UIControlStateSelected];
             [self.btnCity setTitle:[firstEducationItem objectForKey:@"city"] forState:UIControlStateNormal];
         }
-        if([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 1)
+        if([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 1)
             self.btnEnrolled.selected = TRUE;
-        else if([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 2)
+        else if([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 2)
             self.btnGraduated.selected = TRUE;
-        else if([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 3)
+        else if([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 3)
             self.btnAttended.selected = TRUE;
         
     }
-    if ([self.eduEditCount  intValue] == 4) {
+    if ([self.eduEditCount intValue] == 4) {
         self.eduId = @"edu_id[4]";
         self.schoolLevel = @"school_level[4]";
         self.status = @"status[4]";
@@ -392,18 +392,18 @@
             [self.btnState setTitle:[firstEducationItem objectForKey:@"state_id"] forState:UIControlStateSelected];
             [self.btnCity setTitle:[firstEducationItem objectForKey:@"city"] forState:UIControlStateNormal];
         }
-        if([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 1)
+        if([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 1)
             self.btnEnrolled.selected = TRUE;
-        else if([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 2)
+        else if([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 2)
             self.btnGraduated.selected = TRUE;
-        else if([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 3)
+        else if([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 3)
             self.btnAttended.selected = TRUE;
     }
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     NSArray *eduArray = [self.appDelegate.user objectForKey:@"education"];
-    if ([self.educount  intValue] == 1) {
+    if ([self.educount intValue] == 1) {
         self.eduId = @"edu_id[0]";
         self.schoolLevel = @"school_level[0]";
         self.status = @"status[0]";
@@ -415,7 +415,7 @@
         self.remove = @"remove[0]";
         [self.params setObject:@"" forKey:self.eduId];
     }
-    if ([self.educount  intValue] == 2) {
+    if ([self.educount intValue] == 2) {
         self.eduId = @"edu_id[1]";
         self.schoolLevel = @"school_level[1]";
         self.status = @"status[1]";
@@ -437,7 +437,7 @@
         [self.params setObject:[firstEduItem objectForKey:@"other_school"] forKey:@"other_school[0]"];
         [self.params setObject:@"0" forKey:@"remove[0]"];
     }
-    if ([self.educount  intValue] == 3) {
+    if ([self.educount intValue] == 3) {
         self.eduId = @"edu_id[2]";
         self.schoolLevel = @"school_level[2]";
         self.status = @"status[2]";
@@ -469,7 +469,7 @@
         [self.params setObject:[secondEduItem objectForKey:@"other_school"] forKey:@"other_school[1]"];
         [self.params setObject:@"0" forKey:@"remove[1]"];
     }
-    if ([self.educount  intValue] == 4) {
+    if ([self.educount intValue] == 4) {
         self.eduId = @"edu_id[3]";
         self.schoolLevel = @"school_level[3]";
         self.status = @"status[3]";
@@ -511,7 +511,7 @@
         [self.params setObject:[thirdEduItem objectForKey:@"other_school"] forKey:@"other_school[2]"];
         [self.params setObject:@"0" forKey:@"remove[2]"];
     }
-    if ([self.educount  intValue] == 5) {
+    if ([self.educount intValue] == 5) {
         self.eduId = @"edu_id[4]";
         self.schoolLevel = @"school_level[4]";
         self.status = @"status[4]";
@@ -751,7 +751,6 @@
     
     ListSelectorTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ListSelector"];
     
-    
     [myController setParameters:nil];
     if (self.btnHighSchool.isSelected) {
         [myController setUrl:@"http://uwurk.tscserver.com/employee/form-options"];
@@ -769,7 +768,7 @@
         [myController setUrl:@"http://uwurk.tscserver.com/api/v1/form-options"];
         [myController setParameters:@{@"state_id":[self.btnState titleForState:UIControlStateSelected]}];
     }
-    // Come back for schools
+    
     [myController setDisplay:@"description"];
     [myController setKey:@"id"];
     [myController setDelegate:self];

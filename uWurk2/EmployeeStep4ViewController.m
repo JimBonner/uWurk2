@@ -32,14 +32,17 @@
 @property (strong, nonatomic) NSMutableDictionary *params;
 @property (weak, nonatomic) NSString *eduId;
 
-
-
 @end
 
 @implementation EmployeeStep4ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    
+    [self.btnHighSchool setSelected:[[self.appDelegate.user objectForKey:@"high_school_selected"]intValue]];
+    
+        
     self.params = [[NSMutableDictionary alloc] init];
     self.eduId = @"edu_id[0]";
     NSArray *educationArray = [self.appDelegate.user objectForKey:@"education"];
@@ -76,11 +79,11 @@
             [self.btnState setTitle:[firstEducationItem objectForKey:@"state_id"] forState:UIControlStateSelected];
             [self.btnCity setTitle:[firstEducationItem objectForKey:@"city"] forState:UIControlStateNormal];
         }
-        if([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 1)
+        if([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 1)
             self.btnEnrolled.selected = TRUE;
-        else if([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 2)
+        else if([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 2)
             self.btnGraduated.selected = TRUE;
-        else if([[firstEducationItem objectForKey:@"school_status_id"]  intValue] == 3)
+        else if([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 3)
             self.btnAttended.selected = TRUE;
 }
     else {
@@ -230,6 +233,7 @@
     
     [myController setParameters:nil];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/states"];
+    
     [myController setDisplay:@"description"];
     [myController setKey:@"id"];
     [myController setDelegate:self];
@@ -249,7 +253,6 @@
     
     [myController setParameters:@{@"state_id":[self.btnState titleForState:UIControlStateSelected]}];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/cities"];
-    // Come back for city
     [myController setDisplay:@"description"];
     [myController setKey:@"id"];
     [myController setDelegate:self];
@@ -265,10 +268,9 @@
     ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
     
     if (self.btnHighSchool.isSelected) {
-        [myController setUrl:@"http://uwurk.tscserver.com/api/v1/high_schools"];
-        [myController setParameters:@{@"state_id":[self.btnState titleForState:UIControlStateSelected],
-                                      @"city":[self.btnCity titleForState:UIControlStateSelected],
-                                      @"type":@"high_schools"}];
+        [myController setUrl:@"http://uwurk.tscserver.com/api/v1/highschools"];
+        [myController setParameters:@{@"city":[self.btnCity titleForState:UIControlStateNormal]}];
+        [myController setJsonGroup:@"highschools"];
         myController.bPost = FALSE;
         myController.bUseArray = TRUE;
     }
@@ -281,7 +283,10 @@
     }
     if (self.btnTradeSchool.isSelected) {
         [myController setUrl:@"http://uwurk.tscserver.com/api/v1/trade_schools"];
-        [myController setParameters:@{@"state_id":[self.btnState titleForState:UIControlStateSelected]}];
+        [myController setParameters:@{@"state":[self.btnState titleForState:UIControlStateSelected]}];
+        [myController setJsonGroup:@"schools"];
+        myController.bPost = FALSE;
+        myController.bUseArray = TRUE;
     }
     
     [myController setDisplay:@"description"];
@@ -295,8 +300,28 @@
 
 - (IBAction)nextPress:(id)sender
 {
-    // Did data get updated?
-    
+    [self.appDelegate.user setObject:self.btnHighSchool.selected ? @"1" : @"0" forKey:@"high_school_selected"];
+    [self.appDelegate.user setObject:self.btnCollege.selected ? @"1" : @"0" forKey:@"college_selected"];
+    [self.appDelegate.user setObject:self.btnTradeSchool.selected ? @"1" : @"0" forKey:@"trade_school_selected"];
+    [self.appDelegate.user setObject:self.btnGED.selected ? @"1" : @"0" forKey:@"ged_selected"];
+    [self.appDelegate.user setObject:self.btnEnrolled.selected ? @"1" : @"0" forKey:@"enrolled_selected"];
+    [self.appDelegate.user setObject:self.btnGraduated.selected ? @"1" : @"0" forKey:@"graduated_Selected"];
+    [self.appDelegate.user setObject:self.btnAttended.selected ? @"1" : @"0" forKey:@"attedned_Selected"];
+    if([[self.btnState titleForState:UIControlStateNormal] isEqualToString:@"Select State"]) {
+        [self.appDelegate.user setObject:@"" forKey:@"selected_state"];
+    } else {
+        [self.appDelegate.user setObject:[self.btnState titleForState:UIControlStateNormal] forKey:@"selected_state"];
+    }
+    if([[self.btnCity titleForState:UIControlStateNormal] isEqualToString:@"Select City"]) {
+        [self.appDelegate.user setObject:@"" forKey:@"selected_city"];
+    } else {
+        [self.appDelegate.user setObject:[self.btnCity titleForState:UIControlStateNormal] forKey:@"selected_city"];
+    }
+    if([[self.btnSchool titleForState:UIControlStateNormal] isEqualToString:@"Select School"]) {
+        [self.appDelegate.user setObject:@"" forKey:@"selected_school"];
+    } else {
+        [self.appDelegate.user setObject:[self.btnSchool titleForState:UIControlStateNormal] forKey:@"selected_school"];
+    }
     [self saveUserDefault:self.appDelegate.user Key:@"user_data"];
     
     AFHTTPRequestOperationManager *manager = [self getManager];
@@ -360,10 +385,7 @@
         [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
             if([self validateResponse:responseObject]){
-                
-                // Update the user object
-                
-                
+             
                 UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup5"];
                 [self.navigationController pushViewController:myController animated:TRUE];
             }

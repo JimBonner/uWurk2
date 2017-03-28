@@ -85,15 +85,15 @@
     cell.searchID = [_additionalJSON objectForKey:@"search_id"];
     cell.profileID = [dict objectForKey:@"id"];
 
-    [cell.btnFavorite setSelected: [[dict objectForKey:@"is_favorite"]   intValue] == 1];
+    [cell.btnFavorite setSelected: [[dict objectForKey:@"is_favorite"]  intValue] == 1];
     NSString *tip;
     NSString *jobstatus;
-    if ([[dict objectForKey:@"job_status"]  intValue] == 1){
+    if ([[dict objectForKey:@"job_status"] intValue] == 1){
         jobstatus = @"Current";
     }
     else
         jobstatus = @"Previous";
-    if ([[dict objectForKey:@"tipped_position"]  intValue] == 1){
+    if ([[dict objectForKey:@"tipped_position"] intValue] == 1){
         tip = @"or Tips";
     }
     else

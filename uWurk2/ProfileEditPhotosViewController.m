@@ -119,7 +119,7 @@
     self.photoArray = [NSMutableArray arrayWithArray:[[self.appDelegate user] objectForKey:@"photos"]];
     for(int i=0; i < [self.photoArray count]; ++i) {
         NSDictionary *photoDict = [self.photoArray objectAtIndex:i];
-        if([[photoDict objectForKey:@"for_profile"]  intValue] == 1) {
+        if([[photoDict objectForKey:@"for_profile"] intValue] == 1) {
             NSURL *photoURL =[NSURL URLWithString:[NSString stringWithFormat:@"http://uwurk.tscserver.com%@",[photoDict objectForKey:@"url"]]];
             [self.imgMain loadPhoto:photoURL];
             //[self.photoArray removeObjectAtIndex:i];
@@ -291,7 +291,7 @@
 
 - (void)removeImage: (NSString*)photoID {
     
-    if([[self getUserDefault:@"prefRemovePhoto"]  intValue] == 1) {
+    if([[self getUserDefault:@"prefRemovePhoto"] intValue] == 1) {
     
     
     UIAlertController * alert=   [UIAlertController
