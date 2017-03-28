@@ -81,55 +81,59 @@
 //        return CGSizeMake(120, 120);
 //}
 
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
+}
 
--(void) viewWillAppear:(BOOL)animated{
+-(void) viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     self.viewCool.layer.cornerRadius = 5;
     
-    if([[self.appDelegate.user objectForKey:@"has_drivers_license"] intValue] == 1) {
-        self.btnDLYes.selected = TRUE; }
-    else if([[self.appDelegate.user objectForKey:@"has_drivers_license"] intValue] == 0) {
-        self.btnDLNo.selected  = TRUE; }
-    if([[self.appDelegate.user objectForKey:@"is_veteran"] intValue] == 1) {
-        self.btnVetYes.selected = TRUE; }
-    else if([[self.appDelegate.user objectForKey:@"is_veteran"] intValue] == 0) {
-        self.btnVetNo.selected  = TRUE; }
-    if([[self.appDelegate.user objectForKey:@"fluent_english"] intValue] == 1) {
-        self.btnFluEngYes.selected = TRUE; }
-    else if([[self.appDelegate.user objectForKey:@"fluent_english"] intValue] == 0) {
-        self.btnFluEngNo.selected  = TRUE; }
-    if([[self.appDelegate.user objectForKey:@"has_body_art"] intValue] == 1) {
-        self.btnBodyArtYes.selected = TRUE; }
-    else if([[self.appDelegate.user objectForKey:@"has_body_art"] intValue] == 0) {
-        self.btnBodyArtNo.selected  = TRUE; }
-    if([[self.appDelegate.user objectForKey:@"has_ear_gauge"] intValue] == 1) {
-        self.btnEarGauges.selected = TRUE; }
-    else if([[self.appDelegate.user objectForKey:@"has_ear_gauge"] intValue] == 0) {
-        self.btnEarGauges.selected = FALSE; }
-    if([[self.appDelegate.user objectForKey:@"has_facial_piercing"] intValue] == 1) {
-        self.btnFacialPiercing.selected = TRUE; }
-    else if([[self.appDelegate.user objectForKey:@"has_facial_piercing"] intValue] == 0) {
-        self.btnFacialPiercing.selected = FALSE; }
-    if([[self.appDelegate.user objectForKey:@"has_tattoo"] intValue] == 1) {
-        self.btnTattoo.selected = TRUE; }
-    else if([[self.appDelegate.user objectForKey:@"has_tattoo"] intValue] == 0) {
-        self.btnTattoo.selected = FALSE; }
-    if([[self.appDelegate.user objectForKey:@"has_tongue_piercing"] intValue] == 1) {
-        self.btnTonguePiercing.selected = TRUE; }
-    else if([[self.appDelegate.user objectForKey:@"has_tongue_piercing"] intValue] == 0) {
-        self.btnTonguePiercing.selected = FALSE; }
-    if (self.btnBodyArtYes.isSelected) {
-        self.cnstrntBodyArtHeight.constant = 333;
-        self.viewBdyArt.alpha = 1;
-        [self.view layoutIfNeeded];
+    if([[self.appDelegate.user objectForKey:@"has_drivers_license"]intValue] == 1){
+        self.btnDLYes.selected = TRUE;
+    } else {
+        self.btnDLNo.selected = TRUE;
     }
-    else if (self.btnBodyArtNo.isSelected)
-    {
-        self.cnstrntBodyArtHeight.constant = 0;
-        self.viewBdyArt.alpha = 0;
-        [self.view layoutIfNeeded];
+    if([[self.appDelegate.user objectForKey:@"is_veteran"]intValue] == 1){
+        self.btnVetYes.selected = TRUE;
+    } else {
+        self.btnVetNo.selected = TRUE;
     }
-    
+    if([[self.appDelegate.user objectForKey:@"fluent_english"]intValue] == 1){
+        self.btnFluEngYes.selected = TRUE;
+    } else {
+        self.btnFluEngNo.selected = TRUE;
+    }
+    if([[self.appDelegate.user objectForKey:@"has_body_art"]intValue] == 1){
+        self.btnBodyArtYes.selected = TRUE;
+        [self pressYesBdyArt:self.btnBodyArtYes];
+    } else {
+        self.btnBodyArtNo.selected = TRUE;
+        [self pressNoBdyArt:self.btnBodyArtNo];
+    }
+    if([[self.appDelegate.user objectForKey:@"has_facial_piercing"]intValue] == 1){
+        self.btnFacialPiercing.selected = TRUE;
+    } else {
+        self.btnFacialPiercing.selected = FALSE;
+    }
+    if([[self.appDelegate.user objectForKey:@"has_tattoo"]intValue] == 1){
+        self.btnTattoo.selected = TRUE;
+    } else {
+        self.btnTattoo.selected = FALSE;
+    }
+    if([[self.appDelegate.user objectForKey:@"has_tongue_piercing"]intValue] == 1){
+        self.btnTonguePiercing.selected = TRUE;
+    } else {
+        self.btnTonguePiercing.selected = FALSE;
+    }
+    if([[self.appDelegate.user objectForKey:@"has_ear_gauges"]intValue] == 1){
+        self.btnEarGauges.selected = TRUE;
+    } else {
+        self.btnEarGauges.selected = FALSE;
+    }
+
     if(!self.langDict) {
         self.langDict = [NSMutableDictionary new];
         
@@ -162,7 +166,8 @@
     // Pass the selected object to the new view controller.
 }
 */
-- (IBAction)changeCheckBox:(UIButton *)sender {
+- (IBAction)changeCheckBox:(UIButton *)sender
+{
     [sender setSelected:!sender.selected];
 }
 - (IBAction)pressYesBdyArt:(id)sender {
@@ -181,7 +186,8 @@
     
     
 }
-- (IBAction)pressNoBdyArt:(id)sender {
+- (IBAction)pressNoBdyArt:(id)sender
+{
     self.btnEarGauges.selected = FALSE;
     self.btnFacialPiercing.selected = FALSE;
     self.btnTattoo.selected = FALSE;
@@ -211,6 +217,7 @@
     [self.appDelegate.user setObject:self.btnFacialPiercing.selected ? @"1" : @"0" forKey:@"has_facial_piercing"];
     [self.appDelegate.user setObject:self.btnTattoo.selected ? @"1" : @"0" forKey:@"has_tattoo"];
     [self.appDelegate.user setObject:self.btnTonguePiercing.selected ? @"1" : @"0" forKey:@"has_tongue_piercing"];
+    [self.appDelegate.user setObject:self.btnEarGauges.selected ? @"1" : @"0" forKey:@"has_ear_gauges"];
     
     [self saveUserDefault:self.appDelegate.user Key:@"user_data"];
 
