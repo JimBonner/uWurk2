@@ -42,17 +42,7 @@
     self.params = [[NSMutableDictionary alloc] init];
     self.viewExpTip.layer.cornerRadius = 10;
     self.viewNoExpTip.layer.cornerRadius = 10;
-    if([[self.appDelegate.user objectForKey:@"has_no_experience"] isEqualToString:@"1"]){
-        self.btnExperienceNo.selected = TRUE;
-        self.cnstrntNoExpViewHeight.constant = 155;
-        self.viewNoExp.alpha = 1;
-        self.cnstrntWorkExpHeight.constant = 0;
-        self.viewWorkExp.alpha = 0;
-    } else {
-        self.btnExperienceNo.selected = TRUE;
-        self.cnstrntNoExpViewHeight.constant = 0;
-        self.viewNoExp.alpha = 0;
-    }
+
     NSArray *experienceArray = [self.appDelegate.user objectForKey:@"experience"];
     if([experienceArray count] >0) {
         NSDictionary *firstExperienceItem = [experienceArray objectAtIndex:0];
@@ -75,9 +65,7 @@
     }
     else {
         [self.params setObject:@"" forKey:@"exp_id[0]"];
-        
     }
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -88,6 +76,40 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    if([[self.appDelegate.user objectForKey:@"has_experience"] isEqualToString:@"1"]){
+        self.btnExperienceYes.selected = TRUE;
+        self.cnstrntNoExpViewHeight.constant = 155;
+        self.viewNoExp.alpha = 1;
+        self.cnstrntWorkExpHeight.constant = 0;
+        self.viewWorkExp.alpha = 0;
+        [self pressYesExp:nil];
+    } else {
+        self.btnExperienceYes.selected = FALSE;
+        self.cnstrntNoExpViewHeight.constant = 0;
+        self.viewNoExp.alpha = 0;
+        [self pressNoExp:nil];
+    }
+    [self.txtCompany setText:[self.appDelegate.user objectForKey:@"company_names"]];
+    [self.btnCurrentJob setSelected:[self.appDelegate.user objectForKey:@"current_job"]];
+    [self.btnIndustry setTitle:[self.appDelegate.user objectForKey:@"industry_name"] forState:UIControlStateNormal];
+    [self.btnPosition setTitle:[self.appDelegate.user objectForKey:@"industry_position"] forState:UIControlStateNormal];
+    [self.btnPosition setTitle:[self.appDelegate.user objectForKey:@"industry_position"] forState:UIControlStateNormal];
+    if([[self.appDelegate.user objectForKey:@"industry_tenure_underyear"]intValue] == 1) {
+        [self.btnUnderYear setSelected:TRUE];
+    } else {
+        [self.btnUnderYear setSelected:FALSE];
+    }
+    if([[self.appDelegate.user objectForKey:@"industry_tenure_year2year"]intValue] == 1) {
+        [self.btnYear2Year setSelected:TRUE];
+    } else {
+        [self.btnYear2Year setSelected:FALSE];
+    }
+    if([[self.appDelegate.user objectForKey:@"industry_tenure_over2year"]intValue] == 1) {
+        [self.btnOver2Year setSelected:TRUE];
+    } else {
+        [self.btnOver2Year setSelected:FALSE];
+    }
 }
 
 /*
@@ -99,7 +121,9 @@
     // Pass the selected object to the new view controller.
 }
 */
-- (IBAction)pressNoExp:(id)sender {
+- (IBAction)pressNoExp:(id)sender
+{
+    [self.appDelegate.user setObject:@"0" forKey:@"has_experence"];
     [UIView animateWithDuration:.3 animations:^{
         self.viewWorkExp.alpha = 0;
         self.viewNoExp.alpha = 1;
@@ -115,9 +139,12 @@
          }
      }];
 }
-- (IBAction)pressYesExp:(id)sender {
-        self.cnstrntWorkExpHeight.constant = 700;
-        self.viewNoExp.alpha = 0;
+- (IBAction)pressYesExp:(id)sender
+{
+    [self.appDelegate.user setObject:@"1" forKey:@"has_experence"];
+    self.cnstrntWorkExpHeight.constant = 700;
+    self.viewNoExp.alpha = 0;
+    
     [UIView animateWithDuration:.3 animations:^{
         [self.view layoutIfNeeded];}
      
@@ -132,10 +159,10 @@
      }];
 }
 
-- (IBAction)industryPress:(id)sender {
+- (IBAction)industryPress:(id)sender
+{
     
      ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
-    
     
     [myController setParameters:nil];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/industries"];
@@ -147,12 +174,11 @@
     [myController setTitle:@"Industries"];
     
     [self.navigationController pushViewController:myController animated:TRUE];
-    
 }
-- (IBAction)positionPress:(id)sender {
-    
+
+- (IBAction)positionPress:(id)sender
+{
     ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
-    
     
     [myController setParameters:@{@"industry_id":[self.btnIndustry titleForState:UIControlStateSelected]}];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/positions"];
@@ -164,7 +190,6 @@
     [myController setTitle:@"Positions"];
     
     [self.navigationController pushViewController:myController animated:TRUE];
-    
 }
 
 - (IBAction)nextPress:(id)sender
@@ -203,6 +228,7 @@
     if (self.btnPreviousJob.isSelected) {
         [self.params setObject:@"2" forKey:@"status[0]"];
     }
+    
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
     if (self.btnExperienceYes.selected == NO && self.btnExperienceNo.selected == NO) {
@@ -231,33 +257,34 @@
                                                otherButtonTitles: nil];
         [alert show];
     }
-    else {
-    if([self.params count]){
-        [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"JSON: %@", responseObject);
-            if([self validateResponse:responseObject]){
-                
-                // Update the user object
-                
-                
-                UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup6"];
-                [self.navigationController pushViewController:myController animated:YES];
-            }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
-            UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Error"
-                                                             message:@"Unable to contact server"
-                                                            delegate:self
-                                                   cancelButtonTitle:@"OK"
-                                                   otherButtonTitles: nil];
-            [alert show];
-        }];
+    else
+    {
+        if([self.params count])
+        {
+            [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"JSON: %@", responseObject);
+                if([self validateResponse:responseObject]){
+                    
+                    // Update the user object
+                    
+                    
+                    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup6"];
+                    [self.navigationController pushViewController:myController animated:YES];
+                }
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Error: %@", error);
+                UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Error"
+                                                                 message:@"Unable to contact server"
+                                                                delegate:self
+                                                       cancelButtonTitle:@"OK"
+                                                       otherButtonTitles: nil];
+                [alert show];
+            }];
+        } else {
+            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup6"];
+            [self.navigationController pushViewController:myController animated:YES];
+        }
     }
-    else{
-        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup6"];
-        [self.navigationController pushViewController:myController animated:YES];
-    }
-}
 }
 
 @end
