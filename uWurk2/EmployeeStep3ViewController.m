@@ -51,9 +51,13 @@
 
 }
 
--(void) SelectionMade:(NSMutableDictionary *)dict displayString:(NSString *)displayString {
+-(void) SelectionMade:(NSMutableDictionary *)dict displayString:(NSString *)displayString
+{
     self.lblLanguages.text = displayString;
     self.langDict = dict;
+    
+    [self.appDelegate.user setObject:displayString forKey:@"languages_display"];
+//    [self.appDelegate.user setObject:dict forKey:@"languages_dictionary"];
 }
 
 //- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -84,12 +88,6 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-}
-
--(void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.viewCool.layer.cornerRadius = 5;
     
     if([[self.appDelegate.user objectForKey:@"has_drivers_license"]intValue] == 1){
         self.btnDLYes.selected = TRUE;
@@ -106,6 +104,15 @@
     } else {
         self.btnFluEngNo.selected = TRUE;
     }
+    if([self.appDelegate.user objectForKey:@"languages_display"]) {
+        [self.lblLanguages setText:[self.appDelegate.user objectForKey:@"languages_display"]];
+    } else {
+        [self.lblLanguages setText:@""];
+    }
+//    if([self.appDelegate.user objectForKey:@"languages_dictionary"]) {
+//        NSDictionary *tempDict = [self.appDelegate.user objectForKey:@"languages_dictionary"];
+//        self.langDict = [tempDict mutableCopy];
+//    }
     if([[self.appDelegate.user objectForKey:@"has_body_art"]intValue] == 1){
         self.btnBodyArtYes.selected = TRUE;
         [self pressYesBdyArt:self.btnBodyArtYes];
@@ -133,9 +140,15 @@
     } else {
         self.btnEarGauges.selected = FALSE;
     }
+}
 
-    if(!self.langDict) {
-        self.langDict = [NSMutableDictionary new];
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.viewCool.layer.cornerRadius = 5;
+    
+    if(!self.langDict & 0) {
+        self.langDict = [[NSMutableDictionary alloc]init];
         
         NSArray *languages = [self.appDelegate.user objectForKey:@"languages"];
         NSString *displayString = @"";
@@ -146,17 +159,19 @@
             }
             displayString = [displayString stringByAppendingString:[dict objectForKey:@"description"]];
         }
+        
         [self SelectionMade:self.langDict displayString:displayString];
     }
-
+    
     if([self.lblLanguages.text length] > 0) {
         [self.addLanguage setTitle:@"Modify Languages" forState:UIControlStateNormal];
-        [self.appDelegate.user setObject:self.lblLanguages.text forKey:@"addl_languages"];
+        [self.appDelegate.user setObject:self.lblLanguages.text forKey:@"languages_display"];
     } else {
         [self.addLanguage setTitle:@"Add Languages" forState:UIControlStateNormal];
-        [self.appDelegate.user setObject:@"" forKey:@"addl_languages"];
+        [self.appDelegate.user setObject:@"" forKey:@"languages_display"];
     }
 }
+
 /*
 #pragma mark - Navigation
 
@@ -212,7 +227,8 @@
     [self.appDelegate.user setObject:self.btnDLYes.selected ? @"1" : @"0" forKey:@"has_drivers_license"];
     [self.appDelegate.user setObject:self.btnVetYes.selected ? @"1" : @"0" forKey:@"is_veteran"];
     [self.appDelegate.user setObject:self.btnFluEngYes.selected ? @"1" : @"0" forKey:@"fluent_english"];
-    [self.appDelegate.user setObject:self.lblLanguages.text forKey:@"addl_languages"];
+    [self.appDelegate.user setObject:self.lblLanguages.text forKey:@"languages_display"];
+//    [self.appDelegate.user setObject:self.langDict forKey:@"languages_dictionary"];
     [self.appDelegate.user setObject:self.btnBodyArtYes.selected ? @"1" : @"0" forKey:@"has_body_art"];
     [self.appDelegate.user setObject:self.btnFacialPiercing.selected ? @"1" : @"0" forKey:@"has_facial_piercing"];
     [self.appDelegate.user setObject:self.btnTattoo.selected ? @"1" : @"0" forKey:@"has_tattoo"];
@@ -222,6 +238,7 @@
     [self saveUserDefault:self.appDelegate.user Key:@"user_data"];
 
     AFHTTPRequestOperationManager *manager = [self getManager];
+    
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     
     [self updateParamDict:params value:self.btnDLYes.selected ? @"1" : @"0" key:@"has_drivers_license"];

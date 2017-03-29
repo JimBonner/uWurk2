@@ -279,7 +279,6 @@
     frameToMove.frame = frame;
 }
 
-
 #pragma mark -
 #pragma mark User Defaults
 

@@ -40,11 +40,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     
     if([[self.appDelegate.user objectForKey:@"high_school_selected]"]intValue] == 1){
         [self.btnCollege setSelected:TRUE];
@@ -143,6 +138,11 @@
     else {
         [self.params setObject:@"" forKey:self.eduId];
     }
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {

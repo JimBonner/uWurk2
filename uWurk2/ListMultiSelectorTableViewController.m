@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    self.idDict = [[NSMutableDictionary alloc]init];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -24,7 +25,6 @@
     
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    
     
     if(self.bPost) {
         [manager POST:self.url parameters:self.parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -101,8 +101,6 @@
             displayString = [displayString stringByAppendingString:@", "];
         displayString = [displayString stringByAppendingString:[self.idDict objectForKey:key]];
     }
-    
-    
     
     if ( [self.delegate respondsToSelector:@selector(SelectionMade:displayString:)])
         [self.delegate SelectionMade:self.idDict displayString:displayString];
