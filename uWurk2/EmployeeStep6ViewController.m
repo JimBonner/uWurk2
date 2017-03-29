@@ -31,6 +31,7 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    
     self.cnstrntImageHeight.constant = 0;
     self.imagePhotoView.alpha = 0;
     self.viewBio.layer.borderWidth = 1;
@@ -46,15 +47,15 @@
     [super viewWillAppear:animated];
 }
 
-- (IBAction)btnPhoto:(UIButton*)sender {
-    
+- (IBAction)btnPhoto:(UIButton*)sender
+{
     UIImagePickerController * picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     
-    UIAlertController * alert=   [UIAlertController
-                                  alertControllerWithTitle:nil
-                                  message:nil
-                                  preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:nil
+                                 message:nil
+                                 preferredStyle:UIAlertControllerStyleActionSheet];
     
     [alert addAction:[UIAlertAction
                       actionWithTitle:@"Photo Library"
@@ -89,7 +90,8 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
     self.photo = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     [self dismissViewControllerAnimated:YES completion:nil];
     self.cnstrntPhotoHeight.constant = 0;
@@ -111,8 +113,7 @@
     if (self.btnPhotoSkip.selected == TRUE) {
         self.cnstrntPhotoTipHeight.constant = 100;
         self.viewPhotoTip.alpha = 1;
-    }
-    else {
+    } else {
         self.cnstrntPhotoTipHeight.constant = 0;
         self.viewPhotoTip.alpha = 0;
     }
@@ -122,8 +123,7 @@
     if (self.btnBioSkip.selected == TRUE) {
         self.cnstrntBioTipHeight.constant = 100;
         self.viewBioTip.alpha = 1;
-    }
-    else {
+    } else {
         self.cnstrntBioTipHeight.constant = 0;
         self.viewBioTip.alpha = 0;
     }
