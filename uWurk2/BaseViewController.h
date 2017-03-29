@@ -18,8 +18,10 @@
 -(void)assignValueTextView:(NSString*)value control:(UITextView*)control;
 -(void)saveUserDefault:(id)object Key:(NSString*)key;
 -(id)getUserDefault:(NSString*)key;
--(NSString *)NSMutableDictionaryToString:(NSMutableDictionary *)dictionary;
--(NSMutableDictionary *)StringToNSMutableDictionary:(NSString *)string;
+-(NSString *)objectToJsonString:(id)object;
+-(id)jsonStringToObject:(NSString *)string;
+-(NSMutableData *)objectToData:(id)object;
+-(id)dataToObject:(NSMutableData *)data;
 -(BOOL) validateResponse:(NSDictionary*)response;
 -(AFHTTPRequestOperationManager*)getManager;
 -(AFHTTPRequestOperationManager*)getManagerNoAuth;

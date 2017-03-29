@@ -35,8 +35,10 @@
 
 @implementation EmployeeStep5ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    
     self.params = [[NSMutableDictionary alloc] init];
     self.viewExpTip.layer.cornerRadius = 10;
     self.viewNoExpTip.layer.cornerRadius = 10;
@@ -46,10 +48,8 @@
         self.viewNoExp.alpha = 1;
         self.cnstrntWorkExpHeight.constant = 0;
         self.viewWorkExp.alpha = 0;
-        
-    }
-    if([[self.appDelegate.user objectForKey:@"has_no_experience"] intValue] == 0){
-        self.btnExperienceYes.selected = TRUE;
+    } else {
+        self.btnExperienceNo.selected = TRUE;
         self.cnstrntNoExpViewHeight.constant = 0;
         self.viewNoExp.alpha = 0;
     }
@@ -169,9 +169,17 @@
 
 - (IBAction)nextPress:(id)sender
 {
-    // Did data get updated?
+    [self.appDelegate.user setObject:self.btnExperienceYes.selected ? @"1" : @"0" forKey:@"has_experience"];
+    [self.appDelegate.user setObject:self.txtCompany.text forKey:@"company_names"];
+    [self.appDelegate.user setObject:self.btnCurrentJob.selected ? @"1" : @"0" forKey:@"current_job"];
+    [self.appDelegate.user setObject:[self.btnIndustry titleForState:UIControlStateNormal] forKey:@"industry_name"];
+    [self.appDelegate.user setObject:[self.btnPosition titleForState:UIControlStateNormal] forKey:@"industry_position"];
+    [self.appDelegate.user setObject:self.btnUnderYear.selected ? @"1" : @"0" forKey:@"industry_tenure_underyear"];
+    [self.appDelegate.user setObject:self.btnYear2Year.selected ? @"1" : @"0" forKey:@"industry_tenure_year2year"];
+    [self.appDelegate.user setObject:self.btnOver2Year.selected ? @"1" : @"0" forKey:@"industry_tenure_over2year"];
     
-    [self saveUserDefault:self.appDelegate.user Key:@"user_data"];
+    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
+                      Key:@"user_data"];
     
     AFHTTPRequestOperationManager *manager = [self getManager];
     [self.params setObject:self.txtCompany.text forKey:@"company[0]"];

@@ -28,8 +28,11 @@
 
 @implementation EmployeeStep6ViewController
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+- (void) viewDidLoad
+{
+    [super viewDidLoad];
+    self.cnstrntImageHeight.constant = 0;
+    self.imagePhotoView.alpha = 0;
     self.viewBio.layer.borderWidth = 1;
     self.viewBio.layer.borderColor = [UIColor blackColor].CGColor;
     self.cnstrntBioTipHeight.constant = 0;
@@ -37,11 +40,12 @@
     self.viewBioTip.alpha = 0;
     self.viewPhotoTip.alpha = 0;
 }
-- (void) viewDidLoad {
-    [super viewDidLoad];
-    self.cnstrntImageHeight.constant = 0;
-    self.imagePhotoView.alpha = 0;
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 }
+
 - (IBAction)btnPhoto:(UIButton*)sender {
     
     UIImagePickerController * picker = [[UIImagePickerController alloc] init];
@@ -129,7 +133,8 @@
 {
     // Did data get updated?
     
-    [self saveUserDefault:self.appDelegate.user Key:@"user_data"];
+    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
+                      Key:@"user_data"];
     
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];

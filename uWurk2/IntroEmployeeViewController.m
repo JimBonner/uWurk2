@@ -24,11 +24,10 @@
 {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:false];
-    // Do any additional setup after loading the view.
     [self saveUserDefault:@"1" Key:@"register_Active"];
     [self.emailText setText:[self getUserDefault:@"email"]];
 
-    NSDictionary *dict = [NSDictionary dictionaryWithDictionary:[self getUserDefault:@"user_data"]];
+    NSDictionary *dict = [NSDictionary dictionaryWithDictionary:[self jsonStringToObject:[self getUserDefault:@"user_data"]]];
     [self.appDelegate setUser:[dict mutableCopy]];
 }
 
@@ -58,7 +57,8 @@
                     [self.appDelegate.user setObject:[self getUserDefault:@"email"] forKey:@"email"];
                     [self.appDelegate.user setObject:[self getUserDefault:@"api_auth_token"] forKey:@"api_auth_token"];
 
-                    [self saveUserDefault:self.appDelegate.user Key:@"user_data"];
+                    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
+                                      Key:@"user_data"];
                 }
                 
                 EmployeeStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeStep1ViewController"];
@@ -68,7 +68,7 @@
                 NSArray *array = [dictionary objectForKey:@"email"];
                 NSString *message = [array objectAtIndex:0];
                 UIAlertController *alert = [UIAlertController
-                                            alertControllerWithTitle:@"Error"
+                                            alertControllerWithTitle:@"Oops"
                                                             message:message
                                                      preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction *cancel = [UIAlertAction

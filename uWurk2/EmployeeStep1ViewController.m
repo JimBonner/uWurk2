@@ -28,10 +28,9 @@
 
 @implementation EmployeeStep1ViewController
 
--(void) viewWillAppear:(BOOL)animated
+-(void)viewDidLoad
 {
-    [super viewWillAppear:animated];
-    self.viewCommunication.layer.cornerRadius = 10;
+    [super viewDidLoad];
     
     [self.appDelegate.user setObject:[self getUserDefault:@"email"] forKey:@"email"];
     [self.appDelegate.user setObject:[self getUserDefault:@"api_auth_token"] forKey:@"api_auth_token"];
@@ -64,6 +63,13 @@
     }
 }
 
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.viewCommunication.layer.cornerRadius = 10;
+}
+
 - (IBAction)changeCheckBox:(UIButton *)sender {
     [sender setSelected:!sender.selected];
 }
@@ -80,8 +86,9 @@
     [self.appDelegate.user setObject:self.btnText.selected ? @"1" : @"0" forKey:@"contact_text"];
     [self.appDelegate.user setObject:self.btnEmail.selected ? @"1" : @"0" forKey:@"contact_email"];
     
-    [self saveUserDefault:self.appDelegate.user Key:@"user_data"];
-   
+    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
+                      Key:@"user_data"];
+    
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     

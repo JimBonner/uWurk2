@@ -19,9 +19,10 @@
 
 @implementation EmployeeStep2ViewController
 
--(void) viewWillAppear:(BOOL)animated
+-(void)viewDidLoad
 {
-    [super viewWillAppear:animated];
+    [super viewDidLoad];
+    
     [self assignValue:[self.appDelegate.user objectForKey:@"miles(0)"] control:self.txtMiles];
     [self assignValue:[self.appDelegate.user objectForKey:@"zip(0)"] control:self.txtZip];
     [self assignValue:[self.appDelegate.user objectForKey:@"hourly_wage"] control:self.txtHourly];
@@ -35,6 +36,11 @@
     } else {
         [self.btnTips setSelected:FALSE];
     }
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 }
 
 - (IBAction)changeCheckBox:(UIButton *)sender {
@@ -52,7 +58,8 @@
     [self.appDelegate.user setObject:self.btnHourly.selected ? @"1" : @"0" forKey:@"hourlySelected"];
     [self.appDelegate.user setObject:self.btnTips.selected ? @"1" : @"0" forKey:@"tipsSelected"];
     
-    [self saveUserDefault:self.appDelegate.user Key:@"user_data"];
+    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
+                      Key:@"user_data"];
     
     AFHTTPRequestOperationManager *manager = [self getManager];
     

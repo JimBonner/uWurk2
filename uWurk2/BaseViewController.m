@@ -98,8 +98,6 @@
     return paramDict;
 }
 
-
-
 -(BOOL) validateResponse:(NSDictionary*)response
 {
     if([response isKindOfClass:[NSDictionary class]])
@@ -300,14 +298,29 @@
 }
 
 #pragma mark -
-#pragma mark NSMutableDictionary Conversion(s)
+#pragma mark Object & Data Conversion Using NSMutableData
 
-- (NSString *)NSMutableDictionaryToString:(NSMutableDictionary *)dictionary
+-(NSMutableData *)objectToData:(id)object
+{
+    NSMutableData *data = [[NSMutableData alloc]initWithBytes:(const void *)object length:sizeof(object)];
+    return data;
+}
+
+-(id)dataToObject:(NSMutableData *)data
+{
+    id object = [data bytes];
+    return object;
+}
+
+#pragma mark -
+#pragma mark Object & String Conversion(s) Using Json
+
+- (NSString *)objectToJsonString:(id)object
 {
     NSError *err;
-    NSData  *jsonData = [NSJSONSerialization  dataWithJSONObject:dictionary
-                                                         options:0
-                                                           error:&err];
+    NSData  *jsonData = [NSJSONSerialization dataWithJSONObject:object
+                                                        options:0
+                                                          error:&err];
     NSString *string = [[NSString alloc] initWithData:jsonData
                                              encoding:NSUTF8StringEncoding];
     NSLog(@"%@",string);
@@ -315,20 +328,21 @@
     return string;
 }
 
-- (NSMutableDictionary *)StringToNSMutableDictionary:(NSString *)string
+- (id)jsonStringToObject:(NSString *)string
 {
     NSError *err;
-    NSData  *data =[string dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *tempDict = nil;
-    NSMutableDictionary *dictionary = nil;
-    if(data!=nil){
-        tempDict = (NSDictionary *)[NSJSONSerialization
-                                    JSONObjectWithData:data
-                                               options:NSJSONReadingMutableContainers
-                                                 error:&err];
-        dictionary = [tempDict mutableCopy];
+    NSData  *jsonData =[string dataUsingEncoding:NSUTF8StringEncoding];
+    id object = nil;
+    if(jsonData!= nil){
+        object = (id)[NSJSONSerialization
+                      JSONObjectWithData:jsonData
+                                 options:NSJSONReadingMutableContainers
+                                   error:&err];
     }
-    return dictionary;
+    
+    NSLog(@"%@",object);
+    
+    return object;
 }
 
 @end

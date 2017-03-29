@@ -41,52 +41,52 @@
 {
     [super viewDidLoad];
     
-    if([[self.appDelegate.user objectForKey:@"high_school_selected]"]intValue] == 1){
-        [self.btnCollege setSelected:TRUE];
-    } else {
-        [self.btnCollege setSelected:FALSE];
-    }
-    if([[self.appDelegate.user objectForKey:@"college_selected]"]intValue] == 1){
+    if([[self.appDelegate.user objectForKey:@"high_school_selected"]intValue] == 1){
         [self.btnHighSchool setSelected:TRUE];
     } else {
         [self.btnHighSchool setSelected:FALSE];
     }
-    if([[self.appDelegate.user objectForKey:@"trade_school_selected]"]intValue] == 1){
+    if([[self.appDelegate.user objectForKey:@"college_selected"]intValue] == 1){
+        [self.btnCollege setSelected:TRUE];
+    } else {
+        [self.btnCollege setSelected:FALSE];
+    }
+    if([[self.appDelegate.user objectForKey:@"trade_school_selected"]intValue] == 1){
         [self.btnTradeSchool setSelected:TRUE];
     } else {
         [self.btnTradeSchool setSelected:FALSE];
     }
-    if([[self.appDelegate.user objectForKey:@"ged_selected]"]intValue] == 1){
+    if([[self.appDelegate.user objectForKey:@"ged_selected"]intValue] == 1){
         [self.btnGED setSelected:TRUE];
     } else {
         [self.btnGED setSelected:FALSE];
     }
-    if([[self.appDelegate.user objectForKey:@"enrolled_selected]"]intValue] == 1){
+    if([[self.appDelegate.user objectForKey:@"enrolled_selected"]intValue] == 1){
         [self.btnEnrolled setSelected:TRUE];
     } else {
         [self.btnEnrolled setSelected:FALSE];
     }
-    if([[self.appDelegate.user objectForKey:@"graduated_Selected]"]intValue] == 1){
+    if([[self.appDelegate.user objectForKey:@"graduated_Selected"]intValue] == 1){
         [self.btnGraduated setSelected:TRUE];
     } else {
         [self.btnGraduated setSelected:FALSE];
     }
-    if([[self.appDelegate.user objectForKey:@"attedned_Selected]"]intValue] == 1){
+    if([[self.appDelegate.user objectForKey:@"attedned_Selected"]intValue] == 1){
         [self.btnAttended setSelected:TRUE];
     } else {
         [self.btnAttended setSelected:FALSE];
     }
-    if([[self.appDelegate.user objectForKey:@"selected_state]"] isEqualToString:@"Select State"]){
+    if([[self.appDelegate.user objectForKey:@"selected_state"] isEqualToString:@"Select State"]){
         [self.btnState setTitle:@"Select State" forState:UIControlStateNormal];
     } else {
-        [self.btnState setTitle:[self.appDelegate.user objectForKey:@"selected_state]"] forState:UIControlStateNormal];
+        [self.btnState setTitle:[self.appDelegate.user objectForKey:@"selected_state"] forState:UIControlStateNormal];
     }
-    if([[self.appDelegate.user objectForKey:@"selected_city]"] isEqualToString:@"Select City"]){
+    if([[self.appDelegate.user objectForKey:@"selected_city"] isEqualToString:@"Select City"]){
         [self.btnCity setTitle:@"Select City" forState:UIControlStateNormal];
     } else {
         [self.btnCity setTitle:[self.appDelegate.user objectForKey:@"selected_city"] forState:UIControlStateNormal];
     }
-    if([[self.appDelegate.user objectForKey:@"selected_school]"] isEqualToString:@"Select School"]){
+    if([[self.appDelegate.user objectForKey:@"selected_school"] isEqualToString:@"Select School"]){
         [self.btnSchool setTitle:@"Select School" forState:UIControlStateNormal];
     } else {
         [self.btnSchool setTitle:[self.appDelegate.user objectForKey:@"selected_school"] forState:UIControlStateNormal];
@@ -377,7 +377,8 @@
         [self.appDelegate.user setObject:[self.btnSchool titleForState:UIControlStateNormal] forKey:@"selected_school"];
     }
     
-    [self saveUserDefault:self.appDelegate.user Key:@"user_data"];
+    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
+                      Key:@"user_data"];
     
     AFHTTPRequestOperationManager *manager = [self getManager];
     if (self.btnHighSchool.isSelected){

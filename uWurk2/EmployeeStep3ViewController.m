@@ -109,10 +109,10 @@
     } else {
         [self.lblLanguages setText:@""];
     }
-//    if([self.appDelegate.user objectForKey:@"languages_dictionary"]) {
-//        NSDictionary *tempDict = [self.appDelegate.user objectForKey:@"languages_dictionary"];
-//        self.langDict = [tempDict mutableCopy];
-//    }
+    //    if([self.appDelegate.user objectForKey:@"languages_dictionary"]) {
+    //        NSDictionary *tempDict = [self.appDelegate.user objectForKey:@"languages_dictionary"];
+    //        self.langDict = [tempDict mutableCopy];
+    //    }
     if([[self.appDelegate.user objectForKey:@"has_body_art"]intValue] == 1){
         self.btnBodyArtYes.selected = TRUE;
         [self pressYesBdyArt:self.btnBodyArtYes];
@@ -140,12 +140,6 @@
     } else {
         self.btnEarGauges.selected = FALSE;
     }
-}
-
--(void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.viewCool.layer.cornerRadius = 5;
     
     if(!self.langDict & 0) {
         self.langDict = [[NSMutableDictionary alloc]init];
@@ -170,6 +164,12 @@
         [self.addLanguage setTitle:@"Add Languages" forState:UIControlStateNormal];
         [self.appDelegate.user setObject:@"" forKey:@"languages_display"];
     }
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.viewCool.layer.cornerRadius = 5;
 }
 
 /*
@@ -235,7 +235,8 @@
     [self.appDelegate.user setObject:self.btnTonguePiercing.selected ? @"1" : @"0" forKey:@"has_tongue_piercing"];
     [self.appDelegate.user setObject:self.btnEarGauges.selected ? @"1" : @"0" forKey:@"has_ear_gauges"];
     
-    [self saveUserDefault:self.appDelegate.user Key:@"user_data"];
+    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
+                      Key:@"user_data"];
 
     AFHTTPRequestOperationManager *manager = [self getManager];
     
@@ -250,7 +251,7 @@
     [self updateParamDict:params value:self.btnTattoo.selected ? @"1" : @"0" key:@"has_tattoo"];
     [self updateParamDict:params value:self.btnTonguePiercing.selected ? @"1" : @"0" key:@"has_tongue_piercing"];
     if([self.lblLanguages.text length] > 0) {
-        [params setObject:self.langDict.allKeys forKey:@"other_languages"];
+//        [params setObject:self.langDict.allKeys forKey:@"other_languages"];
     }
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
