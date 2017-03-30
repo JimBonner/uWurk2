@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AFNetworking.h"
 #import "AppDelegate.h"
+#import "NSMutableDictionary+CocoaFix.h"
 
 
 @interface BaseViewController : UIViewController

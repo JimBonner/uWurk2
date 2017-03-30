@@ -4,6 +4,7 @@
 //
 //  Created by Avery Bonner on 9/4/15.
 //  Copyright (c) 2015 Michael Brown. All rights reserved.
+//  Copyright (c) 2017 Jim Bonner. All rights reserved.
 //
 
 #import "EmployeeStep3ViewController.h"
@@ -56,38 +57,19 @@
     self.lblLanguages.text = displayString;
     self.langDict = dict;
     
-    [self.appDelegate.user setObject:displayString forKey:@"languages_display"];
-//    [self.appDelegate.user setObject:dict forKey:@"languages_dictionary"];
+    [self.appDelegate.user setObjectOrNil:displayString forKey:@"languages_display"];
+//    [self.appDelegate.user setObjectOrNil:dict forKey:@"languages_dictionary"];
 }
-
-//- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//    return 0;
-//}
-
-//// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
-//- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    LanguageSpokenCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"LanguageSpoken" forIndexPath:indexPath];
-//    if (!cell) {
-//        cell = [[LanguageSpokenCollectionViewCell alloc] init];
-//    }
-//    cell.delegate = self;
-//    return cell;
-//}
-//
-//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//}
-//
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    if(indexPath.row == 0)
-//        return CGSizeMake(260, 260);
-//    else
-//        return CGSizeMake(120, 120);
-//}
 
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.viewCool.layer.cornerRadius = 5;
     
     if([[self.appDelegate.user objectForKey:@"has_drivers_license"]intValue] == 1){
         self.btnDLYes.selected = TRUE;
@@ -159,17 +141,11 @@
     
     if([self.lblLanguages.text length] > 0) {
         [self.addLanguage setTitle:@"Modify Languages" forState:UIControlStateNormal];
-        [self.appDelegate.user setObject:self.lblLanguages.text forKey:@"languages_display"];
+        [self.appDelegate.user setObjectOrNil:self.lblLanguages.text forKey:@"languages_display"];
     } else {
         [self.addLanguage setTitle:@"Add Languages" forState:UIControlStateNormal];
-        [self.appDelegate.user setObject:@"" forKey:@"languages_display"];
+        [self.appDelegate.user setObjectOrNil:@"" forKey:@"languages_display"];
     }
-}
-
--(void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.viewCool.layer.cornerRadius = 5;
 }
 
 /*
@@ -224,16 +200,16 @@
 
 - (IBAction)nextPress:(id)sender
 {
-    [self.appDelegate.user setObject:self.btnDLYes.selected ? @"1" : @"0" forKey:@"has_drivers_license"];
-    [self.appDelegate.user setObject:self.btnVetYes.selected ? @"1" : @"0" forKey:@"is_veteran"];
-    [self.appDelegate.user setObject:self.btnFluEngYes.selected ? @"1" : @"0" forKey:@"fluent_english"];
-    [self.appDelegate.user setObject:self.lblLanguages.text forKey:@"languages_display"];
-//    [self.appDelegate.user setObject:self.langDict forKey:@"languages_dictionary"];
-    [self.appDelegate.user setObject:self.btnBodyArtYes.selected ? @"1" : @"0" forKey:@"has_body_art"];
-    [self.appDelegate.user setObject:self.btnFacialPiercing.selected ? @"1" : @"0" forKey:@"has_facial_piercing"];
-    [self.appDelegate.user setObject:self.btnTattoo.selected ? @"1" : @"0" forKey:@"has_tattoo"];
-    [self.appDelegate.user setObject:self.btnTonguePiercing.selected ? @"1" : @"0" forKey:@"has_tongue_piercing"];
-    [self.appDelegate.user setObject:self.btnEarGauges.selected ? @"1" : @"0" forKey:@"has_ear_gauges"];
+    [self.appDelegate.user setObjectOrNil:self.btnDLYes.selected ? @"1" : @"0" forKey:@"has_drivers_license"];
+    [self.appDelegate.user setObjectOrNil:self.btnVetYes.selected ? @"1" : @"0" forKey:@"is_veteran"];
+    [self.appDelegate.user setObjectOrNil:self.btnFluEngYes.selected ? @"1" : @"0" forKey:@"fluent_english"];
+    [self.appDelegate.user setObjectOrNil:self.lblLanguages.text forKey:@"languages_display"];
+//    [self.appDelegate.user setObjectOrNil:self.langDict forKey:@"languages_dictionary"];
+    [self.appDelegate.user setObjectOrNil:self.btnBodyArtYes.selected ? @"1" : @"0" forKey:@"has_body_art"];
+    [self.appDelegate.user setObjectOrNil:self.btnFacialPiercing.selected ? @"1" : @"0" forKey:@"has_facial_piercing"];
+    [self.appDelegate.user setObjectOrNil:self.btnTattoo.selected ? @"1" : @"0" forKey:@"has_tattoo"];
+    [self.appDelegate.user setObjectOrNil:self.btnTonguePiercing.selected ? @"1" : @"0" forKey:@"has_tongue_piercing"];
+    [self.appDelegate.user setObjectOrNil:self.btnEarGauges.selected ? @"1" : @"0" forKey:@"has_ear_gauges"];
     
     [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
                       Key:@"user_data"];

@@ -15,6 +15,7 @@
 		1E0DC3E91E773A86009ECCB6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0DC3E81E773A86009ECCB6 /* Foundation.framework */; };
 		1E0DC3EB1E773A99009ECCB6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0DC3EA1E773A99009ECCB6 /* CoreGraphics.framework */; };
 		1E0DC3ED1E773AE5009ECCB6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0DC3EC1E773AE5009ECCB6 /* libPods.a */; };
+		1E4B94961E8D697A004ADCB9 /* NSMutableDictionary+CocoaFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4B94951E8D697A004ADCB9 /* NSMutableDictionary+CocoaFix.m */; };
 		1EAE1B901E78738100BE2C11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B497CA91BACA21300BE59B6 /* Main.storyboard */; };
 		9B0452591C02B80C00B33526 /* EmployeeStep6ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0452581C02B80C00B33526 /* EmployeeStep6ViewController.m */; };
 		9B04525C1C03101900B33526 /* ContactProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B04525B1C03101900B33526 /* ContactProfileViewController.m */; };
@@ -127,6 +128,8 @@
 		1E0DC3E81E773A86009ECCB6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1E0DC3EA1E773A99009ECCB6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		1E0DC3EC1E773AE5009ECCB6 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "../../Library/Developer/Xcode/DerivedData/uWurk2-diktffzfdgrxymgrefleqskkagsh/Build/Products/Debug-iphonesimulator/libPods.a"; sourceTree = "<group>"; };
+		1E4B94941E8D697A004ADCB9 /* NSMutableDictionary+CocoaFix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+CocoaFix.h"; sourceTree = "<group>"; };
+		1E4B94951E8D697A004ADCB9 /* NSMutableDictionary+CocoaFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+CocoaFix.m"; sourceTree = "<group>"; };
 		9B0452571C02B80C00B33526 /* EmployeeStep6ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeStep6ViewController.h; sourceTree = "<group>"; };
 		9B0452581C02B80C00B33526 /* EmployeeStep6ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeStep6ViewController.m; sourceTree = "<group>"; };
 		9B04525A1C03101900B33526 /* ContactProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactProfileViewController.h; sourceTree = "<group>"; };
@@ -172,8 +175,8 @@
 		9B379CA71B950FD500EB4E2D /* uWurk2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = uWurk2Tests.m; sourceTree = "<group>"; };
 		9B379CB31B95197600EB4E2D /* EmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmployeeViewController.h; path = ../uWurk2/EmployeeViewController.h; sourceTree = "<group>"; };
 		9B379CB41B95197600EB4E2D /* EmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmployeeViewController.m; path = ../uWurk2/EmployeeViewController.m; sourceTree = "<group>"; };
-		9B379CB91B95217700EB4E2D /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroViewController.h; path = ../uWurk2/IntroViewController.h; sourceTree = "<group>"; };
-		9B379CBA1B95217700EB4E2D /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroViewController.m; path = ../uWurk2/IntroViewController.m; sourceTree = "<group>"; };
+		9B379CB91B95217700EB4E2D /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
+		9B379CBA1B95217700EB4E2D /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
 		9B379CBC1B95247600EB4E2D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ../uWurk2/LoginViewController.h; sourceTree = "<group>"; };
 		9B379CBD1B95247600EB4E2D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = ../uWurk2/LoginViewController.m; sourceTree = "<group>"; };
 		9B379CF11B97DF3A00EB4E2D /* IntroEmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroEmployeeViewController.h; path = ../uWurk2/IntroEmployeeViewController.h; sourceTree = "<group>"; };
@@ -181,7 +184,7 @@
 		9B379CF41B97EAB800EB4E2D /* IntroEmployerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroEmployerViewController.h; path = ../uWurk2/IntroEmployerViewController.h; sourceTree = "<group>"; };
 		9B379CF51B97EAB800EB4E2D /* IntroEmployerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroEmployerViewController.m; path = ../uWurk2/IntroEmployerViewController.m; sourceTree = "<group>"; };
 		9B379CF71B97F6E500EB4E2D /* EmployeeStep1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeStep1ViewController.h; sourceTree = "<group>"; };
-		9B379CF81B97F6E500EB4E2D /* EmployeeStep1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeStep1ViewController.m; sourceTree = "<group>"; };
+		9B379CF81B97F6E500EB4E2D /* EmployeeStep1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EmployeeStep1ViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9B3C29A91C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmployeeRegisterThanksViewController.h; path = ../uWurk2/EmployeeRegisterThanksViewController.h; sourceTree = "<group>"; };
 		9B3C29AA1C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmployeeRegisterThanksViewController.m; path = ../uWurk2/EmployeeRegisterThanksViewController.m; sourceTree = "<group>"; };
 		9B3C29AC1C41F55300EF0296 /* EmployerRegisterThanksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmployerRegisterThanksViewController.h; path = ../uWurk2/EmployerRegisterThanksViewController.h; sourceTree = "<group>"; };
@@ -240,9 +243,9 @@
 		9BD853811BB0F576003D1856 /* ProfileEditEducationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileEditEducationViewController.h; sourceTree = "<group>"; };
 		9BD853821BB0F576003D1856 /* ProfileEditEducationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileEditEducationViewController.m; sourceTree = "<group>"; };
 		9BEA1B191B9A32B00017D87A /* EmployeeStep2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeStep2ViewController.h; sourceTree = "<group>"; };
-		9BEA1B1A1B9A32B00017D87A /* EmployeeStep2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeStep2ViewController.m; sourceTree = "<group>"; };
+		9BEA1B1A1B9A32B00017D87A /* EmployeeStep2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EmployeeStep2ViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9BEA1B1C1B9A4F630017D87A /* EmployeeStep3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeStep3ViewController.h; sourceTree = "<group>"; };
-		9BEA1B1D1B9A4F630017D87A /* EmployeeStep3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeStep3ViewController.m; sourceTree = "<group>"; };
+		9BEA1B1D1B9A4F630017D87A /* EmployeeStep3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EmployeeStep3ViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9BEA1B1F1B9A4F810017D87A /* EmployeeStep4ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeStep4ViewController.h; sourceTree = "<group>"; };
 		9BEA1B201B9A4F810017D87A /* EmployeeStep4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeStep4ViewController.m; sourceTree = "<group>"; };
 		9BEA1B221B9A4F970017D87A /* EmployeeStep5ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeStep5ViewController.h; sourceTree = "<group>"; };
@@ -329,6 +332,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E4B94921E8D683E004ADCB9 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				1E4B94941E8D697A004ADCB9 /* NSMutableDictionary+CocoaFix.h */,
+				1E4B94951E8D697A004ADCB9 /* NSMutableDictionary+CocoaFix.m */,
+			);
+			name = Category;
+			sourceTree = "<group>";
+		};
 		1ED53B641E7736320054EFCA /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,8 +348,6 @@
 				9B379CF21B97DF3A00EB4E2D /* IntroEmployeeViewController.m */,
 				9B379CF41B97EAB800EB4E2D /* IntroEmployerViewController.h */,
 				9B379CF51B97EAB800EB4E2D /* IntroEmployerViewController.m */,
-				9B379CB91B95217700EB4E2D /* IntroViewController.h */,
-				9B379CBA1B95217700EB4E2D /* IntroViewController.m */,
 				9B379CBC1B95247600EB4E2D /* LoginViewController.h */,
 				9B379CBD1B95247600EB4E2D /* LoginViewController.m */,
 				9B3EE14E1BA367BE001D3C37 /* ReferralProgramViewController.h */,
@@ -441,6 +451,7 @@
 		9B379C8A1B950FD500EB4E2D /* uWurk2 */ = {
 			isa = PBXGroup;
 			children = (
+				1E4B94921E8D683E004ADCB9 /* Category */,
 				DC40D9FF1C4C51130037D612 /* EmployerMenu */,
 				DCA4AF721C4BE920007B7F1B /* General */,
 				DCA4AE701C41B57A007B7F1B /* Storyboards */,
@@ -555,6 +566,8 @@
 		9BD16A5C1BEC401E006BAF69 /* Mail */ = {
 			isa = PBXGroup;
 			children = (
+				9B379CB91B95217700EB4E2D /* IntroViewController.h */,
+				9B379CBA1B95217700EB4E2D /* IntroViewController.m */,
 				9BD16A5D1BEC4102006BAF69 /* MailFoldersViewController.h */,
 				9BD16A5E1BEC4102006BAF69 /* MailFoldersViewController.m */,
 				9BD16A631BEC50D2006BAF69 /* MailFolderTableViewCell.h */,
@@ -887,6 +900,7 @@
 				DC81856D1BADA0C100EF2436 /* DashboardMenuTableViewController.m in Sources */,
 				9B0452711C0564E000B33526 /* EmployeeSendMessageViewController.m in Sources */,
 				DC75F3BC1C598BB9005A5196 /* LogoutViewController.m in Sources */,
+				1E4B94961E8D697A004ADCB9 /* NSMutableDictionary+CocoaFix.m in Sources */,
 				9B3C29AE1C41F55300EF0296 /* EmployerRegisterThanksViewController.m in Sources */,
 				9B379CF91B97F6E500EB4E2D /* EmployeeStep1ViewController.m in Sources */,
 				9BEA1B2A1B9A96D10017D87A /* EmployerStep1ViewController.m in Sources */,

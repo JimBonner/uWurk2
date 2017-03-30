@@ -4,6 +4,7 @@
 //
 //  Created by Avery Bonner on 9/2/15.
 //  Copyright (c) 2015 Michael Brown. All rights reserved.
+//  Copyright (c) 2017 Jim Bonner. All rights reserved.
 //
 
 #import "EmployeeStep1ViewController.h"
@@ -32,8 +33,15 @@
 {
     [super viewDidLoad];
     
-    [self.appDelegate.user setObject:[self getUserDefault:@"email"] forKey:@"email"];
-    [self.appDelegate.user setObject:[self getUserDefault:@"api_auth_token"] forKey:@"api_auth_token"];
+    [self.appDelegate.user setObjectOrNil:[self getUserDefault:@"email"] forKey:@"email"];
+    [self.appDelegate.user setObjectOrNil:[self getUserDefault:@"api_auth_token"] forKey:@"api_auth_token"];
+}
+
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.viewCommunication.layer.cornerRadius = 10;
     
     [self assignValue:[self.appDelegate.user objectForKey:@"email"] control:self.txtEmail];
     [self.txtEmail setAlpha:0.2];
@@ -63,28 +71,21 @@
     }
 }
 
-
--(void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.viewCommunication.layer.cornerRadius = 10;
-}
-
 - (IBAction)changeCheckBox:(UIButton *)sender {
     [sender setSelected:!sender.selected];
 }
 
 - (IBAction)nextPress:(id)sender
 {
-    [self.appDelegate.user setObject:[self.txtPassword text] forKey:@"password"];
-    [self.appDelegate.user setObject:[self.txtVerifyPassword text] forKey:@"verifyPW"];
-    [self.appDelegate.user setObject:[self.txtFirstName text] forKey:@"first_name"];
-    [self.appDelegate.user setObject:[self.txtLastName text] forKey:@"last_name"];
-    [self.appDelegate.user setObject:[self.txtBirthDate text] forKey:@"birthdate"];
-    [self.appDelegate.user setObject:[self.txtPhone text] forKey:@"cell_phone"];
-    [self.appDelegate.user setObject:self.btnGenderMale.selected ? @"m" : @"f" forKey:@"gender"];
-    [self.appDelegate.user setObject:self.btnText.selected ? @"1" : @"0" forKey:@"contact_text"];
-    [self.appDelegate.user setObject:self.btnEmail.selected ? @"1" : @"0" forKey:@"contact_email"];
+    [self.appDelegate.user setObjectOrNil:[self.txtPassword text] forKey:@"password"];
+    [self.appDelegate.user setObjectOrNil:[self.txtVerifyPassword text] forKey:@"verifyPW"];
+    [self.appDelegate.user setObjectOrNil:[self.txtFirstName text] forKey:@"first_name"];
+    [self.appDelegate.user setObjectOrNil:[self.txtLastName text] forKey:@"last_name"];
+    [self.appDelegate.user setObjectOrNil:[self.txtBirthDate text] forKey:@"birthdate"];
+    [self.appDelegate.user setObjectOrNil:[self.txtPhone text] forKey:@"cell_phone"];
+    [self.appDelegate.user setObjectOrNil:self.btnGenderMale.selected ? @"m" : @"f" forKey:@"gender"];
+    [self.appDelegate.user setObjectOrNil:self.btnText.selected ? @"1" : @"0" forKey:@"contact_text"];
+    [self.appDelegate.user setObjectOrNil:self.btnEmail.selected ? @"1" : @"0" forKey:@"contact_email"];
     
     [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
                       Key:@"user_data"];
@@ -140,15 +141,15 @@
     {
         if([params count])
         {
-            [self.appDelegate.user setObject:[self.txtPassword text] forKey:@"password"];
-            [self.appDelegate.user setObject:[self.txtVerifyPassword text] forKey:@"verifyPW"];
-            [self.appDelegate.user setObject:[self.txtFirstName text] forKey:@"first_name"];
-            [self.appDelegate.user setObject:[self.txtLastName text] forKey:@"last_name"];
-            [self.appDelegate.user setObject:[self.txtBirthDate text] forKey:@"birthdate"];
-            [self.appDelegate.user setObject:[self.txtPhone text] forKey:@"cell_phone"];
-            [self.appDelegate.user setObject:self.btnGenderMale.selected ? @"m" : @"f" forKey:@"gender"];
-            [self.appDelegate.user setObject:self.btnText.selected ? @"1" : @"0" forKey:@"contact_text"];
-            [self.appDelegate.user setObject:self.btnEmail.selected ? @"1" : @"0" forKey:@"contact_email"];
+            [self.appDelegate.user setObjectOrNil:[self.txtPassword text] forKey:@"password"];
+            [self.appDelegate.user setObjectOrNil:[self.txtVerifyPassword text] forKey:@"verifyPW"];
+            [self.appDelegate.user setObjectOrNil:[self.txtFirstName text] forKey:@"first_name"];
+            [self.appDelegate.user setObjectOrNil:[self.txtLastName text] forKey:@"last_name"];
+            [self.appDelegate.user setObjectOrNil:[self.txtBirthDate text] forKey:@"birthdate"];
+            [self.appDelegate.user setObjectOrNil:[self.txtPhone text] forKey:@"cell_phone"];
+            [self.appDelegate.user setObjectOrNil:self.btnGenderMale.selected ? @"m" : @"f" forKey:@"gender"];
+            [self.appDelegate.user setObjectOrNil:self.btnText.selected ? @"1" : @"0" forKey:@"contact_text"];
+            [self.appDelegate.user setObjectOrNil:self.btnEmail.selected ? @"1" : @"0" forKey:@"contact_email"];
 
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"JSON: %@", responseObject);

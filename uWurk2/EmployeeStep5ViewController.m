@@ -42,29 +42,10 @@
     self.params = [[NSMutableDictionary alloc] init];
     self.viewExpTip.layer.cornerRadius = 10;
     self.viewNoExpTip.layer.cornerRadius = 10;
-
-    NSArray *experienceArray = [self.appDelegate.user objectForKey:@"experience"];
-    if([experienceArray count] >0) {
-        NSDictionary *firstExperienceItem = [experienceArray objectAtIndex:0];
-        [self.btnPosition setTitle:[firstExperienceItem objectForKey:@"position"] forState:UIControlStateNormal];
-        [self.btnPosition setTitle:[firstExperienceItem objectForKey:@"position_id"] forState:UIControlStateSelected];
-        [self.btnIndustry setTitle:[firstExperienceItem objectForKey:@"industry"] forState:UIControlStateNormal];
-        [self.btnIndustry setTitle:[firstExperienceItem objectForKey:@"industry_id"] forState:UIControlStateSelected];
-        [self.params setObject:[firstExperienceItem objectForKey:@"id"] forKey:@"exp_id[0]"];
-        [self assignValue:[firstExperienceItem objectForKey:@"company"] control:self.txtCompany];
-        if([[firstExperienceItem objectForKey:@"status"] intValue] ==1)
-            self.btnCurrentJob.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"status"] intValue] == 2)
-            self.btnPreviousJob.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 1)
-            self.btnUnderYear.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 2)
-            self.btnYear2Year.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 3)
-            self.btnOver2Year.selected = TRUE;
-    }
-    else {
-        [self.params setObject:@"" forKey:@"exp_id[0]"];
+    
+    if([self.appDelegate.user objectForKey:@"has_experience"] == nil) {
+        [self.btnExperienceYes setSelected:TRUE];
+        [self pressYesExp:nil];
     }
 }
 
@@ -76,21 +57,41 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    NSArray *experienceArray = [self.appDelegate.user objectForKey:@"experience"];
+    if([experienceArray count] > 0) {
+        NSDictionary *firstExperienceItem = [experienceArray objectAtIndex:0];
+        [self.btnPosition setTitle:[firstExperienceItem objectForKey:@"position"] forState:UIControlStateNormal];
+        [self.btnPosition setTitle:[firstExperienceItem objectForKey:@"position_id"] forState:UIControlStateSelected];
+        [self.btnIndustry setTitle:[firstExperienceItem objectForKey:@"industry"] forState:UIControlStateNormal];
+        [self.btnIndustry setTitle:[firstExperienceItem objectForKey:@"industry_id"] forState:UIControlStateSelected];
+        [self assignValue:[firstExperienceItem objectForKey:@"company"] control:self.txtCompany];
+        if([[firstExperienceItem objectForKey:@"status"] intValue] ==1)
+            self.btnCurrentJob.selected = TRUE;
+        if([[firstExperienceItem objectForKey:@"status"] intValue] == 2)
+            self.btnPreviousJob.selected = TRUE;
+        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 1)
+            self.btnUnderYear.selected = TRUE;
+        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 2)
+            self.btnYear2Year.selected = TRUE;
+        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 3)
+            self.btnOver2Year.selected = TRUE;
+        [self.params setObject:[firstExperienceItem objectForKey:@"id"] forKey:@"exp_id[0]"];
+    } else {
+        [self.params setObject:@"" forKey:@"exp_id[0]"];
+    }
     
-    if([[self.appDelegate.user objectForKey:@"has_experience"] isEqualToString:@"1"]){
-        self.btnExperienceYes.selected = TRUE;
+    if([[self.appDelegate.user objectForKey:@"has_experience"]intValue] == 0) {
+        self.btnExperienceNo.selected = TRUE;
         self.cnstrntNoExpViewHeight.constant = 155;
         self.viewNoExp.alpha = 1;
         self.cnstrntWorkExpHeight.constant = 0;
         self.viewWorkExp.alpha = 0;
-        [self pressYesExp:nil];
     } else {
-        self.btnExperienceYes.selected = FALSE;
+        self.btnExperienceYes.selected = TRUE;
         self.cnstrntNoExpViewHeight.constant = 0;
         self.viewNoExp.alpha = 0;
-        [self pressNoExp:nil];
     }
-    [self.txtCompany setText:[self.appDelegate.user objectForKey:@"company_names"]];
     [self.btnCurrentJob setSelected:[self.appDelegate.user objectForKey:@"current_job"]];
     [self.btnIndustry setTitle:[self.appDelegate.user objectForKey:@"industry_name"] forState:UIControlStateNormal];
     [self.btnPosition setTitle:[self.appDelegate.user objectForKey:@"industry_position"] forState:UIControlStateNormal];
@@ -112,18 +113,9 @@
     }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 - (IBAction)pressNoExp:(id)sender
 {
-    [self.appDelegate.user setObject:@"0" forKey:@"has_experence"];
+    [self.appDelegate.user setObjectOrNil:@"0" forKey:@"has_experience"];
     [UIView animateWithDuration:.3 animations:^{
         self.viewWorkExp.alpha = 0;
         self.viewNoExp.alpha = 1;
@@ -139,9 +131,10 @@
          }
      }];
 }
+    
 - (IBAction)pressYesExp:(id)sender
 {
-    [self.appDelegate.user setObject:@"1" forKey:@"has_experence"];
+    [self.appDelegate.user setObjectOrNil:@"1" forKey:@"has_experience"];
     self.cnstrntWorkExpHeight.constant = 700;
     self.viewNoExp.alpha = 0;
     
@@ -161,7 +154,6 @@
 
 - (IBAction)industryPress:(id)sender
 {
-    
      ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
     
     [myController setParameters:nil];
@@ -194,39 +186,34 @@
 
 - (IBAction)nextPress:(id)sender
 {
-    [self.appDelegate.user setObject:self.btnExperienceYes.selected ? @"1" : @"0" forKey:@"has_experience"];
-    [self.appDelegate.user setObject:self.txtCompany.text forKey:@"company_names"];
-    [self.appDelegate.user setObject:self.btnCurrentJob.selected ? @"1" : @"0" forKey:@"current_job"];
-    [self.appDelegate.user setObject:[self.btnIndustry titleForState:UIControlStateNormal] forKey:@"industry_name"];
-    [self.appDelegate.user setObject:[self.btnPosition titleForState:UIControlStateNormal] forKey:@"industry_position"];
-    [self.appDelegate.user setObject:self.btnUnderYear.selected ? @"1" : @"0" forKey:@"industry_tenure_underyear"];
-    [self.appDelegate.user setObject:self.btnYear2Year.selected ? @"1" : @"0" forKey:@"industry_tenure_year2year"];
-    [self.appDelegate.user setObject:self.btnOver2Year.selected ? @"1" : @"0" forKey:@"industry_tenure_over2year"];
+    [self.appDelegate.user setObjectOrNil:self.btnExperienceYes.selected ? @"1" : @"0" forKey:@"has_experience"];
+    if([[self.appDelegate.user objectForKey:@"has_experience"] isEqualToString:@"0"]) {
+        [self.appDelegate.user setObjectOrNil:self.txtCompany.text forKey:@"company_names"];
+        [self.appDelegate.user setObjectOrNil:self.btnCurrentJob.selected ? @"1" : @"0" forKey:@"current_job"];
+        [self.appDelegate.user setObjectOrNil:[self.btnIndustry titleForState:UIControlStateNormal] forKey:@"industry_name"];
+        [self.appDelegate.user setObjectOrNil:[self.btnPosition titleForState:UIControlStateNormal] forKey:@"industry_position"];
+        [self.appDelegate.user setObjectOrNil:self.btnUnderYear.selected ? @"1" : @"0" forKey:@"industry_tenure_underyear"];
+        [self.appDelegate.user setObjectOrNil:self.btnYear2Year.selected ? @"1" : @"0" forKey:@"industry_tenure_year2year"];
+        [self.appDelegate.user setObjectOrNil:self.btnOver2Year.selected ? @"1" : @"0" forKey:@"industry_tenure_over2year"];
+    }
     
     [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
                       Key:@"user_data"];
     
-    AFHTTPRequestOperationManager *manager = [self getManager];
-    [self.params setObject:self.txtCompany.text forKey:@"company[0]"];
-    [self.params setObject:[self.btnPosition titleForState:UIControlStateSelected] forKey:@"position[0]"];
-    [self.params setObject:@"" forKey:@"position2[0]"];
-    [self.params setObject:@"" forKey:@"other_position[0]"];
-    [self.params setObject:@"0" forKey:@"remove[0]"];
-    [self.params setObject:[self.btnIndustry titleForState:UIControlStateSelected] forKey:@"industry[0]"];
     if(self.btnUnderYear.isSelected) {
-        [self.params setObject:@"1" forKey:@"job_length[0]"];
+        [self.params setObjectOrNil:@"1" forKey:@"job_length[0]"];
     }
     if(self.btnYear2Year.isSelected) {
-        [self.params setObject:@"2" forKey:@"job_length[0]"];
+        [self.params setObjectOrNil:@"2" forKey:@"job_length[0]"];
     }
     if(self.btnOver2Year.isSelected) {
-        [self.params setObject:@"3" forKey:@"job_length[0]"];
+        [self.params setObjectOrNil:@"3" forKey:@"job_length[0]"];
     }
     if (self.btnCurrentJob.isSelected) {
-        [self.params setObject:@"1" forKey:@"status[0]"];
+        [self.params setObjectOrNil:@"1" forKey:@"status[0]"];
     }
     if (self.btnPreviousJob.isSelected) {
-        [self.params setObject:@"2" forKey:@"status[0]"];
+        [self.params setObjectOrNil:@"2" forKey:@"status[0]"];
     }
     
     NSMutableString *Error = [[NSMutableString alloc] init];
@@ -259,8 +246,16 @@
     }
     else
     {
+        [self.params setObjectOrNil:self.txtCompany.text forKey:@"company[0]"];
+        [self.params setObjectOrNil:[self.btnPosition titleForState:UIControlStateSelected] forKey:@"position[0]"];
+        [self.params setObjectOrNil:@"" forKey:@"position2[0]"];
+        [self.params setObjectOrNil:@"" forKey:@"other_position[0]"];
+        [self.params setObjectOrNil:@"0" forKey:@"remove[0]"];
+        [self.params setObjectOrNil:[self.btnIndustry titleForState:UIControlStateSelected] forKey:@"industry[0]"];
+
         if([self.params count])
         {
+            AFHTTPRequestOperationManager *manager = [self getManager];
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"JSON: %@", responseObject);
                 if([self validateResponse:responseObject]){

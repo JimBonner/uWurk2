@@ -4,6 +4,7 @@
 //
 //  Created by Avery Bonner on 9/4/15.
 //  Copyright (c) 2015 Michael Brown. All rights reserved.
+//  Copyright (c) 2017 Jim Bonner. All rights reserved.
 //
 
 #import "EmployeeStep2ViewController.h"
@@ -22,6 +23,11 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
     [self assignValue:[self.appDelegate.user objectForKey:@"miles(0)"] control:self.txtMiles];
     [self assignValue:[self.appDelegate.user objectForKey:@"zip(0)"] control:self.txtZip];
@@ -38,11 +44,6 @@
     }
 }
 
--(void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
 - (IBAction)changeCheckBox:(UIButton *)sender {
     [sender setSelected:!sender.selected];
 }
@@ -52,11 +53,11 @@
 
 - (IBAction)nextPress:(id)sender {
     
-    [self.appDelegate.user setObject:[self.txtMiles text] forKey:@"miles(0)"];
-    [self.appDelegate.user setObject:[self.txtZip   text] forKey:@"zip(0)"];
-    [self.appDelegate.user setObject:[self.txtHourly text] forKey:@"hourly_wage"];
-    [self.appDelegate.user setObject:self.btnHourly.selected ? @"1" : @"0" forKey:@"hourlySelected"];
-    [self.appDelegate.user setObject:self.btnTips.selected ? @"1" : @"0" forKey:@"tipsSelected"];
+    [self.appDelegate.user setObjectOrNil:[self.txtMiles text] forKey:@"miles(0)"];
+    [self.appDelegate.user setObjectOrNil:[self.txtZip   text] forKey:@"zip(0)"];
+    [self.appDelegate.user setObjectOrNil:[self.txtHourly text] forKey:@"hourly_wage"];
+    [self.appDelegate.user setObjectOrNil:self.btnHourly.selected ? @"1" : @"0" forKey:@"hourlySelected"];
+    [self.appDelegate.user setObjectOrNil:self.btnTips.selected ? @"1" : @"0" forKey:@"tipsSelected"];
     
     [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
                       Key:@"user_data"];

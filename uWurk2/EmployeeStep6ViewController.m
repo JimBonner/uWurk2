@@ -76,16 +76,14 @@
                           UIImagePickerController * picker = [[UIImagePickerController alloc] init];
                           picker.delegate = self;
                           picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-                          [alert dismissViewControllerAnimated:YES completion:nil];
-                          [self presentViewController:picker animated:true completion:nil];
                       }]];
-       [alert addAction:[UIAlertAction
-                      actionWithTitle:@"Cancel"
-                      style:UIAlertActionStyleCancel
-                      handler:^(UIAlertAction * action)
-                      {
-                          [alert dismissViewControllerAnimated:YES completion:nil];
-                      }]];
+     [alert addAction:[UIAlertAction
+                       actionWithTitle:@"Cancel"
+                       style:UIAlertActionStyleCancel
+                       handler:^(UIAlertAction * action)
+                       {
+                           [alert dismissViewControllerAnimated:YES completion:nil];
+                       }]];
     
     [self presentViewController:alert animated:YES completion:nil];
 }

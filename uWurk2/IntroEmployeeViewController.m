@@ -54,8 +54,8 @@
                 {
                     [self saveUserDefault:[self.emailText text] Key:@"email"];
                     [self saveUserDefault:[responseObject objectForKey:@"api_auth_token"] Key:@"api_auth_token"];
-                    [self.appDelegate.user setObject:[self getUserDefault:@"email"] forKey:@"email"];
-                    [self.appDelegate.user setObject:[self getUserDefault:@"api_auth_token"] forKey:@"api_auth_token"];
+                    [self.appDelegate.user setObjectOrNil:[self getUserDefault:@"email"] forKey:@"email"];
+                    [self.appDelegate.user setObjectOrNil:[self getUserDefault:@"api_auth_token"] forKey:@"api_auth_token"];
 
                     [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
                                       Key:@"user_data"];
