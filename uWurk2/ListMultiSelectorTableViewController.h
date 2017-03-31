@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 
 @protocol ListMultiSelectorTableViewControllerProtocol <NSObject>
-    -(void)SelectionMade:(NSMutableDictionary*)dict displayString:(NSString*)displayString;
+-(void)SelectionMade:(NSMutableDictionary*)dict displayString:(NSString*)displayString;
 @end
 
 @interface ListMultiSelectorTableViewController : UITableViewController

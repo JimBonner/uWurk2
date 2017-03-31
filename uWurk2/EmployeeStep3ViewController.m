@@ -29,37 +29,12 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cnstrntBodyArtHeight;
 @property (weak, nonatomic) IBOutlet UIView *viewCool;
 @property (weak, nonatomic) IBOutlet UIButton *addLanguage;
-@property (weak, nonatomic) IBOutlet UILabel *lblLanguages;
+@property (weak, nonatomic) IBOutlet UILabel  *lblLanguages;
 @property (nonatomic, strong) NSMutableDictionary *langDict;
 
 @end
 
 @implementation EmployeeStep3ViewController
-
-- (IBAction)addLanguagePress:(id)sender {
-    ListMultiSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListMultiSelector"];
-    
-    [myController setParameters:nil];
-    [myController setUrl:@"http://uwurk.tscserver.com/api/v1/languages"];
-    [myController setDisplay:@"description"];
-    [myController setKey:@"id"];
-    [myController setDelegate:self];
-    [myController setJsonGroup:@"languages"];
-    [myController setTitle:@"Lauguages"];
-    [myController setIdDict:self.langDict];
-    
-    [self.navigationController pushViewController:myController animated:TRUE];
-
-}
-
--(void) SelectionMade:(NSMutableDictionary *)dict displayString:(NSString *)displayString
-{
-    self.lblLanguages.text = displayString;
-    self.langDict = dict;
-    
-    [self.appDelegate.user setObjectOrNil:displayString forKey:@"languages_display"];
-//    [self.appDelegate.user setObjectOrNil:dict forKey:@"languages_dictionary"];
-}
 
 -(void)viewDidLoad
 {
@@ -197,23 +172,10 @@
      }];
 }
 
-
 - (IBAction)nextPress:(id)sender
 {
-    [self.appDelegate.user setObjectOrNil:self.btnDLYes.selected ? @"1" : @"0" forKey:@"has_drivers_license"];
-    [self.appDelegate.user setObjectOrNil:self.btnVetYes.selected ? @"1" : @"0" forKey:@"is_veteran"];
-    [self.appDelegate.user setObjectOrNil:self.btnFluEngYes.selected ? @"1" : @"0" forKey:@"fluent_english"];
-    [self.appDelegate.user setObjectOrNil:self.lblLanguages.text forKey:@"languages_display"];
-//    [self.appDelegate.user setObjectOrNil:self.langDict forKey:@"languages_dictionary"];
-    [self.appDelegate.user setObjectOrNil:self.btnBodyArtYes.selected ? @"1" : @"0" forKey:@"has_body_art"];
-    [self.appDelegate.user setObjectOrNil:self.btnFacialPiercing.selected ? @"1" : @"0" forKey:@"has_facial_piercing"];
-    [self.appDelegate.user setObjectOrNil:self.btnTattoo.selected ? @"1" : @"0" forKey:@"has_tattoo"];
-    [self.appDelegate.user setObjectOrNil:self.btnTonguePiercing.selected ? @"1" : @"0" forKey:@"has_tongue_piercing"];
-    [self.appDelegate.user setObjectOrNil:self.btnEarGauges.selected ? @"1" : @"0" forKey:@"has_ear_gauges"];
+    [self saveUserData];
     
-    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
-                      Key:@"user_data"];
-
     AFHTTPRequestOperationManager *manager = [self getManager];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
@@ -253,35 +215,114 @@
                                                cancelButtonTitle:@"OK"
                                                otherButtonTitles: nil];
         [alert show];
-    }
-    else {
-    
-    if([params count]){
-        [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"JSON: %@", responseObject);
-            if([self validateResponse:responseObject]){
-                
-                // Update the user object
-                
-                
-                UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup4"];
-                [self.navigationController pushViewController:myController animated:TRUE];
-            }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
-            UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Error"
-                                                             message:@"Unable to contact server"
-                                                            delegate:self
-                                                   cancelButtonTitle:@"OK"
-                                                   otherButtonTitles: nil];
-            [alert show];
-        }];
-    }
-    else{
-        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup4"];
-        [self.navigationController pushViewController:myController animated:TRUE];
+    } else {
+        if([params count]){
+            [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"JSON: %@", responseObject);
+                if([self validateResponse:responseObject]){
+                    
+                    [self.appDelegate.user setObjectOrNil:self.btnDLYes.selected ? @"1" : @"0" forKey:@"has_drivers_license"];
+                    [self.appDelegate.user setObjectOrNil:self.btnVetYes.selected ? @"1" : @"0" forKey:@"is_veteran"];
+                    [self.appDelegate.user setObjectOrNil:self.btnFluEngYes.selected ? @"1" : @"0" forKey:@"fluent_english"];
+                    [self.appDelegate.user setObjectOrNil:self.lblLanguages.text forKey:@"languages_display"];
+                    //    [self.appDelegate.user setObjectOrNil:self.langDict forKey:@"languages_dictionary"];
+                    [self.appDelegate.user setObjectOrNil:self.btnBodyArtYes.selected ? @"1" : @"0" forKey:@"has_body_art"];
+                    [self.appDelegate.user setObjectOrNil:self.btnFacialPiercing.selected ? @"1" : @"0" forKey:@"has_facial_piercing"];
+                    [self.appDelegate.user setObjectOrNil:self.btnTattoo.selected ? @"1" : @"0" forKey:@"has_tattoo"];
+                    [self.appDelegate.user setObjectOrNil:self.btnTonguePiercing.selected ? @"1" : @"0" forKey:@"has_tongue_piercing"];
+                    [self.appDelegate.user setObjectOrNil:self.btnEarGauges.selected ? @"1" : @"0" forKey:@"has_ear_gauges"];
+                    
+                    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
+                                      Key:@"user_data"];
+                    
+                    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup4"];
+                    [self.navigationController pushViewController:myController animated:TRUE];
+                }
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Error: %@", error);
+                UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Error"
+                                                                 message:@"Unable to contact server"
+                                                                delegate:self
+                                                       cancelButtonTitle:@"OK"
+                                                       otherButtonTitles: nil];
+                [alert show];
+            }];
+        }
+        else{
+            [self.appDelegate.user setObjectOrNil:self.btnDLYes.selected ? @"1" : @"0" forKey:@"has_drivers_license"];
+            [self.appDelegate.user setObjectOrNil:self.btnVetYes.selected ? @"1" : @"0" forKey:@"is_veteran"];
+            [self.appDelegate.user setObjectOrNil:self.btnFluEngYes.selected ? @"1" : @"0" forKey:@"fluent_english"];
+            [self.appDelegate.user setObjectOrNil:self.lblLanguages.text forKey:@"languages_display"];
+            //    [self.appDelegate.user setObjectOrNil:self.langDict forKey:@"languages_dictionary"];
+            [self.appDelegate.user setObjectOrNil:self.btnBodyArtYes.selected ? @"1" : @"0" forKey:@"has_body_art"];
+            [self.appDelegate.user setObjectOrNil:self.btnFacialPiercing.selected ? @"1" : @"0" forKey:@"has_facial_piercing"];
+            [self.appDelegate.user setObjectOrNil:self.btnTattoo.selected ? @"1" : @"0" forKey:@"has_tattoo"];
+            [self.appDelegate.user setObjectOrNil:self.btnTonguePiercing.selected ? @"1" : @"0" forKey:@"has_tongue_piercing"];
+            [self.appDelegate.user setObjectOrNil:self.btnEarGauges.selected ? @"1" : @"0" forKey:@"has_ear_gauges"];
+            
+            [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
+                              Key:@"user_data"];
+            
+            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup4"];
+            [self.navigationController pushViewController:myController animated:TRUE];
+        }
     }
 }
+
+- (IBAction)addLanguagePress:(id)sender
+{
+    [self.appDelegate.user setObjectOrNil:self.btnDLYes.selected ? @"1" : @"0" forKey:@"has_drivers_license"];
+    [self.appDelegate.user setObjectOrNil:self.btnVetYes.selected ? @"1" : @"0" forKey:@"is_veteran"];
+    [self.appDelegate.user setObjectOrNil:self.btnFluEngYes.selected ? @"1" : @"0" forKey:@"fluent_english"];
+    [self.appDelegate.user setObjectOrNil:self.lblLanguages.text forKey:@"languages_display"];
+    //    [self.appDelegate.user setObjectOrNil:self.langDict forKey:@"languages_dictionary"];
+    [self.appDelegate.user setObjectOrNil:self.btnBodyArtYes.selected ? @"1" : @"0" forKey:@"has_body_art"];
+    [self.appDelegate.user setObjectOrNil:self.btnFacialPiercing.selected ? @"1" : @"0" forKey:@"has_facial_piercing"];
+    [self.appDelegate.user setObjectOrNil:self.btnTattoo.selected ? @"1" : @"0" forKey:@"has_tattoo"];
+    [self.appDelegate.user setObjectOrNil:self.btnTonguePiercing.selected ? @"1" : @"0" forKey:@"has_tongue_piercing"];
+    [self.appDelegate.user setObjectOrNil:self.btnEarGauges.selected ? @"1" : @"0" forKey:@"has_ear_gauges"];
+    
+    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
+                      Key:@"user_data"];
+    
+    ListMultiSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListMultiSelector"];
+    
+    [myController setParameters:nil];
+    [myController setUrl:@"http://uwurk.tscserver.com/api/v1/languages"];
+    [myController setDisplay:@"description"];
+    [myController setKey:@"id"];
+    [myController setDelegate:self];
+    [myController setJsonGroup:@"languages"];
+    [myController setTitle:@"Lauguages"];
+    [myController setIdDict:self.langDict];
+    
+    [self.navigationController pushViewController:myController animated:TRUE];
+}
+
+-(void)saveUserData
+{
+    [self.appDelegate.user setObjectOrNil:self.btnDLYes.selected ? @"1" : @"0" forKey:@"has_drivers_license"];
+    [self.appDelegate.user setObjectOrNil:self.btnVetYes.selected ? @"1" : @"0" forKey:@"is_veteran"];
+    [self.appDelegate.user setObjectOrNil:self.btnFluEngYes.selected ? @"1" : @"0" forKey:@"fluent_english"];
+    [self.appDelegate.user setObjectOrNil:self.lblLanguages.text forKey:@"languages_display"];
+    //    [self.appDelegate.user setObjectOrNil:self.langDict forKey:@"languages_dictionary"];
+    [self.appDelegate.user setObjectOrNil:self.btnBodyArtYes.selected ? @"1" : @"0" forKey:@"has_body_art"];
+    [self.appDelegate.user setObjectOrNil:self.btnFacialPiercing.selected ? @"1" : @"0" forKey:@"has_facial_piercing"];
+    [self.appDelegate.user setObjectOrNil:self.btnTattoo.selected ? @"1" : @"0" forKey:@"has_tattoo"];
+    [self.appDelegate.user setObjectOrNil:self.btnTonguePiercing.selected ? @"1" : @"0" forKey:@"has_tongue_piercing"];
+    [self.appDelegate.user setObjectOrNil:self.btnEarGauges.selected ? @"1" : @"0" forKey:@"has_ear_gauges"];
+    
+    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
+                      Key:@"user_data"];
+}
+
+-(void) SelectionMade:(NSMutableDictionary *)dict displayString:(NSString *)displayString
+{
+    self.lblLanguages.text = displayString;
+    self.langDict = dict;
+    
+    [self.appDelegate.user setObjectOrNil:displayString forKey:@"languages_display"];
+    //    [self.appDelegate.user setObjectOrNil:dict forKey:@"languages_dictionary"];
 }
 
 @end

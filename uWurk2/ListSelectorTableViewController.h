@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 
 @protocol ListSelectorTableViewControllerProtocol <NSObject>
--(void)SelectionMade;
+-(void)SelectionMade:(NSMutableDictionary *)dict displayString:(NSString *)displayString;
 @end
 
 @interface ListSelectorTableViewController : UITableViewController
@@ -26,6 +26,5 @@
 @property (nonatomic, retain) UIButton *sender;
 @property (assign) BOOL bPost;
 @property (assign) BOOL bUseArray;
-
 
 @end

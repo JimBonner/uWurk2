@@ -116,10 +116,7 @@
             [self.sender setTitle:[row objectForKey:self.display] forState:UIControlStateNormal];
             [self.sender setTitle:[row objectForKey:self.display] forState:UIControlStateHighlighted];
             [self.sender setTitle:[row objectForKey:self.key] forState:UIControlStateSelected];
-        }
-        
-        if ( [self.delegate respondsToSelector:@selector(SelectionMade)])
-            [self.delegate SelectionMade];
+        }        
     }
     [self.navigationController popViewControllerAnimated:TRUE];
     

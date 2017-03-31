@@ -296,6 +296,32 @@
     [myController setSender:self.btnState];
     [myController setTitle:@"States"];
     
+    [self.appDelegate.user setObjectOrNil:self.btnHighSchool.selected ? @"1" : @"0" forKey:@"high_school_selected"];
+    [self.appDelegate.user setObjectOrNil:self.btnCollege.selected ? @"1" : @"0" forKey:@"college_selected"];
+    [self.appDelegate.user setObjectOrNil:self.btnTradeSchool.selected ? @"1" : @"0" forKey:@"trade_school_selected"];
+    [self.appDelegate.user setObjectOrNil:self.btnGED.selected ? @"1" : @"0" forKey:@"ged_selected"];
+    [self.appDelegate.user setObjectOrNil:self.btnEnrolled.selected ? @"1" : @"0" forKey:@"enrolled_selected"];
+    [self.appDelegate.user setObjectOrNil:self.btnGraduated.selected ? @"1" : @"0" forKey:@"graduated_Selected"];
+    [self.appDelegate.user setObjectOrNil:self.btnAttended.selected ? @"1" : @"0" forKey:@"attedned_Selected"];
+    if([[self.btnState titleForState:UIControlStateNormal] isEqualToString:@"Select State"]) {
+        [self.appDelegate.user setObjectOrNil:@"" forKey:@"selected_state"];
+    } else {
+        [self.appDelegate.user setObjectOrNil:[self.btnState titleForState:UIControlStateNormal] forKey:@"selected_state"];
+    }
+    if([[self.btnCity titleForState:UIControlStateNormal] isEqualToString:@"Select City"]) {
+        [self.appDelegate.user setObjectOrNil:@"" forKey:@"selected_city"];
+    } else {
+        [self.appDelegate.user setObjectOrNil:[self.btnCity titleForState:UIControlStateNormal] forKey:@"selected_city"];
+    }
+    if([[self.btnSchool titleForState:UIControlStateNormal] isEqualToString:@"Select School"]) {
+        [self.appDelegate.user setObjectOrNil:@"" forKey:@"selected_school"];
+    } else {
+        [self.appDelegate.user setObjectOrNil:[self.btnSchool titleForState:UIControlStateNormal] forKey:@"selected_school"];
+    }
+    
+    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
+                      Key:@"user_data"];
+    
     [self.navigationController pushViewController:myController animated:TRUE];
 }
 
@@ -315,6 +341,9 @@
     [myController setJsonGroup:@"cities"];
     [myController setSender:self.btnCity];
     [myController setTitle:@"Cities"];
+    
+    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
+                      Key:@"user_data"];
     
     [self.navigationController pushViewController:myController animated:TRUE];
 }
@@ -351,37 +380,14 @@
     [myController setSender:self.btnSchool];
     [myController setTitle:@"Schools"];
     
+    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
+                      Key:@"user_data"];
+    
     [self.navigationController pushViewController:myController animated:TRUE];
 }
 
 - (IBAction)nextPress:(id)sender
 {
-    [self.appDelegate.user setObjectOrNil:self.btnHighSchool.selected ? @"1" : @"0" forKey:@"high_school_selected"];
-    [self.appDelegate.user setObjectOrNil:self.btnCollege.selected ? @"1" : @"0" forKey:@"college_selected"];
-    [self.appDelegate.user setObjectOrNil:self.btnTradeSchool.selected ? @"1" : @"0" forKey:@"trade_school_selected"];
-    [self.appDelegate.user setObjectOrNil:self.btnGED.selected ? @"1" : @"0" forKey:@"ged_selected"];
-    [self.appDelegate.user setObjectOrNil:self.btnEnrolled.selected ? @"1" : @"0" forKey:@"enrolled_selected"];
-    [self.appDelegate.user setObjectOrNil:self.btnGraduated.selected ? @"1" : @"0" forKey:@"graduated_Selected"];
-    [self.appDelegate.user setObjectOrNil:self.btnAttended.selected ? @"1" : @"0" forKey:@"attedned_Selected"];
-    if([[self.btnState titleForState:UIControlStateNormal] isEqualToString:@"Select State"]) {
-        [self.appDelegate.user setObjectOrNil:@"" forKey:@"selected_state"];
-    } else {
-        [self.appDelegate.user setObjectOrNil:[self.btnState titleForState:UIControlStateNormal] forKey:@"selected_state"];
-    }
-    if([[self.btnCity titleForState:UIControlStateNormal] isEqualToString:@"Select City"]) {
-        [self.appDelegate.user setObjectOrNil:@"" forKey:@"selected_city"];
-    } else {
-        [self.appDelegate.user setObjectOrNil:[self.btnCity titleForState:UIControlStateNormal] forKey:@"selected_city"];
-    }
-    if([[self.btnSchool titleForState:UIControlStateNormal] isEqualToString:@"Select School"]) {
-        [self.appDelegate.user setObjectOrNil:@"" forKey:@"selected_school"];
-    } else {
-        [self.appDelegate.user setObjectOrNil:[self.btnSchool titleForState:UIControlStateNormal] forKey:@"selected_school"];
-    }
-    
-    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
-                      Key:@"user_data"];
-    
     AFHTTPRequestOperationManager *manager = [self getManager];
     if (self.btnHighSchool.isSelected){
         [self updateParamDict:self.params value:@"high_school" key:@"school_level[0]"];
@@ -436,32 +442,67 @@
                                                cancelButtonTitle:@"OK"
                                                otherButtonTitles: nil];
         [alert show];
-    }
-    else {
-    
-    if([self.params count]){
-        [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"JSON: %@", responseObject);
-            if([self validateResponse:responseObject]){
-             
-                UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup5"];
-                [self.navigationController pushViewController:myController animated:TRUE];
-            }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
-            UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Error"
-                                                             message:@"Unable to contact server"
-                                                            delegate:self
-                                                   cancelButtonTitle:@"OK"
-                                                   otherButtonTitles: nil];
-            [alert show];
-        }];
-    }
-    else{
-        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup5"];
-        [self.navigationController pushViewController:myController animated:TRUE];
+    } else {
+        if([self.params count]){
+            [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"JSON: %@", responseObject);
+                if([self validateResponse:responseObject]){
+                 
+                    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup5"];
+                    
+                    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
+                                      Key:@"user_data"];
+                    
+                    [self.navigationController pushViewController:myController animated:TRUE];
+                }
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Error: %@", error);
+                UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Error"
+                                                                 message:@"Unable to contact server"
+                                                                delegate:self
+                                                       cancelButtonTitle:@"OK"
+                                                       otherButtonTitles: nil];
+                [alert show];
+            }];
+        }
+        else{
+            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup5"];
+            
+            [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
+                              Key:@"user_data"];
+            
+            [self.navigationController pushViewController:myController animated:TRUE];
+        }
     }
 }
+
+-(void) saveUserData
+{
+    [self.appDelegate.user setObjectOrNil:self.btnHighSchool.selected ? @"1" : @"0" forKey:@"high_school_selected"];
+    [self.appDelegate.user setObjectOrNil:self.btnCollege.selected ? @"1" : @"0" forKey:@"college_selected"];
+    [self.appDelegate.user setObjectOrNil:self.btnTradeSchool.selected ? @"1" : @"0" forKey:@"trade_school_selected"];
+    [self.appDelegate.user setObjectOrNil:self.btnGED.selected ? @"1" : @"0" forKey:@"ged_selected"];
+    [self.appDelegate.user setObjectOrNil:self.btnEnrolled.selected ? @"1" : @"0" forKey:@"enrolled_selected"];
+    [self.appDelegate.user setObjectOrNil:self.btnGraduated.selected ? @"1" : @"0" forKey:@"graduated_Selected"];
+    [self.appDelegate.user setObjectOrNil:self.btnAttended.selected ? @"1" : @"0" forKey:@"attedned_Selected"];
+    if([[self.btnState titleForState:UIControlStateNormal] isEqualToString:@"Select State"]) {
+        [self.appDelegate.user setObjectOrNil:@"" forKey:@"selected_state"];
+    } else {
+        [self.appDelegate.user setObjectOrNil:[self.btnState titleForState:UIControlStateNormal] forKey:@"selected_state"];
+    }
+    if([[self.btnCity titleForState:UIControlStateNormal] isEqualToString:@"Select City"]) {
+        [self.appDelegate.user setObjectOrNil:@"" forKey:@"selected_city"];
+    } else {
+        [self.appDelegate.user setObjectOrNil:[self.btnCity titleForState:UIControlStateNormal] forKey:@"selected_city"];
+    }
+    if([[self.btnSchool titleForState:UIControlStateNormal] isEqualToString:@"Select School"]) {
+        [self.appDelegate.user setObjectOrNil:@"" forKey:@"selected_school"];
+    } else {
+        [self.appDelegate.user setObjectOrNil:[self.btnSchool titleForState:UIControlStateNormal] forKey:@"selected_school"];
+    }
+    
+    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
+                      Key:@"user_data"];
 }
 
 @end

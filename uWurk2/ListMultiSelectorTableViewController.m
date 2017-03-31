@@ -102,8 +102,9 @@
         displayString = [displayString stringByAppendingString:[self.idDict objectForKey:key]];
     }
     
-    if ( [self.delegate respondsToSelector:@selector(SelectionMade:displayString:)])
+    if([self.delegate respondsToSelector:@selector(SelectionMade:displayString:)]) {
         [self.delegate SelectionMade:self.idDict displayString:displayString];
+    }
     
 }
 
