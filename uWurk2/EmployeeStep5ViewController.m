@@ -93,7 +93,9 @@
         self.viewNoExp.alpha = 0;
     }
     [self.btnCurrentJob setSelected:[self.appDelegate.user objectForKey:@"current_job"]];
-    [self.btnIndustry setTitle:[self.appDelegate.user objectForKey:@"industry_name"] forState:UIControlStateNormal];
+    [self.btnIndustry setTitle:[self.appDelegate.user objectForKey:@"industry_name"]
+                      forState:UIControlStateNormal];
+    [self.btnIndustry setTag:[[self.appDelegate.user objectForKey:@"industry_id"]intValue]];
     [self.btnPosition setTitle:[self.appDelegate.user objectForKey:@"industry_position"] forState:UIControlStateNormal];
     if([[self.appDelegate.user objectForKey:@"industry_tenure_underyear"]intValue] == 1) {
         [self.btnUnderYear setSelected:TRUE];
@@ -110,6 +112,15 @@
     } else {
         [self.btnOver2Year setSelected:FALSE];
     }
+    
+    if(([self.appDelegate.user objectForKey:@"industry_name"] == nil) ||
+       ([[self.appDelegate.user objectForKey:@"industry_name"] isEqualToString:@""])) {
+        [self.btnIndustry setTitle:@"Select Industry" forState:UIControlStateNormal];
+        [self.btnPosition setTitle:@"Select Position" forState:UIControlStateNormal];
+    } else if(([self.appDelegate.user objectForKey:@"position_name"] == nil) ||
+              ([[self.appDelegate.user objectForKey:@"position_name"] isEqualToString:@""])) {
+        [self.btnPosition setTitle:@"Select Position" forState:UIControlStateNormal];
+    }
 }
 
 -(void)saveData
@@ -118,6 +129,7 @@
     [self.appDelegate.user setObjectOrNil:self.txtCompany.text forKey:@"company_name"];
     [self.appDelegate.user setObjectOrNil:self.btnCurrentJob.selected ? @"1" : @"0" forKey:@"current_job"];
     [self.appDelegate.user setObjectOrNil:self.btnIndustry.titleLabel.text forKey:@"industry_name"];
+    [self.appDelegate.user setObjectOrNil:[@(self.btnIndustry.tag)stringValue] forKey:@"industry_id"];
     [self.appDelegate.user setObjectOrNil:self.btnPosition.titleLabel.text forKey:@"industry_position"];
     [self.appDelegate.user setObjectOrNil:self.btnUnderYear.selected ? @"1" : @"0" forKey:@"industry_tenure_underyear"];
     [self.appDelegate.user setObjectOrNil:self.btnYear2Year.selected ? @"1" : @"0" forKey:@"industry_tenure_year2year"];
@@ -186,7 +198,7 @@
 {
     ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
     
-    [myController setParameters:@{@"industry_id":[self.btnIndustry titleForState:UIControlStateSelected]}];
+    [myController setParameters:@{@"industry_id":[@(self.btnIndustry.tag)stringValue]}];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/positions"];
     [myController setDisplay:@"description"];
     [myController setKey:@"id"];
@@ -194,6 +206,7 @@
     [myController setJsonGroup:@"positions"];
     [myController setSender:self.btnPosition];
     [myController setTitle:@"Positions"];
+    [myController setUser:@"industry_name"];
     
     [self.navigationController pushViewController:myController animated:TRUE];
 }
@@ -294,6 +307,20 @@
             [self.navigationController pushViewController:myController animated:YES];
         }
     }
+}
+
+-(void)SelectionMade:(NSString *)user withDict:(NSDictionary *)dict displayString:(NSString *)displayString;
+{
+    [self.appDelegate.user setObjectOrNil:displayString forKey:user];
+    
+    if([user isEqualToString:@"industry_name"]) {
+        [self.appDelegate.user setObjectOrNil:[@(self.btnIndustry.tag)stringValue] forKey:@"industry_id"];
+    }
+}
+
+-(void)SelectionMadeString:(NSString *)user displayString:(NSString *)displayString;
+{
+    [self.appDelegate.user setObjectOrNil:displayString forKey:user];
 }
 
 @end
