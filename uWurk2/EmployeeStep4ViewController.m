@@ -49,24 +49,20 @@
     
     if([[self.appDelegate.user objectForKey:@"high_school_selected"]intValue] == 1){
         [self.btnHighSchool setSelected:TRUE];
-        [self highSchoolPress:nil];
     } else {
         [self.btnHighSchool setSelected:FALSE];
     }
     if([[self.appDelegate.user objectForKey:@"college_selected"]intValue] == 1){
         [self.btnCollege setSelected:TRUE];
-        [self collegePress:nil];
     } else {
         [self.btnCollege setSelected:FALSE];
     }
     if([[self.appDelegate.user objectForKey:@"trade_school_selected"]intValue] == 1){
         [self.btnTradeSchool setSelected:TRUE];
-        [self tradeSchoolPress:nil];
     } else {
         [self.btnTradeSchool setSelected:FALSE];
     }
     if([[self.appDelegate.user objectForKey:@"ged_selected"]intValue] == 1){
-        [self.btnGED setSelected:TRUE];
         [self gedPress:nil];
     } else {
         [self.btnGED setSelected:FALSE];
@@ -94,6 +90,7 @@
                (![[self.appDelegate.user objectForKey:@"selected_state"] isEqualToString:@""]))
             {
                 [self.btnState setTitle:[self.appDelegate.user objectForKey:@"selected_state"] forState:UIControlStateNormal];
+                [self.btnState setTag:[[self.appDelegate.user objectForKey:@"state_id"]intValue]];
             }
         }
         if(![[self.appDelegate.user objectForKey:@"selected_city"] isEqualToString:@"Select City"])
@@ -120,6 +117,7 @@
                (![[self.appDelegate.user objectForKey:@"selected_state"] isEqualToString:@""]))
             {
                 [self.btnState setTitle:[self.appDelegate.user objectForKey:@"selected_state"] forState:UIControlStateNormal];
+                [self.btnState setTag:[[self.appDelegate.user objectForKey:@"state_id"]intValue]];
             }
         }
         if(![[self.appDelegate.user objectForKey:@"selected_school"] isEqualToString:@"Select School"])
@@ -138,6 +136,7 @@
                (![[self.appDelegate.user objectForKey:@"selected_state"] isEqualToString:@""]))
             {
                 [self.btnState setTitle:[self.appDelegate.user objectForKey:@"selected_state"] forState:UIControlStateNormal];
+                [self.btnState setTag:[[self.appDelegate.user objectForKey:@"state_id"]intValue]];
             }
         }
         if(![[self.appDelegate.user objectForKey:@"selected_school"] isEqualToString:@"Select School"])
@@ -226,7 +225,6 @@
     [self saveUserData];
 }
 
-
 -(void) saveUserData
 {
     [self.appDelegate.user setObjectOrNil:self.btnHighSchool.selected ? @"1" : @"0" forKey:@"high_school_selected"];
@@ -240,6 +238,7 @@
         [self.appDelegate.user setObjectOrNil:@"" forKey:@"selected_state"];
     } else {
         [self.appDelegate.user setObjectOrNil:[self.btnState titleForState:UIControlStateNormal] forKey:@"selected_state"];
+        [self.appDelegate.user setObjectOrNil:[@(self.btnState.tag)stringValue] forKey:@"state_id"];
     }
     if([[self.btnCity titleForState:UIControlStateNormal] isEqualToString:@"Select City"]) {
         [self.appDelegate.user setObjectOrNil:@"" forKey:@"selected_city"];
@@ -265,14 +264,8 @@
     self.cnstrntStatusHeight.constant = 165;
     [UIView animateWithDuration:.3 animations:^{
         [self.btnSchool setTitle:@"Select School" forState:UIControlStateNormal];
-        [self.btnSchool setTitle:@"Select School" forState:UIControlStateHighlighted];
-        [self.btnSchool setTitle:@"Select School" forState:UIControlStateSelected];
         [self.btnCity setTitle:@"Select City" forState:UIControlStateNormal];
-        [self.btnCity setTitle:@"Select City" forState:UIControlStateHighlighted];
-        [self.btnCity setTitle:@"Select City" forState:UIControlStateSelected];
         [self.btnState setTitle:@"Select State" forState:UIControlStateNormal];
-        [self.btnState setTitle:@"Select State" forState:UIControlStateHighlighted];
-        [self.btnState setTitle:@"Select State" forState:UIControlStateSelected];
         [self.view layoutIfNeeded];}
      
                      completion:^ (BOOL finished)
@@ -297,14 +290,8 @@
     self.cnstrntStatusHeight.constant = 165;
     [UIView animateWithDuration:.3 animations:^{
         [self.btnSchool setTitle:@"Select School" forState:UIControlStateNormal];
-        [self.btnSchool setTitle:@"Select School" forState:UIControlStateHighlighted];
-        [self.btnSchool setTitle:@"Select School" forState:UIControlStateSelected];
         [self.btnCity setTitle:@"Select City" forState:UIControlStateNormal];
-        [self.btnCity setTitle:@"Select City" forState:UIControlStateHighlighted];
-        [self.btnCity setTitle:@"Select City" forState:UIControlStateSelected];
         [self.btnState setTitle:@"Select State" forState:UIControlStateNormal];
-        [self.btnState setTitle:@"Select State" forState:UIControlStateHighlighted];
-        [self.btnState setTitle:@"Select State" forState:UIControlStateSelected];
         [self.view layoutIfNeeded];}
      
                      completion:^ (BOOL finished)
@@ -329,14 +316,8 @@
     self.cnstrntStatusHeight.constant = 165;
     [UIView animateWithDuration:.3 animations:^{
         [self.btnSchool setTitle:@"Select School" forState:UIControlStateNormal];
-        [self.btnSchool setTitle:@"Select School" forState:UIControlStateHighlighted];
-        [self.btnSchool setTitle:@"Select School" forState:UIControlStateSelected];
         [self.btnCity setTitle:@"Select City" forState:UIControlStateNormal];
-        [self.btnCity setTitle:@"Select City" forState:UIControlStateHighlighted];
-        [self.btnCity setTitle:@"Select City" forState:UIControlStateSelected];
         [self.btnState setTitle:@"Select State" forState:UIControlStateNormal];
-        [self.btnState setTitle:@"Select State" forState:UIControlStateHighlighted];
-        [self.btnState setTitle:@"Select State" forState:UIControlStateSelected];
         [self.view layoutIfNeeded];}
      
                      completion:^ (BOOL finished)
@@ -359,14 +340,8 @@
     self.viewAttended.alpha = 0;
     [UIView animateWithDuration:.3 animations:^{
         [self.btnSchool setTitle:@"Select School" forState:UIControlStateNormal];
-        [self.btnSchool setTitle:@"Select School" forState:UIControlStateHighlighted];
-        [self.btnSchool setTitle:@"Select School" forState:UIControlStateSelected];
         [self.btnCity setTitle:@"Select City" forState:UIControlStateNormal];
-        [self.btnCity setTitle:@"Select City" forState:UIControlStateHighlighted];
-        [self.btnCity setTitle:@"Select City" forState:UIControlStateSelected];
         [self.btnState setTitle:@"Select State" forState:UIControlStateNormal];
-        [self.btnState setTitle:@"Select State" forState:UIControlStateHighlighted];
-        [self.btnState setTitle:@"Select State" forState:UIControlStateSelected];
         [self.view layoutIfNeeded];}
      
                      completion:^ (BOOL finished)
@@ -383,11 +358,7 @@
 - (IBAction)statePress:(id)sender
 {
     [self.btnSchool setTitle:@"Select School" forState:UIControlStateNormal];
-    [self.btnSchool setTitle:@"Select School" forState:UIControlStateHighlighted];
-    [self.btnSchool setTitle:@"Select School" forState:UIControlStateSelected];
     [self.btnCity setTitle:@"Select City" forState:UIControlStateNormal];
-    [self.btnCity setTitle:@"Select City" forState:UIControlStateHighlighted];
-    [self.btnCity setTitle:@"Select City" forState:UIControlStateSelected];
     
     ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
     
@@ -410,12 +381,10 @@
 - (IBAction)cityPress:(id)sender
 {
     [self.btnSchool setTitle:@"Select School" forState:UIControlStateNormal];
-    [self.btnSchool setTitle:@"Select School" forState:UIControlStateHighlighted];
-    [self.btnSchool setTitle:@"Select School" forState:UIControlStateSelected];
     
     ListSelectorStringsTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelectorStrings"];
     
-    [myController setParameters:@{@"state_id":[self.btnState titleForState:UIControlStateSelected]}];
+    [myController setParameters:@{@"state_id":[@(self.btnState.tag)stringValue]}];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/cities"];
     [myController setDisplay:@"description"];
     [myController setKey:@"id"];
@@ -443,14 +412,14 @@
     }
     if (self.btnCollege.isSelected) {
         [myController setUrl:@"http://uwurk.tscserver.com/api/v1/colleges"];
-        [myController setParameters:@{@"state":[self.btnState titleForState:UIControlStateSelected]}];
+        [myController setParameters:@{@"state":[@(self.btnState.tag)stringValue]}];
         [myController setJsonGroup:@"colleges"];
         myController.bPost = FALSE;
         myController.bUseArray = TRUE;
     }
     if (self.btnTradeSchool.isSelected) {
         [myController setUrl:@"http://uwurk.tscserver.com/api/v1/trade_schools"];
-        [myController setParameters:@{@"state":[self.btnState titleForState:UIControlStateSelected]}];
+        [myController setParameters:@{@"state":[@(self.btnState.tag)stringValue]}];
         [myController setJsonGroup:@"schools"];
         myController.bPost = FALSE;
         myController.bUseArray = TRUE;
@@ -558,6 +527,10 @@
 -(void)SelectionMade:(NSString *)user withDict:(NSDictionary *)dict displayString:(NSString *)displayString;
 {
     [self.appDelegate.user setObjectOrNil:displayString forKey:user];
+    
+    if([user isEqualToString:@"selected_state"]) {
+        [self.appDelegate.user setObjectOrNil:[@(self.btnState.tag)stringValue] forKey:@"state_id"];
+    }
 }
 
 -(void)SelectionMadeString:(NSString *)user displayString:(NSString *)displayString;

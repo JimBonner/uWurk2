@@ -32,12 +32,12 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)viewDidAppear:(BOOL)animated{
+-(void)viewDidAppear:(BOOL)animated
+{
     [super viewDidAppear:animated];
     
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    
     
     [manager GET:self.url parameters:self.parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.json = [responseObject objectForKey:self.jsonGroup];
@@ -77,8 +77,6 @@
     NSString *row = [self.json objectAtIndex:indexPath.row];
     
     [self.sender setTitle:row forState:UIControlStateNormal];
-    [self.sender setTitle:row forState:UIControlStateHighlighted];
-    [self.sender setTitle:row forState:UIControlStateSelected];
     
     if ([self.delegate respondsToSelector:@selector(SelectionMadeString:displayString:)])
     {

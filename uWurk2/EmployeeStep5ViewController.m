@@ -95,7 +95,6 @@
     [self.btnCurrentJob setSelected:[self.appDelegate.user objectForKey:@"current_job"]];
     [self.btnIndustry setTitle:[self.appDelegate.user objectForKey:@"industry_name"] forState:UIControlStateNormal];
     [self.btnPosition setTitle:[self.appDelegate.user objectForKey:@"industry_position"] forState:UIControlStateNormal];
-    [self.btnPosition setTitle:[self.appDelegate.user objectForKey:@"industry_position"] forState:UIControlStateNormal];
     if([[self.appDelegate.user objectForKey:@"industry_tenure_underyear"]intValue] == 1) {
         [self.btnUnderYear setSelected:TRUE];
     } else {
@@ -111,6 +110,21 @@
     } else {
         [self.btnOver2Year setSelected:FALSE];
     }
+}
+
+-(void)saveData
+{
+    [self.appDelegate.user setObjectOrNil:self.btnExperienceYes.selected ? @"1" : @"0" forKey:@"has_experience"];
+    [self.appDelegate.user setObjectOrNil:self.txtCompany.text forKey:@"company_name"];
+    [self.appDelegate.user setObjectOrNil:self.btnCurrentJob.selected ? @"1" : @"0" forKey:@"current_job"];
+    [self.appDelegate.user setObjectOrNil:self.btnIndustry.titleLabel.text forKey:@"industry_name"];
+    [self.appDelegate.user setObjectOrNil:self.btnPosition.titleLabel.text forKey:@"industry_position"];
+    [self.appDelegate.user setObjectOrNil:self.btnUnderYear.selected ? @"1" : @"0" forKey:@"industry_tenure_underyear"];
+    [self.appDelegate.user setObjectOrNil:self.btnYear2Year.selected ? @"1" : @"0" forKey:@"industry_tenure_year2year"];
+    [self.appDelegate.user setObjectOrNil:self.btnOver2Year.selected ? @"1" : @"0" forKey:@"industry_tenure_over2year"];
+    
+    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
+                      Key:@"user_data"];
 }
 
 - (IBAction)pressNoExp:(id)sender

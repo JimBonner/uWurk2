@@ -11,7 +11,6 @@
 
 @interface ListSelectorTableViewController ()
 @property (nonatomic, retain) NSMutableArray *json;
-@property (nonatomic, retain) NSMutableDictionary *dict;
 @end
 
 @implementation ListSelectorTableViewController
@@ -71,8 +70,8 @@
     return [self.json count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LookupCellTable"];
     if(cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LookupCellTable"];
@@ -90,39 +89,38 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSDictionary *dict = nil;
+    
     if(self.collectionViewArray) {
         ExperienceFilterItem *item = [ExperienceFilterItem new];
         if(self.bUseArray) {
-            NSMutableDictionary *dict = [self.json objectAtIndex:indexPath.row];
+            dict = [self.json objectAtIndex:indexPath.row];
             item.jobDesc = [dict objectForKey:self.display];
             item.jobID   = [dict objectForKey:self.key];
         }
         else {
-            self.dict = [self.json objectAtIndex:indexPath.row];
-            item.jobDesc = [self.dict objectForKey:self.display];
-            item.jobID   = [self.dict objectForKey:self.key];
+            dict = [self.json objectAtIndex:indexPath.row];
+            item.jobDesc = [dict objectForKey:self.display];
+            item.jobID   = [dict objectForKey:self.key];
         }
         [self.collectionViewArray addObject:item];
     }
     else {
         if(self.bUseArray) {
-            self.dict = [self.json objectAtIndex:indexPath.row];
-            [self.sender setTitle:[self.dict objectForKey:self.display] forState:UIControlStateNormal];
-            [self.sender setTitle:[self.dict objectForKey:self.display] forState:UIControlStateHighlighted];
-            [self.sender setTitle:[self.dict objectForKey:self.key] forState:UIControlStateSelected];
-;
+            dict = [self.json objectAtIndex:indexPath.row];
+            [self.sender setTitle:[dict objectForKey:self.display] forState:UIControlStateNormal];
+            [self.sender setTag:[[dict objectForKey:self.key]intValue]];
         }
         else {
-            self.dict = [self.json objectAtIndex:indexPath.row];
-            [self.sender setTitle:[self.dict objectForKey:self.display] forState:UIControlStateNormal];
-            [self.sender setTitle:[self.dict objectForKey:self.display] forState:UIControlStateHighlighted];
-            [self.sender setTitle:[self.dict objectForKey:self.key] forState:UIControlStateSelected];
-        }        
+            dict = [self.json objectAtIndex:indexPath.row];
+            [self.sender setTitle:[dict objectForKey:self.display] forState:UIControlStateNormal];
+            [self.sender setTag:[[dict objectForKey:self.key]intValue]];
+        }
     }
     
     if([self.delegate respondsToSelector:@selector(SelectionMade:withDict:displayString:)])
     {
-        [self.delegate SelectionMade:self.user withDict:self.dict displayString:[self.dict objectForKey:self.display]];
+        [self.delegate SelectionMade:self.user withDict:dict displayString:[dict objectForKey:self.display]];
     }
 
     [self.navigationController popViewControllerAnimated:TRUE];
