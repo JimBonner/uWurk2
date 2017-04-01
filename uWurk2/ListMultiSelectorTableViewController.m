@@ -102,10 +102,10 @@
         displayString = [displayString stringByAppendingString:[self.idDict objectForKey:key]];
     }
     
-    if([self.delegate respondsToSelector:@selector(SelectionMade:displayString:)]) {
-        [self.delegate SelectionMade:self.idDict displayString:displayString];
+    if([self.delegate respondsToSelector:@selector(SelectionMade:withDict:displayString:)])
+    {
+        [self.delegate SelectionMade:self.user withDict:self.idDict displayString:displayString];
     }
-    
 }
 
 @end

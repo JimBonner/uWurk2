@@ -123,6 +123,30 @@
     }
 }
 
+-(void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self saveUserData];
+}
+
+-(void) saveUserData
+{
+    [self.appDelegate.user setObjectOrNil:self.btnDLYes.selected ? @"1" : @"0" forKey:@"has_drivers_license"];
+    [self.appDelegate.user setObjectOrNil:self.btnVetYes.selected ? @"1" : @"0" forKey:@"is_veteran"];
+    [self.appDelegate.user setObjectOrNil:self.btnFluEngYes.selected ? @"1" : @"0" forKey:@"fluent_english"];
+    [self.appDelegate.user setObjectOrNil:self.lblLanguages.text forKey:@"languages_display"];
+    //    [self.appDelegate.user setObjectOrNil:self.langDict forKey:@"languages_dictionary"];
+    [self.appDelegate.user setObjectOrNil:self.btnBodyArtYes.selected ? @"1" : @"0" forKey:@"has_body_art"];
+    [self.appDelegate.user setObjectOrNil:self.btnFacialPiercing.selected ? @"1" : @"0" forKey:@"has_facial_piercing"];
+    [self.appDelegate.user setObjectOrNil:self.btnTattoo.selected ? @"1" : @"0" forKey:@"has_tattoo"];
+    [self.appDelegate.user setObjectOrNil:self.btnTonguePiercing.selected ? @"1" : @"0" forKey:@"has_tongue_piercing"];
+    [self.appDelegate.user setObjectOrNil:self.btnEarGauges.selected ? @"1" : @"0" forKey:@"has_ear_gauges"];
+    
+    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
+                      Key:@"user_data"];
+}
+
 /*
 #pragma mark - Navigation
 
@@ -132,6 +156,7 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 - (IBAction)changeCheckBox:(UIButton *)sender
 {
     [sender setSelected:!sender.selected];
@@ -174,8 +199,6 @@
 
 - (IBAction)nextPress:(id)sender
 {
-    [self saveUserData];
-    
     AFHTTPRequestOperationManager *manager = [self getManager];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
@@ -191,6 +214,7 @@
     if([self.lblLanguages.text length] > 0) {
 //        [params setObject:self.langDict.allKeys forKey:@"other_languages"];
     }
+    
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
     if (self.btnDLYes.selected == NO && self.btnDLNo.selected == NO) {
@@ -221,20 +245,6 @@
                 NSLog(@"JSON: %@", responseObject);
                 if([self validateResponse:responseObject]){
                     
-                    [self.appDelegate.user setObjectOrNil:self.btnDLYes.selected ? @"1" : @"0" forKey:@"has_drivers_license"];
-                    [self.appDelegate.user setObjectOrNil:self.btnVetYes.selected ? @"1" : @"0" forKey:@"is_veteran"];
-                    [self.appDelegate.user setObjectOrNil:self.btnFluEngYes.selected ? @"1" : @"0" forKey:@"fluent_english"];
-                    [self.appDelegate.user setObjectOrNil:self.lblLanguages.text forKey:@"languages_display"];
-                    //    [self.appDelegate.user setObjectOrNil:self.langDict forKey:@"languages_dictionary"];
-                    [self.appDelegate.user setObjectOrNil:self.btnBodyArtYes.selected ? @"1" : @"0" forKey:@"has_body_art"];
-                    [self.appDelegate.user setObjectOrNil:self.btnFacialPiercing.selected ? @"1" : @"0" forKey:@"has_facial_piercing"];
-                    [self.appDelegate.user setObjectOrNil:self.btnTattoo.selected ? @"1" : @"0" forKey:@"has_tattoo"];
-                    [self.appDelegate.user setObjectOrNil:self.btnTonguePiercing.selected ? @"1" : @"0" forKey:@"has_tongue_piercing"];
-                    [self.appDelegate.user setObjectOrNil:self.btnEarGauges.selected ? @"1" : @"0" forKey:@"has_ear_gauges"];
-                    
-                    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
-                                      Key:@"user_data"];
-                    
                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup4"];
                     [self.navigationController pushViewController:myController animated:TRUE];
                 }
@@ -249,20 +259,6 @@
             }];
         }
         else{
-            [self.appDelegate.user setObjectOrNil:self.btnDLYes.selected ? @"1" : @"0" forKey:@"has_drivers_license"];
-            [self.appDelegate.user setObjectOrNil:self.btnVetYes.selected ? @"1" : @"0" forKey:@"is_veteran"];
-            [self.appDelegate.user setObjectOrNil:self.btnFluEngYes.selected ? @"1" : @"0" forKey:@"fluent_english"];
-            [self.appDelegate.user setObjectOrNil:self.lblLanguages.text forKey:@"languages_display"];
-            //    [self.appDelegate.user setObjectOrNil:self.langDict forKey:@"languages_dictionary"];
-            [self.appDelegate.user setObjectOrNil:self.btnBodyArtYes.selected ? @"1" : @"0" forKey:@"has_body_art"];
-            [self.appDelegate.user setObjectOrNil:self.btnFacialPiercing.selected ? @"1" : @"0" forKey:@"has_facial_piercing"];
-            [self.appDelegate.user setObjectOrNil:self.btnTattoo.selected ? @"1" : @"0" forKey:@"has_tattoo"];
-            [self.appDelegate.user setObjectOrNil:self.btnTonguePiercing.selected ? @"1" : @"0" forKey:@"has_tongue_piercing"];
-            [self.appDelegate.user setObjectOrNil:self.btnEarGauges.selected ? @"1" : @"0" forKey:@"has_ear_gauges"];
-            
-            [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
-                              Key:@"user_data"];
-            
             UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup4"];
             [self.navigationController pushViewController:myController animated:TRUE];
         }
@@ -271,20 +267,6 @@
 
 - (IBAction)addLanguagePress:(id)sender
 {
-    [self.appDelegate.user setObjectOrNil:self.btnDLYes.selected ? @"1" : @"0" forKey:@"has_drivers_license"];
-    [self.appDelegate.user setObjectOrNil:self.btnVetYes.selected ? @"1" : @"0" forKey:@"is_veteran"];
-    [self.appDelegate.user setObjectOrNil:self.btnFluEngYes.selected ? @"1" : @"0" forKey:@"fluent_english"];
-    [self.appDelegate.user setObjectOrNil:self.lblLanguages.text forKey:@"languages_display"];
-    //    [self.appDelegate.user setObjectOrNil:self.langDict forKey:@"languages_dictionary"];
-    [self.appDelegate.user setObjectOrNil:self.btnBodyArtYes.selected ? @"1" : @"0" forKey:@"has_body_art"];
-    [self.appDelegate.user setObjectOrNil:self.btnFacialPiercing.selected ? @"1" : @"0" forKey:@"has_facial_piercing"];
-    [self.appDelegate.user setObjectOrNil:self.btnTattoo.selected ? @"1" : @"0" forKey:@"has_tattoo"];
-    [self.appDelegate.user setObjectOrNil:self.btnTonguePiercing.selected ? @"1" : @"0" forKey:@"has_tongue_piercing"];
-    [self.appDelegate.user setObjectOrNil:self.btnEarGauges.selected ? @"1" : @"0" forKey:@"has_ear_gauges"];
-    
-    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
-                      Key:@"user_data"];
-    
     ListMultiSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListMultiSelector"];
     
     [myController setParameters:nil];
@@ -297,23 +279,6 @@
     [myController setIdDict:self.langDict];
     
     [self.navigationController pushViewController:myController animated:TRUE];
-}
-
--(void)saveUserData
-{
-    [self.appDelegate.user setObjectOrNil:self.btnDLYes.selected ? @"1" : @"0" forKey:@"has_drivers_license"];
-    [self.appDelegate.user setObjectOrNil:self.btnVetYes.selected ? @"1" : @"0" forKey:@"is_veteran"];
-    [self.appDelegate.user setObjectOrNil:self.btnFluEngYes.selected ? @"1" : @"0" forKey:@"fluent_english"];
-    [self.appDelegate.user setObjectOrNil:self.lblLanguages.text forKey:@"languages_display"];
-    //    [self.appDelegate.user setObjectOrNil:self.langDict forKey:@"languages_dictionary"];
-    [self.appDelegate.user setObjectOrNil:self.btnBodyArtYes.selected ? @"1" : @"0" forKey:@"has_body_art"];
-    [self.appDelegate.user setObjectOrNil:self.btnFacialPiercing.selected ? @"1" : @"0" forKey:@"has_facial_piercing"];
-    [self.appDelegate.user setObjectOrNil:self.btnTattoo.selected ? @"1" : @"0" forKey:@"has_tattoo"];
-    [self.appDelegate.user setObjectOrNil:self.btnTonguePiercing.selected ? @"1" : @"0" forKey:@"has_tongue_piercing"];
-    [self.appDelegate.user setObjectOrNil:self.btnEarGauges.selected ? @"1" : @"0" forKey:@"has_ear_gauges"];
-    
-    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
-                      Key:@"user_data"];
 }
 
 -(void) SelectionMade:(NSMutableDictionary *)dict displayString:(NSString *)displayString

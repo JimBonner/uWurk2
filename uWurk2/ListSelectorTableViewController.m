@@ -11,6 +11,7 @@
 
 @interface ListSelectorTableViewController ()
 @property (nonatomic, retain) NSMutableArray *json;
+@property (nonatomic, retain) NSMutableDictionary *dict;
 @end
 
 @implementation ListSelectorTableViewController
@@ -87,37 +88,43 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     if(self.collectionViewArray) {
         ExperienceFilterItem *item = [ExperienceFilterItem new];
         if(self.bUseArray) {
-            NSDictionary *row = [self.json objectAtIndex:indexPath.row];
-            item.jobDesc = [row objectForKey:self.display];
-            item.jobID   = [row objectForKey:self.key];
+            NSMutableDictionary *dict = [self.json objectAtIndex:indexPath.row];
+            item.jobDesc = [dict objectForKey:self.display];
+            item.jobID   = [dict objectForKey:self.key];
         }
         else {
-            NSDictionary *row = [self.json objectAtIndex:indexPath.row];
-            item.jobDesc = [row objectForKey:self.display];
-            item.jobID   = [row objectForKey:self.key];
+            self.dict = [self.json objectAtIndex:indexPath.row];
+            item.jobDesc = [self.dict objectForKey:self.display];
+            item.jobID   = [self.dict objectForKey:self.key];
         }
         [self.collectionViewArray addObject:item];
     }
     else {
         if(self.bUseArray) {
-            NSDictionary *row = [self.json objectAtIndex:indexPath.row];
-            [self.sender setTitle:[row objectForKey:self.display] forState:UIControlStateNormal];
-            [self.sender setTitle:[row objectForKey:self.display] forState:UIControlStateHighlighted];
-            [self.sender setTitle:[row objectForKey:self.key] forState:UIControlStateSelected];
+            self.dict = [self.json objectAtIndex:indexPath.row];
+            [self.sender setTitle:[self.dict objectForKey:self.display] forState:UIControlStateNormal];
+            [self.sender setTitle:[self.dict objectForKey:self.display] forState:UIControlStateHighlighted];
+            [self.sender setTitle:[self.dict objectForKey:self.key] forState:UIControlStateSelected];
 ;
         }
         else {
-            NSDictionary *row = [self.json objectAtIndex:indexPath.row];
-            [self.sender setTitle:[row objectForKey:self.display] forState:UIControlStateNormal];
-            [self.sender setTitle:[row objectForKey:self.display] forState:UIControlStateHighlighted];
-            [self.sender setTitle:[row objectForKey:self.key] forState:UIControlStateSelected];
+            self.dict = [self.json objectAtIndex:indexPath.row];
+            [self.sender setTitle:[self.dict objectForKey:self.display] forState:UIControlStateNormal];
+            [self.sender setTitle:[self.dict objectForKey:self.display] forState:UIControlStateHighlighted];
+            [self.sender setTitle:[self.dict objectForKey:self.key] forState:UIControlStateSelected];
         }        
     }
+    
+    if([self.delegate respondsToSelector:@selector(SelectionMade:withDict:displayString:)])
+    {
+        [self.delegate SelectionMade:self.user withDict:self.dict displayString:[self.dict objectForKey:self.display]];
+    }
+
     [self.navigationController popViewControllerAnimated:TRUE];
     
 }

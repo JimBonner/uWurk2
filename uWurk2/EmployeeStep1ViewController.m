@@ -71,11 +71,14 @@
     }
 }
 
-- (IBAction)changeCheckBox:(UIButton *)sender {
-    [sender setSelected:!sender.selected];
+-(void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self saveUserData];
 }
 
-- (IBAction)nextPress:(id)sender
+-(void) saveUserData
 {
     [self.appDelegate.user setObjectOrNil:[self.txtPassword text] forKey:@"password"];
     [self.appDelegate.user setObjectOrNil:[self.txtVerifyPassword text] forKey:@"verifyPW"];
@@ -89,7 +92,14 @@
     
     [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
                       Key:@"user_data"];
-    
+}
+
+- (IBAction)changeCheckBox:(UIButton *)sender {
+    [sender setSelected:!sender.selected];
+}
+
+- (IBAction)nextPress:(id)sender
+{
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     

@@ -44,15 +44,15 @@
     }
 }
 
-- (IBAction)changeCheckBox:(UIButton *)sender {
-    [sender setSelected:!sender.selected];
-}
-- (IBAction)pressHere:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ncsl.org/research/labor-and-employment/state-minimum-wage-chart.aspx"]];
+-(void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self saveUserData];
 }
 
-- (IBAction)nextPress:(id)sender {
-    
+-(void) saveUserData
+{
     [self.appDelegate.user setObjectOrNil:[self.txtMiles text] forKey:@"miles(0)"];
     [self.appDelegate.user setObjectOrNil:[self.txtZip   text] forKey:@"zip(0)"];
     [self.appDelegate.user setObjectOrNil:[self.txtHourly text] forKey:@"hourly_wage"];
@@ -61,7 +61,17 @@
     
     [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
                       Key:@"user_data"];
-    
+}
+
+- (IBAction)changeCheckBox:(UIButton *)sender {
+    [sender setSelected:!sender.selected];
+}
+- (IBAction)pressHere:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ncsl.org/research/labor-and-employment/state-minimum-wage-chart.aspx"]];
+}
+
+- (IBAction)nextPress:(id)sender
+{
     AFHTTPRequestOperationManager *manager = [self getManager];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];

@@ -25,15 +25,36 @@
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:false];
     [self saveUserDefault:@"1" Key:@"register_Active"];
-    [self.emailText setText:[self getUserDefault:@"email"]];
 
     NSDictionary *dict = [NSDictionary dictionaryWithDictionary:[self jsonStringToObject:[self getUserDefault:@"user_data"]]];
     [self.appDelegate setUser:[dict mutableCopy]];
 }
 
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.emailText setText:[self.appDelegate.user objectForKey:@"email"]];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self saveUserData];
+}
+
+-(void)saveUserData
+{
+    [self.appDelegate.user setObjectOrNil:[self.emailText text] forKey:@"email"];
+    
+    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
+                      Key:@"user_data"];
 }
 
 - (IBAction)pressEmailRegister:(id)sender {
@@ -56,9 +77,6 @@
                     [self saveUserDefault:[responseObject objectForKey:@"api_auth_token"] Key:@"api_auth_token"];
                     [self.appDelegate.user setObjectOrNil:[self getUserDefault:@"email"] forKey:@"email"];
                     [self.appDelegate.user setObjectOrNil:[self getUserDefault:@"api_auth_token"] forKey:@"api_auth_token"];
-
-                    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
-                                      Key:@"user_data"];
                 }
                 
                 EmployeeStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeStep1ViewController"];
@@ -85,7 +103,7 @@
                    [[self getUserDefault:@"email"] isEqualToString:[self.emailText text]])
                 {
                     UIAlertAction *ok = [UIAlertAction
-                                         actionWithTitle:@"OK"
+                                         actionWithTitle:@"Continue"
                                          style:UIAlertActionStyleDefault
                                          handler:^(UIAlertAction * action)
                                          {

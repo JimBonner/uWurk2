@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 
 @protocol ListSelectorStringsTableViewControllerProtocol <NSObject>
--(void)SelectionMadeString;
+-(void)SelectionMadeString:(NSString *)user displayString:(NSString *)displayString;
 @end
 
 @interface ListSelectorStringsTableViewController : UITableViewController
@@ -23,5 +23,6 @@
 @property (nonatomic, retain) NSString *url;
 @property (nonatomic, assign) id delegate;
 @property (nonatomic, retain) UIButton *sender;
+@property (nonatomic, retain) NSString *user;
 
 @end
