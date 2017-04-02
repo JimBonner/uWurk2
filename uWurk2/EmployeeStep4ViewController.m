@@ -63,7 +63,7 @@
         [self.btnTradeSchool setSelected:FALSE];
     }
     if([[self.appDelegate.user objectForKey:@"ged_selected"]intValue] == 1){
-        [self gedPress:nil];
+        [self.btnGED setSelected:TRUE];
     } else {
         [self.btnGED setSelected:FALSE];
     }
@@ -83,7 +83,9 @@
     } else {
         [self.btnAttended setSelected:FALSE];
     }
-    if([[self.appDelegate.user objectForKey:@"high_school_selected"]intValue] == 1) {
+    if([[self.appDelegate.user objectForKey:@"high_school_selected"]intValue] == 1)
+    {
+        [self highSchoolPress:nil];
         if(![[self.appDelegate.user objectForKey:@"selected_state"] isEqualToString:@"Select State"])
         {
             if(([self.appDelegate.user objectForKey:@"selected_state"] != nil) &&
@@ -95,6 +97,7 @@
         }
         if(![[self.appDelegate.user objectForKey:@"selected_city"] isEqualToString:@"Select City"])
         {
+            [self cityPress:nil];
             if(([self.appDelegate.user objectForKey:@"selected_city"] != nil) &&
                (![[self.appDelegate.user objectForKey:@"selected_city"] isEqualToString:@""]))
             {
@@ -110,7 +113,9 @@
             }
         }
     }
-    if([[self.appDelegate.user objectForKey:@"college_selected"]intValue] == 1) {
+    if([[self.appDelegate.user objectForKey:@"college_selected"]intValue] == 1)
+    {
+        [self collegePress:nil];
         if(![[self.appDelegate.user objectForKey:@"selected_state"] isEqualToString:@"Select State"])
         {
             if(([self.appDelegate.user objectForKey:@"selected_state"] != nil) &&
@@ -129,7 +134,9 @@
             }
         }
     }
-    if([[self.appDelegate.user objectForKey:@"trade_show_selected"]intValue] == 1) {
+    if([[self.appDelegate.user objectForKey:@"trade_show_selected"]intValue] == 1)
+    {
+        [self tradeSchoolPress:nil];
         if(![[self.appDelegate.user objectForKey:@"selected_state"] isEqualToString:@"Select State"])
         {
             if(([self.appDelegate.user objectForKey:@"selected_state"] != nil) &&
@@ -148,7 +155,11 @@
              }
         }
     }
-
+    if([[self.appDelegate.user objectForKey:@"ged_selected"]intValue] == 1)
+    {
+        [self gedPress:nil];
+    }
+    
     self.params = [[NSMutableDictionary alloc] init];
     self.eduId = @"edu_id[0]";
     NSArray *educationArray = [self.appDelegate.user objectForKey:@"education"];
