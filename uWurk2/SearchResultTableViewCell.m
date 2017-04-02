@@ -47,7 +47,7 @@
 
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     NSLog(@"Error: %@", error);
-                    UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Error"
+                    UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
                                                                      message:@"Unable to contact server"
                                                                     delegate:self
                                                            cancelButtonTitle:@"OK"
@@ -68,7 +68,7 @@
     
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     NSLog(@"Error: %@", error);
-                    UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Error"
+                    UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
                                                                      message:@"Unable to contact server"
                                                                     delegate:self
                                                            cancelButtonTitle:@"OK"

@@ -99,6 +99,7 @@
         self.cnstrntWorkExpHeight.constant = 0;
         self.viewWorkExp.alpha = 0;
     }
+    [self.txtCompany setText:[self.appDelegate.user objectForKey:@"company_names"]];
     [self.btnCurrentJob setSelected:[[self.appDelegate.user objectForKey:@"current_job"]intValue]];
     [self.btnIndustry setTitle:[self.appDelegate.user objectForKey:@"industry_name"]
                       forState:UIControlStateNormal];
@@ -289,7 +290,7 @@
                 }
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error: %@", error);
-                UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Error"
+                UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
                                                                  message:@"Unable to contact server"
                                                                 delegate:self
                                                        cancelButtonTitle:@"OK"

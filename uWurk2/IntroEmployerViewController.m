@@ -31,6 +31,12 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+}
+
 - (IBAction)pressEmailRegister:(id)sender
 {
     AFHTTPRequestOperationManager *manager = [self getManager];
@@ -51,7 +57,7 @@
             }
             else
             {
-                UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Error"
+                UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
                                                                  message:[responseObject objectForKey:@"message"]
                                                                 delegate:self
                                                        cancelButtonTitle:@"OK"
@@ -61,7 +67,7 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error)
         {
             NSLog(@"Error: %@", error);
-            UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Error"
+            UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
                                                              message:@"Unable to contact server"
                                                             delegate:self
                                                    cancelButtonTitle:@"OK"
@@ -131,7 +137,7 @@
                           }
                           else
                           {
-                              UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Error"
+                              UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
                                                                                message:[responseObject objectForKey:@"message"]
                                                                               delegate:self
                                                                      cancelButtonTitle:@"OK"
@@ -142,7 +148,7 @@
                           }
                       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                           NSLog(@"Error: %@", error);
-                          UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Error"
+                          UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
                                                                            message:@"Unable to validate login"
                                                                           delegate:self
                                                                  cancelButtonTitle:@"OK"
