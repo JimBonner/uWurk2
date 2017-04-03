@@ -32,5 +32,4 @@
 -(NSMutableDictionary*)updateParamDictDefault:(NSMutableDictionary*)paramDict value:(NSString*)value key:(NSString*)key def:(NSString*)def;
 -(void)logout;
 
-
 @end

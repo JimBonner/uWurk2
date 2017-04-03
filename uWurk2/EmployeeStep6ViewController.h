@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <Photos/Photos.h>
 
 @interface EmployeeStep6ViewController : BaseViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 

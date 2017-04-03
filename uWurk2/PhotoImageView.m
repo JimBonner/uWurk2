@@ -38,7 +38,8 @@
         [self.delegate getImage];
 }
 
-- (void)loadPhoto:(NSURL*)photoURL {
+- (void)loadPhoto:(NSURL*)photoURL
+{
     UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];
     
     [photoRequest startWithCompletion:^(UIImage *newImage, NSError *error) {
@@ -47,7 +48,5 @@
         }
     }];
 }
-
-
 
 @end

@@ -97,7 +97,6 @@
         }
         if(![[self.appDelegate.user objectForKey:@"selected_city"] isEqualToString:@"Select City"])
         {
-            [self cityPress:nil];
             if(([self.appDelegate.user objectForKey:@"selected_city"] != nil) &&
                (![[self.appDelegate.user objectForKey:@"selected_city"] isEqualToString:@""]))
             {

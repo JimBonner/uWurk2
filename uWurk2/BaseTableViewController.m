@@ -35,6 +35,8 @@
 
     
     self.appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    [self.appDelegate setDocumentsDirectory:[self.appDelegate getDocumentsDirectory]];
 }
 
 - (void)goBack {
