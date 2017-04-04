@@ -196,7 +196,6 @@
                                                 </state>
                                                 <state key="selected" image="check-black"/>
                                                 <connections>
-                                                    <action selector="changeCheckBox:" destination="LaQ-P5-iHF" eventType="touchUpInside" id="PgU-94-JCe"/>
                                                     <action selector="pressSkipBio:" destination="LaQ-P5-iHF" eventType="touchUpInside" id="pcb-Eh-7Jl"/>
                                                 </connections>
                                             </button>
@@ -310,7 +309,7 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RsC-DV-hX7">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RsC-DV-hX7" userLabel="BtnAddPhoto">
                                                 <rect key="frame" x="156" y="199" width="16" height="22"/>
                                                 <state key="normal" image="btn-add-black-min"/>
                                                 <connections>
@@ -384,19 +383,19 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="950"/>
                     <connections>
+                        <outlet property="bioTextView" destination="ExE-Y2-eVY" id="DvX-IF-0bI"/>
+                        <outlet property="bioTipView" destination="4hf-rx-on8" id="xbD-1U-BQk"/>
+                        <outlet property="bioView" destination="92d-vK-Q01" id="TGA-gU-uHT"/>
                         <outlet property="btnBioSkip" destination="8qa-zv-1eY" id="gbb-Xv-cdy"/>
-                        <outlet property="btnPhotoSkip" destination="2AQ-GS-ijh" id="Ji7-vR-CPG"/>
-                        <outlet property="btnaddphoto" destination="RsC-DV-hX7" id="D1I-0p-FTJ"/>
+                        <outlet property="btnPhotoAdd" destination="RsC-DV-hX7" id="aNb-A6-RRB"/>
+                        <outlet property="btnPhotoSkip" destination="2AQ-GS-ijh" id="9Nt-SF-eoX"/>
                         <outlet property="cnstrntBioTipHeight" destination="VL6-aP-GYN" id="gwY-Cf-TIL"/>
                         <outlet property="cnstrntImageHeight" destination="C64-D3-kX1" id="M8c-C3-pq3"/>
                         <outlet property="cnstrntPhotoHeight" destination="S0G-Lh-var" id="wiP-U4-9r7"/>
                         <outlet property="cnstrntPhotoTipHeight" destination="psj-px-2TY" id="Ras-7j-okK"/>
-                        <outlet property="imagePhotoView" destination="BHQ-DK-ldU" id="RDb-k9-zJN"/>
-                        <outlet property="textView" destination="ExE-Y2-eVY" id="9WU-Ec-W9A"/>
-                        <outlet property="viewBio" destination="92d-vK-Q01" id="20Z-KE-8Xx"/>
-                        <outlet property="viewBioTip" destination="4hf-rx-on8" id="YQ6-V6-fRM"/>
-                        <outlet property="viewPhoto" destination="bDe-MJ-Mgg" id="0kA-4Y-4FM"/>
-                        <outlet property="viewPhotoTip" destination="2PV-jw-O4j" id="jdk-0N-eIX"/>
+                        <outlet property="photoImageView" destination="BHQ-DK-ldU" id="Hdb-nw-11S"/>
+                        <outlet property="photoTipView" destination="2PV-jw-O4j" id="WYW-dL-ukY"/>
+                        <outlet property="photoView" destination="bDe-MJ-Mgg" id="b72-u0-Gl8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nnl-wL-zQN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -578,7 +577,7 @@
                                                         <rect key="frame" x="8" y="52" width="244" height="78"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="ADD YOUR LOGO!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ez2-VQ-xXK">
-                                                                <rect key="frame" x="68" y="7" width="109" height="27"/>
+                                                                <rect key="frame" x="67.5" y="7" width="109" height="27"/>
                                                                 <fontDescription key="fontDescription" name="RobotoCondensed-BoldItalic" family="Roboto Condensed" pointSize="16"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -4807,7 +4806,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COMPANY INFO" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8PE-iU-owz">
-                                                        <rect key="frame" x="131" y="10.5" width="114.5" height="21"/>
+                                                        <rect key="frame" x="130.5" y="10.5" width="114.5" height="21"/>
                                                         <fontDescription key="fontDescription" name="RobotoCondensed-Bold" family="Roboto Condensed" pointSize="18"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>

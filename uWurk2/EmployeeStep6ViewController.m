@@ -8,22 +8,30 @@
 
 #import "EmployeeStep6ViewController.h"
 
-@interface EmployeeStep6ViewController () 
-@property (weak, nonatomic) IBOutlet UIView *viewBio;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cnstrntBioTipHeight;
-@property (weak, nonatomic) IBOutlet UIView *viewBioTip;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cnstrntPhotoTipHeight;
-@property (weak, nonatomic) IBOutlet UIView *viewPhotoTip;
-@property (weak, nonatomic) IBOutlet UIButton *btnPhotoSkip;
-@property (weak, nonatomic) IBOutlet UIButton *btnBioSkip;
-@property (weak, nonatomic) IBOutlet UITextView *textView;
-@property (strong, nonatomic) UIImage *photo;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cnstrntPhotoHeight;
-@property (weak, nonatomic) IBOutlet UIView *viewPhoto;
+@interface EmployeeStep6ViewController ()
+
+@property (weak, nonatomic) IBOutlet UIButton    *btnPhotoAdd;
+@property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
+@property (weak, nonatomic) IBOutlet UIView      *photoTipView;
+@property (weak, nonatomic) IBOutlet UIButton    *btnPhotoSkip;
+@property (weak, nonatomic) IBOutlet UIView      *photoView;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cnstrntImageHeight;
-@property (weak, nonatomic) IBOutlet UIImageView *imagePhotoView;
-@property (weak, nonatomic) IBOutlet UIButton *btnaddphoto;
-@property (weak, nonatomic) NSURL *photoLocalURL;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cnstrntPhotoTipHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cnstrntPhotoHeight;
+
+@property (weak, nonatomic) IBOutlet UITextView *bioTextView;
+
+
+@property (weak, nonatomic) IBOutlet UIView   *bioView;
+@property (weak, nonatomic) IBOutlet UIView   *bioTipView;
+@property (weak, nonatomic) IBOutlet UIButton *btnBioSkip;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cnstrntBioTipHeight;
+
+
+@property (strong, nonatomic) UIImage *photo;
+@property (weak, nonatomic)   NSURL   *photoLocalURL;
 @end
 
 @implementation EmployeeStep6ViewController
@@ -37,14 +45,14 @@
 {
     [super viewWillAppear:animated];
     
-    self.cnstrntImageHeight.constant = 0;
-    self.imagePhotoView.alpha = 0;
-    self.viewBio.layer.borderWidth = 1;
-    self.viewBio.layer.borderColor = [UIColor blackColor].CGColor;
-    self.cnstrntBioTipHeight.constant = 0;
-    self.cnstrntPhotoTipHeight.constant = 0;
-    self.viewBioTip.alpha = 0;
-    self.viewPhotoTip.alpha = 0;
+//    self.cnstrntImageHeight.constant = 0;
+//    self.photoImageView.alpha = 0;
+//    self.bioView.layer.borderWidth = 1;
+//    self.bioView.layer.borderColor = [UIColor blackColor].CGColor;
+//    self.cnstrntBioTipHeight.constant = 0;
+//    self.cnstrntPhotoTipHeight.constant = 0;
+//    self.bioTipView.alpha = 0;
+//    self.photoTipView.alpha = 0;
     
     self.photoLocalURL = [NSURL URLWithString:[self.appDelegate.user objectForKey:@"url_string_employee_photo"]];
     if([[self.appDelegate.user objectForKey:@"skip_photo"]intValue] == 1) {
@@ -124,14 +132,14 @@
     self.photo = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     [self dismissViewControllerAnimated:YES completion:nil];
     self.cnstrntPhotoHeight.constant = 0;
-    self.viewPhoto.alpha = 0.0;
-    [self.imagePhotoView setImage:self.photo];
+    self.photoView.alpha = 0.0;
+    [self.photoImageView setImage:self.photo];
     self.cnstrntImageHeight.constant = 200;
-    self.imagePhotoView.layer.borderWidth = 3;
-    self.imagePhotoView.layer.borderColor = [UIColor blackColor].CGColor;
-    self.imagePhotoView.alpha = 1;
+    self.photoImageView.layer.borderWidth = 3;
+    self.photoImageView.layer.borderColor = [UIColor blackColor].CGColor;
+    self.photoImageView.alpha = 1;
     [self.view layoutIfNeeded];
-    self.btnaddphoto.alpha = 0;
+    self.btnPhotoAdd.alpha = 0;
 
     self.photoLocalURL = (NSURL *)[info valueForKey:UIImagePickerControllerReferenceURL];
 }
@@ -143,27 +151,30 @@
 - (IBAction)pressSkipPhoto:(id)sender
 {
     [self changeCheckBox:self.btnPhotoSkip];
+    return;
     if (self.btnPhotoSkip.selected == TRUE) {
         self.cnstrntPhotoTipHeight.constant = 0;
-        self.viewPhoto.alpha = 0;
-        self.viewPhotoTip.alpha = 0;
+        self.photoView.alpha = 0;
+        self.photoTipView.alpha = 0;
     } else {
         self.cnstrntPhotoTipHeight.constant = 100;
-        self.viewPhoto.alpha = 1;
-        self.viewPhotoTip.alpha = 1;
+        self.photoView.alpha = 1;
+        self.photoTipView.alpha = 1;
     }
 }
 
-- (IBAction)pressSkipBio:(id)sender {
+- (IBAction)pressSkipBio:(id)sender
+{
     [self changeCheckBox:self.btnBioSkip];
+    return;
     if (self.btnBioSkip.selected == TRUE) {
         self.cnstrntBioTipHeight.constant = 100;
-        self.viewBio.alpha = 1;
-        self.viewBioTip.alpha = 1;
+        self.bioView.alpha = 1;
+        self.bioTipView.alpha = 1;
     } else {
         self.cnstrntBioTipHeight.constant = 0;
-        self.viewBio.alpha = 0;
-        self.viewBioTip.alpha = 0;
+        self.bioView.alpha = 0;
+        self.bioTipView.alpha = 0;
     }
 }
 
@@ -171,10 +182,10 @@
 {
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    [self updateParamDict:params value:self.textView.text key:@"biography"];
+    [self updateParamDict:params value:self.bioTextView.text key:@"biography"];
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
-    if (self.btnBioSkip.selected == NO && self.textView.text.length == 0)
+    if (self.btnBioSkip.selected == NO && self.bioTextView.text.length == 0)
     {
         [Error appendString:@"\n\nEnter Bio or Select Skip"];
     }
