@@ -137,7 +137,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A1r-q0-qnO" userLabel="PhotoSkipView">
                                                 <rect key="frame" x="30" y="416" width="260" height="28"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2AQ-GS-ijh" userLabel="BtnPhotoSkip">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2AQ-GS-ijh" userLabel="BtnPhotoSkip">
                                                         <rect key="frame" x="0.0" y="4" width="20" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="M6b-qH-5ME"/>
@@ -152,10 +152,11 @@
                                                             <action selector="pressSkipPhoto:" destination="LaQ-P5-iHF" eventType="touchUpInside" id="fyT-FT-PwJ"/>
                                                         </connections>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="I'll add my photo later" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Xk-SL-waX">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I'll add my photo later" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Xk-SL-waX">
                                                         <rect key="frame" x="28" y="3.5" width="135" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="8Ad-Ln-vhy"/>
+                                                            <constraint firstAttribute="width" constant="135" id="VXV-Us-2Yw"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="RobotoCondensed-Light" family="Roboto Condensed" pointSize="16"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -164,22 +165,57 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
+                                                    <constraint firstItem="8Xk-SL-waX" firstAttribute="top" secondItem="A1r-q0-qnO" secondAttribute="top" constant="4" id="FHe-Mu-Yxx"/>
+                                                    <constraint firstItem="2AQ-GS-ijh" firstAttribute="leading" secondItem="A1r-q0-qnO" secondAttribute="leading" id="QSt-9Z-gr8"/>
+                                                    <constraint firstItem="2AQ-GS-ijh" firstAttribute="top" secondItem="A1r-q0-qnO" secondAttribute="top" constant="4" id="gAg-5X-HuD"/>
+                                                    <constraint firstItem="8Xk-SL-waX" firstAttribute="leading" secondItem="2AQ-GS-ijh" secondAttribute="trailing" constant="8" id="hWc-xY-PaX"/>
+                                                    <constraint firstAttribute="bottom" secondItem="8Xk-SL-waX" secondAttribute="bottom" constant="4" id="stl-aP-v9P"/>
                                                     <constraint firstAttribute="height" constant="28" id="znv-ro-aVH"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="92d-vK-Q01">
-                                                <rect key="frame" x="25" y="529" width="260" height="173"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bDe-MJ-Mgg" userLabel="PhotoTipView">
+                                                <rect key="frame" x="30" y="449" width="260" height="40"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="ADD YOUR BIO" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKW-Vt-bFQ">
-                                                        <rect key="frame" x="-14" y="70" width="117" height="21"/>
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2PV-jw-O4j" userLabel="Photo">
+                                                        <rect key="frame" x="0.0" y="-5" width="260" height="47"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="tip-icon-blue" translatesAutoresizingMaskIntoConstraints="NO" id="dOd-53-Mgi">
+                                                                <rect key="frame" x="0.0" y="4" width="26" height="18"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="26" id="Prg-fD-ceR"/>
+                                                                    <constraint firstAttribute="height" constant="18" id="wwk-1G-ZbA"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="You’re far more likely to be contacted by employers when you have a photo!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s05-mj-UKC">
+                                                                <rect key="frame" x="32" y="0.0" width="228" height="42"/>
+                                                                <fontDescription key="fontDescription" name="RobotoCondensed-LightItalic" family="Roboto Condensed" pointSize="15"/>
+                                                                <color key="textColor" red="0.2666666667" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="21" id="OAQ-DB-sHf"/>
-                                                            <constraint firstAttribute="width" constant="117" id="Rmd-xY-ccY"/>
+                                                            <constraint firstItem="dOd-53-Mgi" firstAttribute="leading" secondItem="2PV-jw-O4j" secondAttribute="leading" id="72T-ls-9kR"/>
+                                                            <constraint firstItem="s05-mj-UKC" firstAttribute="leading" secondItem="dOd-53-Mgi" secondAttribute="trailing" constant="6" id="UdD-4z-4s1"/>
+                                                            <constraint firstItem="dOd-53-Mgi" firstAttribute="top" secondItem="2PV-jw-O4j" secondAttribute="top" constant="4" id="fpM-Wp-yz5"/>
+                                                            <constraint firstAttribute="bottom" secondItem="s05-mj-UKC" secondAttribute="bottom" constant="5" id="m9y-Qb-Xba"/>
+                                                            <constraint firstItem="s05-mj-UKC" firstAttribute="top" secondItem="2PV-jw-O4j" secondAttribute="top" id="wgm-og-261"/>
+                                                            <constraint firstAttribute="trailing" secondItem="s05-mj-UKC" secondAttribute="trailing" id="y9Y-QC-SqP"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="RobotoCondensed-Bold" family="Roboto Condensed" pointSize="16"/>
-                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="2PV-jw-O4j" secondAttribute="trailing" id="4Dd-nm-DJb"/>
+                                                    <constraint firstItem="2PV-jw-O4j" firstAttribute="height" secondItem="bDe-MJ-Mgg" secondAttribute="height" id="Q1U-cA-l11"/>
+                                                    <constraint firstAttribute="height" constant="40" id="S0G-Lh-var"/>
+                                                    <constraint firstItem="2PV-jw-O4j" firstAttribute="width" secondItem="bDe-MJ-Mgg" secondAttribute="width" id="gfJ-0l-3Fo"/>
+                                                    <constraint firstItem="2PV-jw-O4j" firstAttribute="leading" secondItem="bDe-MJ-Mgg" secondAttribute="leading" id="xYg-9w-arD"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="92d-vK-Q01">
+                                                <rect key="frame" x="30" y="535" width="260" height="173"/>
+                                                <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ExE-Y2-eVY">
                                                         <rect key="frame" x="0.0" y="83" width="260" height="173"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -191,8 +227,6 @@
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="173" id="4Bi-dk-pVM"/>
-                                                    <constraint firstItem="DKW-Vt-bFQ" firstAttribute="leading" secondItem="92d-vK-Q01" secondAttribute="leading" constant="-8" id="nKm-EU-B9e"/>
-                                                    <constraint firstAttribute="top" secondItem="DKW-Vt-bFQ" secondAttribute="bottom" constant="-47" id="wM4-2x-HSA"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fxo-NE-iLd">
@@ -284,47 +318,16 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bDe-MJ-Mgg" userLabel="PhotoTipView">
-                                                <rect key="frame" x="30" y="456" width="260" height="47"/>
-                                                <subviews>
-                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2PV-jw-O4j" userLabel="Photo">
-                                                        <rect key="frame" x="-4" y="-5" width="260" height="47"/>
-                                                        <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="tip-icon-blue" translatesAutoresizingMaskIntoConstraints="NO" id="dOd-53-Mgi">
-                                                                <rect key="frame" x="0.0" y="4" width="26" height="18"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="26" id="Prg-fD-ceR"/>
-                                                                    <constraint firstAttribute="height" constant="18" id="wwk-1G-ZbA"/>
-                                                                </constraints>
-                                                            </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="You’re far more likely to be contacted by employers when you have a photo!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s05-mj-UKC">
-                                                                <rect key="frame" x="32" y="0.0" width="228" height="42"/>
-                                                                <fontDescription key="fontDescription" name="RobotoCondensed-LightItalic" family="Roboto Condensed" pointSize="15"/>
-                                                                <color key="textColor" red="0.2666666667" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                        </subviews>
-                                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <constraints>
-                                                            <constraint firstItem="dOd-53-Mgi" firstAttribute="leading" secondItem="2PV-jw-O4j" secondAttribute="leading" id="72T-ls-9kR"/>
-                                                            <constraint firstItem="s05-mj-UKC" firstAttribute="leading" secondItem="dOd-53-Mgi" secondAttribute="trailing" constant="6" id="UdD-4z-4s1"/>
-                                                            <constraint firstItem="dOd-53-Mgi" firstAttribute="top" secondItem="2PV-jw-O4j" secondAttribute="top" constant="4" id="fpM-Wp-yz5"/>
-                                                            <constraint firstAttribute="bottom" secondItem="s05-mj-UKC" secondAttribute="bottom" constant="5" id="m9y-Qb-Xba"/>
-                                                            <constraint firstAttribute="bottom" secondItem="dOd-53-Mgi" secondAttribute="bottom" constant="25" id="qtp-yE-Ady"/>
-                                                            <constraint firstItem="s05-mj-UKC" firstAttribute="top" secondItem="2PV-jw-O4j" secondAttribute="top" id="wgm-og-261"/>
-                                                            <constraint firstAttribute="trailing" secondItem="s05-mj-UKC" secondAttribute="trailing" id="y9Y-QC-SqP"/>
-                                                        </constraints>
-                                                    </view>
-                                                </subviews>
-                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADD YOUR BIO" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKW-Vt-bFQ">
+                                                <rect key="frame" x="30" y="519" width="117" height="21"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="2PV-jw-O4j" secondAttribute="trailing" constant="4" id="4Dd-nm-DJb"/>
-                                                    <constraint firstItem="2PV-jw-O4j" firstAttribute="height" secondItem="bDe-MJ-Mgg" secondAttribute="height" id="Q1U-cA-l11"/>
-                                                    <constraint firstAttribute="height" constant="50" id="S0G-Lh-var"/>
-                                                    <constraint firstItem="2PV-jw-O4j" firstAttribute="width" secondItem="bDe-MJ-Mgg" secondAttribute="width" id="gfJ-0l-3Fo"/>
-                                                    <constraint firstItem="2PV-jw-O4j" firstAttribute="leading" secondItem="bDe-MJ-Mgg" secondAttribute="leading" constant="-4" id="xYg-9w-arD"/>
+                                                    <constraint firstAttribute="height" constant="21" id="OAQ-DB-sHf"/>
+                                                    <constraint firstAttribute="width" constant="117" id="Rmd-xY-ccY"/>
                                                 </constraints>
-                                            </view>
+                                                <fontDescription key="fontDescription" name="RobotoCondensed-Bold" family="Roboto Condensed" pointSize="16"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -333,6 +336,7 @@
                                             <constraint firstItem="92d-vK-Q01" firstAttribute="leading" secondItem="uXi-VS-8eo" secondAttribute="leading" constant="30" id="ABr-0U-q9D"/>
                                             <constraint firstAttribute="trailing" secondItem="A1r-q0-qnO" secondAttribute="trailing" constant="30" id="BGw-El-Km8"/>
                                             <constraint firstItem="4hf-rx-on8" firstAttribute="leading" secondItem="uXi-VS-8eo" secondAttribute="leading" constant="30" id="BvF-VT-rJk"/>
+                                            <constraint firstItem="DKW-Vt-bFQ" firstAttribute="leading" secondItem="uXi-VS-8eo" secondAttribute="leading" constant="30" id="Cc2-D7-q7r"/>
                                             <constraint firstAttribute="trailing" secondItem="BHQ-DK-ldU" secondAttribute="trailing" constant="30" id="I9b-26-S4N"/>
                                             <constraint firstItem="F0l-Lp-QR9" firstAttribute="top" secondItem="Uxs-SO-fQb" secondAttribute="bottom" constant="32" id="LS5-jW-GC2"/>
                                             <constraint firstItem="k84-Xx-esk" firstAttribute="leading" secondItem="8qa-zv-1eY" secondAttribute="trailing" constant="8" id="MaG-cX-jrz"/>
@@ -344,6 +348,7 @@
                                             <constraint firstItem="bDe-MJ-Mgg" firstAttribute="leading" secondItem="uXi-VS-8eo" secondAttribute="leading" constant="30" id="SMr-lD-NRv"/>
                                             <constraint firstAttribute="trailing" secondItem="lt7-uC-G83" secondAttribute="trailing" id="UVd-Fn-0QS"/>
                                             <constraint firstItem="8qa-zv-1eY" firstAttribute="top" secondItem="92d-vK-Q01" secondAttribute="bottom" constant="16" id="Wfh-tN-S9k"/>
+                                            <constraint firstItem="bDe-MJ-Mgg" firstAttribute="top" secondItem="A1r-q0-qnO" secondAttribute="bottom" constant="5" id="XIb-s9-yJ7"/>
                                             <constraint firstItem="Uxs-SO-fQb" firstAttribute="top" secondItem="lt7-uC-G83" secondAttribute="bottom" constant="75" id="XSH-eU-Yzc"/>
                                             <constraint firstItem="8qa-zv-1eY" firstAttribute="leading" secondItem="uXi-VS-8eo" secondAttribute="leading" constant="30" id="dKX-m8-Jed"/>
                                             <constraint firstAttribute="trailing" secondItem="k84-Xx-esk" secondAttribute="trailing" constant="30" id="eVq-La-6BM"/>
@@ -356,6 +361,7 @@
                                             <constraint firstAttribute="trailing" secondItem="BnX-VR-5FD" secondAttribute="trailing" constant="30" id="mQI-8W-gpU"/>
                                             <constraint firstItem="A1r-q0-qnO" firstAttribute="top" secondItem="BHQ-DK-ldU" secondAttribute="bottom" constant="4" id="odo-MR-GVW"/>
                                             <constraint firstItem="RsC-DV-hX7" firstAttribute="leading" secondItem="F0l-Lp-QR9" secondAttribute="trailing" constant="4" id="pW4-Mr-uZW"/>
+                                            <constraint firstItem="DKW-Vt-bFQ" firstAttribute="top" secondItem="bDe-MJ-Mgg" secondAttribute="bottom" constant="30" id="pvp-q5-VMh"/>
                                             <constraint firstItem="RsC-DV-hX7" firstAttribute="centerY" secondItem="F0l-Lp-QR9" secondAttribute="centerY" id="sZp-g5-2Se"/>
                                             <constraint firstItem="BHQ-DK-ldU" firstAttribute="top" secondItem="F0l-Lp-QR9" secondAttribute="bottom" constant="4" id="t5m-G2-S2r"/>
                                             <constraint firstItem="fxo-NE-iLd" firstAttribute="top" secondItem="4hf-rx-on8" secondAttribute="bottom" constant="3" id="u5D-mh-jMq"/>
@@ -582,7 +588,7 @@
                                                         <rect key="frame" x="8" y="52" width="244" height="78"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="ADD YOUR LOGO!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ez2-VQ-xXK">
-                                                                <rect key="frame" x="68.5" y="7" width="109" height="27"/>
+                                                                <rect key="frame" x="67.5" y="7" width="109" height="27"/>
                                                                 <fontDescription key="fontDescription" name="RobotoCondensed-BoldItalic" family="Roboto Condensed" pointSize="16"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -5446,7 +5452,7 @@ If you don’t find quality candidates today, check back soon.</string>
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1sd-tj-XQK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1sd-tj-XQK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
