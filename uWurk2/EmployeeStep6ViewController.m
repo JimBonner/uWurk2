@@ -12,21 +12,20 @@
 
 @property (weak, nonatomic) IBOutlet UIButton    *btnPhotoAdd;
 @property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
+@property (weak, nonatomic) IBOutlet UIView      *photoSkipView;
 @property (weak, nonatomic) IBOutlet UIView      *photoTipView;
 @property (weak, nonatomic) IBOutlet UIButton    *btnPhotoSkip;
-@property (weak, nonatomic) IBOutlet UIView      *photoView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cnstrntImageHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cnstrntPhotoSkipHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cnstrntPhotoTipHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cnstrntPhotoHeight;
 
 @property (weak, nonatomic) IBOutlet UITextView *bioTextView;
+@property (weak, nonatomic) IBOutlet UIView     *bioTipView;
+@property (weak, nonatomic) IBOutlet UIButton   *btnBioSkip;
 
-
-@property (weak, nonatomic) IBOutlet UIView   *bioView;
-@property (weak, nonatomic) IBOutlet UIView   *bioTipView;
-@property (weak, nonatomic) IBOutlet UIButton *btnBioSkip;
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cnstrntBioTextHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cnstrntBioTipHeight;
 
 
@@ -39,22 +38,19 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.photoImageView.layer.borderWidth = 1;
+    self.photoImageView.layer.borderColor = [UIColor blackColor].CGColor;
+    self.bioTextView.layer.borderWidth = 1;
+    self.bioTextView.layer.borderColor = [UIColor blackColor].CGColor;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-//    self.cnstrntImageHeight.constant = 0;
-//    self.photoImageView.alpha = 0;
-//    self.bioView.layer.borderWidth = 1;
-//    self.bioView.layer.borderColor = [UIColor blackColor].CGColor;
-//    self.cnstrntBioTipHeight.constant = 0;
-//    self.cnstrntPhotoTipHeight.constant = 0;
-//    self.bioTipView.alpha = 0;
-//    self.photoTipView.alpha = 0;
-    
     self.photoLocalURL = [NSURL URLWithString:[self.appDelegate.user objectForKey:@"url_string_employee_photo"]];
+    
     if([[self.appDelegate.user objectForKey:@"skip_photo"]intValue] == 1) {
         [self.btnPhotoSkip setSelected:FALSE];
     } else {
@@ -64,7 +60,6 @@
 
     if([[self.appDelegate.user objectForKey:@"skip_bio"]intValue] == 1) {
         [self.btnBioSkip setSelected:TRUE];
-        [self pressSkipBio:nil];
     } else {
         [self.btnBioSkip setSelected:FALSE];
     }
@@ -80,8 +75,12 @@
     [self.appDelegate.user setObjectOrNil:self.btnPhotoSkip.selected ? @"1" : @"0" forKey:@"skip_photo"];
     [self.appDelegate.user setObjectOrNil:self.btnBioSkip.selected ? @"1" : @"0" forKey:@"skip_bio"];
     
-    [self.appDelegate.user setObjectOrNil:[self.photoLocalURL absoluteString] forKey:@"url_string_employee_photo"];
-     
+    if([self.appDelegate.user objectForKey:@"url_string_employee_photo"] != nil) {
+        [self.appDelegate.user setObjectOrNil:[self.photoLocalURL absoluteString] forKey:@"url_string_employee_photo"];
+    }
+    
+    [self.appDelegate.user setObjectOrNil:self.bioTextView.text forKey:@"bio_text"];
+    
     [self saveUserDefault:[self objectToJsonString:self.appDelegate.user] Key:@"user_data"];
 }
 
@@ -132,7 +131,7 @@
     self.photo = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     [self dismissViewControllerAnimated:YES completion:nil];
     self.cnstrntPhotoHeight.constant = 0;
-    self.photoView.alpha = 0.0;
+    self.photoTipView.alpha = 0.0;
     [self.photoImageView setImage:self.photo];
     self.cnstrntImageHeight.constant = 200;
     self.photoImageView.layer.borderWidth = 3;
@@ -151,31 +150,28 @@
 - (IBAction)pressSkipPhoto:(id)sender
 {
     [self changeCheckBox:self.btnPhotoSkip];
-    return;
     if (self.btnPhotoSkip.selected == TRUE) {
-        self.cnstrntPhotoTipHeight.constant = 0;
-        self.photoView.alpha = 0;
-        self.photoTipView.alpha = 0;
+        self.btnPhotoAdd.alpha = 0.0;
+        self.cnstrntImageHeight.constant = 0.0;
+        self.photoImageView.alpha = 0.0;
     } else {
-        self.cnstrntPhotoTipHeight.constant = 100;
-        self.photoView.alpha = 1;
-        self.photoTipView.alpha = 1;
+        self.btnPhotoAdd.alpha = 1.0;
+        self.cnstrntImageHeight.constant = 200.0;
+        self.photoImageView.alpha = 1.0;
     }
 }
 
 - (IBAction)pressSkipBio:(id)sender
 {
     [self changeCheckBox:self.btnBioSkip];
-    return;
     if (self.btnBioSkip.selected == TRUE) {
-        self.cnstrntBioTipHeight.constant = 100;
-        self.bioView.alpha = 1;
-        self.bioTipView.alpha = 1;
-    } else {
-        self.cnstrntBioTipHeight.constant = 0;
-        self.bioView.alpha = 0;
-        self.bioTipView.alpha = 0;
+        self.cnstrntBioTextHeight.constant = 0.0;
+        self.bioTextView.alpha = 0.0;
+     } else {
+         self.cnstrntBioTextHeight.constant = 173.0;
+         self.bioTextView.alpha = 1.0;
     }
+    [self.view.layer layoutIfNeeded];
 }
 
 - (IBAction)nextPress:(id)sender

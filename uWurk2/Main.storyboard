@@ -46,7 +46,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="950"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uXi-VS-8eo" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="940"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="936"/>
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lt7-uC-G83" userLabel="Header">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="42"/>
@@ -124,14 +124,11 @@
                                                     <constraint firstAttribute="width" constant="20" id="TpM-NM-LsK"/>
                                                 </constraints>
                                                 <state key="normal" image="btn-add-black-min"/>
-                                                <connections>
-                                                    <action selector="btnPhoto:" destination="LaQ-P5-iHF" eventType="touchUpInside" id="8K0-6h-eFd"/>
-                                                </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BHQ-DK-ldU">
                                                 <rect key="frame" x="30" y="212" width="260" height="200"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="C64-D3-kX1"/>
+                                                    <constraint firstAttribute="height" constant="200" id="C64-D3-kX1" userLabel="cnstrntImageHeight"/>
                                                 </constraints>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A1r-q0-qnO" userLabel="PhotoSkipView">
@@ -141,14 +138,13 @@
                                                         <rect key="frame" x="0.0" y="4" width="20" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="M6b-qH-5ME"/>
-                                                            <constraint firstAttribute="height" constant="20" id="XRY-JH-PxE"/>
+                                                            <constraint firstAttribute="height" constant="20" id="XRY-JH-PxE" userLabel="cnstrntPhotoSkipHeight"/>
                                                         </constraints>
                                                         <state key="normal" backgroundImage="checkBox">
                                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <state key="selected" image="check-black"/>
                                                         <connections>
-                                                            <action selector="changeCheckBox:" destination="LaQ-P5-iHF" eventType="touchUpInside" id="z9B-Zh-Z6n"/>
                                                             <action selector="pressSkipPhoto:" destination="LaQ-P5-iHF" eventType="touchUpInside" id="fyT-FT-PwJ"/>
                                                         </connections>
                                                     </button>
@@ -170,11 +166,11 @@
                                                     <constraint firstItem="2AQ-GS-ijh" firstAttribute="top" secondItem="A1r-q0-qnO" secondAttribute="top" constant="4" id="gAg-5X-HuD"/>
                                                     <constraint firstItem="8Xk-SL-waX" firstAttribute="leading" secondItem="2AQ-GS-ijh" secondAttribute="trailing" constant="8" id="hWc-xY-PaX"/>
                                                     <constraint firstAttribute="bottom" secondItem="8Xk-SL-waX" secondAttribute="bottom" constant="4" id="stl-aP-v9P"/>
-                                                    <constraint firstAttribute="height" constant="28" id="znv-ro-aVH"/>
+                                                    <constraint firstAttribute="height" constant="28" id="znv-ro-aVH" userLabel="cnstrntPhotoSkipHeight"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bDe-MJ-Mgg" userLabel="PhotoTipView">
-                                                <rect key="frame" x="30" y="449" width="260" height="40"/>
+                                                <rect key="frame" x="30" y="445" width="260" height="40"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2PV-jw-O4j" userLabel="Photo">
                                                         <rect key="frame" x="0.0" y="0.0" width="260" height="40"/>
@@ -186,8 +182,11 @@
                                                                     <constraint firstAttribute="height" constant="18" id="wwk-1G-ZbA"/>
                                                                 </constraints>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You’re far more likely to be contacted by employers when you have a photo!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s05-mj-UKC">
-                                                                <rect key="frame" x="32" y="0.0" width="228" height="35"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You’re far more likely to be contacted by employers when you have a photo!  " lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s05-mj-UKC">
+                                                                <rect key="frame" x="32" y="0.0" width="228" height="37"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="37" id="g7N-dB-DpI"/>
+                                                                </constraints>
                                                                 <fontDescription key="fontDescription" name="RobotoCondensed-LightItalic" family="Roboto Condensed" pointSize="15"/>
                                                                 <color key="textColor" red="0.2666666667" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -198,7 +197,6 @@
                                                             <constraint firstItem="dOd-53-Mgi" firstAttribute="leading" secondItem="2PV-jw-O4j" secondAttribute="leading" id="72T-ls-9kR"/>
                                                             <constraint firstItem="s05-mj-UKC" firstAttribute="leading" secondItem="dOd-53-Mgi" secondAttribute="trailing" constant="6" id="UdD-4z-4s1"/>
                                                             <constraint firstItem="dOd-53-Mgi" firstAttribute="top" secondItem="2PV-jw-O4j" secondAttribute="top" constant="4" id="fpM-Wp-yz5"/>
-                                                            <constraint firstAttribute="bottom" secondItem="s05-mj-UKC" secondAttribute="bottom" constant="5" id="m9y-Qb-Xba"/>
                                                             <constraint firstItem="s05-mj-UKC" firstAttribute="top" secondItem="2PV-jw-O4j" secondAttribute="top" id="wgm-og-261"/>
                                                             <constraint firstAttribute="trailing" secondItem="s05-mj-UKC" secondAttribute="trailing" id="y9Y-QC-SqP"/>
                                                         </constraints>
@@ -208,7 +206,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="2PV-jw-O4j" secondAttribute="trailing" id="4Dd-nm-DJb"/>
                                                     <constraint firstItem="2PV-jw-O4j" firstAttribute="height" secondItem="bDe-MJ-Mgg" secondAttribute="height" id="Q1U-cA-l11"/>
-                                                    <constraint firstAttribute="height" constant="40" id="S0G-Lh-var"/>
+                                                    <constraint firstAttribute="height" constant="40" id="S0G-Lh-var" userLabel="cnstrntPhotoTipHeight"/>
                                                     <constraint firstItem="2PV-jw-O4j" firstAttribute="width" secondItem="bDe-MJ-Mgg" secondAttribute="width" id="gfJ-0l-3Fo"/>
                                                     <constraint firstItem="2PV-jw-O4j" firstAttribute="leading" secondItem="bDe-MJ-Mgg" secondAttribute="leading" id="maS-a6-Ac7"/>
                                                     <constraint firstItem="2PV-jw-O4j" firstAttribute="leading" secondItem="bDe-MJ-Mgg" secondAttribute="leading" id="xYg-9w-arD"/>
@@ -216,7 +214,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADD YOUR BIO" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKW-Vt-bFQ">
-                                                <rect key="frame" x="30" y="519" width="124" height="19"/>
+                                                <rect key="frame" x="30" y="515" width="124" height="19"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="19" id="OAQ-DB-sHf"/>
                                                     <constraint firstAttribute="width" constant="124" id="Rmd-xY-ccY"/>
@@ -225,8 +223,8 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="92d-vK-Q01">
-                                                <rect key="frame" x="30" y="543" width="260" height="173"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="92d-vK-Q01" userLabel="Bio Text View">
+                                                <rect key="frame" x="30" y="539" width="260" height="173"/>
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ExE-Y2-eVY">
                                                         <rect key="frame" x="0.0" y="0.0" width="260" height="173"/>
@@ -237,7 +235,7 @@
                                                 </subviews>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="173" id="4Bi-dk-pVM"/>
+                                                    <constraint firstAttribute="height" constant="173" id="4Bi-dk-pVM" userLabel="cnstrntBioTextHeight"/>
                                                     <constraint firstItem="ExE-Y2-eVY" firstAttribute="top" secondItem="92d-vK-Q01" secondAttribute="top" id="SkL-Pd-rG9"/>
                                                     <constraint firstItem="ExE-Y2-eVY" firstAttribute="height" secondItem="92d-vK-Q01" secondAttribute="height" id="bBF-Cx-v2h"/>
                                                     <constraint firstItem="ExE-Y2-eVY" firstAttribute="leading" secondItem="92d-vK-Q01" secondAttribute="leading" id="nM8-Sk-UA8"/>
@@ -245,7 +243,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxo-NE-iLd">
-                                                <rect key="frame" x="0.0" y="798" width="320" height="102"/>
+                                                <rect key="frame" x="0.0" y="794" width="320" height="102"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yZH-Fe-meb">
                                                         <rect key="frame" x="80" y="45" width="160" height="36"/>
@@ -282,7 +280,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4hf-rx-on8" userLabel="BioTipView">
-                                                <rect key="frame" x="30" y="748" width="260" height="47"/>
+                                                <rect key="frame" x="30" y="744" width="260" height="47"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tip-icon-blue" translatesAutoresizingMaskIntoConstraints="NO" id="oiK-br-rfh">
                                                         <rect key="frame" x="0.0" y="4" width="26" height="18"/>
@@ -291,7 +289,7 @@
                                                             <constraint firstAttribute="height" constant="18" id="gh6-gf-yVX"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A short bio is a great way for employers to learn more about you." lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQL-b5-VLw">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A short bio is a great way for employers to learn more about you." lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQL-b5-VLw">
                                                         <rect key="frame" x="32" y="0.0" width="228" height="42"/>
                                                         <fontDescription key="fontDescription" name="RobotoCondensed-LightItalic" family="Roboto Condensed" pointSize="15"/>
                                                         <color key="textColor" red="0.2666666667" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -311,7 +309,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8qa-zv-1eY" userLabel="BioSkip">
-                                                <rect key="frame" x="30" y="724" width="20" height="20"/>
+                                                <rect key="frame" x="30" y="720" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="IAc-9m-CkU"/>
                                                     <constraint firstAttribute="width" constant="20" id="kOh-uS-zlh"/>
@@ -325,7 +323,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I'll add my bio later" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k84-Xx-esk">
-                                                <rect key="frame" x="58" y="724" width="232" height="21"/>
+                                                <rect key="frame" x="58" y="720" width="232" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="12Y-gD-XPU"/>
                                                 </constraints>
@@ -354,7 +352,7 @@
                                             <constraint firstItem="92d-vK-Q01" firstAttribute="top" secondItem="DKW-Vt-bFQ" secondAttribute="bottom" constant="5" id="Us5-WE-pRm"/>
                                             <constraint firstItem="k84-Xx-esk" firstAttribute="centerY" secondItem="8qa-zv-1eY" secondAttribute="centerY" id="VgI-a0-czL"/>
                                             <constraint firstItem="8qa-zv-1eY" firstAttribute="top" secondItem="92d-vK-Q01" secondAttribute="bottom" constant="8" id="Wfh-tN-S9k"/>
-                                            <constraint firstItem="bDe-MJ-Mgg" firstAttribute="top" secondItem="A1r-q0-qnO" secondAttribute="bottom" constant="5" id="XIb-s9-yJ7"/>
+                                            <constraint firstItem="bDe-MJ-Mgg" firstAttribute="top" secondItem="A1r-q0-qnO" secondAttribute="bottom" constant="1" id="XIb-s9-yJ7"/>
                                             <constraint firstItem="Uxs-SO-fQb" firstAttribute="top" secondItem="lt7-uC-G83" secondAttribute="bottom" constant="75" id="XSH-eU-Yzc"/>
                                             <constraint firstItem="8qa-zv-1eY" firstAttribute="leading" secondItem="uXi-VS-8eo" secondAttribute="leading" constant="30" id="dKX-m8-Jed"/>
                                             <constraint firstAttribute="trailing" secondItem="k84-Xx-esk" secondAttribute="trailing" constant="30" id="eVq-La-6BM"/>
@@ -402,17 +400,19 @@
                     <size key="freeformSize" width="320" height="950"/>
                     <connections>
                         <outlet property="bioTextView" destination="ExE-Y2-eVY" id="DvX-IF-0bI"/>
-                        <outlet property="bioTipView" destination="4hf-rx-on8" id="xbD-1U-BQk"/>
-                        <outlet property="bioView" destination="92d-vK-Q01" id="TGA-gU-uHT"/>
-                        <outlet property="btnBioSkip" destination="8qa-zv-1eY" id="gbb-Xv-cdy"/>
+                        <outlet property="bioTipView" destination="4hf-rx-on8" id="BYy-6i-GvW"/>
+                        <outlet property="btnBioSkip" destination="8qa-zv-1eY" id="rpk-Ud-enu"/>
                         <outlet property="btnPhotoAdd" destination="RsC-DV-hX7" id="aNb-A6-RRB"/>
-                        <outlet property="btnPhotoSkip" destination="2AQ-GS-ijh" id="9Nt-SF-eoX"/>
+                        <outlet property="btnPhotoSkip" destination="2AQ-GS-ijh" id="VZ2-5b-vpb"/>
+                        <outlet property="cnstrntBioTextHeight" destination="4Bi-dk-pVM" id="QnF-rC-NXU"/>
                         <outlet property="cnstrntBioTipHeight" destination="VL6-aP-GYN" id="gwY-Cf-TIL"/>
-                        <outlet property="cnstrntImageHeight" destination="C64-D3-kX1" id="M8c-C3-pq3"/>
+                        <outlet property="cnstrntImageHeight" destination="C64-D3-kX1" id="wvb-P6-cDn"/>
                         <outlet property="cnstrntPhotoHeight" destination="S0G-Lh-var" id="wiP-U4-9r7"/>
+                        <outlet property="cnstrntPhotoSkipHeight" destination="XRY-JH-PxE" id="vp9-8o-s8V"/>
+                        <outlet property="cnstrntPhotoTipHeight" destination="S0G-Lh-var" id="10F-yz-iRQ"/>
                         <outlet property="photoImageView" destination="BHQ-DK-ldU" id="Hdb-nw-11S"/>
-                        <outlet property="photoTipView" destination="2PV-jw-O4j" id="WYW-dL-ukY"/>
-                        <outlet property="photoView" destination="bDe-MJ-Mgg" id="b72-u0-Gl8"/>
+                        <outlet property="photoSkipView" destination="A1r-q0-qnO" id="hcA-o4-2fY"/>
+                        <outlet property="photoTipView" destination="bDe-MJ-Mgg" id="AoP-Ct-Xvw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nnl-wL-zQN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5458,7 +5458,7 @@ If you don’t find quality candidates today, check back soon.</string>
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1sd-tj-XQK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1sd-tj-XQK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
