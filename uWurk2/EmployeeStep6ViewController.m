@@ -28,9 +28,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cnstrntBioTextHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cnstrntBioTipHeight;
 
+@property (weak, nonatomic) NSString *photoUrlString;
+@property (weak, nonatomic) UIImage  *photoImage;
 
-@property (strong, nonatomic) UIImage *photo;
-@property (weak, nonatomic)   NSURL   *photoLocalURL;
 @end
 
 @implementation EmployeeStep6ViewController
@@ -49,7 +49,13 @@
 {
     [super viewWillAppear:animated];
     
-    self.photoLocalURL = [NSURL URLWithString:[self.appDelegate.user objectForKey:@"url_string_employee_photo"]];
+    self.photoUrlString = [self.appDelegate.user objectForKey:@"url_string_employee_photo"];
+    if(self.photoUrlString != nil) {
+        UIImage *image = [self loadPhoto:[NSURL URLWithString:self.photoUrlString]];
+        self.photoImageView.image = image;
+    } else {
+        self.photoImageView.image = [UIImage imageNamed:@"PhotoNotAvailable.png"];
+    }
     
     if([[self.appDelegate.user objectForKey:@"skip_photo"]intValue] == 1) {
         [self.btnPhotoSkip setSelected:FALSE];
@@ -75,9 +81,7 @@
     [self.appDelegate.user setObjectOrNil:self.btnPhotoSkip.selected ? @"1" : @"0" forKey:@"skip_photo"];
     [self.appDelegate.user setObjectOrNil:self.btnBioSkip.selected ? @"1" : @"0" forKey:@"skip_bio"];
     
-    if([self.appDelegate.user objectForKey:@"url_string_employee_photo"] != nil) {
-        [self.appDelegate.user setObjectOrNil:[self.photoLocalURL absoluteString] forKey:@"url_string_employee_photo"];
-    }
+    [self.appDelegate.user setObjectOrNil:self.photoUrlString forKey:@"url_string_employee_photo"];
     
     [self.appDelegate.user setObjectOrNil:self.bioTextView.text forKey:@"bio_text"];
     
@@ -97,7 +101,7 @@
     [alert addAction:[UIAlertAction
                       actionWithTitle:@"Photo Library"
                       style:UIAlertActionStyleDefault
-                      handler:^(UIAlertAction * action)
+                      handler:^(UIAlertAction *action)
                       {
                           UIImagePickerController * picker = [[UIImagePickerController alloc] init];
                           picker.delegate = self;
@@ -128,19 +132,13 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     NSLog(@"%@",info);
-    self.photo = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    self.photoImage = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     [self dismissViewControllerAnimated:YES completion:nil];
-    self.cnstrntPhotoHeight.constant = 0;
-    self.photoTipView.alpha = 0.0;
-    [self.photoImageView setImage:self.photo];
-    self.cnstrntImageHeight.constant = 200;
-    self.photoImageView.layer.borderWidth = 3;
-    self.photoImageView.layer.borderColor = [UIColor blackColor].CGColor;
-    self.photoImageView.alpha = 1;
+    [self.photoImageView setImage:self.photoImage];
+    self.photoImageView.alpha = 1.0;
     [self.view layoutIfNeeded];
-    self.btnPhotoAdd.alpha = 0;
-
-    self.photoLocalURL = (NSURL *)[info valueForKey:UIImagePickerControllerReferenceURL];
+    self.photoUrlString = [[info valueForKey:UIImagePickerControllerReferenceURL]absoluteString];
+    [self saveUserData];
 }
 
 - (IBAction)changeCheckBox:(UIButton *)sender {
@@ -202,7 +200,7 @@
             {
                 NSLog(@"JSON: %@", responseObject);
                 if([self validateResponse:responseObject]){
-                    NSData *imageData = UIImageJPEGRepresentation(self.photo, 0.5);
+                    NSData *imageData = UIImageJPEGRepresentation(self.photoImage, 0.5);
                     [manager POST:@"http://uwurk.tscserver.com/api/v1/photos" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
                     {
                         [formData appendPartWithFileData:imageData name:@"photo_file" fileName:@"photo.jpg" mimeType:@"image/jpeg"];
@@ -238,5 +236,31 @@
         }
     }
 }
+
+UIImage *returnImage;
+
+- (UIImage *)loadPhoto:(NSURL *)photoUrl
+{
+    PHAsset *asset = [[PHAsset fetchAssetsWithALAssetURLs:[NSArray arrayWithObject:photoUrl] options:nil]firstObject];
+    CGSize targetSize = CGSizeMake(300.0,300.0);
+    PHImageRequestOptions *requestOptions = [[PHImageRequestOptions alloc]init];
+    requestOptions.synchronous = YES;
+    [[PHImageManager defaultManager]requestImageForAsset:asset targetSize:targetSize contentMode:PHImageContentModeAspectFit options:requestOptions resultHandler:^(UIImage *image, NSDictionary * info) {
+        returnImage = image;
+        }];
+    return returnImage;
+}
+
+/*func imageFromAsset(nsurl: NSURL) {
+    let asset = PHAsset.fetchAssetsWithALAssetURLs([nsurl], options: nil).firstObject as! PHAsset
+    let targetSize = CGSizeMake(300, 300)
+    var options = PHImageRequestOptions()
+    
+    PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: targetSize, contentMode: PHImageContentMode.AspectFit, options: options, resultHandler: {
+        (result, info) in
+        // imageE - UIImageView on scene
+        self.imageE.image = result
+    }) 
+ } */
 
 @end

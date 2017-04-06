@@ -16,9 +16,9 @@
 		1E0DC3EB1E773A99009ECCB6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0DC3EA1E773A99009ECCB6 /* CoreGraphics.framework */; };
 		1E0DC3ED1E773AE5009ECCB6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0DC3EC1E773AE5009ECCB6 /* libPods.a */; };
 		1E4B94961E8D697A004ADCB9 /* NSMutableDictionary+CocoaFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4B94951E8D697A004ADCB9 /* NSMutableDictionary+CocoaFix.m */; };
-		1E9CCAFE1E91B220008DBEE7 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9CCAFD1E91B220008DBEE7 /* AssetsLibrary.framework */; };
 		1E9CCB001E91B2C2008DBEE7 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9CCAFF1E91B2C2008DBEE7 /* Photos.framework */; };
 		1EAE1B901E78738100BE2C11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B497CA91BACA21300BE59B6 /* Main.storyboard */; };
+		1EE550A71E95750D007CA914 /* PhotoNotAvailable.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EE550A61E95750D007CA914 /* PhotoNotAvailable.png */; };
 		9B0452591C02B80C00B33526 /* EmployeeStep6ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0452581C02B80C00B33526 /* EmployeeStep6ViewController.m */; };
 		9B04525C1C03101900B33526 /* ContactProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B04525B1C03101900B33526 /* ContactProfileViewController.m */; };
 		9B04525F1C03165800B33526 /* MessageSentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B04525E1C03165800B33526 /* MessageSentViewController.m */; };
@@ -132,8 +132,8 @@
 		1E0DC3EC1E773AE5009ECCB6 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "../../Library/Developer/Xcode/DerivedData/uWurk2-diktffzfdgrxymgrefleqskkagsh/Build/Products/Debug-iphonesimulator/libPods.a"; sourceTree = "<group>"; };
 		1E4B94941E8D697A004ADCB9 /* NSMutableDictionary+CocoaFix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+CocoaFix.h"; sourceTree = "<group>"; };
 		1E4B94951E8D697A004ADCB9 /* NSMutableDictionary+CocoaFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+CocoaFix.m"; sourceTree = "<group>"; };
-		1E9CCAFD1E91B220008DBEE7 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		1E9CCAFF1E91B2C2008DBEE7 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		1EE550A61E95750D007CA914 /* PhotoNotAvailable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PhotoNotAvailable.png; sourceTree = "<group>"; };
 		9B0452571C02B80C00B33526 /* EmployeeStep6ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeStep6ViewController.h; sourceTree = "<group>"; };
 		9B0452581C02B80C00B33526 /* EmployeeStep6ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EmployeeStep6ViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9B04525A1C03101900B33526 /* ContactProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactProfileViewController.h; sourceTree = "<group>"; };
@@ -316,7 +316,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E9CCB001E91B2C2008DBEE7 /* Photos.framework in Frameworks */,
-				1E9CCAFE1E91B220008DBEE7 /* AssetsLibrary.framework in Frameworks */,
 				1E0DC3ED1E773AE5009ECCB6 /* libPods.a in Frameworks */,
 				1E0DC3EB1E773A99009ECCB6 /* CoreGraphics.framework in Frameworks */,
 				1E0DC3E91E773A86009ECCB6 /* Foundation.framework in Frameworks */,
@@ -377,6 +376,14 @@
 			path = ../Pods;
 			sourceTree = "<group>";
 		};
+		1EE550A31E9540DC007CA914 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				1EE550A61E95750D007CA914 /* PhotoNotAvailable.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		57BC6448572285618DFBB48F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -390,9 +397,8 @@
 		98F8C277F04B8C2E2D8E0A0D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1E9CCAFF1E91B2C2008DBEE7 /* Photos.framework */,
-				1E9CCAFD1E91B220008DBEE7 /* AssetsLibrary.framework */,
 				1E0DC3EC1E773AE5009ECCB6 /* libPods.a */,
+				1E9CCAFF1E91B2C2008DBEE7 /* Photos.framework */,
 				1E0DC3EA1E773A99009ECCB6 /* CoreGraphics.framework */,
 				1E0DC3E81E773A86009ECCB6 /* Foundation.framework */,
 				1E0DC3E61E773A64009ECCB6 /* ImageIO.framework */,
@@ -467,6 +473,7 @@
 				9B379C8F1B950FD500EB4E2D /* AppDelegate.h */,
 				9B379C901B950FD500EB4E2D /* AppDelegate.m */,
 				9B379C981B950FD500EB4E2D /* Images.xcassets */,
+				1EE550A31E9540DC007CA914 /* Images */,
 				9BEA1B251B9A4FCA0017D87A /* Register */,
 				9B3EE1921BAA2860001D3C37 /* EditEmployeeProfile */,
 				9B0C71331C7770A6003DB760 /* EditEmployerProfile */,
@@ -785,6 +792,7 @@
 			files = (
 				DC6A07CE1C0B76FD007FDEE1 /* RobotoCondensed-LightItalic.ttf in Resources */,
 				DC40DA041C4C514C0037D612 /* EmployerProfile.storyboard in Resources */,
+				1EE550A71E95750D007CA914 /* PhotoNotAvailable.png in Resources */,
 				DC81856E1BADA0C100EF2436 /* employeeMenu.plist in Resources */,
 				DC6A07CA1C0B76FD007FDEE1 /* RobotoCondensed-Bold.ttf in Resources */,
 				DC6A07CD1C0B76FD007FDEE1 /* RobotoCondensed-Light.ttf in Resources */,

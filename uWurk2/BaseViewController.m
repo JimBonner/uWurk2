@@ -323,8 +323,6 @@
                                                           error:&err];
     NSString *string = [[NSString alloc] initWithData:jsonData
                                              encoding:NSUTF8StringEncoding];
-    NSLog(@"%@",string);
-    
     return string;
 }
 
@@ -339,8 +337,6 @@
                                  options:NSJSONReadingMutableContainers
                                    error:&err];
     }
-    
-    NSLog(@"%@",object);
     
     return object;
 }
