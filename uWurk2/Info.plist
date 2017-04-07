@@ -97,5 +97,7 @@
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Allow access to your photo library?</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow your picture to be taken and stored to your photo library?</string>
 </dict>
 </plist>

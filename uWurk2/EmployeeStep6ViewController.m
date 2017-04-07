@@ -28,8 +28,10 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cnstrntBioTextHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cnstrntBioTipHeight;
 
-@property (weak, nonatomic) NSString *photoUrlString;
+@property (weak, nonatomic) NSString *photoLocalIdentifier;
 @property (weak, nonatomic) UIImage  *photoImage;
+
+//@property (weak, nonatomic) NSString *photoUrlString;
 
 @end
 
@@ -49,13 +51,23 @@
 {
     [super viewWillAppear:animated];
     
-    self.photoUrlString = [self.appDelegate.user objectForKey:@"url_string_employee_photo"];
-    if(self.photoUrlString != nil) {
-        UIImage *image = [self loadPhoto:[NSURL URLWithString:self.photoUrlString]];
-        self.photoImageView.image = image;
+    self.photoLocalIdentifier = [self.appDelegate.user objectForKey:@"photo_local_Identifier"];
+    if(self.photoLocalIdentifier != nil) {
+        self.photoImageView.image = [self loadPhotoImageUsingLocalIdentifier:self.photoLocalIdentifier];
     } else {
         self.photoImageView.image = [UIImage imageNamed:@"PhotoNotAvailable.png"];
     }
+    
+/*    self.photoUrlString = [self.appDelegate.user objectForKey:@"url_string_employee_photo"];
+    if(self.photoUrlString != nil) {
+        if([self.photoUrlString containsString:@"assets-library:"]) {
+            self.photoImageView.image = [self loadPhotoWithAssetString:self.photoUrlString];
+        } else if([self.photoUrlString containsString:@"file:"]) {
+            self.photoImageView.image = [self loadPhotoWithFileString:self.photoUrlString];
+        } else {
+            self.photoImageView.image = [UIImage imageNamed:@"PhotoNotAvailable.png"];
+        }
+    } */
     
     if([[self.appDelegate.user objectForKey:@"skip_photo"]intValue] == 1) {
         [self.btnPhotoSkip setSelected:FALSE];
@@ -81,7 +93,7 @@
     [self.appDelegate.user setObjectOrNil:self.btnPhotoSkip.selected ? @"1" : @"0" forKey:@"skip_photo"];
     [self.appDelegate.user setObjectOrNil:self.btnBioSkip.selected ? @"1" : @"0" forKey:@"skip_bio"];
     
-    [self.appDelegate.user setObjectOrNil:self.photoUrlString forKey:@"url_string_employee_photo"];
+    [self.appDelegate.user setObjectOrNil:self.photoLocalIdentifier forKey:@"photo_local_identifier"];
     
     [self.appDelegate.user setObjectOrNil:self.bioTextView.text forKey:@"bio_text"];
     
@@ -90,7 +102,7 @@
 
 - (IBAction)btnPhoto:(UIButton*)sender
 {
-    UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     
     UIAlertController * alert = [UIAlertController
@@ -117,6 +129,8 @@
                           UIImagePickerController * picker = [[UIImagePickerController alloc] init];
                           picker.delegate = self;
                           picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                          [alert dismissViewControllerAnimated:YES completion:nil];
+                          [self presentViewController:picker animated:true completion:nil];
                       }]];
      [alert addAction:[UIAlertAction
                        actionWithTitle:@"Cancel"
@@ -132,13 +146,52 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     NSLog(@"%@",info);
-    self.photoImage = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self.photoImageView setImage:self.photoImage];
+    [self.photoImageView setImage:[info objectForKey:@"UIImagePickerControllerOriginalImage"]];
     self.photoImageView.alpha = 1.0;
     [self.view layoutIfNeeded];
-    self.photoUrlString = [[info valueForKey:UIImagePickerControllerReferenceURL]absoluteString];
+    self.photoLocalIdentifier = nil;
+    if(picker.sourceType == UIImagePickerControllerSourceTypeSavedPhotosAlbum) {
+        self.photoUrlString = [[info valueForKey:UIImagePickerControllerReferenceURL]absoluteString];
+    } else if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+        UIImageWriteToSavedPhotosAlbum(self.photoImage,
+                                       self,
+                                       @selector(image:didFinishSavingWithError:contextInfo:),
+                                       nil);
+        self.photoUrlString = [self urlStringForLastPhotoInSavedAlbum];
+    } else {
+        return;
+    }
     [self saveUserData];
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(NSDictionary *)contextInfo
+{
+    UIAlertController *alert;
+    if (error) {
+        alert = [UIAlertController
+                 alertControllerWithTitle:@"Oops!"
+                 message:@"Save of photo to Photo Album failed"
+                 preferredStyle:UIAlertControllerStyleActionSheet];
+         [alert addAction:[UIAlertAction
+                           actionWithTitle:@"OK"
+                           style:UIAlertActionStyleDefault
+                           handler:^(UIAlertAction *action)
+                           {
+                           }]];
+    } else  {
+        alert = [UIAlertController
+                 alertControllerWithTitle:@"Success!"
+                 message:@"Save of photo to Photo Album successful"
+                 preferredStyle:UIAlertControllerStyleActionSheet];
+        [alert addAction:[UIAlertAction
+                          actionWithTitle:@"OK"
+                          style:UIAlertActionStyleDefault
+                          handler:^(UIAlertAction *action)
+                          {
+                          }]];
+    }
+    [self presentViewController:alert animated:TRUE completion:nil];
 }
 
 - (IBAction)changeCheckBox:(UIButton *)sender {
@@ -239,28 +292,95 @@
 
 UIImage *returnImage;
 
-- (UIImage *)loadPhoto:(NSURL *)photoUrl
+- (UIImage *)loadPhotoImageUsingLocalIdentifier:(NSString *)localId
 {
-    PHAsset *asset = [[PHAsset fetchAssetsWithALAssetURLs:[NSArray arrayWithObject:photoUrl] options:nil]firstObject];
-    CGSize targetSize = CGSizeMake(300.0,300.0);
-    PHImageRequestOptions *requestOptions = [[PHImageRequestOptions alloc]init];
-    requestOptions.synchronous = YES;
-    [[PHImageManager defaultManager]requestImageForAsset:asset targetSize:targetSize contentMode:PHImageContentModeAspectFit options:requestOptions resultHandler:^(UIImage *image, NSDictionary * info) {
-        returnImage = image;
+    returnImage = nil;
+    PHAsset *asset = [[PHAsset fetchAssetsWithLocalIdentifiers:[NSArray arrayWithObject:localId]
+                                                       options:nil]lastObject];
+    if(asset != nil) {
+        CGSize targetSize = CGSizeMake(300.0,300.0);
+        PHImageRequestOptions *requestOptions = [[PHImageRequestOptions alloc]init];
+        requestOptions.synchronous = YES;
+        [[PHImageManager defaultManager]requestImageForAsset:asset targetSize:targetSize contentMode:PHImageContentModeAspectFit options:requestOptions resultHandler:^(UIImage *image, NSDictionary * info) {
+            returnImage = image;
         }];
+    }
     return returnImage;
 }
 
-/*func imageFromAsset(nsurl: NSURL) {
-    let asset = PHAsset.fetchAssetsWithALAssetURLs([nsurl], options: nil).firstObject as! PHAsset
-    let targetSize = CGSizeMake(300, 300)
-    var options = PHImageRequestOptions()
+- (NSString *)localIdentifierOfLastPhotoAsset
+{
+    PHAsset *asset = nil;
+    PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
+    fetchOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
+    PHFetchResult *fetchResult = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:fetchOptions];
+    if (fetchResult != nil && fetchResult.count > 0) {
+        asset = [fetchResult lastObject];
+    }
+    NSString *localID = nil;
+    if (asset) {
+        localID = asset.localIdentifier;
+    }
+    return localID;
+}
+
+- (UIImage *)loadPhotoWithAssetString:(NSString *)photoUrlString
+{
+    returnImage = nil;
+    NSArray *urlArray = [NSArray arrayWithObject:[NSURL URLWithString:photoUrlString]];
+    PHAsset *asset = [[PHAsset fetchAssetsWithALAssetURLs:urlArray options:nil]lastObject];
+    if(asset != nil) {
+        CGSize targetSize = CGSizeMake(300.0,300.0);
+        PHImageRequestOptions *requestOptions = [[PHImageRequestOptions alloc]init];
+        requestOptions.synchronous = YES;
+        [[PHImageManager defaultManager]requestImageForAsset:asset targetSize:targetSize contentMode:PHImageContentModeAspectFit options:requestOptions resultHandler:^(UIImage *image, NSDictionary * info) {
+            returnImage = image;
+            }];
+    }
+    return returnImage;
+}
+
+- (UIImage *)loadPhotoWithFileString:(NSString *)photoUrlString
+{
+    returnImage = nil;
+    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:photoUrlString]];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+        returnImage = [UIImage imageWithData:imageData];
+//    });
+    return returnImage;
+}
+
+NSURL *returnURL;
+
+- (NSString *)urlStringForLastPhotoInSavedAlbum
+{
+    returnURL = nil;
     
-    PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: targetSize, contentMode: PHImageContentMode.AspectFit, options: options, resultHandler: {
-        (result, info) in
-        // imageE - UIImageView on scene
-        self.imageE.image = result
-    }) 
- } */
+    PHAsset *asset = nil;
+    PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
+    fetchOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
+    PHFetchResult *fetchResult = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:fetchOptions];
+    if (fetchResult != nil && fetchResult.count > 0) {
+        asset = [fetchResult lastObject];
+    }
+    
+    if (asset) {
+        PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
+        imageRequestOptions.synchronous = YES;
+        [[PHImageManager defaultManager] requestImageDataForAsset:asset
+                                                          options:imageRequestOptions
+                                                    resultHandler:^(NSData *imageData, NSString *dataUTI,
+                                                                    UIImageOrientation orientation,
+                                                                    NSDictionary *info)
+         {
+             NSLog(@"info = %@", info);
+             if ([info objectForKey:@"PHImageFileURLKey"]) {
+                 NSURL *fileURL = [info objectForKey:@"PHImageFileURLKey"];
+                 returnURL = [NSURL URLWithString:[fileURL absoluteString]];
+             }
+         }];
+    }
+    return [returnURL absoluteString];
+}
 
 @end
