@@ -51,23 +51,12 @@
 {
     [super viewWillAppear:animated];
     
-    self.photoLocalIdentifier = [self.appDelegate.user objectForKey:@"photo_local_Identifier"];
+    self.photoLocalIdentifier = [self.appDelegate.user objectForKey:@"photo_local_identifier"];
     if(self.photoLocalIdentifier != nil) {
         self.photoImageView.image = [self loadPhotoImageUsingLocalIdentifier:self.photoLocalIdentifier];
     } else {
         self.photoImageView.image = [UIImage imageNamed:@"PhotoNotAvailable.png"];
     }
-    
-/*    self.photoUrlString = [self.appDelegate.user objectForKey:@"url_string_employee_photo"];
-    if(self.photoUrlString != nil) {
-        if([self.photoUrlString containsString:@"assets-library:"]) {
-            self.photoImageView.image = [self loadPhotoWithAssetString:self.photoUrlString];
-        } else if([self.photoUrlString containsString:@"file:"]) {
-            self.photoImageView.image = [self loadPhotoWithFileString:self.photoUrlString];
-        } else {
-            self.photoImageView.image = [UIImage imageNamed:@"PhotoNotAvailable.png"];
-        }
-    } */
     
     if([[self.appDelegate.user objectForKey:@"skip_photo"]intValue] == 1) {
         [self.btnPhotoSkip setSelected:FALSE];
@@ -147,18 +136,21 @@
 {
     NSLog(@"%@",info);
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self.photoImageView setImage:[info objectForKey:@"UIImagePickerControllerOriginalImage"]];
+    self.photoImage = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    [self.photoImageView setImage:self.photoImage];
     self.photoImageView.alpha = 1.0;
     [self.view layoutIfNeeded];
     self.photoLocalIdentifier = nil;
     if(picker.sourceType == UIImagePickerControllerSourceTypeSavedPhotosAlbum) {
-        self.photoUrlString = [[info valueForKey:UIImagePickerControllerReferenceURL]absoluteString];
+        NSString *localId = [self localIdentifierFromAssetUrlString:[[info valueForKey:UIImagePickerControllerReferenceURL]absoluteString]];
+        self.photoLocalIdentifier = localId;
     } else if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
-        UIImageWriteToSavedPhotosAlbum(self.photoImage,
+         UIImageWriteToSavedPhotosAlbum(self.photoImage,
                                        self,
                                        @selector(image:didFinishSavingWithError:contextInfo:),
                                        nil);
-        self.photoUrlString = [self urlStringForLastPhotoInSavedAlbum];
+        NSString *localId = [self localIdentifierOfLastPhotoAsset];
+        self.photoLocalIdentifier = localId;
     } else {
         return;
     }
@@ -189,6 +181,7 @@
                           style:UIAlertActionStyleDefault
                           handler:^(UIAlertAction *action)
                           {
+                              
                           }]];
     }
     [self presentViewController:alert animated:TRUE completion:nil];
@@ -290,7 +283,8 @@
     }
 }
 
-UIImage *returnImage;
+NSString *returnString;
+UIImage  *returnImage;
 
 - (UIImage *)loadPhotoImageUsingLocalIdentifier:(NSString *)localId
 {
@@ -301,11 +295,23 @@ UIImage *returnImage;
         CGSize targetSize = CGSizeMake(300.0,300.0);
         PHImageRequestOptions *requestOptions = [[PHImageRequestOptions alloc]init];
         requestOptions.synchronous = YES;
-        [[PHImageManager defaultManager]requestImageForAsset:asset targetSize:targetSize contentMode:PHImageContentModeAspectFit options:requestOptions resultHandler:^(UIImage *image, NSDictionary * info) {
+        [[PHImageManager defaultManager]requestImageForAsset:asset targetSize:targetSize contentMode:PHImageContentModeAspectFit options:requestOptions resultHandler:^(UIImage *image, NSDictionary * info)
+        {
             returnImage = image;
         }];
     }
     return returnImage;
+}
+
+- (NSString *)localIdentifierFromAssetUrlString:(NSString *)photoUrlString
+{
+    returnString = nil;
+    NSArray *urlArray = [NSArray arrayWithObject:[NSURL URLWithString:photoUrlString]];
+    PHAsset *asset = [[PHAsset fetchAssetsWithALAssetURLs:urlArray options:nil]lastObject];
+    if(asset != nil) {
+        returnString = asset.localIdentifier;
+    }
+    return returnString;
 }
 
 - (NSString *)localIdentifierOfLastPhotoAsset
@@ -324,38 +330,9 @@ UIImage *returnImage;
     return localID;
 }
 
-- (UIImage *)loadPhotoWithAssetString:(NSString *)photoUrlString
+- (NSString *)localIdentifiedForLastPhotoInSavedAlbum
 {
-    returnImage = nil;
-    NSArray *urlArray = [NSArray arrayWithObject:[NSURL URLWithString:photoUrlString]];
-    PHAsset *asset = [[PHAsset fetchAssetsWithALAssetURLs:urlArray options:nil]lastObject];
-    if(asset != nil) {
-        CGSize targetSize = CGSizeMake(300.0,300.0);
-        PHImageRequestOptions *requestOptions = [[PHImageRequestOptions alloc]init];
-        requestOptions.synchronous = YES;
-        [[PHImageManager defaultManager]requestImageForAsset:asset targetSize:targetSize contentMode:PHImageContentModeAspectFit options:requestOptions resultHandler:^(UIImage *image, NSDictionary * info) {
-            returnImage = image;
-            }];
-    }
-    return returnImage;
-}
-
-- (UIImage *)loadPhotoWithFileString:(NSString *)photoUrlString
-{
-    returnImage = nil;
-    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:photoUrlString]];
-//    dispatch_async(dispatch_get_main_queue(), ^{
-        returnImage = [UIImage imageWithData:imageData];
-//    });
-    return returnImage;
-}
-
-NSURL *returnURL;
-
-- (NSString *)urlStringForLastPhotoInSavedAlbum
-{
-    returnURL = nil;
-    
+    returnString = nil;
     PHAsset *asset = nil;
     PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
     fetchOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
@@ -363,24 +340,10 @@ NSURL *returnURL;
     if (fetchResult != nil && fetchResult.count > 0) {
         asset = [fetchResult lastObject];
     }
-    
     if (asset) {
-        PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
-        imageRequestOptions.synchronous = YES;
-        [[PHImageManager defaultManager] requestImageDataForAsset:asset
-                                                          options:imageRequestOptions
-                                                    resultHandler:^(NSData *imageData, NSString *dataUTI,
-                                                                    UIImageOrientation orientation,
-                                                                    NSDictionary *info)
-         {
-             NSLog(@"info = %@", info);
-             if ([info objectForKey:@"PHImageFileURLKey"]) {
-                 NSURL *fileURL = [info objectForKey:@"PHImageFileURLKey"];
-                 returnURL = [NSURL URLWithString:[fileURL absoluteString]];
-             }
-         }];
+        returnString = asset.localIdentifier;
     }
-    return [returnURL absoluteString];
+    return returnString;
 }
 
 @end
