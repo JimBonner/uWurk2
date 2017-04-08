@@ -31,8 +31,6 @@
 @property (weak, nonatomic) NSString *photoLocalIdentifier;
 @property (weak, nonatomic) UIImage  *photoImage;
 
-//@property (weak, nonatomic) NSString *photoUrlString;
-
 @end
 
 @implementation EmployeeStep6ViewController
@@ -53,7 +51,8 @@
     
     self.photoLocalIdentifier = [self.appDelegate.user objectForKey:@"photo_local_identifier"];
     if(self.photoLocalIdentifier != nil) {
-        self.photoImageView.image = [self loadPhotoImageUsingLocalIdentifier:self.photoLocalIdentifier];
+        self.photoImage = [self loadPhotoImageUsingLocalIdentifier:self.photoLocalIdentifier];
+        self.photoImageView.image = self.photoImage;
     } else {
         self.photoImageView.image = [UIImage imageNamed:@"PhotoNotAvailable.png"];
     }
@@ -64,12 +63,13 @@
         [self.btnPhotoSkip setSelected:TRUE];
     }
     [self pressSkipPhoto:nil];
-
+    
     if([[self.appDelegate.user objectForKey:@"skip_bio"]intValue] == 1) {
-        [self.btnBioSkip setSelected:TRUE];
-    } else {
         [self.btnBioSkip setSelected:FALSE];
+    } else {
+        [self.btnBioSkip setSelected:TRUE];
     }
+    [self pressSkipBio:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -220,71 +220,98 @@
 
 - (IBAction)nextPress:(id)sender
 {
-    AFHTTPRequestOperationManager *manager = [self getManager];
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    [self updateParamDict:params value:self.bioTextView.text key:@"biography"];
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
+    if ((self.btnPhotoSkip.selected == NO) && [self.photoLocalIdentifier length] == 0)
+    {
+        [Error appendString:@"\n\nSelect Photo or Select Skip"];
+    }
     if (self.btnBioSkip.selected == NO && self.bioTextView.text.length == 0)
     {
         [Error appendString:@"\n\nEnter Bio or Select Skip"];
     }
     if ((Error.length) > 50)
     {
-        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"OOPS!"
-                                                         message:Error
-                                                        delegate:self
-                                               cancelButtonTitle:@"OK"
-                                               otherButtonTitles: nil];
-        [alert show];
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:@"Oops!"
+                                     message:Error
+                                     preferredStyle:UIAlertControllerStyleActionSheet];
+        [alert addAction:[UIAlertAction
+                          actionWithTitle:@"OK"
+                          style:UIAlertActionStyleDefault
+                          handler:^(UIAlertAction *action)
+                          {
+                          }]];
+        [self presentViewController:alert animated:TRUE completion:nil];
+    } else {
+        [self savePhotoDataToDbms];
     }
-    else
-    {
-        if([params count])
-        {
-            [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
-            {
-                NSLog(@"JSON: %@", responseObject);
-                if([self validateResponse:responseObject]){
-                    NSData *imageData = UIImageJPEGRepresentation(self.photoImage, 0.5);
-                    [manager POST:@"http://uwurk.tscserver.com/api/v1/photos" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
-                    {
-                        [formData appendPartWithFileData:imageData name:@"photo_file" fileName:@"photo.jpg" mimeType:@"image/jpeg"];
-                    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
-                        [self.navigationController setViewControllers:@[myController] animated:YES];
-                        
-                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                        NSLog(@"Error: %@", error);
-                        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                                         message:@"Unable to contact server"
-                                                                        delegate:self
-                                                               cancelButtonTitle:@"OK"
-                                                               otherButtonTitles: nil];
-                        [alert show];
-                    }];
-                }
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error)
-            {
-                NSLog(@"Error: %@", error);
-                UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                                 message:@"Unable to contact server"
-                                                                delegate:self
-                                                       cancelButtonTitle:@"OK"
-                                                       otherButtonTitles: nil];
-                [alert show];
-            }];
-        }
-        else
-        {
-            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
-            [self.navigationController setViewControllers:@[myController] animated:YES];
-        }
-    }
+
 }
 
 NSString *returnString;
 UIImage  *returnImage;
+
+- (void)savePhotoDataToDbms
+{
+    if(self.btnPhotoSkip.selected == FALSE) {
+        NSData *imageData = UIImageJPEGRepresentation(self.photoImage, 0.5);
+        AFHTTPRequestOperationManager *manager = [self getManager];
+        [manager POST:@"http://uwurk.tscserver.com/api/v1/photos"
+           parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
+         {
+             [formData appendPartWithFileData:imageData name:@"photo_file" fileName:@"photo.jpg" mimeType:@"image/jpeg"];
+         } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             if(self.btnBioSkip.selected == TRUE) {
+                 UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
+                 [self.navigationController setViewControllers:@[myController] animated:YES];
+             } else {
+                 [self saveBioDataToDbms];
+             }
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             NSLog(@"Error: %@", error.description);
+             UIAlertController * alert = [UIAlertController
+                                          alertControllerWithTitle:@"Oops!"
+                                          message:@"Unable to save Photo data"
+                                          preferredStyle:UIAlertControllerStyleActionSheet];
+             [alert addAction:[UIAlertAction
+                               actionWithTitle:@"OK"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction *action)
+                               {
+                               }]];
+             [self presentViewController:alert animated:TRUE completion:nil];
+         }];
+    }
+}
+
+- (void)saveBioDataToDbms
+{
+    if(self.btnBioSkip == FALSE) {
+        NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+        [self updateParamDict:params value:self.bioTextView.text key:@"biography"];
+        AFHTTPRequestOperationManager *manager = [self getManager];
+        [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params
+           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             NSLog(@"JSON: %@", responseObject);
+             UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
+             [self.navigationController setViewControllers:@[myController] animated:YES];
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             NSLog(@"Error: %@", error);
+             UIAlertController * alert = [UIAlertController
+                                          alertControllerWithTitle:@"Oops!"
+                                          message:@"Unable to save Bio data"
+                                          preferredStyle:UIAlertControllerStyleActionSheet];
+             [alert addAction:[UIAlertAction
+                               actionWithTitle:@"OK"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction *action)
+                               {
+                               }]];
+             [self presentViewController:alert animated:TRUE completion:nil];
+         }];
+    }
+}
 
 - (UIImage *)loadPhotoImageUsingLocalIdentifier:(NSString *)localId
 {
@@ -328,22 +355,6 @@ UIImage  *returnImage;
         localID = asset.localIdentifier;
     }
     return localID;
-}
-
-- (NSString *)localIdentifiedForLastPhotoInSavedAlbum
-{
-    returnString = nil;
-    PHAsset *asset = nil;
-    PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
-    fetchOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
-    PHFetchResult *fetchResult = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:fetchOptions];
-    if (fetchResult != nil && fetchResult.count > 0) {
-        asset = [fetchResult lastObject];
-    }
-    if (asset) {
-        returnString = asset.localIdentifier;
-    }
-    return returnString;
 }
 
 @end
