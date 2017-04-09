@@ -17,11 +17,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-    self.idDict = [[NSMutableDictionary alloc]init];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    
+    if(self.idDict == nil) {
+        self.idDict = [[NSMutableDictionary alloc]init];
+    }
     
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -74,7 +77,9 @@
     }
     else {
         NSDictionary *row = [self.json objectAtIndex:indexPath.row];
-        if([self.idDict objectForKey:[row objectForKey:@"id"]])
+        NSString *tableId = [[NSNumber numberWithInt:(int)[row objectForKey:@"id"]]stringValue];
+        NSString *selected = [self.idDict objectForKey:tableId];
+        if(selected != nil)
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
         else
             cell.accessoryType = UITableViewCellAccessoryNone;
@@ -87,12 +92,12 @@
    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
     NSDictionary *row = [self.json objectAtIndex:indexPath.row];
-    if([self.idDict objectForKey:[row objectForKey:@"id"]]) {
-        [self.idDict removeObjectForKey:[row objectForKey:@"id"]];
+    if([self.idDict objectForKey:[[NSNumber numberWithInt:(int)[row objectForKey:@"id"]]stringValue]]) {
+        [self.idDict removeObjectForKey:[[NSNumber numberWithInt:(int)[row objectForKey:@"id"]]stringValue]];
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
     else {
-        [self.idDict setObject:[row objectForKey:self.display] forKey:[row objectForKey:@"id"]];
+        [self.idDict setObject:[row objectForKey:self.display] forKey:[[NSNumber numberWithInt:(int)[row objectForKey:@"id"]]stringValue]];
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     NSString *displayString = @"";

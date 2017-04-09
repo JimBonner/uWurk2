@@ -9,8 +9,9 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import "ListMultiSelectorTableViewController.h"
 
-@interface EmployeeStep3ViewController : BaseViewController
+@interface EmployeeStep3ViewController : BaseViewController <ListMultiSelectorTableViewControllerProtocol>
 
 @end
 

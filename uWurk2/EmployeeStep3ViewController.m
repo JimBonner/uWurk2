@@ -61,15 +61,18 @@
     } else {
         self.btnFluEngNo.selected = TRUE;
     }
-    if([self.appDelegate.user objectForKey:@"languages_display"]) {
-        [self.lblLanguages setText:[self.appDelegate.user objectForKey:@"languages_display"]];
-    } else {
-        [self.lblLanguages setText:@""];
+    if([self.appDelegate.user objectForKey:@"languages_dictionary"] == nil) {
+        self.langDict = [[NSMutableDictionary alloc]init];
+        [self.appDelegate.user setObjectOrNil:[self objectToJsonString:self.langDict] forKey:@"languages_dictionary"];
     }
-    //    if([self.appDelegate.user objectForKey:@"languages_dictionary"]) {
-    //        NSDictionary *tempDict = [self.appDelegate.user objectForKey:@"languages_dictionary"];
-    //        self.langDict = [tempDict mutableCopy];
-    //    }
+    if([[self jsonStringToObject:[self.appDelegate.user objectForKey:@"languages_dictionary"]]count] == 0) {
+        self.lblLanguages.text = @"";
+        [self.addLanguage setTitle:@"Add Languages" forState:UIControlStateNormal];
+    } else {
+        self.langDict = [self jsonStringToObject:[self.appDelegate.user objectForKey:@"languages_dictionary"]];
+        self.lblLanguages.text = [self languageDictionaryToString:self.langDict];
+        [self.addLanguage setTitle:@"Modify Languages" forState:UIControlStateNormal];
+    }
     if([[self.appDelegate.user objectForKey:@"has_body_art"]intValue] == 1){
         self.btnBodyArtYes.selected = TRUE;
         [self pressYesBdyArt:self.btnBodyArtYes];
@@ -97,33 +100,9 @@
     } else {
         self.btnEarGauges.selected = FALSE;
     }
-    
-    if(!self.langDict & 0) {
-        self.langDict = [[NSMutableDictionary alloc]init];
-        
-        NSArray *languages = [self.appDelegate.user objectForKey:@"languages"];
-        NSString *displayString = @"";
-        for(NSDictionary *dict in languages) {
-            [self.langDict setObject:[dict objectForKey:@"description"] forKey:[dict objectForKey:@"id"]];
-            if([displayString length] >0) {
-                displayString = [displayString stringByAppendingString:@", "];
-            }
-            displayString = [displayString stringByAppendingString:[dict objectForKey:@"description"]];
-        }
-        
-        [self SelectionMade:self.langDict displayString:displayString];
-    }
-    
-    if([self.lblLanguages.text length] > 0) {
-        [self.addLanguage setTitle:@"Modify Languages" forState:UIControlStateNormal];
-        [self.appDelegate.user setObjectOrNil:self.lblLanguages.text forKey:@"languages_display"];
-    } else {
-        [self.addLanguage setTitle:@"Add Languages" forState:UIControlStateNormal];
-        [self.appDelegate.user setObjectOrNil:@"" forKey:@"languages_display"];
-    }
 }
 
--(void) viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
@@ -135,8 +114,9 @@
     [self.appDelegate.user setObjectOrNil:self.btnDLYes.selected ? @"1" : @"0" forKey:@"has_drivers_license"];
     [self.appDelegate.user setObjectOrNil:self.btnVetYes.selected ? @"1" : @"0" forKey:@"is_veteran"];
     [self.appDelegate.user setObjectOrNil:self.btnFluEngYes.selected ? @"1" : @"0" forKey:@"fluent_english"];
-    [self.appDelegate.user setObjectOrNil:self.lblLanguages.text forKey:@"languages_display"];
-    //    [self.appDelegate.user setObjectOrNil:self.langDict forKey:@"languages_dictionary"];
+    if(self.langDict != nil) {
+        [self.appDelegate.user setObjectOrNil:[self objectToJsonString:self.langDict]  forKey:@"languages_dictionary"];
+    }
     [self.appDelegate.user setObjectOrNil:self.btnBodyArtYes.selected ? @"1" : @"0" forKey:@"has_body_art"];
     [self.appDelegate.user setObjectOrNil:self.btnFacialPiercing.selected ? @"1" : @"0" forKey:@"has_facial_piercing"];
     [self.appDelegate.user setObjectOrNil:self.btnTattoo.selected ? @"1" : @"0" forKey:@"has_tattoo"];
@@ -146,16 +126,6 @@
     [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
                       Key:@"user_data"];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)changeCheckBox:(UIButton *)sender
 {
@@ -281,13 +251,25 @@
     [self.navigationController pushViewController:myController animated:TRUE];
 }
 
--(void) SelectionMade:(NSMutableDictionary *)dict displayString:(NSString *)displayString
+- (void)SelectionMade:(NSString *)user withDict:(NSMutableDictionary *)dict displayString:(NSString *)displayString
 {
     self.lblLanguages.text = displayString;
     self.langDict = dict;
+    [self.appDelegate.user setObject:[self objectToJsonString:self.langDict] forKey:@"languages_dictionary"];
+}
+
+- (NSString *)languageDictionaryToString:(NSMutableDictionary *)langDict
+{
+    NSString *langString = @"";
+    NSArray *keys = self.langDict.allKeys;
+    for(NSString *key in keys) {
+        if([langString length] >0) {
+            langString = [langString stringByAppendingString:@", "];
+        }
+        langString = [langString stringByAppendingString:[langDict objectForKey:key]];
+    }
     
-    [self.appDelegate.user setObjectOrNil:displayString forKey:@"languages_display"];
-    //    [self.appDelegate.user setObjectOrNil:dict forKey:@"languages_dictionary"];
+    return langString;
 }
 
 @end
