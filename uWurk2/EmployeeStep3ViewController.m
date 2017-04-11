@@ -203,12 +203,17 @@
         [Error appendString:@"\n\nSelect Body Art Type"];
     }
     if ((Error.length) > 50) {
-        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"OOPS!"
-                                                         message:Error
-                                                        delegate:self
-                                               cancelButtonTitle:@"OK"
-                                               otherButtonTitles: nil];
-        [alert show];
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:@"Oops!"
+                                     message:Error
+                                     preferredStyle:UIAlertControllerStyleActionSheet];
+        [alert addAction:[UIAlertAction
+                          actionWithTitle:@"OK"
+                          style:UIAlertActionStyleDefault
+                          handler:^(UIAlertAction *action)
+                          {
+                          }]];
+        [self presentViewController:alert animated:TRUE completion:nil];
     } else {
         if([params count]){
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -220,12 +225,17 @@
                 }
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error: %@", error);
-                UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                                 message:@"Unable to contact server"
-                                                                delegate:self
-                                                       cancelButtonTitle:@"OK"
-                                                       otherButtonTitles: nil];
-                [alert show];
+                UIAlertController * alert = [UIAlertController
+                                             alertControllerWithTitle:@"Oops!"
+                                             message:@"Unable to contact server"
+                                             preferredStyle:UIAlertControllerStyleActionSheet];
+                [alert addAction:[UIAlertAction
+                                  actionWithTitle:@"OK"
+                                  style:UIAlertActionStyleDefault
+                                  handler:^(UIAlertAction *action)
+                                  {
+                                  }]];
+                [self presentViewController:alert animated:TRUE completion:nil];
             }];
         }
         else{

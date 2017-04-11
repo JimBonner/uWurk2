@@ -52,27 +52,20 @@
     [self assignValue:[self.appDelegate.user objectForKey:@"birthdate"] control:self.txtBirthDate];
     [self assignValue:[self.appDelegate.user objectForKey:@"cell_phone"] control:self.txtPhone];
     if([[self.appDelegate.user objectForKey:@"gender"] isEqualToString:@"m"])
+    {
         self.btnGenderMale.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"gender"] isEqualToString:@"f"])
+    } else if([[self.appDelegate.user objectForKey:@"gender"] isEqualToString:@"f"])
+    {
         self.btnGenderFemale.selected = TRUE;
-    if([[self.appDelegate.user objectForKey:@"contact_method_id"] intValue] == 0)
-    {
-        self.btnEmail.selected = FALSE;
-        self.btnText.selected = FALSE;
     }
-    else if([[self.appDelegate.user objectForKey:@"contact_method_id"] intValue] == 1)
+    self.btnEmail.selected = FALSE;
+    self.btnText.selected  = FALSE;
+    if(([[self.appDelegate.user objectForKey:@"contact_method_id"] intValue] & 1) == 1)
     {
         self.btnEmail.selected = TRUE;
-        self.btnText.selected = FALSE;
     }
-    if([[self.appDelegate.user objectForKey:@"contact_method_id"] intValue] == 2)
+    if(([[self.appDelegate.user objectForKey:@"contact_method_id"] intValue] & 2 ) == 2)
     {
-        self.btnText.selected = TRUE;
-        self.btnEmail.selected = FALSE;
-    }
-    else if([[self.appDelegate.user objectForKey:@"contact_method_id"] intValue] == 3)
-    {
-        self.btnEmail.selected = TRUE;
         self.btnText.selected = TRUE;
     }
 }

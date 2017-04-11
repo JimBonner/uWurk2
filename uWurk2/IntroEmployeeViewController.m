@@ -4,6 +4,7 @@
 //
 //  Created by Avery Bonner on 9/2/15.
 //  Copyright (c) 2015 Michael Brown. All rights reserved.
+//  Copyright (c) 2017 Jim Bonner. All rights reserved.
 //
 
 #import "IntroEmployeeViewController.h"
@@ -24,7 +25,7 @@
 {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:false];
-    [self saveUserDefault:@"1" Key:@"register_Active"];
+//    [self saveUserDefault:@"1" Key:@"employee_register_active"];
 
     NSDictionary *dict = [NSDictionary dictionaryWithDictionary:[self jsonStringToObject:[self getUserDefault:@"user_data"]]];
     [self.appDelegate setUser:[dict mutableCopy]];
@@ -57,7 +58,8 @@
                       Key:@"user_data"];
 }
 
-- (IBAction)pressEmailRegister:(id)sender {
+- (IBAction)pressEmailRegister:(id)sender
+{
     AFHTTPRequestOperationManager *manager = [self getManager];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
@@ -73,8 +75,11 @@
                 if(([self getUserDefault:@"email"] == nil) &&
                    ([self getUserDefault:@"api_auth_token"] == nil))
                 {
+                    [self saveUserDefault:@"employee" Key:@"user_type"];
                     [self saveUserDefault:[self.emailText text] Key:@"email"];
                     [self saveUserDefault:[responseObject objectForKey:@"api_auth_token"] Key:@"api_auth_token"];
+                    
+                    [self.appDelegate.user setObjectOrNil:@"employee" forKey:@"user_type"];
                     [self.appDelegate.user setObjectOrNil:[self getUserDefault:@"email"] forKey:@"email"];
                     [self.appDelegate.user setObjectOrNil:[self getUserDefault:@"api_auth_token"] forKey:@"api_auth_token"];
                 }
@@ -118,12 +123,17 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error)
         {
             NSLog(@"Error: %@", error);
-            UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                             message:@"Unable to contact server"
-                                                            delegate:self
-                                                   cancelButtonTitle:@"OK"
-                                                   otherButtonTitles: nil];
-            [alert show];
+            UIAlertController * alert = [UIAlertController
+                                         alertControllerWithTitle:@"Oops!"
+                                         message:@"Unable to contact server"
+                                         preferredStyle:UIAlertControllerStyleActionSheet];
+            [alert addAction:[UIAlertAction
+                              actionWithTitle:@"OK"
+                              style:UIAlertActionStyleDefault
+                              handler:^(UIAlertAction *action)
+                              {
+                              }]];
+            [self presentViewController:alert animated:TRUE completion:nil];
         }];
     }
 }
@@ -138,9 +148,29 @@
      handler:^(FBSDKLoginManagerLoginResult *result, NSError *facebookError) {
          if (facebookError) {
              DLog(@"Process error");
-             [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+             UIAlertController * alert = [UIAlertController
+                                          alertControllerWithTitle:@"Oops!"
+                                          message:@"Something went wrong. Please try again."
+                                          preferredStyle:UIAlertControllerStyleActionSheet];
+             [alert addAction:[UIAlertAction
+                               actionWithTitle:@"OK"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction *action)
+                               {
+                               }]];
+             [self presentViewController:alert animated:TRUE completion:nil];
          } else if (result.isCancelled) {
-             [[[UIAlertView alloc] initWithTitle:@"Log In Canceled" message:@"Facebook login was canceled." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+             UIAlertController * alert = [UIAlertController
+                                          alertControllerWithTitle:@"Oops!"
+                                          message:@"Facebook login was canceled."
+                                          preferredStyle:UIAlertControllerStyleActionSheet];
+             [alert addAction:[UIAlertAction
+                               actionWithTitle:@"OK"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction *action)
+                               {
+                               }]];
+             [self presentViewController:alert animated:TRUE completion:nil];
              DLog(@"Cancelled");
          } else {
              DLog(@"Logged in");
@@ -185,32 +215,35 @@
                               [nav pushViewController:myController animated:TRUE];
                           }
                           else {
-                              UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                                               message:[responseObject objectForKey:@"message"]
-                                                                              delegate:self
-                                                                     cancelButtonTitle:@"OK"
-                                                                     otherButtonTitles: nil];
-                              [alert show];
+                              UIAlertController * alert = [UIAlertController
+                                                           alertControllerWithTitle:@"Oops!"
+                                                           message:[responseObject objectForKey:@"message"]
+                                                           preferredStyle:UIAlertControllerStyleActionSheet];
+                              [alert addAction:[UIAlertAction
+                                                actionWithTitle:@"OK"
+                                                style:UIAlertActionStyleDefault
+                                                handler:^(UIAlertAction *action)
+                                                {
+                                                }]];
                               [self.navigationController popViewControllerAnimated:TRUE];
-
                           }
                           
                       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                           NSLog(@"Error: %@", error);
-                          UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                                           message:@"Unable to validate login"
-                                                                          delegate:self
-                                                                 cancelButtonTitle:@"OK"
-                                                                 otherButtonTitles: nil];
-                          [alert show];
-                          
-                          
+                          UIAlertController * alert = [UIAlertController
+                                                       alertControllerWithTitle:@"Oops!"
+                                                       message:@"Unable to validate login"
+                                                       preferredStyle:UIAlertControllerStyleActionSheet];
+                          [alert addAction:[UIAlertAction
+                                            actionWithTitle:@"OK"
+                                            style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction *action)
+                                            {
+                                            }]];
+                          [self.navigationController popViewControllerAnimated:TRUE];
                       }];
-                      
                   }
-                  
               }];
-            
          }
      }];
 }

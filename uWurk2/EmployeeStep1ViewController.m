@@ -37,11 +37,12 @@
     [self.appDelegate.user setObjectOrNil:[self getUserDefault:@"api_auth_token"] forKey:@"api_auth_token"];
 }
 
-
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.viewCommunication.layer.cornerRadius = 10;
+    
+    [self getLatestUserDataFromDbms];
     
     [self assignValue:[self.appDelegate.user objectForKey:@"email"] control:self.txtEmail];
     [self.txtEmail setAlpha:0.2];
@@ -59,23 +60,24 @@
         self.btnGenderMale.selected = TRUE;
         self.btnGenderFemale.selected = FALSE;
     }
-    if([[self.appDelegate.user objectForKey:@"contact_text"] isEqualToString:@"1"]) {
-        self.btnText.selected = TRUE;
-    } else {
-        self.btnText.selected = FALSE;
-    }
-    if([[self.appDelegate.user objectForKey:@"contact_email"] isEqualToString:@"1"]) {
-        self.btnEmail.selected  = TRUE;
-    } else {
+    self.btnEmail.selected = FALSE;
+    self.btnText.selected  = FALSE;
+    NSUInteger contact = [[self.appDelegate.user objectForKey:@"contact_method_id"]integerValue];
+    if(contact == 1) {
+        self.btnText.selected  = TRUE;
         self.btnEmail.selected = FALSE;
+    } else if(contact == 2) {
+        self.btnText.selected  = FALSE;
+        self.btnEmail.selected = TRUE;
+    } else if(contact == 3) {
+        self.btnEmail.selected = TRUE;
+        self.btnText.selected  = TRUE;
     }
 }
 
 -(void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
-    [self saveUserData];
 }
 
 -(void) saveUserData
@@ -87,14 +89,21 @@
     [self.appDelegate.user setObjectOrNil:[self.txtBirthDate text] forKey:@"birthdate"];
     [self.appDelegate.user setObjectOrNil:[self.txtPhone text] forKey:@"cell_phone"];
     [self.appDelegate.user setObjectOrNil:self.btnGenderMale.selected ? @"m" : @"f" forKey:@"gender"];
-    [self.appDelegate.user setObjectOrNil:self.btnText.selected ? @"1" : @"0" forKey:@"contact_text"];
-    [self.appDelegate.user setObjectOrNil:self.btnEmail.selected ? @"1" : @"0" forKey:@"contact_email"];
+    NSUInteger contact = 0;
+    if(self.btnText.selected) {
+        contact = contact | 1;
+    }
+    if(self.btnEmail.selected) {
+        contact = contact | 2;
+    }
+    [self.appDelegate.user setObjectOrNil:[[NSNumber numberWithInteger:contact]stringValue] forKey:@"contact_method_id"];
     
     [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
                       Key:@"user_data"];
 }
 
-- (IBAction)changeCheckBox:(UIButton *)sender {
+- (IBAction)changeCheckBox:(UIButton *)sender
+{
     [sender setSelected:!sender.selected];
 }
 
@@ -110,8 +119,14 @@
     [self updateParamDict:params value:self.txtBirthDate.text key:@"birthdate"];
     [self updateParamDict:params value:self.txtPhone.text key:@"cell_phone"];
     [self updateParamDict:params value:self.btnGenderMale.selected ? @"m" : @"f" key:@"gender"];
-    [self updateParamDict:params value:self.btnText.selected ? @"1" : @"0" key:@"contact_text"];
-    [self updateParamDict:params value:self.btnEmail.selected ? @"1" : @"0" key:@"contact_email"];
+    NSUInteger contact = 0;
+    if(self.btnText.selected) {
+        contact = contact | 1;
+    }
+    if(self.btnEmail.selected) {
+        contact = contact | 2;
+    }
+    [self updateParamDict:params value:[[NSNumber numberWithInteger:contact]stringValue]  key:@"contact_method_id"];
 
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
@@ -140,46 +155,47 @@
         [Error appendString:@"\n\nPhone Number"];
     }
     if ((Error.length) > 50) {
-        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"OOPS!"
-                                                         message:Error
-                                                        delegate:self
-                                               cancelButtonTitle:@"OK"
-                                               otherButtonTitles: nil];
-        [alert show];
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:@"Oops!"
+                                     message:Error
+                                     preferredStyle:UIAlertControllerStyleActionSheet];
+        [alert addAction:[UIAlertAction
+                          actionWithTitle:@"OK"
+                          style:UIAlertActionStyleDefault
+                          handler:^(UIAlertAction *action)
+                          {
+                          }]];
+        [self presentViewController:alert animated:TRUE completion:nil];
     }
     else
     {
         if([params count])
         {
-            [self.appDelegate.user setObjectOrNil:[self.txtPassword text] forKey:@"password"];
-            [self.appDelegate.user setObjectOrNil:[self.txtVerifyPassword text] forKey:@"verifyPW"];
-            [self.appDelegate.user setObjectOrNil:[self.txtFirstName text] forKey:@"first_name"];
-            [self.appDelegate.user setObjectOrNil:[self.txtLastName text] forKey:@"last_name"];
-            [self.appDelegate.user setObjectOrNil:[self.txtBirthDate text] forKey:@"birthdate"];
-            [self.appDelegate.user setObjectOrNil:[self.txtPhone text] forKey:@"cell_phone"];
-            [self.appDelegate.user setObjectOrNil:self.btnGenderMale.selected ? @"m" : @"f" forKey:@"gender"];
-            [self.appDelegate.user setObjectOrNil:self.btnText.selected ? @"1" : @"0" forKey:@"contact_text"];
-            [self.appDelegate.user setObjectOrNil:self.btnEmail.selected ? @"1" : @"0" forKey:@"contact_email"];
-
-            [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"JSON: %@", responseObject);
-                if([self validateResponse:responseObject])
-                {
-                    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup2"];
-                    [self.navigationController pushViewController:myController animated:TRUE];
-                    
-                }
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"Error: %@", error);
-                UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                                 message:@"Unable to contact server"
-                                                                delegate:self
-                                                       cancelButtonTitle:@"OK"
-                                                       otherButtonTitles: nil];
-                [alert show];
-            }];
-        }
-        else{
+            [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params
+                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                      NSLog(@"JSON: %@", responseObject);
+                      if([self validateResponse:responseObject])
+                      {
+                          UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup2"];
+                          [self.navigationController pushViewController:myController animated:TRUE];
+                      }
+                  }
+                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                      NSLog(@"Error: %@", error);
+                      UIAlertController * alert = [UIAlertController
+                                                   alertControllerWithTitle:@"Oops!"
+                                                   message:@"Unable to contact server"
+                                                   preferredStyle:UIAlertControllerStyleActionSheet];
+                      [alert addAction:[UIAlertAction
+                                        actionWithTitle:@"OK"
+                                        style:UIAlertActionStyleDefault
+                                        handler:^(UIAlertAction *action)
+                                        {
+                                        }]];
+                      [self presentViewController:alert animated:TRUE completion:nil];
+                 }
+             ];
+        } else {
             UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup2"];
             [self.navigationController pushViewController:myController animated:TRUE];
         }

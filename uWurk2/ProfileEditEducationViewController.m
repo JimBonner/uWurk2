@@ -54,7 +54,7 @@
     NSString *SchoolStatus3;
     NSString *SchoolStatus4;
     NSString *SchoolStatus5;
-    NSArray *eduArray = [self.appDelegate.user objectForKey:@"education"];
+    NSArray  *eduArray = [self.appDelegate.user objectForKey:@"education"];
     if([eduArray count] >=1) {
         self.educationCount = @"2";
         NSDictionary *firstEduItem = [eduArray objectAtIndex:0];

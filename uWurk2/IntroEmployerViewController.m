@@ -4,6 +4,7 @@
 //
 //  Created by Avery Bonner on 9/2/15.
 //  Copyright (c) 2015 Michael Brown. All rights reserved.
+//  Copyright (c) 2017 Jim Bonner. All rights reserved.
 //
 
 #import "IntroEmployerViewController.h"
@@ -57,22 +58,32 @@
             }
             else
             {
-                UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                                 message:[responseObject objectForKey:@"message"]
-                                                                delegate:self
-                                                       cancelButtonTitle:@"OK"
-                                                       otherButtonTitles: nil];
-                [alert show];
+                UIAlertController * alert = [UIAlertController
+                                             alertControllerWithTitle:@"Oops!"
+                                             message:[responseObject objectForKey:@"message"]
+                                             preferredStyle:UIAlertControllerStyleActionSheet];
+                [alert addAction:[UIAlertAction
+                                  actionWithTitle:@"OK"
+                                  style:UIAlertActionStyleDefault
+                                  handler:^(UIAlertAction *action)
+                                  {
+                                  }]];
+                [self.navigationController popViewControllerAnimated:TRUE];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error)
         {
             NSLog(@"Error: %@", error);
-            UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                             message:@"Unable to contact server"
-                                                            delegate:self
-                                                   cancelButtonTitle:@"OK"
-                                                   otherButtonTitles: nil];
-            [alert show];
+            UIAlertController * alert = [UIAlertController
+                                         alertControllerWithTitle:@"Oops!"
+                                         message:@"Unable to contact server"
+                                         preferredStyle:UIAlertControllerStyleActionSheet];
+            [alert addAction:[UIAlertAction
+                              actionWithTitle:@"OK"
+                              style:UIAlertActionStyleDefault
+                              handler:^(UIAlertAction *action)
+                              {
+                              }]];
+            [self.navigationController popViewControllerAnimated:TRUE];
         }];
     }
 }
@@ -86,9 +97,29 @@
      handler:^(FBSDKLoginManagerLoginResult *result, NSError *facebookError) {
          if (facebookError) {
              DLog(@"Process error");
-             [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+             UIAlertController * alert = [UIAlertController
+                                          alertControllerWithTitle:@"Oops!"
+                                          message:@"Something went wrong.  Please try again."
+                                          preferredStyle:UIAlertControllerStyleActionSheet];
+             [alert addAction:[UIAlertAction
+                               actionWithTitle:@"OK"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction *action)
+                               {
+                               }]];
+             [self.navigationController popViewControllerAnimated:TRUE];
          } else if (result.isCancelled) {
-             [[[UIAlertView alloc] initWithTitle:@"Log In Canceled" message:@"Facebook login was canceled." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+             UIAlertController * alert = [UIAlertController
+                                          alertControllerWithTitle:@"Oops!"
+                                          message:@"Facebood login was cancelled."
+                                          preferredStyle:UIAlertControllerStyleActionSheet];
+             [alert addAction:[UIAlertAction
+                               actionWithTitle:@"OK"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction *action)
+                               {
+                               }]];
+             [self.navigationController popViewControllerAnimated:TRUE];
              DLog(@"Cancelled");
          } else {
              DLog(@"Logged in");
@@ -137,37 +168,33 @@
                           }
                           else
                           {
-                              UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                                               message:[responseObject objectForKey:@"message"]
-                                                                              delegate:self
-                                                                     cancelButtonTitle:@"OK"
-                                                                     otherButtonTitles: nil];
-                              [alert show];
+                              UIAlertController * alert = [UIAlertController
+                                                           alertControllerWithTitle:@"Oops!"
+                                                           message:[responseObject objectForKey:@"message"]
+                                                           preferredStyle:UIAlertControllerStyleActionSheet];
+                              [alert addAction:[UIAlertAction
+                                                actionWithTitle:@"OK"
+                                                style:UIAlertActionStyleDefault
+                                                handler:^(UIAlertAction *action)
+                                                {
+                                                }]];
                               [self.navigationController popViewControllerAnimated:TRUE];
-                              
                           }
                       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                           NSLog(@"Error: %@", error);
-                          UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                                           message:@"Unable to validate login"
-                                                                          delegate:self
-                                                                 cancelButtonTitle:@"OK"
-                                                                 otherButtonTitles: nil];
-                          [alert show];
-                          
-                          
+                          UIAlertController * alert = [UIAlertController
+                                                       alertControllerWithTitle:@"Oops!"
+                                                       message:@"Unable to validate login"
+                                                       preferredStyle:UIAlertControllerStyleActionSheet];
+                          [alert addAction:[UIAlertAction
+                                            actionWithTitle:@"OK"
+                                            style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction *action)
+                                            {
+                                            }]];
                       }];
-                      
                   }
-                  
               }];
-             
-             
-             
-             
-             
-             
-             
          }
      }];
 }

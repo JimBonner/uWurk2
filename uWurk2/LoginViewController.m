@@ -4,6 +4,7 @@
 //
 //  Created by Avery Bonner on 8/31/15.
 //  Copyright (c) 2015 Michael Brown. All rights reserved.
+//  Copyright (c) 2017 Jim Bonner. All rights reserved.
 //
 
 #import "LoginViewController.h"
@@ -24,8 +25,10 @@
 
 @implementation LoginViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    
     self.viewForgotPassTip.layer.cornerRadius = 10;
     self.viewForgotPass.alpha = 0;
     self.heightForgotPass.constant = 0;
@@ -38,35 +41,53 @@
     [self.view layoutIfNeeded];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
+    
     if([self getUserDefault:@"api_auth_token"] != nil) {
-        [self loginWithStoredToken];
-        [self.view setHidden:TRUE];
+///        [self loginWithStoredToken];
+///        [self.view setHidden:TRUE];
     }
 
 }
 
-- (IBAction)loginEmail:(id)sender {
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+}
+
+- (IBAction)loginEmail:(id)sender
+{
     
     NSString *emailRegEx = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,10}";
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
     if ([emailTest evaluateWithObject:self.txtEmail.text] == NO) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Email Error"
-                                                        message:@"Please enter a valid email address"
-                                                       delegate:self
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:@"Oops!"
+                                     message:@"Please enter a valid email address"
+                                     preferredStyle:UIAlertControllerStyleActionSheet];
+        [alert addAction:[UIAlertAction
+                          actionWithTitle:@"OK"
+                          style:UIAlertActionStyleDefault
+                          handler:^(UIAlertAction *action)
+                          {
+                          }]];
+        [self.navigationController popViewControllerAnimated:TRUE];
         return;
     }
     if([self.txtPassword.text length] < 6) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Password Error"
-                                                        message:@"Password must be at least 6 characters"
-                                                       delegate:self
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:@"Oops!"
+                                     message:@"Password must be at least 6 characters"
+                                     preferredStyle:UIAlertControllerStyleActionSheet];
+        [alert addAction:[UIAlertAction
+                          actionWithTitle:@"OK"
+                          style:UIAlertActionStyleDefault
+                          handler:^(UIAlertAction *action)
+                          {
+                          }]];
+        [self.navigationController popViewControllerAnimated:TRUE];
         return;
     }
     [self loginWithUser:self.txtEmail.text  password:self.txtPassword.text];
@@ -87,7 +108,8 @@
          }
      }];
 }
-- (IBAction)pressSend:(id)sender {
+- (IBAction)pressSend:(id)sender
+{
     AFHTTPRequestOperationManager *manager = [self getManager];
         [manager POST:@"http://uwurk.tscserver.com/api/v1/forgot-password" parameters:self.txtForgotPass.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
@@ -95,12 +117,17 @@
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
-            UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                             message:@"Unable to contact server"
-                                                            delegate:self
-                                                   cancelButtonTitle:@"OK"
-                                                   otherButtonTitles: nil];
-            [alert show];
+            UIAlertController * alert = [UIAlertController
+                                         alertControllerWithTitle:@"Oops!"
+                                         message:@"Unable to contact server"
+                                         preferredStyle:UIAlertControllerStyleActionSheet];
+            [alert addAction:[UIAlertAction
+                              actionWithTitle:@"OK"
+                              style:UIAlertActionStyleDefault
+                              handler:^(UIAlertAction *action)
+                              {
+                              }]];
+            [self.navigationController popViewControllerAnimated:TRUE];
         }];
 }
 
@@ -112,7 +139,7 @@
                                       preferredStyle:UIAlertControllerStyleAlert];
         
         [alert addAction:[UIAlertAction
-                          actionWithTitle:@"Employee Start Setup"
+                          actionWithTitle:@"user Start Setup"
                           style:UIAlertActionStyleDefault
                           handler:^(UIAlertAction * action)
                           {
@@ -120,7 +147,7 @@
                               [alert dismissViewControllerAnimated:YES completion:nil];
                           }]];
         [alert addAction:[UIAlertAction
-                          actionWithTitle:@"Employee Landing"
+                          actionWithTitle:@"user Landing"
                           style:UIAlertActionStyleDefault
                           handler:^(UIAlertAction * action)
                           {
@@ -128,7 +155,7 @@
                               [alert dismissViewControllerAnimated:YES completion:nil];
                           }]];
         [alert addAction:[UIAlertAction
-                          actionWithTitle:@"Employer Start Setup"
+                          actionWithTitle:@"user Start Setup"
                           style:UIAlertActionStyleDefault
                           handler:^(UIAlertAction * action)
                           {
@@ -136,7 +163,7 @@
                               [alert dismissViewControllerAnimated:YES completion:nil];
                           }]];
         [alert addAction:[UIAlertAction
-                          actionWithTitle:@"Employer Landing"
+                          actionWithTitle:@"user Landing"
                           style:UIAlertActionStyleDefault
                           handler:^(UIAlertAction * action)
                           {
@@ -155,20 +182,24 @@
     }
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)loginEmployerProfileSetup:(id)sender {
+- (IBAction)loginEmployerProfileSetup:(id)sender
+{
     [self loginWithUser:@"employersetup@mailinator.com" password:@"uwurk"];
 }
 
-- (IBAction)loginEmployerLanding:(id)sender {
+- (IBAction)loginEmployerLanding:(id)sender
+{
     [self loginWithUser:@"employerLanding@mailinator.com" password:@"uwurk"];
 }
 
-- (IBAction)loginEmployeeProfileSetup:(id)sender {
+- (IBAction)loginEmployeeProfileSetup:(id)sender
+{
     [self loginWithUser:@"employeesetup@mailinator.com" password:@"uwurk"];
 }
 
@@ -180,13 +211,14 @@
     [self logout];
 }
 
-- (void)loginWithStoredToken {
+- (void)loginWithStoredToken
+{
     AFHTTPRequestOperationManager *manager = [self getManager];
     
     [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
         NSLog(@"String: %@", operation.responseString);
         if([self validateResponse:responseObject]){
-            if([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"employee"]) {
+            if([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"user"]) {
                 if([[[self.appDelegate user] objectForKey:@"profile_complete"] intValue] >= 100) {
                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                     [self.navigationController setViewControllers:@[myController] animated:YES];
@@ -234,7 +266,7 @@
                     
                 }
             }
-            else if([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"employer"]) {
+            else if([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"user"]) {
                 if([[[self.appDelegate user] objectForKey:@"profile_complete"] intValue] >= 100) {
                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerLanding"];
                     [self.navigationController setViewControllers:@[myController] animated:YES];
@@ -246,13 +278,17 @@
             }
             else {
                 // All hell has broken loose
-                UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                                 message:@"Unable to validate user type"
-                                                                delegate:self
-                                                       cancelButtonTitle:@"OK"
-                                                       otherButtonTitles: nil];
-                [alert show];
-                
+                UIAlertController * alert = [UIAlertController
+                                             alertControllerWithTitle:@"Oops!"
+                                             message:@"Unable to validate user type"
+                                             preferredStyle:UIAlertControllerStyleActionSheet];
+                [alert addAction:[UIAlertAction
+                                  actionWithTitle:@"OK"
+                                  style:UIAlertActionStyleDefault
+                                  handler:^(UIAlertAction *action)
+                                  {
+                                  }]];
+                [self.navigationController popViewControllerAnimated:TRUE];
             }
         }
     }
@@ -265,7 +301,7 @@
 - (void)loginWithUser:(NSString*)user password:(NSString*)password
 {
     AFHTTPRequestOperationManager *manager = [self getManagerNoAuth];
-    //NSDictionary *parameters = @{@"email": @"employee@asdf.com",@"password": @"uwurk"};
+    //NSDictionary *parameters = @{@"email": @"user@asdf.com",@"password": @"uwurk"};
     NSDictionary *parameters = @{@"email": user,@"password": password};
     
     //NSDictionary *parameters = @{@"email": self.txtEmail.text,@"password": self.txtPassword.text};
@@ -285,39 +321,52 @@
            }
             else
             {
-                UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                                 message:@"Unable to validate login"
-                                                                delegate:self
-                                                       cancelButtonTitle:@"OK"
-                                                       otherButtonTitles: nil];
-                [alert show];
+                UIAlertController * alert = [UIAlertController
+                                             alertControllerWithTitle:@"Oops!"
+                                             message:@"Unable to validate login"
+                                             preferredStyle:UIAlertControllerStyleActionSheet];
+                [alert addAction:[UIAlertAction
+                                  actionWithTitle:@"OK"
+                                  style:UIAlertActionStyleDefault
+                                  handler:^(UIAlertAction *action)
+                                  {
+                                  }]];
+                [self.navigationController popViewControllerAnimated:TRUE];
             }
         }
         else{
-            UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                             message:@"Unable to validate login"
-                                                            delegate:self
-                                                   cancelButtonTitle:@"OK"
-                                                   otherButtonTitles: nil];
-            [alert show];
-            
+            UIAlertController * alert = [UIAlertController
+                                         alertControllerWithTitle:@"Oops!"
+                                         message:@"Unable to validate login"
+                                         preferredStyle:UIAlertControllerStyleActionSheet];
+            [alert addAction:[UIAlertAction
+                              actionWithTitle:@"OK"
+                              style:UIAlertActionStyleDefault
+                              handler:^(UIAlertAction *action)
+                              {
+                              }]];
+            [self.navigationController popViewControllerAnimated:TRUE];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                         message:@"Unable to validate login"
-                                                        delegate:self
-                                               cancelButtonTitle:@"OK"
-                                               otherButtonTitles: nil];
-        [alert show];
-        
-        
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:@"Oops!"
+                                     message:@"Unable to validate login"
+                                     preferredStyle:UIAlertControllerStyleActionSheet];
+        [alert addAction:[UIAlertAction
+                          actionWithTitle:@"OK"
+                          style:UIAlertActionStyleDefault
+                          handler:^(UIAlertAction *action)
+                          {
+                          }]];
+        [self.navigationController popViewControllerAnimated:TRUE];
     }];
 }
 
 
-- (IBAction)signInWithFacebookButtonPressed:(id)sender {
+- (IBAction)signInWithFacebookButtonPressed:(id)sender
+{
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
     [login logOut];
     [login
@@ -326,9 +375,29 @@
      handler:^(FBSDKLoginManagerLoginResult *result, NSError *facebookError) {
          if (facebookError) {
              DLog(@"Process error");
-             [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+             UIAlertController * alert = [UIAlertController
+                                          alertControllerWithTitle:@"Oops!"
+                                          message:@"Something went wrong. Please try again."
+                                          preferredStyle:UIAlertControllerStyleActionSheet];
+             [alert addAction:[UIAlertAction
+                               actionWithTitle:@"OK"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction *action)
+                               {
+                               }]];
+             [self.navigationController popViewControllerAnimated:TRUE];
          } else if (result.isCancelled) {
-             [[[UIAlertView alloc] initWithTitle:@"Log In Canceled" message:@"Facebook login was canceled." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+             UIAlertController * alert = [UIAlertController
+                                          alertControllerWithTitle:@"Oops!"
+                                          message:@"Facebook login was canceled."
+                                          preferredStyle:UIAlertControllerStyleActionSheet];
+             [alert addAction:[UIAlertAction
+                               actionWithTitle:@"OK"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction *action)
+                               {
+                               }]];
+             [self.navigationController popViewControllerAnimated:TRUE];
              DLog(@"Cancelled");
          } else {
              DLog(@"Logged in");
@@ -366,46 +435,49 @@
                               }
                               else
                               {
-                                  UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                                                   message:@"Unable to validate login"
-                                                                                  delegate:self
-                                                                         cancelButtonTitle:@"OK"
-                                                                         otherButtonTitles: nil];
-                                  [alert show];
+                                  UIAlertController * alert = [UIAlertController
+                                                               alertControllerWithTitle:@"Oops!"
+                                                               message:@"Unable to validate login"
+                                                               preferredStyle:UIAlertControllerStyleActionSheet];
+                                  [alert addAction:[UIAlertAction
+                                                    actionWithTitle:@"OK"
+                                                    style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction *action)
+                                                    {
+                                                    }]];
+                                  [self.navigationController popViewControllerAnimated:TRUE];
                               }
                           }
                           else{
-                              UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                                               message:@"Unable to validate login"
-                                                                              delegate:self
-                                                                     cancelButtonTitle:@"OK"
-                                                                     otherButtonTitles: nil];
-                              [alert show];
-                              
+                              UIAlertController * alert = [UIAlertController
+                                                           alertControllerWithTitle:@"Oops!"
+                                                           message:@"Unable to validate login"
+                                                           preferredStyle:UIAlertControllerStyleActionSheet];
+                              [alert addAction:[UIAlertAction
+                                                actionWithTitle:@"OK"
+                                                style:UIAlertActionStyleDefault
+                                                handler:^(UIAlertAction *action)
+                                                {
+                                                }]];
+                              [self.navigationController popViewControllerAnimated:TRUE];
                           }
                           
                       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                           NSLog(@"Error: %@", error);
-                          UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                                           message:@"Unable to validate login"
-                                                                          delegate:self
-                                                                 cancelButtonTitle:@"OK"
-                                                                 otherButtonTitles: nil];
-                          [alert show];
-                          
-                          
+                          UIAlertController * alert = [UIAlertController
+                                                       alertControllerWithTitle:@"Oops!"
+                                                       message:@"Unable to validate login"
+                                                       preferredStyle:UIAlertControllerStyleActionSheet];
+                          [alert addAction:[UIAlertAction
+                                            actionWithTitle:@"OK"
+                                            style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction *action)
+                                            {
+                                            }]];
+                          [self.navigationController popViewControllerAnimated:TRUE];
                       }];
-                      
-                  }
-              
+                  }              
               }];
-             
-
-             
-             
-
-
-
          }
      }];
 }

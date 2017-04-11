@@ -4,6 +4,7 @@
 //
 //  Created by Avery Bonner on 9/7/15.
 //  Copyright (c) 2015 Michael Brown. All rights reserved.
+//  Copyright (c) 2017 Jim Bonner. All rights reserved.
 //
 
 #import "BaseViewController.h"
@@ -15,18 +16,13 @@
 
 @implementation BaseViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 
     UIImage* logoImage = [UIImage imageNamed:@"UWURK-header-logo"];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:logoImage];
     
-    
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-//                                   initWithTarget:self
-//                                   action:@selector(dismissKeyboard)];
-//    
-//    [self.view addGestureRecognizer:tap];
     self.appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     
     if ([[self.parentViewController parentViewController] isKindOfClass:[UITabBarController class]]) {
@@ -79,9 +75,8 @@
 -(NSMutableDictionary*)updateParamDict:(NSMutableDictionary*)paramDict value:(NSString*)value key:(NSString*)key{
     NSString *trimmedValue = [value stringByTrimmingCharactersInSet:
                               [NSCharacterSet whitespaceCharacterSet]];
-    if([trimmedValue length]>0){
-///        NSString *s = [self.appDelegate.user objectForKey:key];
-//        if(![value isEqualToString:[self.appDelegate.user objectForKey:key]])
+    if([trimmedValue length] > 0)
+    {
             [paramDict setObject:value forKey:key];
     }
     return paramDict;
@@ -102,20 +97,53 @@
 {
     if([response isKindOfClass:[NSDictionary class]])
     {
+        NSLog(@"%@",response);
         id n = [response valueForKey:@"result"];
         if([n isKindOfClass:[NSNumber class]])
         {
             if([((NSNumber*)n) isEqual:@1])
             {
+                if([response objectForKey:@"user"])
+                {
+                    NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
+                    // Clean up this null nonsense
+                    for (NSString* key in [response objectForKey:@"user"])
+                    {
+                        id value = [[response objectForKey:@"user"] objectForKey:key];
+                        if(![value isEqual:[NSNull null]])
+                            [tempDict setObject:value forKey:key];
+                    }
+                    [self.appDelegate setUser:tempDict];
+                 }
                 return TRUE;
             }
         }
     }
-    else
-    {
-        return FALSE;
-    }
     return FALSE;
+}
+            
+- (void)getLatestUserDataFromDbms
+{
+    AFHTTPRequestOperationManager *manager = [self getManager];
+    [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              NSLog(@"JSON: %@", responseObject);
+              [self validateResponse:responseObject]; }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Error: %@", error);
+              UIAlertController * alert = [UIAlertController
+                                           alertControllerWithTitle:@"Oops!"
+                                           message:@"Unable to contact server"
+                                           preferredStyle:UIAlertControllerStyleActionSheet];
+              [alert addAction:[UIAlertAction
+                                actionWithTitle:@"OK"
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction *action)
+                                {
+                                }]];
+              [self presentViewController:alert animated:TRUE completion:nil];
+          }
+     ];
 }
 
 -(void)setupUXforUser{
@@ -123,7 +151,7 @@
     return;
     
 //    // Decision time
-//    if([[[self.appDelegate user] objectForKey:@"user_type"] isEqualToString:@"employer"]){
+//    if([[[self.appDelegate user] objectForKey:@"user_type"] isEqualToString:@"employee"]){
 //        //        if((long)[[self.appDelegate user] objectForKey:@"profile_complete"] >= 0)
 //        if(TRUE)
 //        {
@@ -258,20 +286,18 @@
 //    
 //    
     
-    
-    
-    
 }
 
-
-- (void)logout {
+- (void)logout
+{
     [self saveUserDefault:@"" Key:@"api_auth_token"];
     IntroViewController *introViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"InitialView"];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:introViewController];
     self.view.window.rootViewController = nav;
 }
 
--(void)setFrame:(UIView*)frameToMove basedOnView:(UIView*)basedOnView offset:(float)offset{
+-(void)setFrame:(UIView*)frameToMove basedOnView:(UIView*)basedOnView offset:(float)offset
+{
     CGRect frame = frameToMove.frame;
     frame.origin.y = basedOnView.frame.origin.y + basedOnView.frame.size.height + offset;
     frameToMove.frame = frame;
@@ -341,4 +367,30 @@
     return object;
 }
 
+#pragma -
+#pragma User Data File Handling
+
+- (void)saveUserDataToDocumentsFile
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *filePath = [self.appDelegate.documentsDirectory stringByAppendingPathComponent:                        [NSString stringWithFormat:@"%@.%@",[self getUserDefault:@"email"],@".user_data.json"]];
+    
+    if([fileManager fileExistsAtPath:filePath]) {
+        [fileManager removeItemAtPath:filePath error:nil];
+    }
+    NSString *string = [self objectToJsonString:self.appDelegate.user];
+    [string writeToFile:filePath atomically:NO
+                                   encoding:NSUTF8StringEncoding
+                                      error:nil];
+}
+
+- (void)getUserDataFromDocumentsFile
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *filePath = [self.appDelegate.documentsDirectory stringByAppendingPathComponent:                          [NSString stringWithFormat:@"%@.%@",[self getUserDefault:@"email"],@".user_data.json"]];
+    if([fileManager fileExistsAtPath:filePath]) {
+        NSString *string = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+        [self.appDelegate setUser:[self jsonStringToObject:string]];
+    }
+}
 @end

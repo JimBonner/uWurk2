@@ -15,7 +15,8 @@
 
 @implementation IntroViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     // Do any additional setup after loading the view.
@@ -25,7 +26,7 @@
 {
     [super viewWillAppear:animated];
     if(([self getUserDefault:@"api_auth_token"] != nil) &&
-       ([[self getUserDefault:@"register_Active"] isEqualToString:@"0"])) {
+       ([[self getUserDefault:@"employee_register_active"] isEqualToString:@"0"])) {
         LoginViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
         [self.navigationController pushViewController:myController animated:FALSE];
     }
@@ -34,18 +35,10 @@
     }
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 @end

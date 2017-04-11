@@ -4,6 +4,7 @@
 //
 //  Created by Avery Bonner on 9/4/15.
 //  Copyright (c) 2015 Michael Brown. All rights reserved.
+//  Copyright © 2016 Jim Bonner. All rights reserved.
 //
 
 #import "EmployerStep2ViewController.h"
@@ -77,12 +78,17 @@
         [Error appendString:@"\n\nIndustry"];
     }
     if ((Error.length) > 50) {
-        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"OOPS!"
-                                                         message:Error
-                                                        delegate:self
-                                               cancelButtonTitle:@"OK"
-                                               otherButtonTitles: nil];
-        [alert show];
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:@"Oops!"
+                                     message:Error
+                                     preferredStyle:UIAlertControllerStyleActionSheet];
+        [alert addAction:[UIAlertAction
+                          actionWithTitle:@"OK"
+                          style:UIAlertActionStyleDefault
+                          handler:^(UIAlertAction *action)
+                          {
+                          }]];
+        [self presentViewController:alert animated:TRUE completion:nil];
     }
     else {
 
@@ -101,12 +107,17 @@
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
-            UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                             message:@"Unable to contact server"
-                                                            delegate:self
-                                                   cancelButtonTitle:@"OK"
-                                                   otherButtonTitles: nil];
-            [alert show];
+            UIAlertController * alert = [UIAlertController
+                                         alertControllerWithTitle:@"Oops!"
+                                         message:@"Unable to contact server"
+                                         preferredStyle:UIAlertControllerStyleActionSheet];
+            [alert addAction:[UIAlertAction
+                              actionWithTitle:@"OK"
+                              style:UIAlertActionStyleDefault
+                              handler:^(UIAlertAction *action)
+                              {
+                              }]];
+            [self presentViewController:alert animated:TRUE completion:nil];
         }];
     }
     else{

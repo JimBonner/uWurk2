@@ -3,6 +3,7 @@
 //  
 //
 //  Created by Avery Bonner on 11/22/15.
+//  Copyright (c) 2017 Jim Bonner. All rights reserved.
 //
 //
 

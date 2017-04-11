@@ -4,14 +4,13 @@
 //
 //  Created by Avery Bonner on 8/31/15.
 //  Copyright (c) 2015 Michael Brown. All rights reserved.
+//  Copyright (c) 2015 Jim Bonner. All rights reserved.
 //
 
 #import "AppDelegate.h"
 #import "UIColor+uWurkColors.h"
-//Facebook imports
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
-
 
 @interface AppDelegate ()
 

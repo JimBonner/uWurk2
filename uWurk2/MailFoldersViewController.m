@@ -38,8 +38,8 @@
             self.json2 = [NSMutableArray arrayWithArray:[responseObject objectForKey:@"folders"]];
             self.json = [[NSMutableArray alloc] init];
 
-            if([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"employee"]) {
-                [self.json addObject:@{@"id":@"0",@"name":@"From Employer"}];
+            if([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"user"]) {
+                [self.json addObject:@{@"id":@"0",@"name":@"From user"}];
                 [self.json addObject:@{@"id":@"1",@"name":@"From uWurk"}];
             }
             else {
@@ -55,22 +55,32 @@
                 });
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error: %@", error);
-                UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                                 message:@"Unable to contact server"
-                                                                delegate:self
-                                                       cancelButtonTitle:@"OK"
-                                                       otherButtonTitles: nil];
-                [alert show];
+                UIAlertController * alert = [UIAlertController
+                                             alertControllerWithTitle:@"Oops!"
+                                             message:@"Unable to contact server"
+                                             preferredStyle:UIAlertControllerStyleActionSheet];
+                [alert addAction:[UIAlertAction
+                                  actionWithTitle:@"OK"
+                                  style:UIAlertActionStyleDefault
+                                  handler:^(UIAlertAction *action)
+                                  {
+                                  }]];
+                [self.navigationController popViewControllerAnimated:TRUE];
             }];
 
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
-            UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                             message:@"Unable to contact server"
-                                                            delegate:self
-                                                   cancelButtonTitle:@"OK"
-                                                   otherButtonTitles: nil];
-            [alert show];
+            UIAlertController * alert = [UIAlertController
+                                         alertControllerWithTitle:@"Oops!"
+                                         message:@"Unable to contact server"
+                                         preferredStyle:UIAlertControllerStyleActionSheet];
+            [alert addAction:[UIAlertAction
+                              actionWithTitle:@"OK"
+                              style:UIAlertActionStyleDefault
+                              handler:^(UIAlertAction *action)
+                              {
+                              }]];
+            [self.navigationController popViewControllerAnimated:TRUE];
         }];
 }
 
@@ -153,22 +163,17 @@
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        
-        
-        
-        UIAlertController * alert=   [UIAlertController
-                                      alertControllerWithTitle:@"Confirm"
-                                      message:@"Are you sure you want to delete this folder?"
-                                      preferredStyle:UIAlertControllerStyleAlert];
-        
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:@"Oops!"
+                                     message:@"Are you sure you want to delete this folder?"
+                                     preferredStyle:UIAlertControllerStyleActionSheet];
+        [self.navigationController popViewControllerAnimated:TRUE];
         UIAlertAction* ok = [UIAlertAction
                              actionWithTitle:@"OK"
                              style:UIAlertActionStyleDefault
                              handler:^(UIAlertAction * action)
                              {
-                                 
                                  [alert dismissViewControllerAnimated:YES completion:nil];
-                                 
                                  
                                  AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
                                  manager.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -185,8 +190,8 @@
                                          self.json2 = [NSMutableArray arrayWithArray:[responseObject objectForKey:@"folders"]];
                                          self.json = [[NSMutableArray alloc] init];
                                          
-                                         if([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"employee"]) {
-                                             [self.json addObject:@{@"id":@"0",@"name":@"From Employer"}];
+                                         if([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"user"]) {
+                                             [self.json addObject:@{@"id":@"0",@"name":@"From user"}];
                                              [self.json addObject:@{@"id":@"1",@"name":@"From uWurk"}];
                                          }
                                          else {
@@ -198,12 +203,17 @@
                                          });
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                          NSLog(@"Error: %@", error);
-                                         UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                                                          message:@"Unable to contact server"
-                                                                                         delegate:self
-                                                                                cancelButtonTitle:@"OK"
-                                                                                otherButtonTitles: nil];
-                                         [alert show];
+                                         UIAlertController * alert = [UIAlertController
+                                                                      alertControllerWithTitle:@"Oops!"
+                                                                      message:@"Unable to contact server"
+                                                                      preferredStyle:UIAlertControllerStyleActionSheet];
+                                         [alert addAction:[UIAlertAction
+                                                           actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction *action)
+                                                           {
+                                                           }]];
+                                         [self.navigationController popViewControllerAnimated:TRUE];
                                      }];
                                      
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

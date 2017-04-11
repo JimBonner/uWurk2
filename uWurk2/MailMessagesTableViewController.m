@@ -40,12 +40,17 @@
         });
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                         message:@"Unable to contact server"
-                                                        delegate:self
-                                               cancelButtonTitle:@"OK"
-                                               otherButtonTitles: nil];
-        [alert show];
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:@"Oops!"
+                                     message:@"Unable to contact server"
+                                     preferredStyle:UIAlertControllerStyleActionSheet];
+        [alert addAction:[UIAlertAction
+                          actionWithTitle:@"OK"
+                          style:UIAlertActionStyleDefault
+                          handler:^(UIAlertAction *action)
+                          {
+                          }]];
+        [self.navigationController popViewControllerAnimated:TRUE];
     }];
     
 }
@@ -72,12 +77,12 @@
     if ([[parmdic objectForKey:@"discussion_status"] intValue] == 1) {
         cell.lblPosition.text = @"View Position";
         cell.lblPosition.font = [UIFont fontWithName:@"RobotoCondensed-Bold" size:17];
-        cell.lblSubject.text = @"NEW EMPLOYER!";
+        cell.lblSubject.text = @"NEW user!";
         cell.lblSubject.font = [UIFont fontWithName:@"RobotoCondensed-Bold" size:17];
     }
     else {
     cell.lblPosition.text = [parmdic objectForKey:@"position"];
-    if ([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"employer"]) {
+    if ([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"user"]) {
         cell.lblSubject.text = [NSString stringWithFormat:@"%@ %@",[parmdic objectForKey:@"to_first_name"],[parmdic objectForKey:@"to_last_name"]];
     }
     else
@@ -102,7 +107,7 @@
     UIImage *imageyes = [UIImage imageNamed: @"arrow-yes-min"];
     UIImage *imageno = [UIImage imageNamed: @"arrow-no-min"];
     UIImage *imagenew = [UIImage imageNamed: @"smiley-yellow"];
-    if([[[self.appDelegate user] objectForKey:@"user_type"] isEqualToString:@"employee"] && [parmdic objectForKey:@"employee_interest"] == (id)[NSNull null]) {
+    if([[[self.appDelegate user] objectForKey:@"user_type"] isEqualToString:@"user"] && [parmdic objectForKey:@"employee_interest"] == (id)[NSNull null]) {
         [cell.imageYesNo setImage:imagenew];
         cell.viewYesNoWidth.constant = 17;
     }
@@ -118,7 +123,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
         NSDictionary *dict = [self.json objectAtIndex:indexPath.row];
-    if ([[self.appDelegate.user objectForKey:@"user_type"]isEqualToString:@"employer"]) {
+    if ([[self.appDelegate.user objectForKey:@"user_type"]isEqualToString:@"user"]) {
         EmployerSendMessageViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerSendMessage"];
         [myController setMailMessagedict:dict];
         [self.navigationController pushViewController:myController animated:TRUE];
@@ -154,12 +159,18 @@
     
     UITableViewRowAction *delete = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *ip)
                                   {
-                                      
-                                      UIAlertController * alert=   [UIAlertController
-                                                                    alertControllerWithTitle:@"Confirm"
-                                                                    message:@"Are you sure you want to delete this message?"
-                                                                    preferredStyle:UIAlertControllerStyleAlert];
-                                      
+                                      UIAlertController * alert = [UIAlertController
+                                                                   alertControllerWithTitle:@"Oops!"
+                                                                   message:@"Are you sure you want to delete this message"
+                                                                   preferredStyle:UIAlertControllerStyleActionSheet];
+                                      [alert addAction:[UIAlertAction
+                                                        actionWithTitle:@"OK"
+                                                        style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction *action)
+                                                        {
+                                                        }]];
+                                      [self.navigationController popViewControllerAnimated:TRUE];
+                                    
                                       UIAlertAction* ok = [UIAlertAction
                                                            actionWithTitle:@"OK"
                                                            style:UIAlertActionStyleDefault
@@ -195,12 +206,18 @@
                                                                        });
                                                                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                                                        NSLog(@"Error: %@", error);
-                                                                       UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                                                                                        message:@"Unable to contact server"
-                                                                                                                       delegate:self
-                                                                                                              cancelButtonTitle:@"OK"
-                                                                                                              otherButtonTitles: nil];
-                                                                       [alert show];
+                                                                       UIAlertController * alert = [UIAlertController
+                                                                                                    alertControllerWithTitle:@"Oops!"
+                                                                                                    message:@"Unable to contact server."
+                                                                                                    preferredStyle:UIAlertControllerStyleActionSheet];
+                                                                       [alert addAction:[UIAlertAction
+                                                                                         actionWithTitle:@"OK"
+                                                                                         style:UIAlertActionStyleDefault
+                                                                                         handler:^(UIAlertAction *action)
+                                                                                         {
+                                                                                         }]];
+                                                                       [self presentViewController:alert animated:TRUE completion:nil];
+
                                                                    }];
                                                                    
                                                                    

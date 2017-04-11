@@ -3,6 +3,7 @@
 //  
 //
 //  Created by Avery Bonner on 11/22/15.
+//  Copyright (c) 2017 Jim Bonner. All rights reserved.
 //
 //
 
@@ -64,6 +65,7 @@
     }
     [self pressSkipPhoto:nil];
     
+    self.bioTextView.text = [self.appDelegate.user objectForKey:@"bio_text"];
     if([[self.appDelegate.user objectForKey:@"skip_bio"]intValue] == 1) {
         [self.btnBioSkip setSelected:FALSE];
     } else {
@@ -108,7 +110,6 @@
                           picker.delegate = self;
                           picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
                           [alert dismissViewControllerAnimated:YES completion:nil];
-                          [self presentViewController:picker animated:true completion:nil];
                       }]];
     [alert addAction:[UIAlertAction
                       actionWithTitle:@"Take Photo"
@@ -119,7 +120,6 @@
                           picker.delegate = self;
                           picker.sourceType = UIImagePickerControllerSourceTypeCamera;
                           [alert dismissViewControllerAnimated:YES completion:nil];
-                          [self presentViewController:picker animated:true completion:nil];
                       }]];
      [alert addAction:[UIAlertAction
                        actionWithTitle:@"Cancel"
@@ -171,6 +171,7 @@
                            handler:^(UIAlertAction *action)
                            {
                            }]];
+        [self presentViewController:alert animated:TRUE completion:nil];
     } else  {
         alert = [UIAlertController
                  alertControllerWithTitle:@"Success!"
@@ -183,8 +184,8 @@
                           {
                               
                           }]];
+        [self presentViewController:alert animated:TRUE completion:nil];
     }
-    [self presentViewController:alert animated:TRUE completion:nil];
 }
 
 - (IBAction)changeCheckBox:(UIButton *)sender {
@@ -246,7 +247,6 @@
     } else {
         [self savePhotoDataToDbms];
     }
-
 }
 
 NSString *returnString;
@@ -263,6 +263,7 @@ UIImage  *returnImage;
              [formData appendPartWithFileData:imageData name:@"photo_file" fileName:@"photo.jpg" mimeType:@"image/jpeg"];
          } success:^(AFHTTPRequestOperation *operation, id responseObject) {
              if(self.btnBioSkip.selected == TRUE) {
+//                 [self saveUserDefault:@"0" Key:@"employee_register_active"];
                  UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                  [self.navigationController setViewControllers:@[myController] animated:YES];
              } else {
@@ -287,7 +288,7 @@ UIImage  *returnImage;
 
 - (void)saveBioDataToDbms
 {
-    if(self.btnBioSkip == FALSE) {
+    if(self.btnBioSkip.selected == FALSE) {
         NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
         [self updateParamDict:params value:self.bioTextView.text key:@"biography"];
         AFHTTPRequestOperationManager *manager = [self getManager];

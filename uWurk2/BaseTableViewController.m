@@ -4,6 +4,7 @@
 //
 //  Created by Avery Bonner on 9/7/15.
 //  Copyright (c) 2015 Michael Brown. All rights reserved.
+//  Copyright (c) 2017 Jim Bonner. All rights reserved.
 //
 
 #import "BaseTableViewController.h"
@@ -87,8 +88,6 @@
     return paramDict;
 }
 
-
-
 -(BOOL) validateResponse:(NSDictionary*)response{
     if([response isKindOfClass:[NSDictionary class]]){
         NSLog(@"%@",response);
@@ -121,7 +120,7 @@
     return;
     
 //    // Decision time
-//    if([[[self.appDelegate user] objectForKey:@"user_type"] isEqualToString:@"employer"]){
+//    if([[[self.appDelegate user] objectForKey:@"user_type"] isEqualToString:@"user"]){
 //        //        if((long)[[self.appDelegate user] objectForKey:@"profile_complete"] >= 0)
 //        if(TRUE)
 //        {
