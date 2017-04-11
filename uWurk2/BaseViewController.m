@@ -106,7 +106,6 @@
                 if([response objectForKey:@"user"])
                 {
                     NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
-                    // Clean up this null nonsense
                     for (NSString* key in [response objectForKey:@"user"])
                     {
                         id value = [[response objectForKey:@"user"] objectForKey:key];
@@ -114,7 +113,8 @@
                             [tempDict setObject:value forKey:key];
                     }
                     [self.appDelegate setUser:tempDict];
-                 }
+                    return TRUE;
+                }
                 return TRUE;
             }
         }
@@ -124,16 +124,21 @@
             
 - (void)getLatestUserDataFromDbms
 {
+    if(![self getUserDefault:@"api_auth_token"]) {
+        return;
+    }
+
     AFHTTPRequestOperationManager *manager = [self getManager];
     [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               NSLog(@"JSON: %@", responseObject);
-              [self validateResponse:responseObject]; }
+              if(![self validateResponse:responseObject]) {
+              } }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
               UIAlertController * alert = [UIAlertController
                                            alertControllerWithTitle:@"Oops!"
-                                           message:@"Unable to contact server"
+                                           message:@"Unable to get data from server"
                                            preferredStyle:UIAlertControllerStyleActionSheet];
               [alert addAction:[UIAlertAction
                                 actionWithTitle:@"OK"

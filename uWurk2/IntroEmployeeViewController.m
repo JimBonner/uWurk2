@@ -25,17 +25,13 @@
 {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:false];
-//    [self saveUserDefault:@"1" Key:@"employee_register_active"];
-
-    NSDictionary *dict = [NSDictionary dictionaryWithDictionary:[self jsonStringToObject:[self getUserDefault:@"user_data"]]];
-    [self.appDelegate setUser:[dict mutableCopy]];
 }
 
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    [self.emailText setText:[self.appDelegate.user objectForKey:@"email"]];
+    [self.emailText setText:[self getUserDefault:@"email"]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,7 +43,7 @@
 {
     [super viewWillDisappear:animated];
     
-    [self saveUserData];
+///    [self saveUserData];
 }
 
 -(void)saveUserData
@@ -78,12 +74,7 @@
                     [self saveUserDefault:@"employee" Key:@"user_type"];
                     [self saveUserDefault:[self.emailText text] Key:@"email"];
                     [self saveUserDefault:[responseObject objectForKey:@"api_auth_token"] Key:@"api_auth_token"];
-                    
-                    [self.appDelegate.user setObjectOrNil:@"employee" forKey:@"user_type"];
-                    [self.appDelegate.user setObjectOrNil:[self getUserDefault:@"email"] forKey:@"email"];
-                    [self.appDelegate.user setObjectOrNil:[self getUserDefault:@"api_auth_token"] forKey:@"api_auth_token"];
                 }
-                
                 EmployeeStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeStep1ViewController"];
                 [self.navigationController pushViewController:myController animated:TRUE];
             } else {
@@ -105,7 +96,9 @@
                 
                 if([self getUserDefault:@"email"] &&
                    [self getUserDefault:@"api_auth_token"] &&
-                   [[self getUserDefault:@"email"] isEqualToString:[self.emailText text]])
+                   [[self getUserDefault:@"email"] isEqualToString:[self.emailText text]] &&
+                   [message containsString:@"email"] &&
+                   [message containsString:@"taken"])
                 {
                     UIAlertAction *ok = [UIAlertAction
                                          actionWithTitle:@"Continue"

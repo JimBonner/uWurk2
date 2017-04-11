@@ -18,15 +18,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Do any additional setup after loading the view.
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     if(([self getUserDefault:@"api_auth_token"] != nil) &&
-       ([[self getUserDefault:@"employee_register_active"] isEqualToString:@"0"])) {
+       ([[self.appDelegate.user objectForKey:@"register_complete"] isEqualToString:@"1"])) {
         LoginViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
         [self.navigationController pushViewController:myController animated:FALSE];
     }

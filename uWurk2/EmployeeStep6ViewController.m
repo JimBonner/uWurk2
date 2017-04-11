@@ -263,7 +263,6 @@ UIImage  *returnImage;
              [formData appendPartWithFileData:imageData name:@"photo_file" fileName:@"photo.jpg" mimeType:@"image/jpeg"];
          } success:^(AFHTTPRequestOperation *operation, id responseObject) {
              if(self.btnBioSkip.selected == TRUE) {
-//                 [self saveUserDefault:@"0" Key:@"employee_register_active"];
                  UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                  [self.navigationController setViewControllers:@[myController] animated:YES];
              } else {

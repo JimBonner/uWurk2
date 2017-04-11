@@ -32,19 +32,15 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self.appDelegate.user setObjectOrNil:[self getUserDefault:@"email"] forKey:@"email"];
-    [self.appDelegate.user setObjectOrNil:[self getUserDefault:@"api_auth_token"] forKey:@"api_auth_token"];
 }
 
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     self.viewCommunication.layer.cornerRadius = 10;
     
-    [self getLatestUserDataFromDbms];
-    
-    [self assignValue:[self.appDelegate.user objectForKey:@"email"] control:self.txtEmail];
+    [self assignValue:[self getUserDefault:@"email"] control:self.txtEmail];
     [self.txtEmail setAlpha:0.2];
     [self.txtEmail setEnabled:NO];
     [self assignValue:[self.appDelegate.user objectForKey:@"password"] control:self.txtPassword];
