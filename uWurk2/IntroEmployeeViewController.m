@@ -74,9 +74,24 @@
                     [self saveUserDefault:@"employee" Key:@"user_type"];
                     [self saveUserDefault:[self.emailText text] Key:@"email"];
                     [self saveUserDefault:[responseObject objectForKey:@"api_auth_token"] Key:@"api_auth_token"];
+                    [self getLatestUserDataFromDbmsWithCompletion:^(NSInteger result) {
+                        if(result == 1) {
+                            EmployeeStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeStep1ViewController"];
+                            [self.navigationController pushViewController:myController animated:TRUE];
+                        } else {
+                            UIAlertController * alert = [UIAlertController
+                                                         alertControllerWithTitle:@"Oops!"
+                                                         message:@"Unable to get data from server"
+                                                         preferredStyle:UIAlertControllerStyleAlert];
+                            [alert addAction:[UIAlertAction
+                                              actionWithTitle:@"OK"
+                                              style:UIAlertActionStyleDefault
+                                              handler:^(UIAlertAction *action)
+                                              {
+                                              }]];
+                            [self presentViewController:alert animated:TRUE completion:nil];
+                        }}];
                 }
-                EmployeeStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeStep1ViewController"];
-                [self.navigationController pushViewController:myController animated:TRUE];
             } else {
                 NSDictionary *dictionary = [responseObject objectForKey:@"messages"];
                 NSArray *array = [dictionary objectForKey:@"email"];
@@ -102,12 +117,26 @@
                 {
                     UIAlertAction *ok = [UIAlertAction
                                          actionWithTitle:@"Continue"
-                                         style:UIAlertActionStyleDefault
-                                         handler:^(UIAlertAction * action)
+                                         style:UIAlertActionStyleDefault                                         handler:^(UIAlertAction * action)
                                          {
                                              [alert dismissViewControllerAnimated:YES completion:nil];
-                                             EmployeeStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeStep1ViewController"];
-                                             [self.navigationController pushViewController:myController animated:TRUE];
+                                             [self getLatestUserDataFromDbmsWithCompletion:^(NSInteger result) {
+                                                 if(result == 1) {
+                                                     EmployeeStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeStep1ViewController"];
+                                                     [self.navigationController pushViewController:myController animated:TRUE];
+                                                 } else {
+                                                     UIAlertController * alert = [UIAlertController
+                                                                                  alertControllerWithTitle:@"Oops!"
+                                                                                  message:@"Unable to get data from server"
+                                                                                  preferredStyle:UIAlertControllerStyleAlert];
+                                                     [alert addAction:[UIAlertAction
+                                                                       actionWithTitle:@"OK"
+                                                                       style:UIAlertActionStyleDefault
+                                                                       handler:^(UIAlertAction *action)
+                                                                       {
+                                                                       }]];
+                                                     [self presentViewController:alert animated:TRUE completion:nil];
+                                                 }}];
                                          }];
                     [alert addAction:ok];
                 }
@@ -119,7 +148,7 @@
             UIAlertController * alert = [UIAlertController
                                          alertControllerWithTitle:@"Oops!"
                                          message:@"Unable to contact server"
-                                         preferredStyle:UIAlertControllerStyleActionSheet];
+                                         preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction
                               actionWithTitle:@"OK"
                               style:UIAlertActionStyleDefault
@@ -194,15 +223,11 @@
                       [parameters setObject:email forKey:@"email"];
                       [parameters setObject:@"employee" forKey:@"type"];
                       [parameters setObject:@1 forKey:@"facebook"];
-                      
                       [manager POST:@"http://uwurk.tscserver.com/api/v1/register" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                          
                           NSLog(@"JSON: %@", responseObject);
-///                          BOOL bValid = [self validateResponse:responseObject];
+                          BOOL bValid = [self validateResponse:responseObject];
                           if([((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] != nil){
-                              
                               EmployeeStepSetupViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"IntroEmployee"];
-                              
                               UINavigationController *nav = self.navigationController;
                               [nav popToRootViewControllerAnimated:FALSE];
                               [nav pushViewController:myController animated:TRUE];
@@ -211,7 +236,7 @@
                               UIAlertController * alert = [UIAlertController
                                                            alertControllerWithTitle:@"Oops!"
                                                            message:[responseObject objectForKey:@"message"]
-                                                           preferredStyle:UIAlertControllerStyleActionSheet];
+                                                           preferredStyle:UIAlertControllerStyleAlert];
                               [alert addAction:[UIAlertAction
                                                 actionWithTitle:@"OK"
                                                 style:UIAlertActionStyleDefault
@@ -220,13 +245,12 @@
                                                 }]];
                               [self.navigationController popViewControllerAnimated:TRUE];
                           }
-                          
                       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                           NSLog(@"Error: %@", error);
                           UIAlertController * alert = [UIAlertController
                                                        alertControllerWithTitle:@"Oops!"
                                                        message:@"Unable to validate login"
-                                                       preferredStyle:UIAlertControllerStyleActionSheet];
+                                                       preferredStyle:UIAlertControllerStyleAlert];
                           [alert addAction:[UIAlertAction
                                             actionWithTitle:@"OK"
                                             style:UIAlertActionStyleDefault

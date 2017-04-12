@@ -93,7 +93,7 @@
     return paramDict;
 }
 
--(BOOL) validateResponse:(NSDictionary*)response
+-(BOOL) validateResponse:(NSDictionary *)response
 {
     if([response isKindOfClass:[NSDictionary class]])
     {
@@ -121,32 +121,19 @@
     }
     return FALSE;
 }
-            
-- (void)getLatestUserDataFromDbms
-{
-    if(![self getUserDefault:@"api_auth_token"]) {
-        return;
-    }
 
+- (void)getLatestUserDataFromDbmsWithCompletion:(void(^)(NSInteger result))completion
+{
     AFHTTPRequestOperationManager *manager = [self getManager];
     [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               NSLog(@"JSON: %@", responseObject);
-              if(![self validateResponse:responseObject]) {
-              } }
+              if([self validateResponse:responseObject]) {
+                  completion(1);
+              }}
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
-              UIAlertController * alert = [UIAlertController
-                                           alertControllerWithTitle:@"Oops!"
-                                           message:@"Unable to get data from server"
-                                           preferredStyle:UIAlertControllerStyleActionSheet];
-              [alert addAction:[UIAlertAction
-                                actionWithTitle:@"OK"
-                                style:UIAlertActionStyleDefault
-                                handler:^(UIAlertAction *action)
-                                {
-                                }]];
-              [self presentViewController:alert animated:TRUE completion:nil];
+              completion(0);
           }
      ];
 }

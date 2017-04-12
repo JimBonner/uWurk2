@@ -47,8 +47,6 @@
 -(void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
-    [self saveUserData];
 }
 
 -(void) saveUserData

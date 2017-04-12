@@ -35,5 +35,6 @@
 -(void)getUserDataFromDocumentsFile;
 -(void)getLatestUserDataFromDbms;
 -(void)logout;
+-(void)getLatestUserDataFromDbmsWithCompletion:(void(^)(NSInteger result))completion;
 
 @end

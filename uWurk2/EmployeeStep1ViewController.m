@@ -37,14 +37,13 @@
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
     self.viewCommunication.layer.cornerRadius = 10;
     
     [self assignValue:[self getUserDefault:@"email"] control:self.txtEmail];
     [self.txtEmail setAlpha:0.2];
     [self.txtEmail setEnabled:NO];
-    [self assignValue:[self.appDelegate.user objectForKey:@"password"] control:self.txtPassword];
-    [self assignValue:[self.appDelegate.user objectForKey:@"verifyPW"] control:self.txtVerifyPassword];
+    [self assignValue:@"" control:self.txtPassword];
+    [self assignValue:@"" control:self.txtVerifyPassword];
     [self assignValue:[self.appDelegate.user objectForKey:@"first_name"] control:self.txtFirstName];
     [self assignValue:[self.appDelegate.user objectForKey:@"last_name"] control:self.txtLastName];
     [self assignValue:[self.appDelegate.user objectForKey:@"birthdate"] control:self.txtBirthDate];
@@ -78,8 +77,6 @@
 
 -(void) saveUserData
 {
-    [self.appDelegate.user setObjectOrNil:[self.txtPassword text] forKey:@"password"];
-    [self.appDelegate.user setObjectOrNil:[self.txtVerifyPassword text] forKey:@"verifyPW"];
     [self.appDelegate.user setObjectOrNil:[self.txtFirstName text] forKey:@"first_name"];
     [self.appDelegate.user setObjectOrNil:[self.txtLastName text] forKey:@"last_name"];
     [self.appDelegate.user setObjectOrNil:[self.txtBirthDate text] forKey:@"birthdate"];
@@ -154,7 +151,7 @@
         UIAlertController * alert = [UIAlertController
                                      alertControllerWithTitle:@"Oops!"
                                      message:Error
-                                     preferredStyle:UIAlertControllerStyleActionSheet];
+                                     preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction
                           actionWithTitle:@"OK"
                           style:UIAlertActionStyleDefault
@@ -181,7 +178,7 @@
                       UIAlertController * alert = [UIAlertController
                                                    alertControllerWithTitle:@"Oops!"
                                                    message:@"Unable to contact server"
-                                                   preferredStyle:UIAlertControllerStyleActionSheet];
+                                                   preferredStyle:UIAlertControllerStyleAlert];
                       [alert addAction:[UIAlertAction
                                         actionWithTitle:@"OK"
                                         style:UIAlertActionStyleDefault
