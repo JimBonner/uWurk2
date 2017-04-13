@@ -47,6 +47,8 @@
 {
     [super viewWillAppear:animated];
     
+    NSLog(@"%@",self.appDelegate.user);
+    
     if([[self.appDelegate.user objectForKey:@"high_school_selected"]intValue] == 1){
         [self.btnHighSchool setSelected:TRUE];
     } else {
@@ -67,7 +69,6 @@
     } else {
         [self.btnGED setSelected:FALSE];
     }
-
     if([[self.appDelegate.user objectForKey:@"enrolled_selected"]intValue] == 1){
         [self.btnEnrolled setSelected:TRUE];
     } else {
@@ -231,8 +232,6 @@
 -(void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
-    [self saveUserData];
 }
 
 -(void) saveUserData
@@ -260,9 +259,6 @@
     } else {
         [self.appDelegate.user setObjectOrNil:[self.btnSchool titleForState:UIControlStateNormal] forKey:@"selected_school"];
     }
-    
-    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
-                      Key:@"user_data"];
 }
 
 - (IBAction)highSchoolPress:(id)sender
@@ -383,8 +379,6 @@
     [myController setTitle:@"States"];
     [myController setUser:@"selected_state"];
     
-    [self saveUserData];
-    
     [self.navigationController pushViewController:myController animated:TRUE];
 }
 
@@ -403,8 +397,6 @@
     [myController setSender:self.btnCity];
     [myController setTitle:@"Cities"];
     [myController setUser:@"selected_city"];
-    
-    [self saveUserData];
     
     [self.navigationController pushViewController:myController animated:TRUE];
 }
@@ -442,8 +434,6 @@
     [myController setTitle:@"Schools"];
     [myController setUser:@"selected_school"];
     
-    [self saveUserData];
-    
     [self.navigationController pushViewController:myController animated:TRUE];
 }
 
@@ -452,10 +442,10 @@
     AFHTTPRequestOperationManager *manager = [self getManager];
     if (self.btnHighSchool.isSelected){
         [self updateParamDict:self.params value:@"high_school" key:@"school_level[0]"];
-        [self.params setObject:[self.btnCity titleForState:UIControlStateNormal] forKey:@"town[0]"];
-    }
-    else
+        [self.params setObject:self.btnCity.titleLabel.text forKey:@"town[0]"];
+    } else {
         [self.params setObject:@"" forKey:@"town[0]"];
+    }
     if (self.btnCollege.isSelected){
         [self updateParamDict:self.params value:@"college" key:@"school_level[0]"];
     }
@@ -474,11 +464,12 @@
     if(self.btnAttended.isSelected) {
         [self updateParamDict:self.params value:@"3" key:@"status[0]"];
     }
-    [self.params setObject:[self.btnState titleForState:UIControlStateSelected] forKey:@"state[0]"];
-    [self.params setObject:[self.btnSchool titleForState:UIControlStateSelected] forKey:@"school[0]"];
+    [self.params setObject:self.btnState.titleLabel.text forKey:@"state[0]"];
+    [self.params setObject:self.btnSchool.titleLabel.text forKey:@"school[0]"];
     [self.params setObject:@"" forKey:@"other_location[0]"];
     [self.params setObject:@"" forKey:@"other_school[0]"];
     [self.params setObject:@"0" forKey:@"remove[0]"];
+    
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
     if (self.btnHighSchool.selected == NO && self.btnCollege.selected == NO && self.btnTradeSchool.selected == NO && self.btnGED.selected == NO) {
@@ -516,8 +507,6 @@
                  
                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup5"];
                     
-                    [self saveUserData];
-                    
                     [self.navigationController pushViewController:myController animated:TRUE];
                 }
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -536,9 +525,6 @@
             }];
         } else {
             UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup5"];
-            
-            [self saveUserData];
-            
             [self.navigationController pushViewController:myController animated:TRUE];
         }
     }

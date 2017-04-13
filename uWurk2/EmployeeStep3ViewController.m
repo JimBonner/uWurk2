@@ -68,18 +68,14 @@
     } else {
         self.btnFluEngNo.selected = TRUE;
     }
-//    if([self.appDelegate.user objectForKey:@"languages"] == nil) {
-//        self.langDict = [[NSMutableDictionary alloc]init];
-//        [self.appDelegate.user setObjectOrNil:[self objectToJsonString:self.langDict] forKey:@"languages_dictionary"];
-//    }
-//    if([[self jsonStringToObject:[self.appDelegate.user objectForKey:@"languages_dictionary"]]count] == 0) {
-//        self.lblLanguages.text = @"";
-//        [self.addLanguage setTitle:@"Add Languages" forState:UIControlStateNormal];
-//    } else {
-//        self.langDict = [self jsonStringToObject:[self.appDelegate.user objectForKey:@"languages_dictionary"]];
-//        self.lblLanguages.text = [self languageDictionaryToString:self.langDict];
-//        [self.addLanguage setTitle:@"Modify Languages" forState:UIControlStateNormal];
-//    }
+    if([self.appDelegate.user objectForKey:@"languages"] == nil) {
+        self.langDict = [[NSMutableDictionary alloc]init];
+        [self.lblLanguages setText:@""];
+        [self.addLanguage setTitle:@"Add Languages" forState:UIControlStateNormal];
+    } else {
+        [self.lblLanguages setText:@""];
+        [self.addLanguage setTitle:@"Modify Languages" forState:UIControlStateNormal];
+    }
     if([[self.appDelegate.user objectForKey:@"has_body_art"]intValue] == 1){
         self.btnBodyArtYes.selected = TRUE;
         [self pressYesBdyArt:self.btnBodyArtYes];
@@ -169,9 +165,7 @@
     [self updateParamDict:params value:self.btnTattoo.selected ? @"1" : @"0" key:@"has_tattoo"];
     [self updateParamDict:params value:self.btnTonguePiercing.selected ? @"1" : @"0" key:@"has_tongue_piercing"];
     if([self.lblLanguages.text length] > 0) {
-        NSArray *array = [self buildLanguageArrayFromDictionary:self.langDict];
-        NSString *json = [self objectToJsonString:self.langDict];
-        [self updateParamDict:params value:json key:@"languages"];
+//        [self updateParamDict:params value:json key:@"languages"];
     }
     
     NSMutableString *Error = [[NSMutableString alloc] init];
@@ -254,39 +248,9 @@
 {
     self.lblLanguages.text = displayString;
     self.langDict = dict;
-    [self.appDelegate.user setObject:[self objectToJsonString:self.langDict] forKey:@"languages_dictionary"];
 }
 
-- (NSString *)languageDictionaryToString:(NSMutableDictionary *)langDict
-{
-    NSString *langString = @"";
-    NSArray *keys = self.langDict.allKeys;
-    for(NSString *key in keys) {
-        if([langString length] >0) {
-            langString = [langString stringByAppendingString:@", "];
-        }
-        langString = [langString stringByAppendingString:[langDict objectForKey:key]];
-    }
-    
-    return langString;
-}
-
-- (NSMutableArray *)buildLanguageArrayFromDictionary:(NSMutableDictionary *)langDict
-{
-    NSMutableArray *langArray = [[NSMutableArray alloc]init];
-    NSArray *allKeys = [langDict allKeys];
-    for(NSString *key in allKeys) {
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-        [dict setValue:key forKey:@"id"];
-        NSString *string = [langDict objectForKey:key];
-        [dict setValue:string forKey:@"description"];
-        [langArray addObject:dict];
-    };
-    NSString *json = [self objectToJsonString:langArray];
-    return langArray;
-}
-
-- (NSMutableDictionary *)buildLanguageDictionaryFromArray:(NSMutableArray *)langArray
+- (NSMutableDictionary *)xbuildLanguageDictionaryFromArray:(NSMutableArray *)langArray
 {
     NSMutableDictionary *langDict =[[NSMutableDictionary alloc]init];
     

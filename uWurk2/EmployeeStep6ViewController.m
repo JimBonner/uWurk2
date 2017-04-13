@@ -76,7 +76,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self saveUserData];
+    [super viewWillDisappear:animated];
 }
 
 - (void)saveUserData
@@ -154,7 +154,6 @@
     } else {
         return;
     }
-    [self saveUserData];
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(NSDictionary *)contextInfo

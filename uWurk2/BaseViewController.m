@@ -348,7 +348,7 @@
 {
     NSError *err;
     NSData  *jsonData = [NSJSONSerialization dataWithJSONObject:object
-                                                        options:0
+                                                        options:NSJSONWritingPrettyPrinted
                                                           error:&err];
     NSString *string = [[NSString alloc] initWithData:jsonData
                                              encoding:NSUTF8StringEncoding];
@@ -361,10 +361,9 @@
     NSData  *jsonData =[string dataUsingEncoding:NSUTF8StringEncoding];
     id object = nil;
     if(jsonData!= nil){
-        object = (id)[NSJSONSerialization
-                      JSONObjectWithData:jsonData
-                                 options:NSJSONReadingMutableContainers
-                                   error:&err];
+        object = (id)[NSJSONSerialization JSONObjectWithData:jsonData
+                                                     options:NSJSONReadingMutableContainers
+                                                       error:&err];
     }
     
     return object;

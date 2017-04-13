@@ -69,8 +69,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LookupCellMultiple"];
-    if(cell == nil)
+    if(cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LookupCellMultiple"];
+    }
     
     if(self.bUseArray) {
         NSArray *row = [self.json objectAtIndex:indexPath.row];
@@ -78,27 +79,29 @@
     }
     else {
         NSDictionary *row = [self.json objectAtIndex:indexPath.row];
-        NSString *tableId = [[NSNumber numberWithInt:(int)[row objectForKey:@"id"]]stringValue];
-        NSString *selected = [self.idDict objectForKey:tableId];
-        if(selected != nil)
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        else
-            cell.accessoryType = UITableViewCellAccessoryNone;
+        NSString *langId = [[NSNumber numberWithInt:[[row objectForKey:@"id"]intValue]]stringValue];
         cell.textLabel.text = [row objectForKey:self.display];
+        NSString *selected = [self.idDict objectForKey:langId];
+        if(selected != nil) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
     }
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-   UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
     NSDictionary *row = [self.json objectAtIndex:indexPath.row];
-    if([self.idDict objectForKey:[[NSNumber numberWithInt:(int)[row objectForKey:@"id"]]stringValue]]) {
-        [self.idDict removeObjectForKey:[[NSNumber numberWithInt:(int)[row objectForKey:@"id"]]stringValue]];
+    if([self.idDict objectForKey:[[NSNumber numberWithInt:[[row objectForKey:@"id"]intValue]]stringValue]]) {
+        [self.idDict removeObjectForKey:[[NSNumber numberWithInteger:indexPath.row]stringValue]];
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
     else {
-        [self.idDict setObject:[row objectForKey:self.display] forKey:[[NSNumber numberWithInt:(int)[row objectForKey:@"id"]]stringValue]];
+        [self.idDict setObject:[row objectForKey:@"description"] forKey:[[NSNumber numberWithInt:[[row objectForKey:@"id"]intValue]]stringValue]];
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     NSString *displayString = @"";

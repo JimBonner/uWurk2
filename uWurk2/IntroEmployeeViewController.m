@@ -128,7 +128,6 @@
     }
 }
 
-
 - (IBAction)signInWithFacebookButtonPressed:(id)sender {
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
     [login logOut];
@@ -191,41 +190,41 @@
                       [parameters setObject:email forKey:@"email"];
                       [parameters setObject:@"employee" forKey:@"type"];
                       [parameters setObject:@1 forKey:@"facebook"];
-                      [manager POST:@"http://uwurk.tscserver.com/api/v1/register" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                          NSLog(@"JSON: %@", responseObject);
-                          BOOL bValid = [self validateResponse:responseObject];
-                          if([((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] != nil){
-                              EmployeeStepSetupViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"IntroEmployee"];
-                              UINavigationController *nav = self.navigationController;
-                              [nav popToRootViewControllerAnimated:FALSE];
-                              [nav pushViewController:myController animated:TRUE];
-                          }
-                          else {
-                              UIAlertController * alert = [UIAlertController
-                                                           alertControllerWithTitle:@"Oops!"
-                                                           message:[responseObject objectForKey:@"message"]
-                                                           preferredStyle:UIAlertControllerStyleAlert];
-                              [alert addAction:[UIAlertAction
-                                                actionWithTitle:@"OK"
-                                                style:UIAlertActionStyleDefault
-                                                handler:^(UIAlertAction *action)
-                                                {
-                                                }]];
-                              [self.navigationController popViewControllerAnimated:TRUE];
-                          }
-                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                          NSLog(@"Error: %@", error);
-                          UIAlertController * alert = [UIAlertController
-                                                       alertControllerWithTitle:@"Oops!"
-                                                       message:@"Unable to validate login"
-                                                       preferredStyle:UIAlertControllerStyleAlert];
-                          [alert addAction:[UIAlertAction
-                                            actionWithTitle:@"OK"
-                                            style:UIAlertActionStyleDefault
-                                            handler:^(UIAlertAction *action)
-                                            {
-                                            }]];
-                          [self.navigationController popViewControllerAnimated:TRUE];
+                      [manager POST:@"http://uwurk.tscserver.com/api/v1/register" parameters:parameters
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                NSLog(@"JSON: %@", responseObject);
+                                BOOL bValid = [self validateResponse:responseObject];
+                                if([((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] != nil){
+                                    EmployeeStepSetupViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"IntroEmployee"];
+                                    UINavigationController *nav = self.navigationController;
+                                    [nav popToRootViewControllerAnimated:FALSE];
+                                    [nav pushViewController:myController animated:TRUE];
+                                } else {
+                                    UIAlertController * alert = [UIAlertController
+                                                                 alertControllerWithTitle:@"Oops!"
+                                                                 message:[responseObject objectForKey:@"message"]
+                                                                 preferredStyle:UIAlertControllerStyleAlert];
+                                    [alert addAction:[UIAlertAction
+                                                      actionWithTitle:@"OK"
+                                                      style:UIAlertActionStyleDefault
+                                                      handler:^(UIAlertAction *action)
+                                                      {
+                                                      }]];
+                                    [self.navigationController popViewControllerAnimated:TRUE];
+                                }}
+                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"Error: %@", error);
+                                UIAlertController * alert = [UIAlertController
+                                                             alertControllerWithTitle:@"Oops!"
+                                                             message:@"Unable to validate login"
+                                                             preferredStyle:UIAlertControllerStyleAlert];
+                                [alert addAction:[UIAlertAction
+                                                  actionWithTitle:@"OK"
+                                                  style:UIAlertActionStyleDefault
+                                                  handler:^(UIAlertAction *action)
+                                                  {
+                                                  }]];
+                                [self.navigationController popViewControllerAnimated:TRUE];
                       }];
                   }
               }];

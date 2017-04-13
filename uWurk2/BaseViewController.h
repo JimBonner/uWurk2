@@ -33,8 +33,7 @@
 -(NSMutableDictionary*)updateParamDictDefault:(NSMutableDictionary*)paramDict value:(NSString*)value key:(NSString*)key def:(NSString*)def;
 -(void)saveUserDataToDocumentsFile;
 -(void)getUserDataFromDocumentsFile;
--(void)getLatestUserDataFromDbms;
 -(void)logout;
--(void)getLatestUserDataFromDbmsWithCompletion:(void(^)(NSInteger result))completion;
-
+- (void)getLatestUserDataFromDbmsWithCompletion:(void(^)(NSInteger result))completion
+;
 @end
