@@ -31,6 +31,8 @@
 {
     [super viewWillAppear:animated];
     
+    NSLog(@"%@",self.appDelegate.user);
+    
     [self.emailText setText:[self getUserDefault:@"email"]];
 }
 
@@ -42,16 +44,6 @@
 -(void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
-///    [self saveUserData];
-}
-
--(void)saveUserData
-{
-    [self.appDelegate.user setObjectOrNil:[self.emailText text] forKey:@"email"];
-    
-    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
-                      Key:@"user_data"];
 }
 
 - (IBAction)pressEmailRegister:(id)sender
@@ -78,18 +70,6 @@
                         if(result == 1) {
                             EmployeeStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeStep1ViewController"];
                             [self.navigationController pushViewController:myController animated:TRUE];
-                        } else {
-                            UIAlertController * alert = [UIAlertController
-                                                         alertControllerWithTitle:@"Oops!"
-                                                         message:@"Unable to get data from server"
-                                                         preferredStyle:UIAlertControllerStyleAlert];
-                            [alert addAction:[UIAlertAction
-                                              actionWithTitle:@"OK"
-                                              style:UIAlertActionStyleDefault
-                                              handler:^(UIAlertAction *action)
-                                              {
-                                              }]];
-                            [self presentViewController:alert animated:TRUE completion:nil];
                         }}];
                 }
             } else {
@@ -124,18 +104,6 @@
                                                  if(result == 1) {
                                                      EmployeeStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeStep1ViewController"];
                                                      [self.navigationController pushViewController:myController animated:TRUE];
-                                                 } else {
-                                                     UIAlertController * alert = [UIAlertController
-                                                                                  alertControllerWithTitle:@"Oops!"
-                                                                                  message:@"Unable to get data from server"
-                                                                                  preferredStyle:UIAlertControllerStyleAlert];
-                                                     [alert addAction:[UIAlertAction
-                                                                       actionWithTitle:@"OK"
-                                                                       style:UIAlertActionStyleDefault
-                                                                       handler:^(UIAlertAction *action)
-                                                                       {
-                                                                       }]];
-                                                     [self presentViewController:alert animated:TRUE completion:nil];
                                                  }}];
                                          }];
                     [alert addAction:ok];

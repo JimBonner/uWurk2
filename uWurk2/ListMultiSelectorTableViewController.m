@@ -103,7 +103,7 @@
     }
     NSString *displayString = @"";
     for(NSString *key in self.idDict) {
-        if([displayString length] >0)
+        if([displayString length] > 0)
             displayString = [displayString stringByAppendingString:@", "];
         displayString = [displayString stringByAppendingString:[self.idDict objectForKey:key]];
     }

@@ -46,6 +46,13 @@
     [super viewWillAppear:animated];
     self.viewCool.layer.cornerRadius = 5;
     
+    NSLog(@"%@",self.appDelegate.user);
+    
+    if([self.appDelegate.user objectForKey:@"has_drivers_license"] == nil) {
+        [self pressNoBdyArt:nil];
+        return;
+    }
+    
     if([[self.appDelegate.user objectForKey:@"has_drivers_license"]intValue] == 1){
         self.btnDLYes.selected = TRUE;
     } else {
@@ -61,18 +68,18 @@
     } else {
         self.btnFluEngNo.selected = TRUE;
     }
-    if([self.appDelegate.user objectForKey:@"languages_dictionary"] == nil) {
-        self.langDict = [[NSMutableDictionary alloc]init];
-        [self.appDelegate.user setObjectOrNil:[self objectToJsonString:self.langDict] forKey:@"languages_dictionary"];
-    }
-    if([[self jsonStringToObject:[self.appDelegate.user objectForKey:@"languages_dictionary"]]count] == 0) {
-        self.lblLanguages.text = @"";
-        [self.addLanguage setTitle:@"Add Languages" forState:UIControlStateNormal];
-    } else {
-        self.langDict = [self jsonStringToObject:[self.appDelegate.user objectForKey:@"languages_dictionary"]];
-        self.lblLanguages.text = [self languageDictionaryToString:self.langDict];
-        [self.addLanguage setTitle:@"Modify Languages" forState:UIControlStateNormal];
-    }
+//    if([self.appDelegate.user objectForKey:@"languages"] == nil) {
+//        self.langDict = [[NSMutableDictionary alloc]init];
+//        [self.appDelegate.user setObjectOrNil:[self objectToJsonString:self.langDict] forKey:@"languages_dictionary"];
+//    }
+//    if([[self jsonStringToObject:[self.appDelegate.user objectForKey:@"languages_dictionary"]]count] == 0) {
+//        self.lblLanguages.text = @"";
+//        [self.addLanguage setTitle:@"Add Languages" forState:UIControlStateNormal];
+//    } else {
+//        self.langDict = [self jsonStringToObject:[self.appDelegate.user objectForKey:@"languages_dictionary"]];
+//        self.lblLanguages.text = [self languageDictionaryToString:self.langDict];
+//        [self.addLanguage setTitle:@"Modify Languages" forState:UIControlStateNormal];
+//    }
     if([[self.appDelegate.user objectForKey:@"has_body_art"]intValue] == 1){
         self.btnBodyArtYes.selected = TRUE;
         [self pressYesBdyArt:self.btnBodyArtYes];
@@ -105,26 +112,6 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
-    [self saveUserData];
-}
-
--(void) saveUserData
-{
-    [self.appDelegate.user setObjectOrNil:self.btnDLYes.selected ? @"1" : @"0" forKey:@"has_drivers_license"];
-    [self.appDelegate.user setObjectOrNil:self.btnVetYes.selected ? @"1" : @"0" forKey:@"is_veteran"];
-    [self.appDelegate.user setObjectOrNil:self.btnFluEngYes.selected ? @"1" : @"0" forKey:@"fluent_english"];
-    if(self.langDict != nil) {
-        [self.appDelegate.user setObjectOrNil:[self objectToJsonString:self.langDict]  forKey:@"languages_dictionary"];
-    }
-    [self.appDelegate.user setObjectOrNil:self.btnBodyArtYes.selected ? @"1" : @"0" forKey:@"has_body_art"];
-    [self.appDelegate.user setObjectOrNil:self.btnFacialPiercing.selected ? @"1" : @"0" forKey:@"has_facial_piercing"];
-    [self.appDelegate.user setObjectOrNil:self.btnTattoo.selected ? @"1" : @"0" forKey:@"has_tattoo"];
-    [self.appDelegate.user setObjectOrNil:self.btnTonguePiercing.selected ? @"1" : @"0" forKey:@"has_tongue_piercing"];
-    [self.appDelegate.user setObjectOrNil:self.btnEarGauges.selected ? @"1" : @"0" forKey:@"has_ear_gauges"];
-    
-    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
-                      Key:@"user_data"];
 }
 
 - (IBAction)changeCheckBox:(UIButton *)sender
@@ -182,7 +169,9 @@
     [self updateParamDict:params value:self.btnTattoo.selected ? @"1" : @"0" key:@"has_tattoo"];
     [self updateParamDict:params value:self.btnTonguePiercing.selected ? @"1" : @"0" key:@"has_tongue_piercing"];
     if([self.lblLanguages.text length] > 0) {
-//        [params setObject:self.langDict.allKeys forKey:@"other_languages"];
+        NSArray *array = [self buildLanguageArrayFromDictionary:self.langDict];
+        NSString *json = [self objectToJsonString:self.langDict];
+        [self updateParamDict:params value:json key:@"languages"];
     }
     
     NSMutableString *Error = [[NSMutableString alloc] init];
@@ -280,6 +269,28 @@
     }
     
     return langString;
+}
+
+- (NSMutableArray *)buildLanguageArrayFromDictionary:(NSMutableDictionary *)langDict
+{
+    NSMutableArray *langArray = [[NSMutableArray alloc]init];
+    NSArray *allKeys = [langDict allKeys];
+    for(NSString *key in allKeys) {
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+        [dict setValue:key forKey:@"id"];
+        NSString *string = [langDict objectForKey:key];
+        [dict setValue:string forKey:@"description"];
+        [langArray addObject:dict];
+    };
+    NSString *json = [self objectToJsonString:langArray];
+    return langArray;
+}
+
+- (NSMutableDictionary *)buildLanguageDictionaryFromArray:(NSMutableArray *)langArray
+{
+    NSMutableDictionary *langDict =[[NSMutableDictionary alloc]init];
+    
+    return langDict;
 }
 
 @end

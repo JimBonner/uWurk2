@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIButton    *btnTips;
 @property (weak, nonatomic) IBOutlet UIButton    *btnHourly;
 
+@property (weak, nonatomic) NSString *saveHourly;
+
 @end
 
 @implementation EmployeeStep2ViewController
@@ -29,18 +31,26 @@
 {
     [super viewWillAppear:animated];
     
-    [self assignValue:[self.appDelegate.user objectForKey:@"miles(0)"] control:self.txtMiles];
-    [self assignValue:[self.appDelegate.user objectForKey:@"zip(0)"] control:self.txtZip];
-    [self assignValue:[self.appDelegate.user objectForKey:@"hourly_wage"] control:self.txtHourly];
-    if([[self.appDelegate.user objectForKey:@"hourlySelected"] isEqualToString:@"1"]) {
-        [self.btnHourly setSelected:TRUE];
-    } else {
-        [self.btnHourly setSelected:FALSE];
+    NSLog(@"%@",self.appDelegate.user);
+    
+    NSArray *array = [self.appDelegate.user objectForKey:@"availability"];
+    if([array count] <= 0) {
+        self.txtHourly.enabled = NO;
+        return;
     }
-    if([[self.appDelegate.user objectForKey:@"tipsSelected"] isEqualToString:@"1"]) {
-        [self.btnTips setSelected:TRUE];
+    NSDictionary *availability = array[0];
+    [self assignValue:[[NSNumber numberWithInteger:[[availability objectForKey:@"miles"]intValue]]stringValue] control:self.txtMiles];
+    [self assignValue:[availability objectForKey:@"zip"] control:self.txtZip];
+    [self assignValue:[self.appDelegate.user objectForKey:@"hourly_wage"] control:self.txtHourly];
+    if([[self.appDelegate.user objectForKey:@"hourly_wage"]isEqualToString:@"0.0"]) {
+        [self.btnHourly setSelected:NO];
     } else {
-        [self.btnTips setSelected:FALSE];
+        [self.btnHourly setSelected:YES];
+    }
+    if([[[NSNumber numberWithInteger:[[self.appDelegate.user objectForKey:@"tipped_position"]intValue]]stringValue]isEqualToString:@"1"]) {
+        [self.btnTips setSelected:YES];
+    } else {
+        [self.btnTips setSelected:NO];
     }
 }
 
@@ -49,21 +59,23 @@
     [super viewWillDisappear:animated];
 }
 
--(void) saveUserData
-{
-    [self.appDelegate.user setObjectOrNil:[self.txtMiles text] forKey:@"miles(0)"];
-    [self.appDelegate.user setObjectOrNil:[self.txtZip   text] forKey:@"zip(0)"];
-    [self.appDelegate.user setObjectOrNil:[self.txtHourly text] forKey:@"hourly_wage"];
-    [self.appDelegate.user setObjectOrNil:self.btnHourly.selected ? @"1" : @"0" forKey:@"hourlySelected"];
-    [self.appDelegate.user setObjectOrNil:self.btnTips.selected ? @"1" : @"0" forKey:@"tipsSelected"];
-    
-    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
-                      Key:@"user_data"];
-}
-
 - (IBAction)changeCheckBox:(UIButton *)sender {
     [sender setSelected:!sender.selected];
 }
+
+- (IBAction)hourlyBoxSelected:(UIButton *)sender
+{
+    [self changeCheckBox:(sender)];
+    if(sender.selected) {
+        self.txtHourly.text = self.saveHourly;
+        self.txtHourly.enabled = YES;
+    } else {
+        self.txtHourly.enabled = NO;
+        self.saveHourly = self.txtHourly.text;
+        self.txtHourly.text = @"0.0";
+    }
+}
+
 - (IBAction)pressHere:(id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ncsl.org/research/labor-and-employment/state-minimum-wage-chart.aspx"]];
 }
@@ -75,13 +87,17 @@
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:[self.txtMiles text] forKey:@"miles[0]"];
     [params setObject:[self.txtZip text] forKey:@"zip[0]"];
+    if(self.btnTips.selected) {
+        [params setObject:@"1" forKey:@"tipped_position"];
+    } else {
+        [params setObject:@"0" forKey:@"tipped_position"];
+    }
     NSMutableArray *wageArray = [[NSMutableArray alloc]init];
     if(self.btnHourly.selected) {
         [wageArray addObject:@"hourly"];
         [params setObject:self.txtHourly.text forKey:@"hourly_wage"];
-    }
-    if(self.btnTips.selected) {
-        [wageArray addObject:@"tips"];
+    } else {
+        [params setObject:@"" forKey:@"hourly_wage"];
     }
     if([wageArray count]) {
         [params setObject:wageArray forKey:@"wage_type"];
@@ -118,27 +134,28 @@
     {
         if([params count])
         {
-            [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"JSON: %@", responseObject);
-                if([self validateResponse:responseObject]){
-                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup3"];
-                    [self.navigationController pushViewController:myController animated:TRUE];
-                    
-                }
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"Error: %@", error);
-                UIAlertController * alert = [UIAlertController
-                                             alertControllerWithTitle:@"Oops!"
-                                             message:@"Unable to contact server"
-                                             preferredStyle:UIAlertControllerStyleActionSheet];
-                [alert addAction:[UIAlertAction
-                                  actionWithTitle:@"OK"
-                                  style:UIAlertActionStyleDefault
-                                  handler:^(UIAlertAction *action)
-                                  {
-                                  }]];
-                [self presentViewController:alert animated:TRUE completion:nil];
-            }];
+            [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params
+                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                      NSLog(@"JSON: %@", responseObject);
+                      if([self validateResponse:responseObject]){
+                           UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup3"];
+                          [self.navigationController pushViewController:myController animated:TRUE];
+                      }
+                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                      NSLog(@"Error: %@", error);
+                      UIAlertController * alert = [UIAlertController
+                                                   alertControllerWithTitle:@"Oops!"
+                                                   message:@"Unable to contact server"
+                                                   preferredStyle:UIAlertControllerStyleActionSheet];
+                      [alert addAction:[UIAlertAction
+                                        actionWithTitle:@"OK"
+                                        style:UIAlertActionStyleDefault
+                                        handler:^(UIAlertAction *action)
+                                        {
+                                        }]];
+                      [self presentViewController:alert animated:TRUE completion:nil];
+                  }
+            ];
         }
         else
         {

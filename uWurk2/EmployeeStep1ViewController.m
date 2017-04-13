@@ -39,25 +39,30 @@
     [super viewWillAppear:animated];
     self.viewCommunication.layer.cornerRadius = 10;
     
+    NSLog(@"%@",self.appDelegate.user);
+    
     [self assignValue:[self getUserDefault:@"email"] control:self.txtEmail];
     [self.txtEmail setAlpha:0.2];
     [self.txtEmail setEnabled:NO];
+    
+    if([[self.appDelegate.user objectForKey:@"first_name"] isEqualToString:@""]) return;
+
     [self assignValue:@"" control:self.txtPassword];
     [self assignValue:@"" control:self.txtVerifyPassword];
     [self assignValue:[self.appDelegate.user objectForKey:@"first_name"] control:self.txtFirstName];
     [self assignValue:[self.appDelegate.user objectForKey:@"last_name"] control:self.txtLastName];
     [self assignValue:[self.appDelegate.user objectForKey:@"birthdate"] control:self.txtBirthDate];
     [self assignValue:[self.appDelegate.user objectForKey:@"cell_phone"] control:self.txtPhone];
-    if([[self.appDelegate.user objectForKey:@"gender"] isEqualToString:@"f"]) {
-        self.btnGenderMale.selected = FALSE;
-        self.btnGenderFemale.selected = TRUE;
-    } else {
+    if([[self.appDelegate.user objectForKey:@"gender"] isEqualToString:@"m"]) {
         self.btnGenderMale.selected = TRUE;
         self.btnGenderFemale.selected = FALSE;
+    } else {
+        self.btnGenderMale.selected = FALSE;
+        self.btnGenderFemale.selected = TRUE;
     }
     self.btnEmail.selected = FALSE;
     self.btnText.selected  = FALSE;
-    NSUInteger contact = [[self.appDelegate.user objectForKey:@"contact_method_id"]integerValue];
+    NSUInteger contact = [[self.appDelegate.user objectForKey:@"contact_method_id"]intValue];
     if(contact == 1) {
         self.btnText.selected  = TRUE;
         self.btnEmail.selected = FALSE;
@@ -73,26 +78,6 @@
 -(void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-}
-
--(void) saveUserData
-{
-    [self.appDelegate.user setObjectOrNil:[self.txtFirstName text] forKey:@"first_name"];
-    [self.appDelegate.user setObjectOrNil:[self.txtLastName text] forKey:@"last_name"];
-    [self.appDelegate.user setObjectOrNil:[self.txtBirthDate text] forKey:@"birthdate"];
-    [self.appDelegate.user setObjectOrNil:[self.txtPhone text] forKey:@"cell_phone"];
-    [self.appDelegate.user setObjectOrNil:self.btnGenderMale.selected ? @"m" : @"f" forKey:@"gender"];
-    NSUInteger contact = 0;
-    if(self.btnText.selected) {
-        contact = contact | 1;
-    }
-    if(self.btnEmail.selected) {
-        contact = contact | 2;
-    }
-    [self.appDelegate.user setObjectOrNil:[[NSNumber numberWithInteger:contact]stringValue] forKey:@"contact_method_id"];
-    
-    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user]
-                      Key:@"user_data"];
 }
 
 - (IBAction)changeCheckBox:(UIButton *)sender
