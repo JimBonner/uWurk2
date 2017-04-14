@@ -97,7 +97,7 @@
     
     NSDictionary *row = [self.json objectAtIndex:indexPath.row];
     if([self.idDict objectForKey:[[NSNumber numberWithInt:[[row objectForKey:@"id"]intValue]]stringValue]]) {
-        [self.idDict removeObjectForKey:[[NSNumber numberWithInteger:indexPath.row]stringValue]];
+        [self.idDict removeObjectForKey:[[NSNumber numberWithInt:[[row objectForKey:@"id"]intValue]]stringValue]];
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
     else {

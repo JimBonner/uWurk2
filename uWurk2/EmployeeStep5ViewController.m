@@ -63,6 +63,8 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    NSLog(@"%@",self.appDelegate.user);
 
     NSArray *experienceArray = [self.appDelegate.user objectForKey:@"experience"];
     if([experienceArray count] > 0) {
@@ -84,7 +86,7 @@
             self.btnOver2Year.selected = TRUE;
         [self.params setObject:[firstExperienceItem objectForKey:@"id"] forKey:@"exp_id[0]"];
     } else {
-        [self.params setObject:@"" forKey:@"exp_id[0]"];
+//        [self.params setObject:@"" forKey:@"exp_id[0]"];
     }
     
     if([[self.appDelegate.user objectForKey:@"has_experience"]intValue] == 1) {
@@ -266,9 +268,7 @@
                           {
                           }]];
         [self presentViewController:alert animated:TRUE completion:nil];
-    }
-    else
-    {
+    } else {
         [self.params setObjectOrNil:self.txtCompany.text forKey:@"company[0]"];
         [self.params setObjectOrNil:[self.btnPosition titleForState:UIControlStateSelected] forKey:@"position[0]"];
         [self.params setObjectOrNil:@"" forKey:@"position2[0]"];
