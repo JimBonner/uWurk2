@@ -46,7 +46,7 @@
     [super viewWillAppear:animated];
     self.viewCool.layer.cornerRadius = 5;
     
-    NSLog(@"%@",self.appDelegate.user);
+    NSLog(@"Employee Step 3:\n%@",self.appDelegate.user);
     
     if([self.appDelegate.user objectForKey:@"has_drivers_license"] == nil) {
         [self pressNoBdyArt:nil];

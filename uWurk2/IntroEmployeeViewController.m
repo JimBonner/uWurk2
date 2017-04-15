@@ -31,7 +31,7 @@
 {
     [super viewWillAppear:animated];
     
-    NSLog(@"%@",self.appDelegate.user);
+    NSLog(@"Employee Intro:\n%@",self.appDelegate.user);
     
     [self.emailText setText:[self getUserDefault:@"email"]];
 }

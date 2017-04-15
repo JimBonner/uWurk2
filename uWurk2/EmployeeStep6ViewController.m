@@ -50,6 +50,8 @@
 {
     [super viewWillAppear:animated];
     
+    NSLog(@"Employee Step 6:\n%@",self.appDelegate.user);
+    
     self.photoLocalIdentifier = [self.appDelegate.user objectForKey:@"photo_local_identifier"];
     if(self.photoLocalIdentifier != nil) {
         self.photoImage = [self loadPhotoImageUsingLocalIdentifier:self.photoLocalIdentifier];

@@ -64,7 +64,7 @@
 {
     [super viewWillAppear:animated];
     
-    NSLog(@"%@",self.appDelegate.user);
+    NSLog(@"Employee Step 5:\n%@",self.appDelegate.user);
 
     NSArray *experienceArray = [self.appDelegate.user objectForKey:@"experience"];
     if([experienceArray count] > 0) {

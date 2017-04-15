@@ -31,7 +31,7 @@
 {
     [super viewWillAppear:animated];
     
-    NSLog(@"%@",self.appDelegate.user);
+    NSLog(@"Employee Step 2:\n%@",self.appDelegate.user);
     
     NSArray *array = [self.appDelegate.user objectForKey:@"availability"];
     if([array count] <= 0) {
