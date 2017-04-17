@@ -31,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *addLanguage;
 @property (weak, nonatomic) IBOutlet UILabel  *lblLanguages;
 @property (nonatomic, strong) NSMutableDictionary *langDict;
+@property BOOL skipLanguagesInit;
 
 @end
 
@@ -39,6 +40,8 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.skipLanguagesInit = NO;
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -48,59 +51,87 @@
     
     NSLog(@"Employee Step 3:\n%@",self.appDelegate.user);
     
-    if([self.appDelegate.user objectForKey:@"has_drivers_license"] == nil) {
-        [self pressNoBdyArt:nil];
-        return;
+    if([self.appDelegate.user objectForKey:@"has_drivers_license"]) {
+        if([[self.appDelegate.user objectForKey:@"has_drivers_license"]intValue] == 1){
+            self.btnDLYes.selected = TRUE;
+        } else {
+            self.btnDLNo.selected = TRUE;
+        }
     }
-    if([[self.appDelegate.user objectForKey:@"has_drivers_license"]intValue] == 1){
-        self.btnDLYes.selected = TRUE;
-    } else {
-        self.btnDLNo.selected = TRUE;
+    if([self.appDelegate.user objectForKey:@"is_veteran"]) {
+        if([[self.appDelegate.user objectForKey:@"is_veteran"]intValue] == 1){
+            self.btnVetYes.selected = TRUE;
+        } else {
+            self.btnVetNo.selected = TRUE;
+        }
     }
-    if([[self.appDelegate.user objectForKey:@"is_veteran"]intValue] == 1){
-        self.btnVetYes.selected = TRUE;
-    } else {
-        self.btnVetNo.selected = TRUE;
+    if([self.appDelegate.user objectForKey:@"fluent_english"]) {
+        if([[self.appDelegate.user objectForKey:@"fluent_english"]intValue] == 1){
+            self.btnFluEngYes.selected = TRUE;
+        } else {
+            self.btnFluEngNo.selected = TRUE;
+        }
     }
-    if([[self.appDelegate.user objectForKey:@"fluent_english"]intValue] == 1){
-        self.btnFluEngYes.selected = TRUE;
-    } else {
-        self.btnFluEngNo.selected = TRUE;
+    if(!self.skipLanguagesInit) {
+        self.langDict = [[NSMutableDictionary alloc]init];
+        NSString *display = @"";
+        if([self.appDelegate.user objectForKey:@"languages"] != nil) {
+            if([[self.appDelegate.user objectForKey:@"languages"]count] > 0) {
+                for(id dict in [self.appDelegate.user objectForKey:@"languages"]) {
+                    if([display length] > 0) {
+                        display = [display stringByAppendingString:@", "];
+                    }
+                    display = [display stringByAppendingString:[dict objectForKey:@"description"]];
+                    [self.langDict setObject:[dict objectForKey:@"description"]
+                                      forKey:[[NSNumber numberWithInt:[[dict objectForKey:@"id"]intValue]]   stringValue]];
+                }
+                self.lblLanguages.text = display;
+            }
+        }
     }
-//    if([self.appDelegate.user objectForKey:@"languages"] == nil) {
-//        self.langDict = [[NSMutableDictionary alloc]init];
-//        [self.lblLanguages setText:@""];
-//        [self.addLanguage setTitle:@"Add Languages" forState:UIControlStateNormal];
-//    } else {
-//        [self.lblLanguages setText:@""];
-//        [self.addLanguage setTitle:@"Modify Languages" forState:UIControlStateNormal];
-//    }
-    if([[self.appDelegate.user objectForKey:@"has_body_art"]intValue] == 1){
-        self.btnBodyArtYes.selected = TRUE;
-        [self pressYesBdyArt:self.btnBodyArtYes];
-    } else {
-        self.btnBodyArtNo.selected = TRUE;
-        [self pressNoBdyArt:self.btnBodyArtNo];
+    self.skipLanguagesInit = YES;
+    if([self.lblLanguages.text length] > 0) {
+        [self.addLanguage setTitle:@"Modify Languages" forState:UIControlStateNormal];
+    }else {
+        [self.addLanguage setTitle:@"Add Languages" forState:UIControlStateNormal];
     }
-    if([[self.appDelegate.user objectForKey:@"has_facial_piercing"]intValue] == 1){
-        self.btnFacialPiercing.selected = TRUE;
-    } else {
-        self.btnFacialPiercing.selected = FALSE;
+    if([self.appDelegate.user objectForKey:@"has_body_art"]) {
+        if([[self.appDelegate.user objectForKey:@"has_body_art"]intValue] == 1){
+            self.btnBodyArtYes.selected = TRUE;
+            [self pressYesBdyArt:self.btnBodyArtYes];
+        } else {
+            self.btnBodyArtNo.selected = TRUE;
+            [self pressNoBdyArt:self.btnBodyArtNo];
+        }
     }
-    if([[self.appDelegate.user objectForKey:@"has_tattoo"]intValue] == 1){
-        self.btnTattoo.selected = TRUE;
-    } else {
-        self.btnTattoo.selected = FALSE;
+    if([self.appDelegate.user objectForKey:@"has_facial_piercing"]) {
+        if([[self.appDelegate.user objectForKey:@"has_facial_piercing"]intValue] == 1){
+            self.btnFacialPiercing.selected = TRUE;
+        } else {
+            self.btnFacialPiercing.selected = FALSE;
+        }
     }
-    if([[self.appDelegate.user objectForKey:@"has_tongue_piercing"]intValue] == 1){
-        self.btnTonguePiercing.selected = TRUE;
-    } else {
-        self.btnTonguePiercing.selected = FALSE;
+    if([self.appDelegate.user objectForKey:@"has_tattoo"]) {
+
+        if([[self.appDelegate.user objectForKey:@"has_tattoo"]intValue] == 1){
+            self.btnTattoo.selected = TRUE;
+        } else {
+            self.btnTattoo.selected = FALSE;
+        }
     }
-    if([[self.appDelegate.user objectForKey:@"has_ear_gauges"]intValue] == 1){
-        self.btnEarGauges.selected = TRUE;
-    } else {
-        self.btnEarGauges.selected = FALSE;
+    if([self.appDelegate.user objectForKey:@"has_tongue_piercing"]){
+        if([[self.appDelegate.user objectForKey:@"has_tongue_piercing"]intValue] == 1){
+            self.btnTonguePiercing.selected = TRUE;
+        } else {
+            self.btnTonguePiercing.selected = FALSE;
+        }
+    }
+    if([self.appDelegate.user objectForKey:@"has_ear_gauges"]){
+        if([[self.appDelegate.user objectForKey:@"has_ear_gauges"]intValue] == 1){
+            self.btnEarGauges.selected = TRUE;
+        } else {
+            self.btnEarGauges.selected = FALSE;
+        }
     }
 }
 
@@ -164,9 +195,13 @@
     [self updateParamDict:params value:self.btnTattoo.selected ? @"1" : @"0" key:@"has_tattoo"];
     [self updateParamDict:params value:self.btnTonguePiercing.selected ? @"1" : @"0" key:@"has_tongue_piercing"];
     if([self.lblLanguages.text length] > 0) {
-        NSMutableArray *array = [self buildLanguageArrayFromDictionary:self.langDict];
-        NSString *json = [self objectToJsonString:array];
-        [self updateParamDict:params value:json key:@"languages"];
+        NSArray *allKeys = [self.langDict allKeys];
+        long count = [allKeys count];
+        for(long icnt = 0; icnt < count; icnt++) {
+            NSString *ident = [allKeys objectAtIndex:icnt];
+            [self updateParamDict:params value:ident
+                              key:[NSString stringWithFormat:@"other_languages[%ld]",icnt]];
+        }
     }
     
     NSMutableString *Error = [[NSMutableString alloc] init];
@@ -203,7 +238,7 @@
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"JSON: %@", responseObject);
                 if([self validateResponse:responseObject]){
-                    
+                    self.skipLanguagesInit = NO;
                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup4"];
                     [self.navigationController pushViewController:myController animated:TRUE];
                 }
@@ -231,6 +266,47 @@
 
 - (IBAction)addLanguagePress:(id)sender
 {
+    if(self.btnDLYes.isSelected) {
+        [self.appDelegate.user setObject:@"1" forKey:@"has_drivers_license"];
+    } else {
+        [self.appDelegate.user setObject:@"0" forKey:@"has_drivers_license"];
+    }
+    if(self.btnVetYes.isSelected) {
+        [self.appDelegate.user setObject:@"1" forKey:@"is_veteran"];
+    } else {
+        [self.appDelegate.user setObject:@"0" forKey:@"is_veteran"];
+    }
+    if(self.btnFluEngYes.isSelected) {
+        [self.appDelegate.user setObject:@"1" forKey:@"fluent_english"];
+    } else {
+        [self.appDelegate.user setObject:@"0" forKey:@"fluent_english"];
+    }
+    if(self.btnBodyArtYes.isSelected) {
+        [self.appDelegate.user setObject:@"1" forKey:@"has_body_art"];
+    } else {
+        [self.appDelegate.user setObject:@"0" forKey:@"has_body_art"];
+    }
+    if(self.btnTattoo.isSelected) {
+        [self.appDelegate.user setObject:@"1" forKey:@"has_tattoo"];
+    } else {
+        [self.appDelegate.user setObject:@"0" forKey:@"has_tattoo"];
+    }
+    if(self.btnFacialPiercing.isSelected) {
+        [self.appDelegate.user setObject:@"1" forKey:@"has_facial_piercing"];
+    } else {
+        [self.appDelegate.user setObject:@"0" forKey:@"has_facial_piercing"];
+    }
+    if(self.btnEarGauges.isSelected) {
+        [self.appDelegate.user setObject:@"1" forKey:@"has_ear_gauge"];
+    } else {
+        [self.appDelegate.user setObject:@"0" forKey:@"has_ear_gauge"];
+    }
+    if(self.btnTonguePiercing.isSelected) {
+        [self.appDelegate.user setObject:@"1" forKey:@"has_tounge_piercing"];
+    } else {
+        [self.appDelegate.user setObject:@"0" forKey:@"has_tounge_piercing"];
+    }
+    
     ListMultiSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListMultiSelector"];
     
     [myController setParameters:nil];

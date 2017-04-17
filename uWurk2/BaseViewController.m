@@ -56,7 +56,8 @@
     [self.view endEditing:TRUE];
 }
 
-- (void)goBack {
+- (void)goBack
+{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -348,7 +349,7 @@
 {
     NSError *err;
     NSData  *jsonData = [NSJSONSerialization dataWithJSONObject:object
-                                                        options:NSJSONWritingPrettyPrinted
+                                                        options:0       //NSJSONWritingPrettyPrinted
                                                           error:&err];
     NSString *string = [[NSString alloc] initWithData:jsonData
                                              encoding:NSUTF8StringEncoding];
