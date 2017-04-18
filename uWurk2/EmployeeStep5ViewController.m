@@ -196,7 +196,7 @@
     [myController setJsonGroup:@"industries"];
     [myController setSender:self.btnIndustry];
     [myController setTitle:@"Industries"];
-    [myController setUser:@"industry_name"];
+    [myController setPassThru:@"industry_name"];
     
     [self.navigationController pushViewController:myController animated:TRUE];
 }
@@ -213,7 +213,7 @@
     [myController setJsonGroup:@"positions"];
     [myController setSender:self.btnPosition];
     [myController setTitle:@"Positions"];
-    [myController setUser:@"position_name"];
+    [myController setPassThru:@"position_name"];
     
     [self.navigationController pushViewController:myController animated:TRUE];
 }
@@ -310,18 +310,16 @@
     }
 }
 
--(void)SelectionMade:(NSString *)user withDict:(NSDictionary *)dict displayString:(NSString *)displayString;
+-(void)SelectionMade:(NSString *)passThru withDict:(NSDictionary *)dict displayString:(NSString *)displayString;
 {
-    [self.appDelegate.user setObjectOrNil:displayString forKey:user];
-    
-    if([user isEqualToString:@"industry_name"]) {
+    if([passThru isEqualToString:@"industry_name"]) {
         [self.appDelegate.user setObjectOrNil:[@(self.btnIndustry.tag)stringValue] forKey:@"industry_id"];
     }
 }
 
--(void)SelectionMadeString:(NSString *)user displayString:(NSString *)displayString;
+-(void)SelectionMadeString:(NSString *)passThru displayString:(NSString *)displayString;
 {
-    [self.appDelegate.user setObjectOrNil:displayString forKey:user];
+
 }
 
 @end

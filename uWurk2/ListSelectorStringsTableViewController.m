@@ -81,16 +81,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-    
     NSString *row = [self.json objectAtIndex:indexPath.row];
     
     [self.sender setTitle:row forState:UIControlStateNormal];
     
     if ([self.delegate respondsToSelector:@selector(SelectionMadeString:displayString:)])
     {
-        [self.delegate SelectionMadeString:self.user displayString:row];
+        [self.delegate SelectionMadeString:self.passThru displayString:row];
     }
 
     [self.navigationController popViewControllerAnimated:TRUE];

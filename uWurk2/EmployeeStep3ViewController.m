@@ -31,7 +31,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *addLanguage;
 @property (weak, nonatomic) IBOutlet UILabel  *lblLanguages;
 @property (nonatomic, strong) NSMutableDictionary *langDict;
-@property BOOL skipLanguagesInit;
+@property BOOL performLanguagesInit;
 
 @end
 
@@ -41,7 +41,7 @@
 {
     [super viewDidLoad];
     
-    self.skipLanguagesInit = NO;
+    self.performLanguagesInit = YES;
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -72,7 +72,7 @@
             self.btnFluEngNo.selected = TRUE;
         }
     }
-    if(!self.skipLanguagesInit) {
+    if(self.performLanguagesInit) {
         self.langDict = [[NSMutableDictionary alloc]init];
         NSString *display = @"";
         if([self.appDelegate.user objectForKey:@"languages"] != nil) {
@@ -89,7 +89,7 @@
             }
         }
     }
-    self.skipLanguagesInit = YES;
+    self.performLanguagesInit = NO;
     if([self.lblLanguages.text length] > 0) {
         [self.addLanguage setTitle:@"Modify Languages" forState:UIControlStateNormal];
     }else {
@@ -238,7 +238,7 @@
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"JSON: %@", responseObject);
                 if([self validateResponse:responseObject]){
-                    self.skipLanguagesInit = NO;
+                    self.performLanguagesInit = YES;
                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup4"];
                     [self.navigationController pushViewController:myController animated:TRUE];
                 }
@@ -264,7 +264,7 @@
     }
 }
 
-- (IBAction)addLanguagePress:(id)sender
+- (void)saveScreenData
 {
     if(self.btnDLYes.isSelected) {
         [self.appDelegate.user setObject:@"1" forKey:@"has_drivers_license"];
@@ -306,6 +306,11 @@
     } else {
         [self.appDelegate.user setObject:@"0" forKey:@"has_tounge_piercing"];
     }
+}
+
+- (IBAction)addLanguagePress:(id)sender
+{
+    [self saveScreenData];
     
     ListMultiSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListMultiSelector"];
     
@@ -321,7 +326,7 @@
     [self.navigationController pushViewController:myController animated:TRUE];
 }
 
-- (void)SelectionMade:(NSString *)user withDict:(NSMutableDictionary *)dict displayString:(NSString *)displayString
+- (void)SelectionMade:(NSString *)passThru withDict:(NSMutableDictionary *)dict displayString:(NSString *)displayString
 {
     self.lblLanguages.text = displayString;
     self.langDict = dict;

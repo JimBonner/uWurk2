@@ -12,11 +12,12 @@
 #import "AppDelegate.h"
 
 @protocol ListSelectorTableViewControllerProtocol <NSObject>
--(void)SelectionMade:(NSString *)user withDict:(NSDictionary *)dict displayString:(NSString *)displayString;
+-(void)SelectionMade:(NSString *)passThru withDict:(NSDictionary *)dict displayString:(NSString *)displayString;
 @end
 
 @interface ListSelectorTableViewController : UITableViewController
 
+@property (nonatomic, retain) AppDelegate *appDelegate;
 @property (nonatomic, retain) NSString *jsonGroup;
 @property (nonatomic, retain) NSString *display;
 @property (nonatomic, retain) NSString *key;
@@ -25,7 +26,7 @@
 @property (nonatomic, assign) id delegate;
 @property (nonatomic, retain) NSMutableArray *collectionViewArray;
 @property (nonatomic, retain) UIButton *sender;
-@property (nonatomic, retain) NSString *user;
+@property (nonatomic, retain) NSString *passThru;
 @property (assign) BOOL bPost;
 @property (assign) BOOL bUseArray;
 

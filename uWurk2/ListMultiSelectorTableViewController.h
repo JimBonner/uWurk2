@@ -12,7 +12,7 @@
 #import "AppDelegate.h"
 
 @protocol ListMultiSelectorTableViewControllerProtocol <NSObject>
--(void)SelectionMade:(NSString *)user withDict:(NSDictionary*)dict displayString:(NSString*)displayString;
+-(void)SelectionMade:(NSString *)passThru withDict:(NSDictionary*)dict displayString:(NSString*)displayString;
 @end
 
 @interface ListMultiSelectorTableViewController : UITableViewController
@@ -25,7 +25,7 @@
 @property(nonatomic,assign)id delegate;
 @property (nonatomic, retain) UILabel *displayLbl;
 @property (nonatomic, retain) NSMutableDictionary *idDict;
-@property (nonatomic, retain) NSString *user;
+@property (nonatomic, retain) NSString *passThru;
 @property (assign) BOOL bPost;
 @property (assign) BOOL bUseArray;
 

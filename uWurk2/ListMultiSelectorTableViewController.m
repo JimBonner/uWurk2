@@ -113,7 +113,7 @@
     
     if([self.delegate respondsToSelector:@selector(SelectionMade:withDict:displayString:)])
     {
-        [self.delegate SelectionMade:self.user withDict:self.idDict displayString:displayString];
+        [self.delegate SelectionMade:self.passThru withDict:self.idDict displayString:displayString];
     }
 }
 

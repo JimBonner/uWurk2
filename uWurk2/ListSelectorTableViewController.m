@@ -21,6 +21,8 @@
     
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     
+    self.appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -121,7 +123,7 @@
     
     if([self.delegate respondsToSelector:@selector(SelectionMade:withDict:displayString:)])
     {
-        [self.delegate SelectionMade:self.user withDict:dict displayString:[dict objectForKey:self.display]];
+        [self.delegate SelectionMade:self.passThru withDict:dict displayString:[dict objectForKey:self.display]];
     }
 
     [self.navigationController popViewControllerAnimated:TRUE];
