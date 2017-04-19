@@ -52,15 +52,15 @@
     
     NSLog(@"Employee Step 4:\n%@",self.appDelegate.user);
     
-    self.eduId = @"edu_id[0]";
-    self.params = [[NSMutableDictionary alloc]init];
-    NSArray *eduArray = [self.appDelegate.user objectForKey:@"education"];
-    NSDictionary *eduDict = nil;
     if(self.performEducationInit) {
+        self.performEducationInit = NO;
+        self.eduId = @"edu_id[0]";
+        self.params = [[NSMutableDictionary alloc]init];
+        NSArray *eduArray = [self.appDelegate.user objectForKey:@"education"];
+        NSDictionary *eduDict = nil;
         if([eduArray count] > 0) {
             eduDict = [eduArray objectAtIndex:0];
             [self.params setObject:[eduDict objectForKey:@"id"] forKey:self.eduId];
-
             if([[eduDict objectForKey:@"type"] isEqualToString:@"high_school"])
                 self.btnHighSchool.selected = TRUE;
             if([[eduDict objectForKey:@"type"] isEqualToString:@"college"])
@@ -105,54 +105,52 @@
             } else {
                 [self.btnAttended setSelected:FALSE];
             }
+            if([[eduDict objectForKey:@"type"] isEqualToString:@"high_school"])
+            {
+                [self highSchoolPress:nil];
+                if([eduDict objectForKey:@"state"] != nil) {
+                    [self.btnState setTitle:[eduDict objectForKey:@"state"] forState:UIControlStateNormal];
+                    [self.btnState setTag:[[eduDict objectForKey:@"state_id"]intValue]];
+                }
+                if([eduDict objectForKey:@"city"] != nil) {
+                    [self.btnCity setTitle:[eduDict objectForKey:@"city"] forState:UIControlStateNormal];
+                }
+                if([eduDict objectForKey:@"school"] != nil) {
+                    [self.btnSchool setTitle:[eduDict objectForKey:@"school"] forState:UIControlStateNormal];
+                    [self.btnSchool setTag:[[eduDict objectForKey:@"school_id"]intValue]];
+                }
+            }
+            if([[eduDict objectForKey:@"type"] isEqualToString:@"college"])
+            {
+                [self collegePress:nil];
+                if([eduDict objectForKey:@"state"] != nil) {
+                    [self.btnState setTitle:[eduDict objectForKey:@"state"] forState:UIControlStateNormal];
+                    [self.btnState setTag:[[eduDict objectForKey:@"state_id"]intValue]];
+                }
+                if([eduDict objectForKey:@"school"] != nil) {
+                    [self.btnSchool setTitle:[eduDict objectForKey:@"school"] forState:UIControlStateNormal];
+                    [self.btnSchool setTag:[[eduDict objectForKey:@"school_id"]intValue]];
+                }
+            }
+            if([[eduDict objectForKey:@"type"] isEqualToString:@"trade_show"])
+            {
+                [self tradeSchoolPress:nil];
+                if([eduDict objectForKey:@"state"] != nil) {
+                    [self.btnState setTitle:[eduDict objectForKey:@"state"] forState:UIControlStateNormal];
+                    [self.btnState setTag:[[eduDict objectForKey:@"state_id"]intValue]];
+                }
+                if([eduDict objectForKey:@"school"] != nil) {
+                    [self.btnSchool setTitle:[eduDict objectForKey:@"school"] forState:UIControlStateNormal];
+                    [self.btnSchool setTag:[[eduDict objectForKey:@"school_id"]intValue]];
+                 }
+            }
+            if([[eduDict objectForKey:@"type"] isEqualToString:@"ged"])
+            {
+                [self gedPress:nil];
+            }
         } else {
             [self.params setObject:@"" forKey:self.eduId];
         }
-        
-        if([[eduDict objectForKey:@"type"] isEqualToString:@"high_school"])
-        {
-            [self highSchoolPress:nil];
-            if([eduDict objectForKey:@"state"] != nil) {
-                [self.btnState setTitle:[eduDict objectForKey:@"state"] forState:UIControlStateNormal];
-                [self.btnState setTag:[[eduDict objectForKey:@"state_id"]intValue]];
-            }
-            if([eduDict objectForKey:@"city"] != nil) {
-                [self.btnCity setTitle:[eduDict objectForKey:@"city"] forState:UIControlStateNormal];
-            }
-            if([eduDict objectForKey:@"school"] != nil) {
-                [self.btnSchool setTitle:[eduDict objectForKey:@"school"] forState:UIControlStateNormal];
-                [self.btnSchool setTag:[[eduDict objectForKey:@"school_id"]intValue]];
-            }
-        }
-        if([[eduDict objectForKey:@"type"] isEqualToString:@"college"])
-        {
-            [self collegePress:nil];
-            if([eduDict objectForKey:@"state"] != nil) {
-                [self.btnState setTitle:[eduDict objectForKey:@"state"] forState:UIControlStateNormal];
-                [self.btnState setTag:[[eduDict objectForKey:@"state_id"]intValue]];
-            }
-            if([eduDict objectForKey:@"school"] != nil) {
-                [self.btnSchool setTitle:[eduDict objectForKey:@"school"] forState:UIControlStateNormal];
-                [self.btnSchool setTag:[[eduDict objectForKey:@"school_id"]intValue]];
-            }
-        }
-        if([[eduDict objectForKey:@"type"] isEqualToString:@"trade_show"])
-        {
-            [self tradeSchoolPress:nil];
-            if([eduDict objectForKey:@"state"] != nil) {
-                [self.btnState setTitle:[eduDict objectForKey:@"state"] forState:UIControlStateNormal];
-                [self.btnState setTag:[[eduDict objectForKey:@"state_id"]intValue]];
-            }
-            if([eduDict objectForKey:@"school"] != nil) {
-                [self.btnSchool setTitle:[eduDict objectForKey:@"school"] forState:UIControlStateNormal];
-                [self.btnSchool setTag:[[eduDict objectForKey:@"school_id"]intValue]];
-             }
-        }
-        if([[eduDict objectForKey:@"type"] isEqualToString:@"ged"])
-        {
-            [self gedPress:nil];
-        }
-        self.performEducationInit = NO;
     } else {
         [self restoreScreenData];
     }
@@ -456,35 +454,6 @@
 
 - (IBAction)nextPress:(id)sender
 {
-    if (self.btnHighSchool.isSelected){
-        [self updateParamDict:self.params value:@"high_school" key:@"school_level[0]"];
-        [self updateParamDict:self.params value:self.btnCity.titleLabel.text key:@"town[0]"];
-    } else {
-        [self updateParamDict:self.params value:@"" key:@"town[0]"];
-    }
-    if (self.btnCollege.isSelected){
-        [self updateParamDict:self.params value:@"college" key:@"school_level[0]"];
-    }
-    if (self.btnTradeSchool.isSelected){
-        [self updateParamDict:self.params value:@"trade_school" key:@"school_level[0]"];
-    }
-    if (self.btnGED.isSelected){
-        [self updateParamDict:self.params value:@"GED" key:@"school_level[0]"];
-    }
-    if(self.btnEnrolled.isSelected) {
-        [self updateParamDict:self.params value:@"1" key:@"status[0]"];
-    }
-    if(self.btnGraduated.isSelected) {
-        [self updateParamDict:self.params value:@"2" key:@"status[0]"];
-    }
-    if(self.btnAttended.isSelected) {
-        [self updateParamDict:self.params value:@"3" key:@"status[0]"];
-    }
-    [self updateParamDict:self.params value:[@(self.btnState.tag)stringValue] key:@"state[0]"];
-    [self updateParamDict:self.params value:[@(self.btnSchool.tag)stringValue] key:@"school[0]"];
-    [self updateParamDict:self.params value:@"" key:@"other_location[0]"];
-    [self updateParamDict:self.params value:@"" key:@"other_school[0]"];
-    [self updateParamDict:self.params value:@"0" key:@"remove[0]"];
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
     if (!self.btnHighSchool.isSelected &&
@@ -523,13 +492,42 @@
                           }]];
         [self presentViewController:alert animated:TRUE completion:nil];
     } else {
+        if (self.btnHighSchool.isSelected){
+            [self updateParamDict:self.params value:@"high_school" key:@"school_level[0]"];
+            [self updateParamDict:self.params value:self.btnCity.titleLabel.text key:@"town[0]"];
+        } else {
+            [self updateParamDict:self.params value:@"" key:@"town[0]"];
+        }
+        if (self.btnCollege.isSelected){
+            [self updateParamDict:self.params value:@"college" key:@"school_level[0]"];
+        }
+        if (self.btnTradeSchool.isSelected){
+            [self updateParamDict:self.params value:@"trade_school" key:@"school_level[0]"];
+        }
+        if (self.btnGED.isSelected){
+            [self updateParamDict:self.params value:@"GED" key:@"school_level[0]"];
+        }
+        if(self.btnEnrolled.isSelected) {
+            [self updateParamDict:self.params value:@"1" key:@"status[0]"];
+        }
+        if(self.btnGraduated.isSelected) {
+            [self updateParamDict:self.params value:@"2" key:@"status[0]"];
+        }
+        if(self.btnAttended.isSelected) {
+            [self updateParamDict:self.params value:@"3" key:@"status[0]"];
+        }
+        [self updateParamDict:self.params value:[@(self.btnState.tag)stringValue] key:@"state[0]"];
+        [self updateParamDict:self.params value:[@(self.btnSchool.tag)stringValue] key:@"school[0]"];
+        [self updateParamDict:self.params value:@"" key:@"other_location[0]"];
+        [self updateParamDict:self.params value:@"" key:@"other_school[0]"];
+        [self updateParamDict:self.params value:@"0" key:@"remove[0]"];
         if([self.params count]){
             AFHTTPRequestOperationManager *manager = [self getManager];
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params
                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                      self.performEducationInit = YES;
                       NSLog(@"JSON: %@", responseObject);
                       if([self validateResponse:responseObject]){
+                          self.performEducationInit = YES;
                           UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup5"];
                           [self.navigationController pushViewController:myController animated:TRUE];
                       }}

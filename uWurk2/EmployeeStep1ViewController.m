@@ -87,25 +87,6 @@
 
 - (IBAction)nextPress:(id)sender
 {
-    AFHTTPRequestOperationManager *manager = [self getManager];
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    
-    [self updateParamDict:params value:self.txtEmail.text key:@"email"];
-    [self updateParamDict:params value:self.txtPassword.text key:@"password"];
-    [self updateParamDict:params value:self.txtFirstName.text key:@"first_name"];
-    [self updateParamDict:params value:self.txtLastName.text key:@"last_name"];
-    [self updateParamDict:params value:self.txtBirthDate.text key:@"birthdate"];
-    [self updateParamDict:params value:self.txtPhone.text key:@"cell_phone"];
-    [self updateParamDict:params value:self.btnGenderMale.selected ? @"m" : @"f" key:@"gender"];
-    NSUInteger contact = 0;
-    if(self.btnText.selected) {
-        contact = contact | 1;
-    }
-    if(self.btnEmail.selected) {
-        contact = contact | 2;
-    }
-    [self updateParamDict:params value:[[NSNumber numberWithInteger:contact]stringValue]  key:@"contact_method_id"];
-
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
     if (self.txtEmail.text.length == 0) {
@@ -144,11 +125,25 @@
                           {
                           }]];
         [self presentViewController:alert animated:TRUE completion:nil];
-    }
-    else
-    {
-        if([params count])
-        {
+    } else {
+        NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+        [self updateParamDict:params value:self.txtEmail.text key:@"email"];
+        [self updateParamDict:params value:self.txtPassword.text key:@"password"];
+        [self updateParamDict:params value:self.txtFirstName.text key:@"first_name"];
+        [self updateParamDict:params value:self.txtLastName.text key:@"last_name"];
+        [self updateParamDict:params value:self.txtBirthDate.text key:@"birthdate"];
+        [self updateParamDict:params value:self.txtPhone.text key:@"cell_phone"];
+        [self updateParamDict:params value:self.btnGenderMale.selected ? @"m" : @"f" key:@"gender"];
+        NSUInteger contact = 0;
+        if(self.btnText.selected) {
+            contact = contact | 1;
+        }
+        if(self.btnEmail.selected) {
+            contact = contact | 2;
+        }
+        [self updateParamDict:params value:[[NSNumber numberWithInteger:contact]stringValue]  key:@"contact_method_id"];
+        if([params count]) {
+            AFHTTPRequestOperationManager *manager = [self getManager];
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params
                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
                       NSLog(@"JSON: %@", responseObject);

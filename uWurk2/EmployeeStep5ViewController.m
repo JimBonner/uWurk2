@@ -30,7 +30,8 @@
 @property (weak, nonatomic) IBOutlet UIView *viewNoExp;
 @property (weak, nonatomic) IBOutlet UIView *viewNoExpTip;
 @property (strong, nonatomic) NSMutableDictionary *params;
-
+@property (weak, nonatomic) NSString *expId;
+@property  BOOL performExperienceInit;
 
 @end
 
@@ -44,10 +45,12 @@
     self.viewExpTip.layer.cornerRadius = 10;
     self.viewNoExpTip.layer.cornerRadius = 10;
     
-    if([self.appDelegate.user objectForKey:@"has_experience"] == nil) {
-        [self.btnExperienceYes setSelected:TRUE];
-        [self pressYesExp:nil];
-    }
+    self.performExperienceInit = YES;
+    
+//    if([self.appDelegate.user objectForKey:@"has_experience"] == nil) {
+//        [self.btnExperienceYes setSelected:TRUE];
+//        [self pressYesExp:nil];
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,88 +69,80 @@
     
     NSLog(@"Employee Step 5:\n%@",self.appDelegate.user);
 
-    NSArray *experienceArray = [self.appDelegate.user objectForKey:@"experience"];
-    if([experienceArray count] > 0) {
-        NSDictionary *firstExperienceItem = [experienceArray objectAtIndex:0];
-        [self.btnPosition setTitle:[firstExperienceItem objectForKey:@"position"] forState:UIControlStateNormal];
-        [self.btnPosition setTitle:[firstExperienceItem objectForKey:@"position_id"] forState:UIControlStateSelected];
-        [self.btnIndustry setTitle:[firstExperienceItem objectForKey:@"industry"] forState:UIControlStateNormal];
-        [self.btnIndustry setTitle:[firstExperienceItem objectForKey:@"industry_id"] forState:UIControlStateSelected];
-        [self assignValue:[firstExperienceItem objectForKey:@"company"] control:self.txtCompany];
-        if([[firstExperienceItem objectForKey:@"status"] intValue] ==1)
-            self.btnCurrentJob.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"status"] intValue] == 2)
-            self.btnPreviousJob.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 1)
-            self.btnUnderYear.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 2)
-            self.btnYear2Year.selected = TRUE;
-        if([[firstExperienceItem objectForKey:@"job_length"] intValue] == 3)
-            self.btnOver2Year.selected = TRUE;
-        [self.params setObject:[firstExperienceItem objectForKey:@"id"] forKey:@"exp_id[0]"];
+    if(self.performExperienceInit) {
+        self.performExperienceInit = NO;
+        self.expId = @"exp_id[0]";
+        self.params = [[NSMutableDictionary alloc]init];
+        NSArray *expArray = [self.appDelegate.user objectForKey:@"experience"];
+        NSDictionary *expDict = nil;
+        if([expArray count] > 0) {
+            expDict = [expArray objectAtIndex:0];
+            [self.params setObject:[expDict objectForKey:@"id"] forKey:self.expId];
+            [self.btnIndustry setTitle:[expDict objectForKey:@"industry"] forState:UIControlStateNormal];
+            [self.btnIndustry setTag:[[expDict objectForKey:@"industry_id"]intValue]];
+            [self.btnPosition setTitle:[expDict objectForKey:@"position"] forState:UIControlStateNormal];
+            [self.btnPosition setTag:[[expDict objectForKey:@"position_id"]intValue]];
+            [self assignValue:[expDict objectForKey:@"company"] control:self.txtCompany];
+            if([[expDict objectForKey:@"status"] intValue] == 1)
+                self.btnCurrentJob.selected = TRUE;
+            if([[expDict objectForKey:@"status"] intValue] == 2)
+                self.btnPreviousJob.selected = TRUE;
+            if([[expDict objectForKey:@"job_length"] intValue] == 1)
+                self.btnUnderYear.selected = TRUE;
+            if([[expDict objectForKey:@"job_length"] intValue] == 2)
+                self.btnYear2Year.selected = TRUE;
+            if([[expDict objectForKey:@"job_length"] intValue] == 3)
+                self.btnOver2Year.selected = TRUE;
+            [self.params setObject:[expDict objectForKey:@"id"] forKey:self.expId];
+        } else {
+            [self.params setObject:@"" forKey:self.expId];
+            [self restoreScreenData];
+        }
     } else {
-//        [self.params setObject:@"" forKey:@"exp_id[0]"];
-    }
-    
-    if([[self.appDelegate.user objectForKey:@"has_experience"]intValue] == 1) {
-        self.btnExperienceYes.selected = TRUE;
-        self.cnstrntNoExpViewHeight.constant = 0;
-        self.viewNoExp.alpha = 0;
-    } else {
-        self.btnExperienceNo.selected = TRUE;
-        self.cnstrntNoExpViewHeight.constant = 155;
-        self.viewNoExp.alpha = 1;
-        self.cnstrntWorkExpHeight.constant = 0;
-        self.viewWorkExp.alpha = 0;
-    }
-    [self.txtCompany setText:[self.appDelegate.user objectForKey:@"company_names"]];
-    [self.btnCurrentJob setSelected:[[self.appDelegate.user objectForKey:@"current_job"]intValue]];
-    [self.btnIndustry setTitle:[self.appDelegate.user objectForKey:@"industry_name"]
-                      forState:UIControlStateNormal];
-    [self.btnIndustry setTag:[[self.appDelegate.user objectForKey:@"industry_id"]intValue]];
-    [self.btnPosition setTitle:[self.appDelegate.user objectForKey:@"position_name"] forState:UIControlStateNormal];
-    if([[self.appDelegate.user objectForKey:@"industry_tenure_underyear"]intValue] == 1) {
-        [self.btnUnderYear setSelected:TRUE];
-    } else {
-        [self.btnUnderYear setSelected:FALSE];
-    }
-    if([[self.appDelegate.user objectForKey:@"industry_tenure_year2year"]intValue] == 1) {
-        [self.btnYear2Year setSelected:TRUE];
-    } else {
-        [self.btnYear2Year setSelected:FALSE];
-    }
-    if([[self.appDelegate.user objectForKey:@"industry_tenure_over2year"]intValue] == 1) {
-        [self.btnOver2Year setSelected:TRUE];
-    } else {
-        [self.btnOver2Year setSelected:FALSE];
-    }
-    
-    if(([self.appDelegate.user objectForKey:@"industry_name"] == nil) ||
-       ([[self.appDelegate.user objectForKey:@"industry_name"] isEqualToString:@""])) {
-        [self.btnIndustry setTitle:@"Select Industry" forState:UIControlStateNormal];
-        [self.btnPosition setTitle:@"Select Position" forState:UIControlStateNormal];
-    } else if(([self.appDelegate.user objectForKey:@"position_name"] == nil) ||
-              ([[self.appDelegate.user objectForKey:@"position_name"] isEqualToString:@""])) {
-        [self.btnPosition setTitle:@"Select Position" forState:UIControlStateNormal];
+        [self restoreScreenData];
     }
 }
 
--(void)saveUserData
+-(void)saveScreenData
 {
-    [self.appDelegate.user setObjectOrNil:self.btnExperienceYes.selected ? @"1" : @"0" forKey:@"has_experience"];
-    [self.appDelegate.user setObjectOrNil:self.txtCompany.text forKey:@"company_names"];
-    [self.appDelegate.user setObjectOrNil:self.btnCurrentJob.selected ? @"1" : @"0" forKey:@"current_job"];
-    [self.appDelegate.user setObjectOrNil:self.btnIndustry.titleLabel.text forKey:@"industry_name"];
-    [self.appDelegate.user setObjectOrNil:[@(self.btnIndustry.tag)stringValue] forKey:@"industry_id"];
-    [self.appDelegate.user setObjectOrNil:self.btnPosition.titleLabel.text forKey:@"industry_position"];
-    [self.appDelegate.user setObjectOrNil:self.btnUnderYear.selected ? @"1" : @"0" forKey:@"industry_tenure_underyear"];
-    [self.appDelegate.user setObjectOrNil:self.btnYear2Year.selected ? @"1" : @"0" forKey:@"industry_tenure_year2year"];
-    [self.appDelegate.user setObjectOrNil:self.btnOver2Year.selected ? @"1" : @"0" forKey:@"industry_tenure_over2year"];
+    [self.appDelegate.user setObjectOrNil:self.btnExperienceYes.selected ? @"1" : @"0" forKey:@"exp_has_experience"];
+    [self.appDelegate.user setObjectOrNil:self.txtCompany.text forKey:@"exp_company_names"];
+    [self.appDelegate.user setObjectOrNil:self.btnCurrentJob.selected ? @"1" : @"0" forKey:@"exp_current_job"];
+    [self.appDelegate.user setObjectOrNil:self.btnUnderYear.selected ? @"1" : @"0" forKey:@"exp_industry_tenure_underyear"];
+    [self.appDelegate.user setObjectOrNil:self.btnYear2Year.selected ? @"1" : @"0" forKey:@"exp_industry_tenure_year2year"];
+    [self.appDelegate.user setObjectOrNil:self.btnOver2Year.selected ? @"1" : @"0" forKey:@"exp_industry_tenure_over2year"];
+    [self.appDelegate.user setObjectOrNil:self.btnIndustry.titleLabel.text forKey:@"exp_industry_name"];
+    [self.appDelegate.user setObjectOrNil:[@(self.btnIndustry.tag)stringValue] forKey:@"exp_industry_id"];
+    [self.appDelegate.user setObjectOrNil:self.btnPosition.titleLabel.text forKey:@"exp_industry_position"];
+    [self.appDelegate.user setObjectOrNil:[@(self.btnPosition.tag)stringValue] forKey:@"exp_industry_position_id"];
+}
+
+- (void)restoreScreenData
+{
+    if(([self.appDelegate.user objectForKey:@"exp_has_experience"] == nil) &&
+       ([self.appDelegate.user objectForKey:@"exp_has_no_experience"] == nil)) {
+        [self pressNoExp:nil];
+        return;
+    }
+    if([self.appDelegate.user objectForKey:@"exp_has_experience"]) {
+        [self.btnExperienceYes setSelected:[[self.appDelegate.user objectForKey:@"exp_has_experience"]intValue]];
+    }
+    if([self.appDelegate.user objectForKey:@"exp_current_job"]) {
+        [self.btnCurrentJob setSelected:[[self.appDelegate.user objectForKey:@"exp_current_job"]intValue]];
+    }
+    if([self.appDelegate.user objectForKey:@"exp_industry_tenure_underyear"]) {
+        [self.btnUnderYear setSelected:[[self.appDelegate.user objectForKey:@"exp_industry_tenure_underyear"]intValue]];
+    }
+    if([self.appDelegate.user objectForKey:@"exp_industry_tenure_year2year"]) {
+        [self.btnYear2Year setSelected:[[self.appDelegate.user objectForKey:@"exp_industry_tenure_year2year"]intValue]];
+    }
+    if([self.appDelegate.user objectForKey:@"exp_industry_tenure_over2year"]) {
+        [self.btnOver2Year setSelected:[[self.appDelegate.user objectForKey:@"exp_industry_tenure_over2year"]intValue]];
+    }
 }
 
 - (IBAction)pressNoExp:(id)sender
 {
-    [self.appDelegate.user setObjectOrNil:@"0" forKey:@"has_experience"];
     [UIView animateWithDuration:.3 animations:^{
         self.viewWorkExp.alpha = 0;
         self.viewNoExp.alpha = 1;
@@ -166,7 +161,6 @@
     
 - (IBAction)pressYesExp:(id)sender
 {
-    [self.appDelegate.user setObjectOrNil:@"1" forKey:@"has_experience"];
     self.cnstrntWorkExpHeight.constant = 700;
     self.viewNoExp.alpha = 0;
     
@@ -186,7 +180,9 @@
 
 - (IBAction)industryPress:(id)sender
 {
-     ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
+    [self saveScreenData];
+    
+    ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
     
     [myController setParameters:nil];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/industries"];
@@ -196,13 +192,15 @@
     [myController setJsonGroup:@"industries"];
     [myController setSender:self.btnIndustry];
     [myController setTitle:@"Industries"];
-    [myController setPassThru:@"industry_name"];
+    [myController setPassThru:@"selected_industry"];
     
     [self.navigationController pushViewController:myController animated:TRUE];
 }
 
 - (IBAction)positionPress:(id)sender
 {
+    [self saveScreenData];
+    
     ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
     
     [myController setParameters:@{@"industry_id":[@(self.btnIndustry.tag)stringValue]}];
@@ -213,29 +211,13 @@
     [myController setJsonGroup:@"positions"];
     [myController setSender:self.btnPosition];
     [myController setTitle:@"Positions"];
-    [myController setPassThru:@"position_name"];
+    [myController setPassThru:@"selected_position"];
     
     [self.navigationController pushViewController:myController animated:TRUE];
 }
 
 - (IBAction)nextPress:(id)sender
 {
-    if(self.btnUnderYear.isSelected) {
-        [self.params setObjectOrNil:@"1" forKey:@"job_length[0]"];
-    }
-    if(self.btnYear2Year.isSelected) {
-        [self.params setObjectOrNil:@"2" forKey:@"job_length[0]"];
-    }
-    if(self.btnOver2Year.isSelected) {
-        [self.params setObjectOrNil:@"3" forKey:@"job_length[0]"];
-    }
-    if (self.btnCurrentJob.isSelected) {
-        [self.params setObjectOrNil:@"1" forKey:@"status[0]"];
-    }
-    if (self.btnPreviousJob.isSelected) {
-        [self.params setObjectOrNil:@"2" forKey:@"status[0]"];
-    }
-    
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
     if (self.btnExperienceYes.selected == NO && self.btnExperienceNo.selected == NO) {
@@ -269,23 +251,59 @@
                           }]];
         [self presentViewController:alert animated:TRUE completion:nil];
     } else {
-        [self.params setObjectOrNil:self.txtCompany.text forKey:@"company[0]"];
-        [self.params setObjectOrNil:[self.btnPosition titleForState:UIControlStateSelected] forKey:@"position[0]"];
-        [self.params setObjectOrNil:@"" forKey:@"position2[0]"];
-        [self.params setObjectOrNil:@"" forKey:@"other_position[0]"];
-        [self.params setObjectOrNil:@"0" forKey:@"remove[0]"];
-        [self.params setObjectOrNil:[self.btnIndustry titleForState:UIControlStateSelected] forKey:@"industry[0]"];
+        BOOL hasExp;
+        if(self.btnExperienceNo.isSelected) {
+            hasExp = NO;
+            [self.params setObjectOrNil:@"1" forKey:@"has_no_Experience[0]"];
+        } else {
+            hasExp = YES;
+            [self.params setObjectOrNil:@"0" forKey:@"has_no_Experience[0]"];
+        }
+        if(hasExp) {
+            if(([self.txtCompany.text length] > 0)) {
+                [self.params setObjectOrNil:self.txtCompany.text forKey:@"company[0]"];
+            } else {
+                [self.params setObjectOrNil:@"" forKey:@"company[0]"];
+            }
+            if((self.btnCurrentJob.isSelected)) {
+                [self.params setObjectOrNil:@"1" forKey:@"status[0]"];
+            } else {
+                [self.params setObjectOrNil:@"2" forKey:@"status[0]"];
+            }
+            if(![self.btnIndustry.titleLabel.text isEqualToString:@"Select Industry"]) {
+                [self.params setObjectOrNil:[@(self.btnIndustry.tag)stringValue] forKey:@"industry[0]"];
+            }
+            if(![self.btnPosition.titleLabel.text isEqualToString:@"Select Position"]) {
+                [self.params setObjectOrNil:[@(self.btnPosition.tag)stringValue] forKey:@"position[0]"];
+            }
+            if(self.btnUnderYear.isSelected) {
+                [self.params setObjectOrNil:@"1" forKey:@"job_length[0]"];
+            };
+            if(self.btnYear2Year.isSelected) {
+                [self.params setObjectOrNil:@"2" forKey:@"job_length[0]"];
+            }
+            if(self.btnOver2Year.isSelected) {
+                [self.params setObjectOrNil:@"3" forKey:@"job_length[0]"];
+            }
+            [self.params setObjectOrNil:@"" forKey:@"position2[0]"];
+            [self.params setObjectOrNil:@"" forKey:@"other_position[0]"];
+            [self.params setObjectOrNil:@"0" forKey:@"remove[0]"];
 
+        } else {
+            [self.params setObjectOrNil:@"" forKey:@"company[0]"];
+            [self.params setObjectOrNil:@"" forKey:@"industry[0]"];
+            [self.params setObjectOrNil:@"" forKey:@"position[0]"];
+            [self.params setObjectOrNil:@"" forKey:@"position2[0]"];
+            [self.params setObjectOrNil:@"" forKey:@"other_position[0]"];
+        }
+        
         if([self.params count])
         {
             AFHTTPRequestOperationManager *manager = [self getManager];
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"JSON: %@", responseObject);
                 if([self validateResponse:responseObject]){
-                    
-                    // Update the user object
-                    
-                    
+                    self.performExperienceInit = YES;
                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup6"];
                     [self.navigationController pushViewController:myController animated:YES];
                 }
@@ -312,14 +330,16 @@
 
 -(void)SelectionMade:(NSString *)passThru withDict:(NSDictionary *)dict displayString:(NSString *)displayString;
 {
-    if([passThru isEqualToString:@"industry_name"]) {
-        [self.appDelegate.user setObjectOrNil:[@(self.btnIndustry.tag)stringValue] forKey:@"industry_id"];
+    if([passThru isEqualToString:@"selected_industry"]) {
+        [self.appDelegate.user setObject:[self.btnIndustry titleForState:UIControlStateNormal]
+                                  forKey:@"exp_industry_name"];
+        [self.appDelegate.user setObjectOrNil:[@(self.btnIndustry.tag)stringValue] forKey:@"exp_industry_id"];
     }
-}
-
--(void)SelectionMadeString:(NSString *)passThru displayString:(NSString *)displayString;
-{
-
+    if([passThru isEqualToString:@"selected_position"]) {
+        [self.appDelegate.user setObject:[self.btnPosition titleForState:UIControlStateNormal]
+                                  forKey:@"exp_industry_position"];
+        [self.appDelegate.user setObjectOrNil:[@(self.btnPosition.tag)stringValue] forKey:@"exp_industry_position_id"];
+    }
 }
 
 @end

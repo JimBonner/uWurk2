@@ -73,6 +73,7 @@
         }
     }
     if(self.performLanguagesInit) {
+        self.performLanguagesInit = NO;
         self.langDict = [[NSMutableDictionary alloc]init];
         NSString *display = @"";
         if([self.appDelegate.user objectForKey:@"languages"] != nil) {
@@ -89,7 +90,6 @@
             }
         }
     }
-    self.performLanguagesInit = NO;
     if([self.lblLanguages.text length] > 0) {
         [self.addLanguage setTitle:@"Modify Languages" forState:UIControlStateNormal];
     }else {
@@ -182,28 +182,6 @@
 
 - (IBAction)nextPress:(id)sender
 {
-    AFHTTPRequestOperationManager *manager = [self getManager];
-    
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    
-    [self updateParamDict:params value:self.btnDLYes.selected ? @"1" : @"0" key:@"has_drivers_license"];
-    [self updateParamDict:params value:self.btnVetYes.selected ? @"1" : @"0" key:@"is_veteran"];
-    [self updateParamDict:params value:self.btnFluEngYes.selected ? @"1" : @"0" key:@"fluent_english"];
-    [self updateParamDict:params value:self.btnBodyArtYes.selected ? @"1" : @"0" key:@"has_body_art"];
-    [self updateParamDict:params value:self.btnEarGauges.selected ? @"1" : @"0" key:@"has_ear_gauge"];
-    [self updateParamDict:params value:self.btnFacialPiercing.selected ? @"1" : @"0" key:@"has_facial_piercing"];
-    [self updateParamDict:params value:self.btnTattoo.selected ? @"1" : @"0" key:@"has_tattoo"];
-    [self updateParamDict:params value:self.btnTonguePiercing.selected ? @"1" : @"0" key:@"has_tongue_piercing"];
-    if([self.lblLanguages.text length] > 0) {
-        NSArray *allKeys = [self.langDict allKeys];
-        long count = [allKeys count];
-        for(long icnt = 0; icnt < count; icnt++) {
-            NSString *ident = [allKeys objectAtIndex:icnt];
-            [self updateParamDict:params value:ident
-                              key:[NSString stringWithFormat:@"other_languages[%ld]",icnt]];
-        }
-    }
-    
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
     if (self.btnDLYes.selected == NO && self.btnDLNo.selected == NO) {
@@ -234,7 +212,26 @@
                           }]];
         [self presentViewController:alert animated:TRUE completion:nil];
     } else {
+        NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+        [self updateParamDict:params value:self.btnDLYes.selected ? @"1" : @"0" key:@"has_drivers_license"];
+        [self updateParamDict:params value:self.btnVetYes.selected ? @"1" : @"0" key:@"is_veteran"];
+        [self updateParamDict:params value:self.btnFluEngYes.selected ? @"1" : @"0" key:@"fluent_english"];
+        [self updateParamDict:params value:self.btnBodyArtYes.selected ? @"1" : @"0" key:@"has_body_art"];
+        [self updateParamDict:params value:self.btnEarGauges.selected ? @"1" : @"0" key:@"has_ear_gauge"];
+        [self updateParamDict:params value:self.btnFacialPiercing.selected ? @"1" : @"0" key:@"has_facial_piercing"];
+        [self updateParamDict:params value:self.btnTattoo.selected ? @"1" : @"0" key:@"has_tattoo"];
+        [self updateParamDict:params value:self.btnTonguePiercing.selected ? @"1" : @"0" key:@"has_tongue_piercing"];
+        if([self.lblLanguages.text length] > 0) {
+            NSArray *allKeys = [self.langDict allKeys];
+            long count = [allKeys count];
+            for(long icnt = 0; icnt < count; icnt++) {
+                NSString *ident = [allKeys objectAtIndex:icnt];
+                [self updateParamDict:params value:ident
+                                  key:[NSString stringWithFormat:@"other_languages[%ld]",icnt]];
+            }
+        }
         if([params count]){
+            AFHTTPRequestOperationManager *manager = [self getManager];
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"JSON: %@", responseObject);
                 if([self validateResponse:responseObject]){

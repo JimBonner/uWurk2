@@ -82,27 +82,6 @@
 
 - (IBAction)nextPress:(id)sender
 {
-    AFHTTPRequestOperationManager *manager = [self getManager];
-    
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    [params setObject:[self.txtMiles text] forKey:@"miles[0]"];
-    [params setObject:[self.txtZip text] forKey:@"zip[0]"];
-    if(self.btnTips.selected) {
-        [params setObject:@"1" forKey:@"tipped_position"];
-    } else {
-        [params setObject:@"0" forKey:@"tipped_position"];
-    }
-    NSMutableArray *wageArray = [[NSMutableArray alloc]init];
-    if(self.btnHourly.selected) {
-        [wageArray addObject:@"hourly"];
-        [params setObject:self.txtHourly.text forKey:@"hourly_wage"];
-    } else {
-        [params setObject:@"" forKey:@"hourly_wage"];
-    }
-    if([wageArray count]) {
-        [params setObject:wageArray forKey:@"wage_type"];
-    }
-    
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
     if (self.txtMiles.text.length ==0) {
@@ -132,8 +111,27 @@
     }
     else
     {
+        NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+        [params setObject:[self.txtMiles text] forKey:@"miles[0]"];
+        [params setObject:[self.txtZip text] forKey:@"zip[0]"];
+        if(self.btnTips.selected) {
+            [params setObject:@"1" forKey:@"tipped_position"];
+        } else {
+            [params setObject:@"0" forKey:@"tipped_position"];
+        }
+        NSMutableArray *wageArray = [[NSMutableArray alloc]init];
+        if(self.btnHourly.selected) {
+            [wageArray addObject:@"hourly"];
+            [params setObject:self.txtHourly.text forKey:@"hourly_wage"];
+        } else {
+            [params setObject:@"" forKey:@"hourly_wage"];
+        }
+        if([wageArray count]) {
+            [params setObject:wageArray forKey:@"wage_type"];
+        }
         if([params count])
         {
+            AFHTTPRequestOperationManager *manager = [self getManager];
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params
                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
                       NSLog(@"JSON: %@", responseObject);
