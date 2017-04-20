@@ -67,11 +67,11 @@
 {
     [super viewWillAppear:animated];
     
-    NSLog(@"Employee Step 5:\n%@",self.appDelegate.user);
+    NSLog(@"\nEmployee Step 5:\n%@",self.appDelegate.user);
 
+    self.expId = @"exp_id[0]";
     if(self.performExperienceInit) {
         self.performExperienceInit = NO;
-        self.expId = @"exp_id[0]";
         self.params = [[NSMutableDictionary alloc]init];
         NSArray *expArray = [self.appDelegate.user objectForKey:@"experience"];
         NSDictionary *expDict = nil;
@@ -82,18 +82,27 @@
             [self.btnIndustry setTag:[[expDict objectForKey:@"industry_id"]intValue]];
             [self.btnPosition setTitle:[expDict objectForKey:@"position"] forState:UIControlStateNormal];
             [self.btnPosition setTag:[[expDict objectForKey:@"position_id"]intValue]];
-            [self assignValue:[expDict objectForKey:@"company"] control:self.txtCompany];
-            if([[expDict objectForKey:@"status"] intValue] == 1)
+            [self.txtCompany  setText:[expDict objectForKey:@"company"]];
+            if([[expDict objectForKey:@"company"] isEqualToString:@""]) {
+                self.btnExperienceNo.selected = YES;
+            } else {
+                self.btnExperienceYes.selected = YES;
+            }
+            if([[expDict objectForKey:@"status"] intValue] == 1) {
                 self.btnCurrentJob.selected = TRUE;
-            if([[expDict objectForKey:@"status"] intValue] == 2)
+            }
+            if([[expDict objectForKey:@"status"] intValue] == 2) {
                 self.btnPreviousJob.selected = TRUE;
-            if([[expDict objectForKey:@"job_length"] intValue] == 1)
+            }
+            if([[expDict objectForKey:@"job_length"] intValue] == 1) {
                 self.btnUnderYear.selected = TRUE;
-            if([[expDict objectForKey:@"job_length"] intValue] == 2)
+            }
+            if([[expDict objectForKey:@"job_length"] intValue] == 2) {
                 self.btnYear2Year.selected = TRUE;
-            if([[expDict objectForKey:@"job_length"] intValue] == 3)
+            }
+            if([[expDict objectForKey:@"job_length"] intValue] == 3) {
                 self.btnOver2Year.selected = TRUE;
-            [self.params setObject:[expDict objectForKey:@"id"] forKey:self.expId];
+            }
         } else {
             [self.params setObject:@"" forKey:self.expId];
             [self restoreScreenData];
@@ -218,113 +227,119 @@
 
 - (IBAction)nextPress:(id)sender
 {
-    NSMutableString *Error = [[NSMutableString alloc] init];
-    [Error appendString:@"To continue, complete the missing information:"];
-    if (self.btnExperienceYes.selected == NO && self.btnExperienceNo.selected == NO) {
-        [Error appendString:@"\n\nJob Status"];
-    }
-    if (self.btnExperienceYes.selected == YES && self.txtCompany.text.length == 0) {
-        [Error appendString:@"\n\nCompany Name"];
-    }
-    if (self.btnExperienceYes.selected == YES && self.btnCurrentJob.selected == NO && self.btnPreviousJob.selected == NO) {
-        [Error appendString:@"\n\nJob Type"];
-    }
-    if (self.btnExperienceYes.selected == YES && [[self.btnIndustry titleForState:UIControlStateNormal]isEqualToString:@"Select Industry"]) {
-        [Error appendString:@"\n\nSelect Industry"];
-    }
-    if (self.btnExperienceYes.selected == YES && [[self.btnPosition titleForState:UIControlStateNormal]isEqualToString:@"Select Position"]) {
-        [Error appendString:@"\n\nSelect Position"];
-    }
-    if (self.btnExperienceYes.selected == YES && self.btnUnderYear.selected == NO && self.btnYear2Year.selected == NO && self.btnOver2Year.selected == NO) {
-        [Error appendString:@"\n\nJob Length"];
-    }
-    if ((Error.length) > 50) {
-        UIAlertController * alert = [UIAlertController
-                                     alertControllerWithTitle:@"Oops!"
-                                     message:Error
-                                     preferredStyle:UIAlertControllerStyleActionSheet];
-        [alert addAction:[UIAlertAction
-                          actionWithTitle:@"OK"
-                          style:UIAlertActionStyleDefault
-                          handler:^(UIAlertAction *action)
-                          {
-                          }]];
-        [self presentViewController:alert animated:TRUE completion:nil];
+    BOOL hasExp;
+    if(self.btnExperienceNo.isSelected) {
+        hasExp = NO;
     } else {
-        BOOL hasExp;
-        if(self.btnExperienceNo.isSelected) {
-            hasExp = NO;
-            [self.params setObjectOrNil:@"1" forKey:@"has_no_Experience[0]"];
-        } else {
-            hasExp = YES;
-            [self.params setObjectOrNil:@"0" forKey:@"has_no_Experience[0]"];
+        hasExp = YES;
+    }
+    if(hasExp) {
+        NSMutableString *Error = [[NSMutableString alloc] init];
+        [Error appendString:@"To continue, complete the missing information:"];
+        if (self.btnExperienceYes.selected == NO && self.btnExperienceNo.selected == NO) {
+            [Error appendString:@"\n\nJob Status"];
         }
-        if(hasExp) {
-            if(([self.txtCompany.text length] > 0)) {
-                [self.params setObjectOrNil:self.txtCompany.text forKey:@"company[0]"];
-            } else {
-                [self.params setObjectOrNil:@"" forKey:@"company[0]"];
-            }
-            if((self.btnCurrentJob.isSelected)) {
-                [self.params setObjectOrNil:@"1" forKey:@"status[0]"];
-            } else {
-                [self.params setObjectOrNil:@"2" forKey:@"status[0]"];
-            }
-            if(![self.btnIndustry.titleLabel.text isEqualToString:@"Select Industry"]) {
-                [self.params setObjectOrNil:[@(self.btnIndustry.tag)stringValue] forKey:@"industry[0]"];
-            }
-            if(![self.btnPosition.titleLabel.text isEqualToString:@"Select Position"]) {
-                [self.params setObjectOrNil:[@(self.btnPosition.tag)stringValue] forKey:@"position[0]"];
-            }
-            if(self.btnUnderYear.isSelected) {
-                [self.params setObjectOrNil:@"1" forKey:@"job_length[0]"];
-            };
-            if(self.btnYear2Year.isSelected) {
-                [self.params setObjectOrNil:@"2" forKey:@"job_length[0]"];
-            }
-            if(self.btnOver2Year.isSelected) {
-                [self.params setObjectOrNil:@"3" forKey:@"job_length[0]"];
-            }
-            [self.params setObjectOrNil:@"" forKey:@"position2[0]"];
-            [self.params setObjectOrNil:@"" forKey:@"other_position[0]"];
-            [self.params setObjectOrNil:@"0" forKey:@"remove[0]"];
-
+        if (self.btnExperienceYes.selected == YES && self.txtCompany.text.length == 0) {
+            [Error appendString:@"\n\nCompany Name"];
+        }
+        if (self.btnExperienceYes.selected == YES && self.btnCurrentJob.selected == NO && self.btnPreviousJob.selected == NO) {
+            [Error appendString:@"\n\nJob Type"];
+        }
+        if (self.btnExperienceYes.selected == YES && [[self.btnIndustry titleForState:UIControlStateNormal]isEqualToString:@"Select Industry"]) {
+            [Error appendString:@"\n\nSelect Industry"];
+        }
+        if (self.btnExperienceYes.selected == YES && [[self.btnPosition titleForState:UIControlStateNormal]isEqualToString:@"Select Position"]) {
+            [Error appendString:@"\n\nSelect Position"];
+        }
+        if (self.btnExperienceYes.selected == YES && self.btnUnderYear.selected == NO && self.btnYear2Year.selected == NO && self.btnOver2Year.selected == NO) {
+            [Error appendString:@"\n\nJob Length"];
+        }
+        if ((Error.length) > 50) {
+            UIAlertController * alert = [UIAlertController
+                                         alertControllerWithTitle:@"Oops!"
+                                         message:Error
+                                         preferredStyle:UIAlertControllerStyleActionSheet];
+            [alert addAction:[UIAlertAction
+                              actionWithTitle:@"OK"
+                              style:UIAlertActionStyleDefault
+                              handler:^(UIAlertAction *action)
+                              {
+                              }]];
+            [self presentViewController:alert animated:TRUE completion:nil];
+            return;
+        }
+    }
+    if(hasExp) {
+        [self.params setObjectOrNil:@"0" forKey:@"has_no_experience[0]"];
+    } else {
+        [self.params setObjectOrNil:@"1" forKey:@"has_no_experience"];
+    }
+    if(hasExp) {
+        if(([self.txtCompany.text length] > 0)) {
+            [self.params setObjectOrNil:self.txtCompany.text forKey:@"company[0]"];
         } else {
             [self.params setObjectOrNil:@"" forKey:@"company[0]"];
-            [self.params setObjectOrNil:@"" forKey:@"industry[0]"];
-            [self.params setObjectOrNil:@"" forKey:@"position[0]"];
-            [self.params setObjectOrNil:@"" forKey:@"position2[0]"];
-            [self.params setObjectOrNil:@"" forKey:@"other_position[0]"];
         }
-        
-        if([self.params count])
-        {
-            AFHTTPRequestOperationManager *manager = [self getManager];
-            [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"JSON: %@", responseObject);
-                if([self validateResponse:responseObject]){
-                    self.performExperienceInit = YES;
-                    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup6"];
-                    [self.navigationController pushViewController:myController animated:YES];
-                }
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"Error: %@", error);
-                UIAlertController * alert = [UIAlertController
-                                             alertControllerWithTitle:@"Oops!"
-                                             message:@"Unable to contact server"
-                                             preferredStyle:UIAlertControllerStyleActionSheet];
-                [alert addAction:[UIAlertAction
-                                  actionWithTitle:@"OK"
-                                  style:UIAlertActionStyleDefault
-                                  handler:^(UIAlertAction *action)
-                                  {
-                                  }]];
-                [self presentViewController:alert animated:TRUE completion:nil];
-            }];
+        if((self.btnCurrentJob.isSelected)) {
+            [self.params setObjectOrNil:@"1" forKey:@"status[0]"];
         } else {
-            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup6"];
-            [self.navigationController pushViewController:myController animated:YES];
+            [self.params setObjectOrNil:@"2" forKey:@"status[0]"];
         }
+        if(![self.btnIndustry.titleLabel.text isEqualToString:@"Select Industry"]) {
+            [self.params setObjectOrNil:[@(self.btnIndustry.tag)stringValue] forKey:@"industry[0]"];
+        }
+        if(![self.btnPosition.titleLabel.text isEqualToString:@"Select Position"]) {
+            [self.params setObjectOrNil:[@(self.btnPosition.tag)stringValue] forKey:@"position[0]"];
+        }
+        if(self.btnUnderYear.isSelected) {
+            [self.params setObjectOrNil:@"1" forKey:@"job_length[0]"];
+        };
+        if(self.btnYear2Year.isSelected) {
+            [self.params setObjectOrNil:@"2" forKey:@"job_length[0]"];
+        }
+        if(self.btnOver2Year.isSelected) {
+            [self.params setObjectOrNil:@"3" forKey:@"job_length[0]"];
+        }
+        [self.params setObjectOrNil:@"" forKey:@"position2[0]"];
+        [self.params setObjectOrNil:@"" forKey:@"other_position[0]"];
+        [self.params setObjectOrNil:@"0" forKey:@"remove[0]"];
+
+    } else {
+        [self.params removeObjectForKey:self.expId];
+        [self.params setObjectOrNil:@"" forKey:@"company"];
+        [self.params setObjectOrNil:@"" forKey:@"industry"];
+        [self.params setObjectOrNil:@"" forKey:@"position"];
+        [self.params setObjectOrNil:@"" forKey:@"position2"];
+        [self.params setObjectOrNil:@"" forKey:@"other_position"];
+    }
+    
+    if([self.params count])
+    {
+        AFHTTPRequestOperationManager *manager = [self getManager];
+        [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"\nEmployee Step 5 - Response: %@", responseObject);
+            if([self validateResponse:responseObject]){
+                self.performExperienceInit = YES;
+                UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup6"];
+                [self.navigationController pushViewController:myController animated:YES];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+            UIAlertController * alert = [UIAlertController
+                                         alertControllerWithTitle:@"Oops!"
+                                         message:@"Unable to contact server"
+                                         preferredStyle:UIAlertControllerStyleActionSheet];
+            [alert addAction:[UIAlertAction
+                              actionWithTitle:@"OK"
+                              style:UIAlertActionStyleDefault
+                              handler:^(UIAlertAction *action)
+                              {
+                              }]];
+            [self presentViewController:alert animated:TRUE completion:nil];
+        }];
+    } else {
+        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup6"];
+        [self.navigationController pushViewController:myController animated:YES];
     }
 }
 

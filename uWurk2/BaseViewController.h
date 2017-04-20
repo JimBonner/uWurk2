@@ -36,4 +36,6 @@
 -(void)logout;
 - (void)getLatestUserDataFromDbmsWithCompletion:(void(^)(NSInteger result))completion
 ;
+-(NSURL *)serverUrlFor:(NSString *)postfix;
+
 @end

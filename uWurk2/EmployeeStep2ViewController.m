@@ -31,7 +31,7 @@
 {
     [super viewWillAppear:animated];
     
-    NSLog(@"Employee Step 2:\n%@",self.appDelegate.user);
+    NSLog(@"\nEmployee Step 2:\n%@",self.appDelegate.user);
     
     NSArray *array = [self.appDelegate.user objectForKey:@"availability"];
     if([array count] <= 0) {
@@ -134,7 +134,7 @@
             AFHTTPRequestOperationManager *manager = [self getManager];
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params
                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                      NSLog(@"JSON: %@", responseObject);
+                      NSLog(@"\nEmployee Step 2 - Response: %@", responseObject);
                       if([self validateResponse:responseObject]){
                            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup3"];
                           [self.navigationController pushViewController:myController animated:TRUE];

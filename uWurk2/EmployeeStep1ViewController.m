@@ -39,7 +39,7 @@
     [super viewWillAppear:animated];
     self.viewCommunication.layer.cornerRadius = 10;
     
-    NSLog(@"Employee Step 1:\n%@",self.appDelegate.user);
+    NSLog(@"\nEmployee Step 1:\n%@",self.appDelegate.user);
     
     [self assignValue:[self getUserDefault:@"email"] control:self.txtEmail];
     [self.txtEmail setAlpha:0.2];
@@ -146,7 +146,7 @@
             AFHTTPRequestOperationManager *manager = [self getManager];
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params
                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                      NSLog(@"JSON: %@", responseObject);
+                      NSLog(@"\nEmployee Step 1 - Response: %@", responseObject);
                       if([self validateResponse:responseObject])
                       {
                           UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup2"];

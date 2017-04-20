@@ -8,6 +8,7 @@
 //
 
 #import "EmployeeStep6ViewController.h"
+#import "UrlImageRequest.h"
 
 @interface EmployeeStep6ViewController ()
 
@@ -29,8 +30,10 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cnstrntBioTextHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cnstrntBioTipHeight;
 
-@property (weak, nonatomic) NSString *photoLocalIdentifier;
+@property (weak, nonatomic) NSMutableDictionary *photoDict;
 @property (weak, nonatomic) UIImage  *photoImage;
+
+@property BOOL performDbmsInit;
 
 @end
 
@@ -44,36 +47,28 @@
     self.photoImageView.layer.borderColor = [UIColor blackColor].CGColor;
     self.bioTextView.layer.borderWidth = 1;
     self.bioTextView.layer.borderColor = [UIColor blackColor].CGColor;
+    
+    self.performDbmsInit = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    NSLog(@"Employee Step 6:\n%@",self.appDelegate.user);
+    NSLog(@"\nEmployee Step 6:\n%@",self.appDelegate.user);
     
-    self.photoLocalIdentifier = [self.appDelegate.user objectForKey:@"photo_local_identifier"];
-    if(self.photoLocalIdentifier != nil) {
-        self.photoImage = [self loadPhotoImageUsingLocalIdentifier:self.photoLocalIdentifier];
-        self.photoImageView.image = self.photoImage;
-    } else {
-        self.photoImageView.image = [UIImage imageNamed:@"PhotoNotAvailable.png"];
+    if(self.performDbmsInit) {
+        self.performDbmsInit = NO;
+        NSMutableArray *photoArray = [self.appDelegate.user objectForKey:@"photos"];
+        NSMutableDictionary *photoDict = nil;
+        if([photoArray count] > 0) {
+            photoDict = [photoArray objectAtIndex:0];
+            self.photoImage = [self loadPhotoImageFromServerUsingUrl:photoDict];
+            self.photoImageView.image = self.photoImage;
+        }
+        
+        [self.bioTextView setText:[self.appDelegate.user objectForKey:@"biography"]];
     }
-    
-    if([[self.appDelegate.user objectForKey:@"skip_photo"]intValue] == 1) {
-        [self.btnPhotoSkip setSelected:FALSE];
-    } else {
-        [self.btnPhotoSkip setSelected:TRUE];
-    }
-    [self pressSkipPhoto:nil];
-    
-    self.bioTextView.text = [self.appDelegate.user objectForKey:@"bio_text"];
-    if([[self.appDelegate.user objectForKey:@"skip_bio"]intValue] == 1) {
-        [self.btnBioSkip setSelected:FALSE];
-    } else {
-        [self.btnBioSkip setSelected:TRUE];
-    }
-    [self pressSkipBio:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -81,21 +76,10 @@
     [super viewWillDisappear:animated];
 }
 
-- (void)saveUserData
-{
-    [self.appDelegate.user setObjectOrNil:self.btnPhotoSkip.selected ? @"1" : @"0" forKey:@"skip_photo"];
-    [self.appDelegate.user setObjectOrNil:self.btnBioSkip.selected ? @"1" : @"0" forKey:@"skip_bio"];
-    
-    [self.appDelegate.user setObjectOrNil:self.photoLocalIdentifier forKey:@"photo_local_identifier"];
-    
-    [self.appDelegate.user setObjectOrNil:self.bioTextView.text forKey:@"bio_text"];
-    
-    [self saveUserDefault:[self objectToJsonString:self.appDelegate.user] Key:@"user_data"];
-}
-
 - (IBAction)btnPhoto:(UIButton*)sender
 {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    
     picker.delegate = self;
     
     UIAlertController * alert = [UIAlertController
@@ -108,20 +92,22 @@
                       style:UIAlertActionStyleDefault
                       handler:^(UIAlertAction *action)
                       {
-                          UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+                          UIImagePickerController *picker = [[UIImagePickerController alloc] init];
                           picker.delegate = self;
                           picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
                           [alert dismissViewControllerAnimated:YES completion:nil];
+                          [self presentViewController:picker animated:true completion:nil];
                       }]];
     [alert addAction:[UIAlertAction
                       actionWithTitle:@"Take Photo"
                       style:UIAlertActionStyleDefault
                       handler:^(UIAlertAction * action)
                       {
-                          UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+                          UIImagePickerController *picker = [[UIImagePickerController alloc] init];
                           picker.delegate = self;
                           picker.sourceType = UIImagePickerControllerSourceTypeCamera;
                           [alert dismissViewControllerAnimated:YES completion:nil];
+                          [self presentViewController:picker animated:true completion:nil];
                       }]];
      [alert addAction:[UIAlertAction
                        actionWithTitle:@"Cancel"
@@ -142,17 +128,13 @@
     [self.photoImageView setImage:self.photoImage];
     self.photoImageView.alpha = 1.0;
     [self.view layoutIfNeeded];
-    self.photoLocalIdentifier = nil;
     if(picker.sourceType == UIImagePickerControllerSourceTypeSavedPhotosAlbum) {
-        NSString *localId = [self localIdentifierFromAssetUrlString:[[info valueForKey:UIImagePickerControllerReferenceURL]absoluteString]];
-        self.photoLocalIdentifier = localId;
+
     } else if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
          UIImageWriteToSavedPhotosAlbum(self.photoImage,
-                                       self,
-                                       @selector(image:didFinishSavingWithError:contextInfo:),
-                                       nil);
-        NSString *localId = [self localIdentifierOfLastPhotoAsset];
-        self.photoLocalIdentifier = localId;
+                                        self,
+                                        @selector(image:didFinishSavingWithError:contextInfo:),
+                                        nil);
     } else {
         return;
     }
@@ -224,11 +206,11 @@
 {
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
-    if ((self.btnPhotoSkip.selected == NO) && [self.photoLocalIdentifier length] == 0)
+    if ((self.btnPhotoSkip.selected == NO) && (self.photoImageView.image == nil))
     {
         [Error appendString:@"\n\nSelect Photo or Select Skip"];
     }
-    if (self.btnBioSkip.selected == NO && self.bioTextView.text.length == 0)
+    if ((self.btnBioSkip.selected == NO) && (self.bioTextView.text.length == 0))
     {
         [Error appendString:@"\n\nEnter Bio or Select Skip"];
     }
@@ -255,7 +237,7 @@ UIImage  *returnImage;
 
 - (void)savePhotoDataToDbms
 {
-    if(self.btnPhotoSkip.selected == FALSE) {
+    if(self.btnPhotoSkip.selected == NO) {
         NSData *imageData = UIImageJPEGRepresentation(self.photoImage, 0.5);
         AFHTTPRequestOperationManager *manager = [self getManager];
         [manager POST:@"http://uwurk.tscserver.com/api/v1/photos"
@@ -263,7 +245,8 @@ UIImage  *returnImage;
          {
              [formData appendPartWithFileData:imageData name:@"photo_file" fileName:@"photo.jpg" mimeType:@"image/jpeg"];
          } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             if(self.btnBioSkip.selected == TRUE) {
+             NSLog(@"\nEmployee Step 6 - Photo Response: %@", responseObject);
+             if(self.btnBioSkip.selected == YES) {
                  UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                  [self.navigationController setViewControllers:@[myController] animated:YES];
              } else {
@@ -283,18 +266,25 @@ UIImage  *returnImage;
                                }]];
              [self presentViewController:alert animated:TRUE completion:nil];
          }];
+    } else {
+        if(self.btnBioSkip.selected) {
+            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
+            [self.navigationController setViewControllers:@[myController] animated:YES];
+        } else {
+            [self saveBioDataToDbms];
+        }
     }
 }
 
 - (void)saveBioDataToDbms
 {
-    if(self.btnBioSkip.selected == FALSE) {
-        NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    if(self.btnBioSkip.selected  == NO) {
+        NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
         [self updateParamDict:params value:self.bioTextView.text key:@"biography"];
         AFHTTPRequestOperationManager *manager = [self getManager];
         [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             NSLog(@"JSON: %@", responseObject);
+             NSLog(@"\nEmployee Step 6 - Bio Response: %@", responseObject);
              UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
              [self.navigationController setViewControllers:@[myController] animated:YES];
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -311,51 +301,75 @@ UIImage  *returnImage;
                                }]];
              [self presentViewController:alert animated:TRUE completion:nil];
          }];
+    } else {
+        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
+        [self.navigationController setViewControllers:@[myController] animated:YES];
     }
 }
 
-- (UIImage *)loadPhotoImageUsingLocalIdentifier:(NSString *)localId
+UIImage *image;
+
+- (UIImage *)loadPhotoImageFromServerUsingUrl:(NSMutableDictionary *)photoDict
 {
-    returnImage = nil;
-    PHAsset *asset = [[PHAsset fetchAssetsWithLocalIdentifiers:[NSArray arrayWithObject:localId]
-                                                       options:nil]lastObject];
-    if(asset != nil) {
-        CGSize targetSize = CGSizeMake(300.0,300.0);
-        PHImageRequestOptions *requestOptions = [[PHImageRequestOptions alloc]init];
-        requestOptions.synchronous = YES;
-        [[PHImageManager defaultManager]requestImageForAsset:asset targetSize:targetSize contentMode:PHImageContentModeAspectFit options:requestOptions resultHandler:^(UIImage *image, NSDictionary * info)
-        {
-            returnImage = image;
+    image = nil;
+    
+    if([[photoDict objectForKey:@"for_profile"] intValue] == 1) {
+        NSURL *photoURL =[self serverUrlFor:[photoDict objectForKey:@"url"]];
+        
+        UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];
+        
+        [photoRequest startWithCompletion:^(UIImage *newImage, NSError *error) {
+            if(newImage) {
+                image = newImage;
+            }
         }];
     }
-    return returnImage;
+    
+    return image;
 }
 
-- (NSString *)localIdentifierFromAssetUrlString:(NSString *)photoUrlString
-{
-    returnString = nil;
-    NSArray *urlArray = [NSArray arrayWithObject:[NSURL URLWithString:photoUrlString]];
-    PHAsset *asset = [[PHAsset fetchAssetsWithALAssetURLs:urlArray options:nil]lastObject];
-    if(asset != nil) {
-        returnString = asset.localIdentifier;
-    }
-    return returnString;
-}
-
-- (NSString *)localIdentifierOfLastPhotoAsset
-{
-    PHAsset *asset = nil;
-    PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
-    fetchOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
-    PHFetchResult *fetchResult = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:fetchOptions];
-    if (fetchResult != nil && fetchResult.count > 0) {
-        asset = [fetchResult lastObject];
-    }
-    NSString *localID = nil;
-    if (asset) {
-        localID = asset.localIdentifier;
-    }
-    return localID;
-}
+//- (UIImage *)loadPhotoImageUsingLocalIdentifier:(NSString *)localId
+//{
+//    returnImage = nil;
+//    PHAsset *asset = [[PHAsset fetchAssetsWithLocalIdentifiers:[NSArray arrayWithObject:localId]
+//                                                       options:nil]lastObject];
+//    if(asset != nil) {
+//        CGSize targetSize = CGSizeMake(300.0,300.0);
+//        PHImageRequestOptions *requestOptions = [[PHImageRequestOptions alloc]init];
+//        requestOptions.synchronous = YES;
+//        [[PHImageManager defaultManager]requestImageForAsset:asset targetSize:targetSize contentMode:PHImageContentModeAspectFit options:requestOptions resultHandler:^(UIImage *image, NSDictionary * info)
+//        {
+//            returnImage = image;
+//        }];
+//    }
+//    return returnImage;
+//}
+//
+//- (NSString *)localIdentifierFromAssetUrlString:(NSString *)photoUrlString
+//{
+//    returnString = nil;
+//    NSArray *urlArray = [NSArray arrayWithObject:[NSURL URLWithString:photoUrlString]];
+//    PHAsset *asset = [[PHAsset fetchAssetsWithALAssetURLs:urlArray options:nil]lastObject];
+//    if(asset != nil) {
+//        returnString = asset.localIdentifier;
+//    }
+//    return returnString;
+//}
+//
+//- (NSString *)localIdentifierOfLastPhotoAsset
+//{
+//    PHAsset *asset = nil;
+//    PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
+//    fetchOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
+//    PHFetchResult *fetchResult = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:fetchOptions];
+//    if (fetchResult != nil && fetchResult.count > 0) {
+//        asset = [fetchResult lastObject];
+//    }
+//    NSString *localID = nil;
+//    if (asset) {
+//        localID = asset.localIdentifier;
+//    }
+//    return localID;
+//}
 
 @end

@@ -14,6 +14,7 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) NSMutableDictionary *user;
 @property (strong, nonatomic) NSString *documentsDirectory;
+@property (strong, nonatomic) NSString *serverAddress;
 
 -(NSString *)getDocumentsDirectory;
 

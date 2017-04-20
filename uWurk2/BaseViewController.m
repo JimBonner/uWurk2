@@ -396,4 +396,12 @@
         [self.appDelegate setUser:[self jsonStringToObject:string]];
     }
 }
+
+-(NSURL *)serverUrlFor:(NSString *)postfix;
+{
+    NSURL *serverURL =[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.appDelegate.serverAddress,postfix]];
+    
+    return serverURL;
+}
+
 @end

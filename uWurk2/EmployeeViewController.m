@@ -80,8 +80,10 @@
 }
 
 
--(void) viewWillAppear:(BOOL)animated{
+-(void) viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
+    
     NSString *SchoolStatus1;
     NSString *JobStatus1;
     NSString *TipWork;
@@ -146,7 +148,7 @@
         [self.btnBio setTitle:@"ADD BIO" forState:UIControlStateHighlighted];
         [self.btnBio setTitle:@"ADD BIO" forState:UIControlStateSelected];
     }
-    if([experienceArray count] ==0) {
+    if([experienceArray count] == 0) {
         self.btnExp.alpha = 0;
     }
     if([educationArray count] <=1) {

@@ -49,7 +49,7 @@
     [super viewWillAppear:animated];
     self.viewCool.layer.cornerRadius = 5;
     
-    NSLog(@"Employee Step 3:\n%@",self.appDelegate.user);
+    NSLog(@"\nEmployee Step 3:\n%@",self.appDelegate.user);
     
     if([self.appDelegate.user objectForKey:@"has_drivers_license"]) {
         if([[self.appDelegate.user objectForKey:@"has_drivers_license"]intValue] == 1){
@@ -233,7 +233,7 @@
         if([params count]){
             AFHTTPRequestOperationManager *manager = [self getManager];
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"JSON: %@", responseObject);
+                NSLog(@"\nEmployee Step 3 - Response: %@", responseObject);
                 if([self validateResponse:responseObject]){
                     self.performLanguagesInit = YES;
                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup4"];
