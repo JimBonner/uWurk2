@@ -39,7 +39,7 @@
     [super viewWillAppear:animated];
     self.viewCommunication.layer.cornerRadius = 10;
     
-    NSLog(@"\nEmployee Step 1:\n%@",self.appDelegate.user);
+    NSLog(@"\nEmployee Step 1 Init:\n%@",self.appDelegate.user);
     
     [self assignValue:[self getUserDefault:@"email"] control:self.txtEmail];
     [self.txtEmail setAlpha:0.2];

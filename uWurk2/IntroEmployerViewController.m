@@ -11,7 +11,7 @@
 #import "EmployerRegisterThanksViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
-#import "EmployerStep0ViewController.h"
+#import "EmployerStep1ViewController.h"
 
 
 @interface IntroEmployerViewController ()
@@ -27,7 +27,17 @@
     [self.navigationController setNavigationBarHidden:false];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSLog(@"\nEmployer Intro:\n%@",self.appDelegate.user);
+    
+    [self.emailText setText:[self getUserDefault:@"email"]];
+}
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -39,35 +49,69 @@
 
 - (IBAction)pressEmailRegister:(id)sender
 {
+    if([[self getUserDefault:@"user_type"] isEqualToString:@"employee"]) {
+        [self saveUserDefault:nil Key:@"email"];
+        [self saveUserDefault:nil Key:@"api_auth_token"];
+    }
+
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:self.emailText.text forKey:@"email"];
     [params setObject:@"employer" forKey:@"type"];
     if([params count])
     {
-        [manager POST:@"http://uwurk.tscserver.com/api/v1/register" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+         [manager POST:@"http://uwurk.tscserver.com/api/v1/register" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
+        {
             NSLog(@"JSON: %@", responseObject);
             if([self validateResponse:responseObject]){
+                if(([self getUserDefault:@"email"] == nil) &&
+                   ([self getUserDefault:@"api_auth_token"] == nil))
+                {
+                    [self saveUserDefault:@"employer" Key:@"user_type"];
+                    [self saveUserDefault:[self.emailText text] Key:@"email"];
+                    [self saveUserDefault:[responseObject objectForKey:@"api_auth_token"] Key:@"api_auth_token"];
+                    [self getLatestUserDataFromDbmsWithCompletion:^(NSInteger result) {
+                        if(result == 1) {
+                            EmployerStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerStep1ViewController"];
+                            [self.navigationController pushViewController:myController animated:TRUE];
+                        }}];
+                }
+            } else {
+                NSDictionary *dictionary = [responseObject objectForKey:@"messages"];
+                NSArray *array = [dictionary objectForKey:@"email"];
+                NSString *message = [array objectAtIndex:0];
+                UIAlertController *alert = [UIAlertController
+                                            alertControllerWithTitle:@"Oops"
+                                            message:message
+                                            preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *cancel = [UIAlertAction
+                                         actionWithTitle:@"Try again"
+                                         style:UIAlertActionStyleDefault
+                                         handler:^(UIAlertAction * action)
+                                         {
+                                             [alert dismissViewControllerAnimated:YES completion:nil];
+                                         }];
+                [alert addAction:cancel];
                 
-                // Update the user object
-                
-                EmployerRegisterThanksViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerRegisterThanksView"];
-                [myController setEmail:self.emailText.text];
-                [self.navigationController pushViewController:myController animated:TRUE];
-            }
-            else
-            {
-                UIAlertController * alert = [UIAlertController
-                                             alertControllerWithTitle:@"Oops!"
-                                             message:[responseObject objectForKey:@"message"]
-                                             preferredStyle:UIAlertControllerStyleActionSheet];
-                [alert addAction:[UIAlertAction
-                                  actionWithTitle:@"OK"
-                                  style:UIAlertActionStyleDefault
-                                  handler:^(UIAlertAction *action)
-                                  {
-                                  }]];
-                [self.navigationController popViewControllerAnimated:TRUE];
+                if([self getUserDefault:@"email"] &&
+                   [self getUserDefault:@"api_auth_token"] &&
+                   [message containsString:@"email"] &&
+                   [message containsString:@"taken"])
+                {
+                    UIAlertAction *ok = [UIAlertAction
+                                         actionWithTitle:@"Continue"
+                                         style:UIAlertActionStyleDefault                                         handler:^(UIAlertAction * action)
+                                         {
+                                             [alert dismissViewControllerAnimated:YES completion:nil];
+                                             [self getLatestUserDataFromDbmsWithCompletion:^(NSInteger result) {
+                                                 if(result == 1) {
+                                                     EmployerStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeStep1ViewController"];
+                                                     [self.navigationController pushViewController:myController animated:TRUE];
+                                                }}];
+                                         }];
+                    [alert addAction:ok];
+                }
+                [self presentViewController:alert animated:YES completion:nil];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error)
         {
@@ -159,7 +203,7 @@
                           {
                               [self saveUserDefault:[((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] Key:@"api_auth_token"];
                               
-                              EmployerStep0ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"IntroEmployer"];
+                              EmployerStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerStep1ViewController"];
                               
                               UINavigationController *nav = self.navigationController;
                               [nav popToRootViewControllerAnimated:FALSE];

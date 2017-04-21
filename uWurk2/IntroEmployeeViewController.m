@@ -31,7 +31,7 @@
 {
     [super viewWillAppear:animated];
     
-    NSLog(@"Employee Intro:\n%@",self.appDelegate.user);
+    NSLog(@"\nEmployee Intro:\n%@",self.appDelegate.user);
     
     [self.emailText setText:[self getUserDefault:@"email"]];
 }
@@ -49,11 +49,9 @@
 - (IBAction)pressEmailRegister:(id)sender
 {
     AFHTTPRequestOperationManager *manager = [self getManager];
-    
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:self.emailText.text forKey:@"email"];
     [params setObject:@"employee" forKey:@"type"];
-
     if([params count]){
         [manager POST:@"http://uwurk.tscserver.com/api/v1/register" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
         {
@@ -91,13 +89,13 @@
                 
                 if([self getUserDefault:@"email"] &&
                    [self getUserDefault:@"api_auth_token"] &&
-                   [[self getUserDefault:@"email"] isEqualToString:[self.emailText text]] &&
                    [message containsString:@"email"] &&
                    [message containsString:@"taken"])
                 {
                     UIAlertAction *ok = [UIAlertAction
                                          actionWithTitle:@"Continue"
-                                         style:UIAlertActionStyleDefault                                         handler:^(UIAlertAction * action)
+                                         style:UIAlertActionStyleDefault
+                                         handler:^(UIAlertAction * action)
                                          {
                                              [alert dismissViewControllerAnimated:YES completion:nil];
                                              [self getLatestUserDataFromDbmsWithCompletion:^(NSInteger result) {

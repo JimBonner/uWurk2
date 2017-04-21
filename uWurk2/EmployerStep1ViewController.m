@@ -10,6 +10,7 @@
 #import "EmployerStep1ViewController.h"
 
 @interface EmployerStep1ViewController ()
+
 @property (weak, nonatomic) IBOutlet UITextField *txtEmail;
 @property (weak, nonatomic) IBOutlet UITextField *txtFirstName;
 @property (weak, nonatomic) IBOutlet UITextField *txtLastName;
@@ -18,18 +19,30 @@
 
 @implementation EmployerStep1ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
--(void) viewWillAppear:(BOOL)animated{
+
+-(void) viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     
-    [self assignValue:[self.appDelegate.user objectForKey:@"email"] control:self.txtEmail];
+    NSLog(@"\nEmployer Step 1 Init:\n%@",self.appDelegate.user);
+    
+    [self assignValue:[self getUserDefault:@"email"] control:self.txtEmail];
+    [self.txtEmail setAlpha:0.2];
+    [self.txtEmail setEnabled:NO];
+    
+    if([[self.appDelegate.user objectForKey:@"first_name"] isEqualToString:@""]) return;
+    
     [self assignValue:[self.appDelegate.user objectForKey:@"first_name"] control:self.txtFirstName];
     [self assignValue:[self.appDelegate.user objectForKey:@"last_name"] control:self.txtLastName];
 }
-- (void)didReceiveMemoryWarning {
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

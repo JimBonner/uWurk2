@@ -49,7 +49,7 @@
     [super viewWillAppear:animated];
     self.viewCool.layer.cornerRadius = 5;
     
-    NSLog(@"\nEmployee Step 3:\n%@",self.appDelegate.user);
+    NSLog(@"\nEmployee Step 3 Init:\n%@",self.appDelegate.user);
     
     if([self.appDelegate.user objectForKey:@"has_drivers_license"]) {
         if([[self.appDelegate.user objectForKey:@"has_drivers_license"]intValue] == 1){
@@ -95,7 +95,9 @@
     }else {
         [self.addLanguage setTitle:@"Add Languages" forState:UIControlStateNormal];
     }
-    if([self.appDelegate.user objectForKey:@"has_body_art"]) {
+    if([self.appDelegate.user objectForKey:@"has_body_art"] == nil) {
+        [self pressNoBdyArt:nil];
+    } else {
         if([[self.appDelegate.user objectForKey:@"has_body_art"]intValue] == 1){
             self.btnBodyArtYes.selected = TRUE;
             [self pressYesBdyArt:self.btnBodyArtYes];
@@ -103,7 +105,7 @@
             self.btnBodyArtNo.selected = TRUE;
             [self pressNoBdyArt:self.btnBodyArtNo];
         }
-    }
+        }
     if([self.appDelegate.user objectForKey:@"has_facial_piercing"]) {
         if([[self.appDelegate.user objectForKey:@"has_facial_piercing"]intValue] == 1){
             self.btnFacialPiercing.selected = TRUE;
