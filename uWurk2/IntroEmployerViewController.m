@@ -33,6 +33,11 @@
     
     NSLog(@"\nEmployer Intro:\n%@",self.appDelegate.user);
     
+    if(![[self getUserDefault:@"user_type"] isEqualToString:@"employer"]) {
+        [self saveUserDefault:@"employer" Key:@"type"];
+        [self saveUserDefault:nil Key:@"email"];
+        [self saveUserDefault:nil Key:@"api_auth_token"];
+    }
     [self.emailText setText:[self getUserDefault:@"email"]];
 }
 
@@ -49,11 +54,6 @@
 
 - (IBAction)pressEmailRegister:(id)sender
 {
-    if([[self getUserDefault:@"user_type"] isEqualToString:@"employee"]) {
-        [self saveUserDefault:nil Key:@"email"];
-        [self saveUserDefault:nil Key:@"api_auth_token"];
-    }
-
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:self.emailText.text forKey:@"email"];
@@ -62,7 +62,7 @@
     {
          [manager POST:@"http://uwurk.tscserver.com/api/v1/register" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
         {
-            NSLog(@"JSON: %@", responseObject);
+            NSLog(@"\nEmployer Email Register Json Response:\n%@", responseObject);
             if([self validateResponse:responseObject]){
                 if(([self getUserDefault:@"email"] == nil) &&
                    ([self getUserDefault:@"api_auth_token"] == nil))
@@ -105,7 +105,7 @@
                                              [alert dismissViewControllerAnimated:YES completion:nil];
                                              [self getLatestUserDataFromDbmsWithCompletion:^(NSInteger result) {
                                                  if(result == 1) {
-                                                     EmployerStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeStep1ViewController"];
+                                                     EmployerStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerStep1ViewController"];
                                                      [self.navigationController pushViewController:myController animated:TRUE];
                                                 }}];
                                          }];
@@ -154,7 +154,7 @@
          } else if (result.isCancelled) {
              UIAlertController * alert = [UIAlertController
                                           alertControllerWithTitle:@"Oops!"
-                                          message:@"Facebood login was cancelled."
+                                          message:@"Facebook login was cancelled."
                                           preferredStyle:UIAlertControllerStyleActionSheet];
              [alert addAction:[UIAlertAction
                                actionWithTitle:@"OK"
@@ -197,7 +197,7 @@
                       
                       [manager POST:@"http://uwurk.tscserver.com/api/v1/register" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
                       {
-                          NSLog(@"JSON: %@", responseObject);
+                          NSLog(@"\nEmployer Facebook Register Json Response:\n%@", responseObject);
                           if([self validateResponse:responseObject] &&
                              [((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] != nil)
                           {

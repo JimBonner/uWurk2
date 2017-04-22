@@ -597,7 +597,7 @@
                                                         <rect key="frame" x="8" y="52" width="244" height="78"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="ADD YOUR LOGO!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ez2-VQ-xXK">
-                                                                <rect key="frame" x="68.5" y="7" width="109" height="27"/>
+                                                                <rect key="frame" x="68" y="7" width="109" height="27"/>
                                                                 <fontDescription key="fontDescription" name="RobotoCondensed-BoldItalic" family="Roboto Condensed" pointSize="16"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -4193,7 +4193,7 @@ If you don’t find quality candidates today, check back soon.</string>
                             <constraint firstItem="0fa-US-ffE" firstAttribute="height" secondItem="n9X-QP-s7e" secondAttribute="height" priority="250" constant="-40" id="EUJ-24-XLb"/>
                             <constraint firstItem="t8v-o5-7UR" firstAttribute="leading" secondItem="n9X-QP-s7e" secondAttribute="leadingMargin" constant="-16" id="b2e-1e-INm"/>
                             <constraint firstItem="t8v-o5-7UR" firstAttribute="top" secondItem="n9X-QP-s7e" secondAttribute="topMargin" id="enJ-L0-ho2"/>
-                            <constraint firstItem="EJn-Hp-c4f" firstAttribute="top" secondItem="t8v-o5-7UR" secondAttribute="bottom" id="iMb-Mr-6M5"/>
+                            <constraint firstItem="EJn-Hp-c4f" firstAttribute="top" secondItem="t8v-o5-7UR" secondAttribute="bottom" id="iQH-DH-8aG"/>
                             <constraint firstAttribute="trailingMargin" secondItem="t8v-o5-7UR" secondAttribute="trailing" constant="-16" id="ia8-CG-zpJ"/>
                         </constraints>
                     </view>
@@ -4202,6 +4202,8 @@ If you don’t find quality candidates today, check back soon.</string>
                         <outlet property="txtEmail" destination="NpP-hP-4i6" id="BPo-3C-2PF"/>
                         <outlet property="txtFirstName" destination="jWb-vu-zzz" id="jYK-LU-wug"/>
                         <outlet property="txtLastName" destination="2Fl-6C-boC" id="sQS-Q4-W5X"/>
+                        <outlet property="txtPassword" destination="iKs-XJ-xys" id="ULW-hc-b7t"/>
+                        <outlet property="txtVerifyPassword" destination="ZLw-Tj-byZ" id="5lp-fp-I24"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZbA-f5-2IQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4826,7 +4828,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COMPANY INFO" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8PE-iU-owz">
-                                                        <rect key="frame" x="130.5" y="10.5" width="114.5" height="21"/>
+                                                        <rect key="frame" x="131" y="10.5" width="114.5" height="21"/>
                                                         <fontDescription key="fontDescription" name="RobotoCondensed-Bold" family="Roboto Condensed" pointSize="18"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>

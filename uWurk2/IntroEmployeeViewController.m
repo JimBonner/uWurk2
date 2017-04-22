@@ -33,6 +33,11 @@
     
     NSLog(@"\nEmployee Intro:\n%@",self.appDelegate.user);
     
+    if(![[self getUserDefault:@"user_type"] isEqualToString:@"employee"]) {
+        [self saveUserDefault:@"employee" Key:@"user_type"];
+        [self saveUserDefault:nil Key:@"email"];
+        [self saveUserDefault:nil Key:@"api_auth_token"];
+    }
     [self.emailText setText:[self getUserDefault:@"email"]];
 }
 
@@ -55,7 +60,7 @@
     if([params count]){
         [manager POST:@"http://uwurk.tscserver.com/api/v1/register" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
         {
-            NSLog(@"JSON: %@", responseObject);
+            NSLog(@"\nEmployee Email Register Json Response:\n%@", responseObject);
             if([self validateResponse:responseObject])
             {
                 if(([self getUserDefault:@"email"] == nil) &&
@@ -190,7 +195,7 @@
                       [parameters setObject:@1 forKey:@"facebook"];
                       [manager POST:@"http://uwurk.tscserver.com/api/v1/register" parameters:parameters
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                NSLog(@"JSON: %@", responseObject);
+                                NSLog(@"\nEmployee Facebook Register Json:\n%@", responseObject);
                                 BOOL bValid = [self validateResponse:responseObject];
                                 if([((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] != nil){
                                     EmployeeStepSetupViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"IntroEmployee"];

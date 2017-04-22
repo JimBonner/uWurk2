@@ -95,9 +95,7 @@
     }else {
         [self.addLanguage setTitle:@"Add Languages" forState:UIControlStateNormal];
     }
-    if([self.appDelegate.user objectForKey:@"has_body_art"] == nil) {
-        [self pressNoBdyArt:nil];
-    } else {
+    if([self.appDelegate.user objectForKey:@"has_body_art"] != nil)  {
         if([[self.appDelegate.user objectForKey:@"has_body_art"]intValue] == 1){
             self.btnBodyArtYes.selected = TRUE;
             [self pressYesBdyArt:self.btnBodyArtYes];
@@ -105,7 +103,9 @@
             self.btnBodyArtNo.selected = TRUE;
             [self pressNoBdyArt:self.btnBodyArtNo];
         }
-        }
+    } else {
+        [self pressNoBdyArt:nil];
+    }
     if([self.appDelegate.user objectForKey:@"has_facial_piercing"]) {
         if([[self.appDelegate.user objectForKey:@"has_facial_piercing"]intValue] == 1){
             self.btnFacialPiercing.selected = TRUE;
@@ -280,10 +280,12 @@
     } else {
         [self.appDelegate.user setObject:@"0" forKey:@"fluent_english"];
     }
-    if(self.btnBodyArtYes.isSelected) {
-        [self.appDelegate.user setObject:@"1" forKey:@"has_body_art"];
-    } else {
-        [self.appDelegate.user setObject:@"0" forKey:@"has_body_art"];
+    if(self.btnBodyArtYes.isSelected || self.btnBodyArtNo.isSelected) {
+        if(self.btnBodyArtYes.isSelected) {
+            [self.appDelegate.user setObject:@"1" forKey:@"has_body_art"];
+        } else {
+            [self.appDelegate.user setObject:@"0" forKey:@"has_body_art"];
+        }
     }
     if(self.btnTattoo.isSelected) {
         [self.appDelegate.user setObject:@"1" forKey:@"has_tattoo"];

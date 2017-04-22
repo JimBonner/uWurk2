@@ -45,6 +45,7 @@
     
     self.photoImageView.layer.borderWidth = 1;
     self.photoImageView.layer.borderColor = [UIColor blackColor].CGColor;
+    
     self.bioTextView.layer.borderWidth = 1;
     self.bioTextView.layer.borderColor = [UIColor blackColor].CGColor;
     
@@ -65,10 +66,18 @@
             photoDict = [photoArray objectAtIndex:0];
             self.photoImage = [self loadPhotoImageFromServerUsingUrl:photoDict];
             self.photoImageView.image = self.photoImage;
+        } else {
+            self.photoImageView.image = [UIImage imageNamed:@"PhotoNotAvailable.png"];
         }
         
         [self.bioTextView setText:[self.appDelegate.user objectForKey:@"biography"]];
     }
+    self.btnPhotoAdd.alpha = 1.0;
+    self.cnstrntImageHeight.constant = 200.0;
+    self.photoImageView.alpha = 1.0;
+
+    self.cnstrntBioTextHeight.constant = 173.0;
+    self.bioTextView.alpha = 1.0;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -206,7 +215,7 @@
 {
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
-    if ((self.btnPhotoSkip.selected == NO) && (self.photoImageView.image == nil))
+    if ((self.btnPhotoSkip.selected == NO) && (self.photoImage == nil))
     {
         [Error appendString:@"\n\nSelect Photo or Select Skip"];
     }
@@ -314,7 +323,7 @@ UIImage *image;
     image = nil;
     
     if([[photoDict objectForKey:@"for_profile"] intValue] == 1) {
-        NSURL *photoURL =[self serverUrlFor:[photoDict objectForKey:@"url"]];
+        NSURL *photoURL =[self serverUrlWith:[photoDict objectForKey:@"url"]];
         
         UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];
         

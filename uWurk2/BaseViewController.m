@@ -397,7 +397,7 @@
     }
 }
 
--(NSURL *)serverUrlFor:(NSString *)postfix;
+-(NSURL *)serverUrlWith:(NSString *)postfix;
 {
     NSURL *serverURL =[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.appDelegate.serverAddress,postfix]];
     

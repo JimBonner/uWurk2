@@ -83,11 +83,11 @@
             [self.btnPosition setTitle:[expDict objectForKey:@"position"] forState:UIControlStateNormal];
             [self.btnPosition setTag:[[expDict objectForKey:@"position_id"]intValue]];
             [self.txtCompany  setText:[expDict objectForKey:@"company"]];
-            if([[expDict objectForKey:@"company"] isEqualToString:@""]) {
-                self.btnExperienceNo.selected = YES;
-            } else {
-                self.btnExperienceYes.selected = YES;
-            }
+            if([self.appDelegate.user objectForKey:@"has_experience"]) {
+                    self.btnExperienceNo.selected = YES;
+                } else {
+                    self.btnExperienceYes.selected = YES;
+                }
             if([[expDict objectForKey:@"status"] intValue] == 1) {
                 self.btnCurrentJob.selected = TRUE;
             }
@@ -115,6 +115,7 @@
 -(void)saveScreenData
 {
     [self.appDelegate.user setObjectOrNil:self.btnExperienceYes.selected ? @"1" : @"0" forKey:@"exp_has_experience"];
+    [self.appDelegate.user setObjectOrNil:self.btnExperienceNo.selected ? @"1" : @"0" forKey:@"exp_has_no_experience"];
     [self.appDelegate.user setObjectOrNil:self.txtCompany.text forKey:@"exp_company_names"];
     [self.appDelegate.user setObjectOrNil:self.btnCurrentJob.selected ? @"1" : @"0" forKey:@"exp_current_job"];
     [self.appDelegate.user setObjectOrNil:self.btnUnderYear.selected ? @"1" : @"0" forKey:@"exp_industry_tenure_underyear"];

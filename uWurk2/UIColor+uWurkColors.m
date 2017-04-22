@@ -3,7 +3,7 @@
 //  Kum-n-GoLoyaltyApp
 //
 //  Created by Pratikbhai Patel on 9/21/15.
-//  Copyright © 2015 Mobiquity, Inc. All rights reserved.
+//  Copyright (c) 2015 Mobiquity, Inc. All rights reserved.
 //
 
 #import "UIColor+uWurkColors.h"

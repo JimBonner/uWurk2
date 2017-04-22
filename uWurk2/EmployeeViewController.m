@@ -4,6 +4,7 @@
 //
 //  Created by Avery Bonner on 8/31/15.
 //  Copyright (c) 2015 Michael Brown. All rights reserved.
+//  Copyright (c) 2017 Jim Bonner. All rights reserved.
 //
 
 #import "EmployeeViewController.h"
@@ -50,7 +51,8 @@
 
 @implementation EmployeeViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -66,15 +68,11 @@
                                                          target:self
                                                          action:@selector(pressRef:)];
     
-    
-    
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:btnMail, btnRef, nil];
-
-
-    
 }
 
-- (IBAction)pressRef:(id)sender {
+- (IBAction)pressRef:(id)sender
+{
     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReferralProgram"];
     [self.navigationController pushViewController:myController animated:TRUE];
 }
@@ -210,15 +208,20 @@
 
     [self.view layoutIfNeeded];
 }
-- (void)didReceiveMemoryWarning {
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)pressEditProfile:(id)sender {
+- (IBAction)pressEditProfile:(id)sender
+{
     UITableViewController *myController = [[UIStoryboard storyboardWithName:@"EmployeeProfile" bundle:nil] instantiateViewControllerWithIdentifier:@"ProfileEditStep1"];
     [self.navigationController pushViewController:myController animated:YES];
 }
-- (IBAction)pressInfo:(id)sender {
+
+- (IBAction)pressInfo:(id)sender
+{
     NSString *BodyArt;
     NSString *DriversLicense;
     NSString *Language;
@@ -314,7 +317,9 @@
          }];
     }
 }
-- (IBAction)pressBio:(id)sender {
+
+- (IBAction)pressBio:(id)sender
+{
     if ([self.appDelegate.user objectForKey:@"biography"] == (id)[NSNull null] || [[self.appDelegate.user objectForKey:@"biography"]length] == 0 ) {
         UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditMyBio"];
         [self.navigationController pushViewController:myController animated:TRUE];
@@ -359,7 +364,9 @@
     }
     }
 }
-- (IBAction)pressMoreEdu:(id)sender {
+
+- (IBAction)pressMoreEdu:(id)sender
+{
     NSString *SchoolStatus2;
     NSString *SchoolStatus3;
     if (self.btnEdu.isSelected ==TRUE){
@@ -435,7 +442,8 @@
     }
 }
 
-- (IBAction)pressMoreExp:(id)sender {
+- (IBAction)pressMoreExp:(id)sender
+{
     NSString *JobLength1;
     NSString *JobLength2;
     NSString *JobLength3;
@@ -568,16 +576,19 @@
     }
 }
 
-- (IBAction)changeCheckBox:(UIButton *)sender {
+- (IBAction)changeCheckBox:(UIButton *)sender
+{
     [sender setSelected:!sender.selected];
 }
 
-- (IBAction)pressReferral:(id)sender {
+- (IBAction)pressReferral:(id)sender
+{
     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"WhatDoIDoView"];
     [self.navigationController pushViewController:myController animated:YES];
 }
 
--(IBAction)menuPress{
+- (IBAction)menuPress
+{
     DashboardMenuTableViewController *controller = [[DashboardMenuTableViewController alloc] init];
     controller.menuFileName = @"employeeMenu";
     
@@ -593,7 +604,8 @@
     [self.popover presentPopoverFromView:targetView];
 }
 
--(IBAction)receiveMenuNotification:(NSNotification*)sender{
+- (IBAction)receiveMenuNotification:(NSNotification*)sender
+{
     
     if([[sender.object objectForKey:@"ViewController"] isEqualToString:@"LogoutViewController"]) {
         [self logout];
@@ -605,19 +617,10 @@
     [self.popover dismissPopoverAnimated:TRUE];
 }
 
-- (IBAction)pressMail:(id)sender {
+- (IBAction)pressMail:(id)sender
+{
     MailFoldersViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil] instantiateViewControllerWithIdentifier:@"MailFolders"];
     [self.navigationController pushViewController:myController animated:TRUE];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
