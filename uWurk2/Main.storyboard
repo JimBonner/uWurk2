@@ -3169,7 +3169,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A confirmation email was sent to" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Tx-5M-hQa">
-                                                <rect key="frame" x="20" y="254" width="335" height="18"/>
+                                                <rect key="frame" x="30" y="254" width="315" height="18"/>
                                                 <fontDescription key="fontDescription" name="RobotoCondensed-Light" family="Roboto Condensed" pointSize="15"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -3181,24 +3181,22 @@ If you don’t find quality candidates today, check back soon.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It includes a link to activate your account. If you don’t see it, check your spam or promotions folder." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6HY-yi-wyM">
-                                                <rect key="frame" x="20" y="305" width="335" height="33"/>
+                                                <rect key="frame" x="30" y="305" width="315" height="33"/>
                                                 <fontDescription key="fontDescription" name="RobotoCondensed-Light" family="Roboto Condensed" pointSize="14"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hdt-Qj-bKt">
-                                                <rect key="frame" x="20" y="358" width="335" height="54"/>
+                                                <rect key="frame" x="30" y="358" width="315" height="40"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wrong email address?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJ2-yw-aRG">
-                                                        <rect key="frame" x="14" y="19" width="140" height="17"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wrong email address?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJ2-yw-aRG">
+                                                        <rect key="frame" x="40" y="11.5" width="120" height="17"/>
                                                         <fontDescription key="fontDescription" name="RobotoCondensed-Light" family="Roboto Condensed" pointSize="14"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="voW-hC-15d">
-                                                        <rect key="frame" x="155" y="12" width="118" height="30"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="voW-hC-15d" userLabel="Re-enter here.">
+                                                        <rect key="frame" x="180" y="5.5" width="86" height="29"/>
                                                         <fontDescription key="fontDescription" name="RobotoCondensed-Light" family="Roboto Condensed" pointSize="14"/>
                                                         <state key="normal" title="Re-enter it here.">
                                                             <color key="titleColor" red="0.2666666667" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3210,28 +3208,45 @@ If you don’t find quality candidates today, check back soon.</string>
                                                 </subviews>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="54" id="jok-R7-LoB"/>
+                                                    <constraint firstItem="AJ2-yw-aRG" firstAttribute="centerY" secondItem="hdt-Qj-bKt" secondAttribute="centerY" id="GZ6-RP-ViR"/>
+                                                    <constraint firstItem="AJ2-yw-aRG" firstAttribute="leading" secondItem="hdt-Qj-bKt" secondAttribute="leading" constant="40" id="MuC-fn-Lta"/>
+                                                    <constraint firstItem="voW-hC-15d" firstAttribute="centerY" secondItem="hdt-Qj-bKt" secondAttribute="centerY" id="YNy-vL-YAC"/>
+                                                    <constraint firstItem="voW-hC-15d" firstAttribute="leading" secondItem="AJ2-yw-aRG" secondAttribute="trailing" constant="20" id="gtG-B5-BDy"/>
+                                                    <constraint firstAttribute="height" constant="40" id="jok-R7-LoB"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xda-ye-R9U" userLabel="Try again.">
+                                                <rect key="frame" x="92.5" y="418" width="190" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="iT7-RN-bRy"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="RobotoCondensed-Light" family="Roboto Condensed" pointSize="14"/>
+                                                <state key="normal" title="Check your activation status again.">
+                                                    <color key="titleColor" red="0.2666666667" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="pressReenter:" destination="LRi-2F-atf" eventType="touchUpInside" id="tA5-Es-WIH"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="1Tx-5M-hQa" firstAttribute="leading" secondItem="wGG-wM-0sv" secondAttribute="leading" constant="20" id="0W8-tR-bXk"/>
-                                            <constraint firstAttribute="trailing" secondItem="hdt-Qj-bKt" secondAttribute="trailing" constant="20" id="2i0-N1-bLh"/>
+                                            <constraint firstItem="1Tx-5M-hQa" firstAttribute="leading" secondItem="wGG-wM-0sv" secondAttribute="leading" constant="30" id="0W8-tR-bXk"/>
+                                            <constraint firstAttribute="trailing" secondItem="hdt-Qj-bKt" secondAttribute="trailing" constant="30" id="2i0-N1-bLh"/>
                                             <constraint firstItem="m1k-q4-eDA" firstAttribute="leading" secondItem="wGG-wM-0sv" secondAttribute="leading" constant="30" id="55i-Hn-cCC"/>
-                                            <constraint firstItem="hdt-Qj-bKt" firstAttribute="leading" secondItem="wGG-wM-0sv" secondAttribute="leading" constant="20" id="5fz-1u-9gV"/>
+                                            <constraint firstItem="hdt-Qj-bKt" firstAttribute="leading" secondItem="wGG-wM-0sv" secondAttribute="leading" constant="30" id="5fz-1u-9gV"/>
                                             <constraint firstItem="6HY-yi-wyM" firstAttribute="top" secondItem="m1k-q4-eDA" secondAttribute="bottom" constant="14" id="C6d-HH-WpX"/>
-                                            <constraint firstItem="6HY-yi-wyM" firstAttribute="leading" secondItem="wGG-wM-0sv" secondAttribute="leading" constant="20" id="IMz-tG-vfc"/>
+                                            <constraint firstItem="6HY-yi-wyM" firstAttribute="leading" secondItem="wGG-wM-0sv" secondAttribute="leading" constant="30" id="IMz-tG-vfc"/>
+                                            <constraint firstItem="Xda-ye-R9U" firstAttribute="top" secondItem="hdt-Qj-bKt" secondAttribute="bottom" constant="20" id="Kfi-Kc-2JK"/>
                                             <constraint firstItem="uwA-68-BO4" firstAttribute="leading" secondItem="wGG-wM-0sv" secondAttribute="leading" constant="20" id="Q9L-VV-Fg7"/>
                                             <constraint firstAttribute="trailing" secondItem="m1k-q4-eDA" secondAttribute="trailing" constant="30" id="RtV-SC-gfE"/>
-                                            <constraint firstItem="6HY-yi-wyM" firstAttribute="centerX" secondItem="wGG-wM-0sv" secondAttribute="centerX" id="XGz-p1-GKx"/>
                                             <constraint firstAttribute="trailing" secondItem="uwA-68-BO4" secondAttribute="trailing" constant="20" id="cDm-kn-zED"/>
-                                            <constraint firstAttribute="trailing" secondItem="1Tx-5M-hQa" secondAttribute="trailing" constant="20" id="ddr-u0-1Ml"/>
+                                            <constraint firstAttribute="trailing" secondItem="1Tx-5M-hQa" secondAttribute="trailing" constant="30" id="ddr-u0-1Ml"/>
                                             <constraint firstItem="hdt-Qj-bKt" firstAttribute="top" secondItem="6HY-yi-wyM" secondAttribute="bottom" constant="20" id="e2S-mh-6wU"/>
-                                            <constraint firstItem="1Tx-5M-hQa" firstAttribute="centerX" secondItem="wGG-wM-0sv" secondAttribute="centerX" id="mWI-5w-gwG"/>
                                             <constraint firstItem="m1k-q4-eDA" firstAttribute="top" secondItem="1Tx-5M-hQa" secondAttribute="bottom" constant="1" id="neD-yl-BZL"/>
+                                            <constraint firstItem="Xda-ye-R9U" firstAttribute="centerX" secondItem="wGG-wM-0sv" secondAttribute="centerX" id="qlz-Cv-TgN"/>
                                             <constraint firstItem="1Tx-5M-hQa" firstAttribute="top" secondItem="uwA-68-BO4" secondAttribute="bottom" constant="46" id="uRE-oA-16b"/>
-                                            <constraint firstAttribute="trailing" secondItem="6HY-yi-wyM" secondAttribute="trailing" constant="20" id="vDo-sa-Bjx"/>
+                                            <constraint firstAttribute="trailing" secondItem="6HY-yi-wyM" secondAttribute="trailing" constant="30" id="vDo-sa-Bjx"/>
                                             <constraint firstItem="uwA-68-BO4" firstAttribute="top" secondItem="wGG-wM-0sv" secondAttribute="top" constant="68" id="z0V-3r-UPu"/>
                                         </constraints>
                                     </view>

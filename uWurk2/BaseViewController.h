@@ -12,7 +12,6 @@
 #import "AppDelegate.h"
 #import "NSMutableDictionary+CocoaFix.h"
 
-
 @interface BaseViewController : UIViewController
 
 @property (nonatomic, retain) AppDelegate *appDelegate;

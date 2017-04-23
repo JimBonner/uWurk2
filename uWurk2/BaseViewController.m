@@ -128,7 +128,7 @@
     AFHTTPRequestOperationManager *manager = [self getManager];
     [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              NSLog(@"JSON: %@", responseObject);
+              NSLog(@"Latest JSON: %@", responseObject);
               if([self validateResponse:responseObject]) {
                   completion(1);
               }}

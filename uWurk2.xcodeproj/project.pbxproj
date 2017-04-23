@@ -15,6 +15,7 @@
 		1E0DC3E91E773A86009ECCB6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0DC3E81E773A86009ECCB6 /* Foundation.framework */; };
 		1E0DC3EB1E773A99009ECCB6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0DC3EA1E773A99009ECCB6 /* CoreGraphics.framework */; };
 		1E0DC3ED1E773AE5009ECCB6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0DC3EC1E773AE5009ECCB6 /* libPods.a */; };
+		1E14786F1EAD3F3400743969 /* EmailVerification.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E14786E1EAD3F3400743969 /* EmailVerification.m */; };
 		1E4B94961E8D697A004ADCB9 /* NSMutableDictionary+CocoaFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4B94951E8D697A004ADCB9 /* NSMutableDictionary+CocoaFix.m */; };
 		1E9CCB001E91B2C2008DBEE7 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9CCAFF1E91B2C2008DBEE7 /* Photos.framework */; };
 		1EAE1B901E78738100BE2C11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B497CA91BACA21300BE59B6 /* Main.storyboard */; };
@@ -130,6 +131,8 @@
 		1E0DC3E81E773A86009ECCB6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1E0DC3EA1E773A99009ECCB6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		1E0DC3EC1E773AE5009ECCB6 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "../../Library/Developer/Xcode/DerivedData/uWurk2-diktffzfdgrxymgrefleqskkagsh/Build/Products/Debug-iphonesimulator/libPods.a"; sourceTree = "<group>"; };
+		1E14786E1EAD3F3400743969 /* EmailVerification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailVerification.m; sourceTree = "<group>"; };
+		1E1478701EAD410200743969 /* EmailVerification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailVerification.h; sourceTree = "<group>"; };
 		1E4B94941E8D697A004ADCB9 /* NSMutableDictionary+CocoaFix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+CocoaFix.h"; sourceTree = "<group>"; };
 		1E4B94951E8D697A004ADCB9 /* NSMutableDictionary+CocoaFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+CocoaFix.m"; sourceTree = "<group>"; };
 		1E9CCAFF1E91B2C2008DBEE7 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
@@ -166,8 +169,8 @@
 		9B214CB51C2FCBB00063BC0E /* RefineSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefineSearchViewController.m; sourceTree = "<group>"; };
 		9B3760881C0C7DD900E9FB7D /* ContactProfileNotifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactProfileNotifyViewController.h; sourceTree = "<group>"; };
 		9B3760891C0C7DD900E9FB7D /* ContactProfileNotifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactProfileNotifyViewController.m; sourceTree = "<group>"; };
-		9B37608B1C0C866A00E9FB7D /* EmployeeWhatDoIDoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmployeeWhatDoIDoViewController.h; path = ../uWurk2/EmployeeWhatDoIDoViewController.h; sourceTree = "<group>"; };
-		9B37608C1C0C866A00E9FB7D /* EmployeeWhatDoIDoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = EmployeeWhatDoIDoViewController.m; path = ../uWurk2/EmployeeWhatDoIDoViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		9B37608B1C0C866A00E9FB7D /* EmployeeWhatDoIDoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeWhatDoIDoViewController.h; sourceTree = "<group>"; };
+		9B37608C1C0C866A00E9FB7D /* EmployeeWhatDoIDoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EmployeeWhatDoIDoViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9B379C881B950FD500EB4E2D /* uWurk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = uWurk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B379C8C1B950FD500EB4E2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B379C8D1B950FD500EB4E2D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -177,22 +180,22 @@
 		9B379CA11B950FD500EB4E2D /* uWurk2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = uWurk2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B379CA61B950FD500EB4E2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B379CA71B950FD500EB4E2D /* uWurk2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = uWurk2Tests.m; sourceTree = "<group>"; };
-		9B379CB31B95197600EB4E2D /* EmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmployeeViewController.h; path = ../uWurk2/EmployeeViewController.h; sourceTree = "<group>"; };
-		9B379CB41B95197600EB4E2D /* EmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmployeeViewController.m; path = ../uWurk2/EmployeeViewController.m; sourceTree = "<group>"; };
+		9B379CB31B95197600EB4E2D /* EmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeViewController.h; sourceTree = "<group>"; };
+		9B379CB41B95197600EB4E2D /* EmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeViewController.m; sourceTree = "<group>"; };
 		9B379CB91B95217700EB4E2D /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
 		9B379CBA1B95217700EB4E2D /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
 		9B379CBC1B95247600EB4E2D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ../uWurk2/LoginViewController.h; sourceTree = "<group>"; };
 		9B379CBD1B95247600EB4E2D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = ../uWurk2/LoginViewController.m; sourceTree = "<group>"; };
-		9B379CF11B97DF3A00EB4E2D /* IntroEmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroEmployeeViewController.h; path = ../uWurk2/IntroEmployeeViewController.h; sourceTree = "<group>"; };
-		9B379CF21B97DF3A00EB4E2D /* IntroEmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = IntroEmployeeViewController.m; path = ../uWurk2/IntroEmployeeViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		9B379CF41B97EAB800EB4E2D /* IntroEmployerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroEmployerViewController.h; path = ../uWurk2/IntroEmployerViewController.h; sourceTree = "<group>"; };
-		9B379CF51B97EAB800EB4E2D /* IntroEmployerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = IntroEmployerViewController.m; path = ../uWurk2/IntroEmployerViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		9B379CF11B97DF3A00EB4E2D /* IntroEmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroEmployeeViewController.h; sourceTree = "<group>"; };
+		9B379CF21B97DF3A00EB4E2D /* IntroEmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IntroEmployeeViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		9B379CF41B97EAB800EB4E2D /* IntroEmployerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroEmployerViewController.h; sourceTree = "<group>"; };
+		9B379CF51B97EAB800EB4E2D /* IntroEmployerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IntroEmployerViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9B379CF71B97F6E500EB4E2D /* EmployeeStep1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeStep1ViewController.h; sourceTree = "<group>"; };
 		9B379CF81B97F6E500EB4E2D /* EmployeeStep1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EmployeeStep1ViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		9B3C29A91C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmployeeRegisterThanksViewController.h; path = ../uWurk2/EmployeeRegisterThanksViewController.h; sourceTree = "<group>"; };
-		9B3C29AA1C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmployeeRegisterThanksViewController.m; path = ../uWurk2/EmployeeRegisterThanksViewController.m; sourceTree = "<group>"; };
-		9B3C29AC1C41F55300EF0296 /* EmployerRegisterThanksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmployerRegisterThanksViewController.h; path = ../uWurk2/EmployerRegisterThanksViewController.h; sourceTree = "<group>"; };
-		9B3C29AD1C41F55300EF0296 /* EmployerRegisterThanksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmployerRegisterThanksViewController.m; path = ../uWurk2/EmployerRegisterThanksViewController.m; sourceTree = "<group>"; };
+		9B3C29A91C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeRegisterThanksViewController.h; sourceTree = "<group>"; };
+		9B3C29AA1C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeRegisterThanksViewController.m; sourceTree = "<group>"; };
+		9B3C29AC1C41F55300EF0296 /* EmployerRegisterThanksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerRegisterThanksViewController.h; sourceTree = "<group>"; };
+		9B3C29AD1C41F55300EF0296 /* EmployerRegisterThanksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerRegisterThanksViewController.m; sourceTree = "<group>"; };
 		9B3EE1451B9F4DFA001D3C37 /* ListSelectorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListSelectorTableViewController.h; path = ../uWurk2/ListSelectorTableViewController.h; sourceTree = "<group>"; };
 		9B3EE1461B9F4DFA001D3C37 /* ListSelectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListSelectorTableViewController.m; path = ../uWurk2/ListSelectorTableViewController.m; sourceTree = "<group>"; };
 		9B3EE1481B9F6D80001D3C37 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
@@ -228,8 +231,8 @@
 		9B8B98F41BB37830005821EB /* SearchResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultTableViewCell.m; sourceTree = "<group>"; };
 		9B8B98F61BB378E3005821EB /* SearchResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsTableViewController.h; sourceTree = "<group>"; };
 		9B8B98F71BB378E3005821EB /* SearchResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsTableViewController.m; sourceTree = "<group>"; };
-		9B8B992B1BB47D7D005821EB /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
-		9B8B992C1BB47D7D005821EB /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BaseTableViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		9B8B992B1BB47D7D005821EB /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseTableViewController.h; path = ../uWurk2/BaseTableViewController.h; sourceTree = "<group>"; };
+		9B8B992C1BB47D7D005821EB /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = BaseTableViewController.m; path = ../uWurk2/BaseTableViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9B8B992E1BB7B104005821EB /* SearchResultProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultProfileViewController.h; sourceTree = "<group>"; };
 		9B8B992F1BB7B104005821EB /* SearchResultProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultProfileViewController.m; sourceTree = "<group>"; };
 		9BBC0B6B1BD482D8003327ED /* EmployeeStepSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeStepSetupViewController.h; sourceTree = "<group>"; };
@@ -258,8 +261,8 @@
 		9BEA1B291B9A96D10017D87A /* EmployerStep1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EmployerStep1ViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9BEA1B2B1B9A96EC0017D87A /* EmployerStep2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerStep2ViewController.h; sourceTree = "<group>"; };
 		9BEA1B2C1B9A96EC0017D87A /* EmployerStep2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EmployerStep2ViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		9BEA1B631B9E27160017D87A /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
-		9BEA1B641B9E27160017D87A /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BaseViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		9BEA1B631B9E27160017D87A /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseViewController.h; path = ../uWurk2/BaseViewController.h; sourceTree = "<group>"; };
+		9BEA1B641B9E27160017D87A /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = BaseViewController.m; path = ../uWurk2/BaseViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9BFF0C621BFDAB5B00ED8EE0 /* AddLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddLocationViewController.h; sourceTree = "<group>"; };
 		9BFF0C631BFDAB5B00ED8EE0 /* AddLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AddLocationViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D30D897AF4E5FF0C47231C2A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -346,33 +349,27 @@
 			name = Category;
 			sourceTree = "<group>";
 		};
-		1ED53B641E7736320054EFCA /* ViewControllers */ = {
+		1ED53B641E7736320054EFCA /* OtherViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				9B379CF11B97DF3A00EB4E2D /* IntroEmployeeViewController.h */,
-				9B379CF21B97DF3A00EB4E2D /* IntroEmployeeViewController.m */,
-				9B379CF41B97EAB800EB4E2D /* IntroEmployerViewController.h */,
-				9B379CF51B97EAB800EB4E2D /* IntroEmployerViewController.m */,
+				9BEA1B631B9E27160017D87A /* BaseViewController.h */,
+				9BEA1B641B9E27160017D87A /* BaseViewController.m */,
+				9B8B992B1BB47D7D005821EB /* BaseTableViewController.h */,
+				9B8B992C1BB47D7D005821EB /* BaseTableViewController.m */,
+				1E1478701EAD410200743969 /* EmailVerification.h */,
+				1E14786E1EAD3F3400743969 /* EmailVerification.m */,
 				9B379CBC1B95247600EB4E2D /* LoginViewController.h */,
 				9B379CBD1B95247600EB4E2D /* LoginViewController.m */,
-				9B3EE14E1BA367BE001D3C37 /* ReferralProgramViewController.h */,
-				9B3EE14F1BA367BE001D3C37 /* ReferralProgramViewController.m */,
-				9B3C29AC1C41F55300EF0296 /* EmployerRegisterThanksViewController.h */,
-				9B3C29AD1C41F55300EF0296 /* EmployerRegisterThanksViewController.m */,
+				DCA4AE751C41CD53007B7F1B /* ListMultiSelectorTableViewController.h */,
+				DCA4AE761C41CD53007B7F1B /* ListMultiSelectorTableViewController.m */,
 				9BD16A561BE6E319006BAF69 /* ListSelectorStringsTableViewController.h */,
 				9BD16A571BE6E319006BAF69 /* ListSelectorStringsTableViewController.m */,
 				9B3EE1451B9F4DFA001D3C37 /* ListSelectorTableViewController.h */,
 				9B3EE1461B9F4DFA001D3C37 /* ListSelectorTableViewController.m */,
-				DCA4AE751C41CD53007B7F1B /* ListMultiSelectorTableViewController.h */,
-				DCA4AE761C41CD53007B7F1B /* ListMultiSelectorTableViewController.m */,
-				9B3C29A91C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.h */,
-				9B3C29AA1C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.m */,
-				9B379CB31B95197600EB4E2D /* EmployeeViewController.h */,
-				9B379CB41B95197600EB4E2D /* EmployeeViewController.m */,
-				9B37608B1C0C866A00E9FB7D /* EmployeeWhatDoIDoViewController.h */,
-				9B37608C1C0C866A00E9FB7D /* EmployeeWhatDoIDoViewController.m */,
+				9B3EE14E1BA367BE001D3C37 /* ReferralProgramViewController.h */,
+				9B3EE14F1BA367BE001D3C37 /* ReferralProgramViewController.m */,
 			);
-			name = ViewControllers;
+			name = OtherViewControllers;
 			path = ../Pods;
 			sourceTree = "<group>";
 		};
@@ -479,7 +476,7 @@
 				9B0C71331C7770A6003DB760 /* EditEmployerProfile */,
 				DC8185681BADA0A500EF2436 /* DashboardMenu */,
 				9BD16A5C1BEC401E006BAF69 /* Mail */,
-				1ED53B641E7736320054EFCA /* ViewControllers */,
+				1ED53B641E7736320054EFCA /* OtherViewControllers */,
 				9B379C8B1B950FD500EB4E2D /* Supporting Files */,
 			);
 			path = uWurk2;
@@ -501,10 +498,6 @@
 				9B0924CC1BB0E1A100B4950D /* Third Party */,
 				9B379C8C1B950FD500EB4E2D /* Info.plist */,
 				9B379C8D1B950FD500EB4E2D /* main.m */,
-				9BEA1B631B9E27160017D87A /* BaseViewController.h */,
-				9BEA1B641B9E27160017D87A /* BaseViewController.m */,
-				9B8B992B1BB47D7D005821EB /* BaseTableViewController.h */,
-				9B8B992C1BB47D7D005821EB /* BaseTableViewController.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -581,30 +574,6 @@
 		9BD16A5C1BEC401E006BAF69 /* Mail */ = {
 			isa = PBXGroup;
 			children = (
-				9B379CB91B95217700EB4E2D /* IntroViewController.h */,
-				9B379CBA1B95217700EB4E2D /* IntroViewController.m */,
-				9BD16A5D1BEC4102006BAF69 /* MailFoldersViewController.h */,
-				9BD16A5E1BEC4102006BAF69 /* MailFoldersViewController.m */,
-				9BD16A631BEC50D2006BAF69 /* MailFolderTableViewCell.h */,
-				9BD16A641BEC50D2006BAF69 /* MailFolderTableViewCell.m */,
-				9BD16A601BEC4119006BAF69 /* MailMessagesTableViewController.h */,
-				9BD16A611BEC4119006BAF69 /* MailMessagesTableViewController.m */,
-				9BD16A661BEC512A006BAF69 /* MailMessageTableViewCell.h */,
-				9BD16A671BEC512A006BAF69 /* MailMessageTableViewCell.m */,
-				DC191A631C026C7900314B6C /* MailAddFolderViewController.h */,
-				DC191A641C026C7900314B6C /* MailAddFolderViewController.m */,
-				9B0452601C031C6200B33526 /* MoveMessageViewController.h */,
-				9B0452611C031C6200B33526 /* MoveMessageViewController.m */,
-				9B0452631C03CA7100B33526 /* ReplySentViewController.h */,
-				9B0452641C03CA7100B33526 /* ReplySentViewController.m */,
-				9B0452651C03CA7100B33526 /* JobInterestViewController.h */,
-				9B0452661C03CA7100B33526 /* JobInterestViewController.m */,
-				9B0452671C03CA7100B33526 /* ViewJobMessageViewController.h */,
-				9B0452681C03CA7100B33526 /* ViewJobMessageViewController.m */,
-				9B04526C1C04456700B33526 /* EmployerSendMessageViewController.h */,
-				9B04526D1C04456700B33526 /* EmployerSendMessageViewController.m */,
-				9B04526F1C0564E000B33526 /* EmployeeSendMessageViewController.h */,
-				9B0452701C0564E000B33526 /* EmployeeSendMessageViewController.m */,
 				DC3F062C1C0BA1C400223484 /* EmployeeMessageDetailLeftTableViewCell.h */,
 				DC3F062D1C0BA1C500223484 /* EmployeeMessageDetailLeftTableViewCell.m */,
 				DC3F062F1C0BA27E00223484 /* EmployeeMessageDetailRightTableViewCell.h */,
@@ -613,6 +582,30 @@
 				9B10F4EA1C4CB7D100616176 /* EmployerMessageDetailLeftTableViewCell.m */,
 				9B10F4EC1C4CB7E500616176 /* EmployerMessageDetailRightTableViewCell.h */,
 				9B10F4ED1C4CB7E500616176 /* EmployerMessageDetailRightTableViewCell.m */,
+				9B04526F1C0564E000B33526 /* EmployeeSendMessageViewController.h */,
+				9B0452701C0564E000B33526 /* EmployeeSendMessageViewController.m */,
+				9B04526C1C04456700B33526 /* EmployerSendMessageViewController.h */,
+				9B04526D1C04456700B33526 /* EmployerSendMessageViewController.m */,
+				9B379CB91B95217700EB4E2D /* IntroViewController.h */,
+				9B379CBA1B95217700EB4E2D /* IntroViewController.m */,
+				9B0452651C03CA7100B33526 /* JobInterestViewController.h */,
+				9B0452661C03CA7100B33526 /* JobInterestViewController.m */,
+				DC191A631C026C7900314B6C /* MailAddFolderViewController.h */,
+				DC191A641C026C7900314B6C /* MailAddFolderViewController.m */,
+				9BD16A5D1BEC4102006BAF69 /* MailFoldersViewController.h */,
+				9BD16A5E1BEC4102006BAF69 /* MailFoldersViewController.m */,
+				9BD16A631BEC50D2006BAF69 /* MailFolderTableViewCell.h */,
+				9BD16A641BEC50D2006BAF69 /* MailFolderTableViewCell.m */,
+				9BD16A601BEC4119006BAF69 /* MailMessagesTableViewController.h */,
+				9BD16A611BEC4119006BAF69 /* MailMessagesTableViewController.m */,
+				9BD16A661BEC512A006BAF69 /* MailMessageTableViewCell.h */,
+				9BD16A671BEC512A006BAF69 /* MailMessageTableViewCell.m */,
+				9B0452601C031C6200B33526 /* MoveMessageViewController.h */,
+				9B0452611C031C6200B33526 /* MoveMessageViewController.m */,
+				9B0452631C03CA7100B33526 /* ReplySentViewController.h */,
+				9B0452641C03CA7100B33526 /* ReplySentViewController.m */,
+				9B0452671C03CA7100B33526 /* ViewJobMessageViewController.h */,
+				9B0452681C03CA7100B33526 /* ViewJobMessageViewController.m */,
 			);
 			name = Mail;
 			sourceTree = "<group>";
@@ -629,6 +622,8 @@
 		9BEA1B261B9A4FD60017D87A /* Employee */ = {
 			isa = PBXGroup;
 			children = (
+				9B3C29A91C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.h */,
+				9B3C29AA1C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.m */,
 				9BBC0B6B1BD482D8003327ED /* EmployeeStepSetupViewController.h */,
 				9BBC0B6C1BD482D8003327ED /* EmployeeStepSetupViewController.m */,
 				9B379CF71B97F6E500EB4E2D /* EmployeeStep1ViewController.h */,
@@ -643,6 +638,12 @@
 				9BEA1B231B9A4F970017D87A /* EmployeeStep5ViewController.m */,
 				9B0452571C02B80C00B33526 /* EmployeeStep6ViewController.h */,
 				9B0452581C02B80C00B33526 /* EmployeeStep6ViewController.m */,
+				9B379CB31B95197600EB4E2D /* EmployeeViewController.h */,
+				9B379CB41B95197600EB4E2D /* EmployeeViewController.m */,
+				9B37608B1C0C866A00E9FB7D /* EmployeeWhatDoIDoViewController.h */,
+				9B37608C1C0C866A00E9FB7D /* EmployeeWhatDoIDoViewController.m */,
+				9B379CF11B97DF3A00EB4E2D /* IntroEmployeeViewController.h */,
+				9B379CF21B97DF3A00EB4E2D /* IntroEmployeeViewController.m */,
 			);
 			name = Employee;
 			sourceTree = "<group>";
@@ -650,12 +651,16 @@
 		9BEA1B271B9A96B50017D87A /* Employer */ = {
 			isa = PBXGroup;
 			children = (
+				9B3C29AC1C41F55300EF0296 /* EmployerRegisterThanksViewController.h */,
+				9B3C29AD1C41F55300EF0296 /* EmployerRegisterThanksViewController.m */,
 				9B89BE1F1C3E311F00B4262C /* EmployerStep0ViewController.h */,
 				9B89BE201C3E311F00B4262C /* EmployerStep0ViewController.m */,
 				9BEA1B281B9A96D10017D87A /* EmployerStep1ViewController.h */,
 				9BEA1B291B9A96D10017D87A /* EmployerStep1ViewController.m */,
 				9BEA1B2B1B9A96EC0017D87A /* EmployerStep2ViewController.h */,
 				9BEA1B2C1B9A96EC0017D87A /* EmployerStep2ViewController.m */,
+				9B379CF41B97EAB800EB4E2D /* IntroEmployerViewController.h */,
+				9B379CF51B97EAB800EB4E2D /* IntroEmployerViewController.m */,
 			);
 			name = Employer;
 			sourceTree = "<group>";
@@ -882,6 +887,7 @@
 				9B8B992D1BB47D7D005821EB /* BaseTableViewController.m in Sources */,
 				DC1BF10D1C0671F40036679F /* UIColor+uWurkColors.m in Sources */,
 				9B8B98EF1BB20133005821EB /* FPPopoverController.m in Sources */,
+				1E14786F1EAD3F3400743969 /* EmailVerification.m in Sources */,
 				9B04526B1C03CA7100B33526 /* ViewJobMessageViewController.m in Sources */,
 				9B3EE1851BAA2788001D3C37 /* ProfileEditStep1ViewController.m in Sources */,
 				9BEA1B211B9A4F810017D87A /* EmployeeStep4ViewController.m in Sources */,

@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 
 @interface EmployeeRegisterThanksViewController : UIViewController
+
 @property (strong, nonatomic) NSString *Email;
 
 @end

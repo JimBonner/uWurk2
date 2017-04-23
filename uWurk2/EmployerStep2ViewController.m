@@ -98,7 +98,7 @@
         NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
         [self updateParamDict:params value:self.txtCompany.text key:@"company"];
         [self updateParamDict:params value:self.txtWebsite.text key:@"web_site_url"];
-        [self updateParamDict:params value:[@(self.btnIndustry.tag)stringValue] key:@"industry"];
+        [self updateParamDict:params value:[@(self.btnIndustry.tag)stringValue] key:@"industry_id"];
         if([params count]){
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 self.performInit = YES;

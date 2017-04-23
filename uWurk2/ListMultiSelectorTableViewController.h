@@ -22,7 +22,7 @@
 @property (nonatomic, retain) NSString *key;
 @property (nonatomic, retain) NSDictionary *parameters;
 @property (nonatomic, retain) NSString *url;
-@property(nonatomic,assign)id delegate;
+@property (nonatomic,assign)id delegate;
 @property (nonatomic, retain) UILabel *displayLbl;
 @property (nonatomic, retain) NSMutableDictionary *idDict;
 @property (nonatomic, retain) NSString *passThru;
