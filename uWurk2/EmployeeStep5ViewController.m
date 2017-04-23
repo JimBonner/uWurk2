@@ -46,11 +46,6 @@
     self.viewNoExpTip.layer.cornerRadius = 10;
     
     self.performExperienceInit = YES;
-    
-//    if([self.appDelegate.user objectForKey:@"has_experience"] == nil) {
-//        [self.btnExperienceYes setSelected:TRUE];
-//        [self pressYesExp:nil];
-//    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -67,7 +62,7 @@
 {
     [super viewWillAppear:animated];
     
-    NSLog(@"\nEmployee Step 5:\n%@",self.appDelegate.user);
+    NSLog(@"\nEmployee Step 5 - Init:\n%@",self.appDelegate.user);
 
     self.expId = @"exp_id[0]";
     if(self.performExperienceInit) {
@@ -318,7 +313,7 @@
     {
         AFHTTPRequestOperationManager *manager = [self getManager];
         [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"\nEmployee Step 5 - Response: %@", responseObject);
+            NSLog(@"\nEmployee Step 5 - Json Response: %@", responseObject);
             if([self validateResponse:responseObject]){
                 self.performExperienceInit = YES;
                 UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup6"];

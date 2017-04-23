@@ -50,7 +50,7 @@
 {
     [super viewWillAppear:animated];
     
-    NSLog(@"\nEmployee Step 4:\n%@",self.appDelegate.user);
+    NSLog(@"\nEmployee Step 4 - Init:\n%@",self.appDelegate.user);
     
     if(self.performEducationInit) {
         self.performEducationInit = NO;
@@ -525,7 +525,7 @@
             AFHTTPRequestOperationManager *manager = [self getManager];
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params
                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                      NSLog(@"\nEmployee Step 4 - Response: %@", responseObject);
+                      NSLog(@"\nEmployee Step 4 - Json Response: %@", responseObject);
                       if([self validateResponse:responseObject]){
                           self.performEducationInit = YES;
                           UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup5"];

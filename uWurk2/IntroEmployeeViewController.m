@@ -31,7 +31,7 @@
 {
     [super viewWillAppear:animated];
     
-    NSLog(@"\nEmployee Intro:\n%@",self.appDelegate.user);
+    NSLog(@"\nEmployee Intro - Init:\n%@",self.appDelegate.user);
     
     if(![[self getUserDefault:@"user_type"] isEqualToString:@"employee"]) {
         [self saveUserDefault:@"employee" Key:@"user_type"];
@@ -60,7 +60,7 @@
     if([params count]){
         [manager POST:@"http://uwurk.tscserver.com/api/v1/register" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
         {
-            NSLog(@"\nEmployee Email Register Json Response:\n%@", responseObject);
+            NSLog(@"\nEmployee Email Register - Json Response:\n%@", responseObject);
             if([self validateResponse:responseObject])
             {
                 if(([self getUserDefault:@"email"] == nil) &&
@@ -195,26 +195,26 @@
                       [parameters setObject:@1 forKey:@"facebook"];
                       [manager POST:@"http://uwurk.tscserver.com/api/v1/register" parameters:parameters
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                NSLog(@"\nEmployee Facebook Register Json:\n%@", responseObject);
-                                BOOL bValid = [self validateResponse:responseObject];
-                                if([((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] != nil){
-                                    EmployeeStepSetupViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"IntroEmployee"];
-                                    UINavigationController *nav = self.navigationController;
-                                    [nav popToRootViewControllerAnimated:FALSE];
-                                    [nav pushViewController:myController animated:TRUE];
-                                } else {
-                                    UIAlertController * alert = [UIAlertController
-                                                                 alertControllerWithTitle:@"Oops!"
-                                                                 message:[responseObject objectForKey:@"message"]
-                                                                 preferredStyle:UIAlertControllerStyleAlert];
-                                    [alert addAction:[UIAlertAction
-                                                      actionWithTitle:@"OK"
-                                                      style:UIAlertActionStyleDefault
-                                                      handler:^(UIAlertAction *action)
-                                                      {
-                                                      }]];
-                                    [self.navigationController popViewControllerAnimated:TRUE];
-                                }}
+                                NSLog(@"\nEmployee Facebook Register - Json Response:\n%@", responseObject);
+                                if([self validateResponse:responseObject]) {
+                                    if([((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] != nil){
+                                        EmployeeStepSetupViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"IntroEmployee"];
+                                        UINavigationController *nav = self.navigationController;
+                                        [nav popToRootViewControllerAnimated:FALSE];
+                                        [nav pushViewController:myController animated:TRUE];
+                                    } else {
+                                        UIAlertController * alert = [UIAlertController
+                                                                     alertControllerWithTitle:@"Oops!"
+                                                                     message:[responseObject objectForKey:@"message"]
+                                                                     preferredStyle:UIAlertControllerStyleAlert];
+                                        [alert addAction:[UIAlertAction
+                                                          actionWithTitle:@"OK"
+                                                          style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction *action)
+                                                          {
+                                                          }]];
+                                        [self.navigationController popViewControllerAnimated:TRUE];
+                                    }}}
                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                 NSLog(@"Error: %@", error);
                                 UIAlertController * alert = [UIAlertController

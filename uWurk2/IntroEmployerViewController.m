@@ -31,7 +31,7 @@
 {
     [super viewWillAppear:animated];
     
-    NSLog(@"\nEmployer Intro:\n%@",self.appDelegate.user);
+    NSLog(@"\nEmployer Intro - Init:\n%@",self.appDelegate.user);
     
     if(![[self getUserDefault:@"user_type"] isEqualToString:@"employer"]) {
         [self saveUserDefault:@"employer" Key:@"type"];
@@ -62,7 +62,7 @@
     {
          [manager POST:@"http://uwurk.tscserver.com/api/v1/register" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
         {
-            NSLog(@"\nEmployer Email Register Json Response:\n%@", responseObject);
+            NSLog(@"\nEmployer Email Register - Json Response:\n%@", responseObject);
             if([self validateResponse:responseObject]){
                 if(([self getUserDefault:@"email"] == nil) &&
                    ([self getUserDefault:@"api_auth_token"] == nil))
@@ -197,7 +197,7 @@
                       
                       [manager POST:@"http://uwurk.tscserver.com/api/v1/register" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
                       {
-                          NSLog(@"\nEmployer Facebook Register Json Response:\n%@", responseObject);
+                          NSLog(@"\nEmployer Facebook Register - Json Response:\n%@", responseObject);
                           if([self validateResponse:responseObject] &&
                              [((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] != nil)
                           {

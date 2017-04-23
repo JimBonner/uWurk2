@@ -31,7 +31,7 @@
 {
     [super viewWillAppear:animated];
     
-    NSLog(@"\nEmployer Step 1 Init:\n%@",self.appDelegate.user);
+    NSLog(@"\nEmployer Step 1 - Init:\n%@",self.appDelegate.user);
     
     [self assignValue:[self getUserDefault:@"email"] control:self.txtEmail];
     [self.txtEmail setAlpha:0.2];
@@ -88,7 +88,7 @@
         [self updateParamDict:params value:self.txtLastName.text key:@"last_name"];
         if([params count]){
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"\nEmployer Step 1 - Response: %@", responseObject);
+                NSLog(@"\nEmployer Step 1 - Json Response: %@", responseObject);
                 if([self validateResponse:responseObject]){
                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerProfileSetup2"];
                     [self.navigationController setViewControllers:@[myController] animated:YES];

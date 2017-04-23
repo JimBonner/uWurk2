@@ -56,7 +56,7 @@
 {
     [super viewWillAppear:animated];
     
-    NSLog(@"\nEmployee Step 6:\n%@",self.appDelegate.user);
+    NSLog(@"\nEmployee Step 6 - Init:\n%@",self.appDelegate.user);
     
     if(self.performDbmsInit) {
         self.performDbmsInit = NO;
@@ -254,7 +254,7 @@ UIImage  *returnImage;
          {
              [formData appendPartWithFileData:imageData name:@"photo_file" fileName:@"photo.jpg" mimeType:@"image/jpeg"];
          } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             NSLog(@"\nEmployee Step 6 - Photo Response: %@", responseObject);
+             NSLog(@"\nEmployee Step 6 - Json Photo Response: %@", responseObject);
              if(self.btnBioSkip.selected == YES) {
                  UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                  [self.navigationController setViewControllers:@[myController] animated:YES];
@@ -293,7 +293,7 @@ UIImage  *returnImage;
         AFHTTPRequestOperationManager *manager = [self getManager];
         [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             NSLog(@"\nEmployee Step 6 - Bio Response: %@", responseObject);
+             NSLog(@"\nEmployee Step 6 - Bio Json Response: %@", responseObject);
              UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
              [self.navigationController setViewControllers:@[myController] animated:YES];
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

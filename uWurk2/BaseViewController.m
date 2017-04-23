@@ -349,7 +349,7 @@
 {
     NSError *err;
     NSData  *jsonData = [NSJSONSerialization dataWithJSONObject:object
-                                                        options:0       //NSJSONWritingPrettyPrinted
+                                                        options:NSJSONWritingPrettyPrinted
                                                           error:&err];
     NSString *string = [[NSString alloc] initWithData:jsonData
                                              encoding:NSUTF8StringEncoding];
