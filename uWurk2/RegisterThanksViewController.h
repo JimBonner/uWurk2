@@ -1,5 +1,5 @@
 //
-//  EmailVerification.h
+//  RegisterThanksViewController.h
 //  uWurk2
 //
 //  Created by Jim Bonner on 4/23/17.
@@ -10,6 +10,6 @@
 #import <Foundation/Foundation.h>
 #import "BaseViewController.h"
 
-@interface EmailVerification : BaseViewController
+@interface RegisterThanksViewController : BaseViewController
 
 @end
