@@ -35,8 +35,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
--(void) viewWillAppear:(BOOL)animated{
+-(void) viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
+    
+    NSLog(@"\nEmployer Edit Contact:\n%@",self.appDelegate.user);
+        
     self.viewCommunication.layer.cornerRadius = 10;
     [self assignValue:[self.appDelegate.user objectForKey:@"email"] control:self.txtEmail];
     [self assignValue:[self.appDelegate.user objectForKey:@"first_name"] control:self.txtFirstName];

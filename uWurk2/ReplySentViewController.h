@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface ReplySentViewController : UIViewController
+@interface ReplySentViewController : BaseViewController
 
 @end

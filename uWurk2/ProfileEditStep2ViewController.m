@@ -57,6 +57,9 @@
 }
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    NSLog(@"\nEmployee Profile Edit Step 2:\n%@",self.appDelegate.user);
+    
     self.viewAddZip.layer.cornerRadius = 10;
     self.cnstrntLoc1Height.constant = 0;
     self.cnstrntLoc2Height.constant = 0;

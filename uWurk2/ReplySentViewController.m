@@ -14,8 +14,11 @@
 
 @implementation ReplySentViewController
 
-- (void) viewWillAppear:(BOOL)animated {
+- (void) viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
+    
+    NSLog(@"\nReply Sent:\n%@",self.appDelegate.user);
 }
 
 - (IBAction)pressReturn:(UIButton *)sender {

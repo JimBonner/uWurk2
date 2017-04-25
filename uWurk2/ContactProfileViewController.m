@@ -21,8 +21,12 @@
 
 @implementation ContactProfileViewController
 
--(void) viewWillAppear:(BOOL)animated {
+-(void) viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
+    
+    NSLog(@"\nContact Profile:\n%@",self.appDelegate.user);
+
 ///    NSString *tips;
 ///    NSString *time;
     self.lblEmployeeName.text = [NSString stringWithFormat:@"%@:",[self.searchUserDict objectForKey:@"first_name"]];

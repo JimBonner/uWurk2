@@ -8,8 +8,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface ContactProfileNotifyViewController : UIViewController
+@interface ContactProfileNotifyViewController : BaseViewController
 
 @property (strong, nonatomic) NSDictionary *searchUserDict;
 

@@ -23,8 +23,12 @@
 
 @implementation MailMessagesTableViewController
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
+    
+    NSLog(@"\nMail Messages:\n%@",self.appDelegate.user);
+    
     self.lblFolderName.text = [[self.mailFolderDict objectForKey:@"name"]uppercaseString];
 }
 - (void)viewDidAppear:(BOOL)animated {

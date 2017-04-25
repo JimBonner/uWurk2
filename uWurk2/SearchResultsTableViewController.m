@@ -26,10 +26,18 @@
 
 @implementation SearchResultsTableViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 77.0;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSLog(@"\nSearch Results:\n%@",self.appDelegate.user);
 }
 
 - (void)didReceiveMemoryWarning {

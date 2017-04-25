@@ -160,7 +160,8 @@
     [self.navigationController pushViewController:myController animated:TRUE];
 }
 
-- (void) viewWillAppear:(BOOL)animated{
+- (void) viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     
     NSLog(@"\nSearch - Init:\n%@",self.appDelegate.user);

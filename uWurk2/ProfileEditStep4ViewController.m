@@ -48,8 +48,12 @@
 @end
 
 @implementation ProfileEditStep4ViewController
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    
+    NSLog(@"\nEmployee Profile Edit Step 4:\n%@",self.appDelegate.user);
+    
     self.params = [[NSMutableDictionary alloc] init];
     NSArray *eduArray = [self.appDelegate.user objectForKey:@"education"];
     if ([self.eduEditCount intValue] == 0) {
@@ -746,7 +750,6 @@
     [myController setTitle:@"Cities"];
     
     [self.navigationController pushViewController:myController animated:TRUE];
-    
 }
 - (IBAction)schoolPress:(id)sender {
     
@@ -868,6 +871,16 @@
         [self.navigationController pushViewController:myController animated:TRUE];
     }
 }
+}
+
+-(void)SelectionMadeString:(NSString *)passThru displayString:(NSString *)displayString;
+{
+    
+}
+
+- (void)SelectionMade:(NSString *)passThru withDict:(NSDictionary *)dict displayString:(NSString *)displayString;
+{
+    
 }
 
 @end

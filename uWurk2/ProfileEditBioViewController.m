@@ -30,8 +30,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) viewWillAppear:(BOOL)animated{
+- (void) viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
+    
+    NSLog(@"\nEmployee Profile Edit Bio:\n%@",self.appDelegate.user);
+    
     self.btnSaveChanges.enabled = NO;
     self.viewPersonality.layer.cornerRadius = 5;
     self.viewTextView.layer.borderWidth = 1;

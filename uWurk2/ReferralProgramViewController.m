@@ -16,6 +16,7 @@
 @end
 
 @implementation ReferralProgramViewController
+
 - (IBAction)highlightIcon:(id)sender {
     [sender setHighlighted:UIControlStateHighlighted];
 }

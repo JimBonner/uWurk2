@@ -8,7 +8,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface LogoutViewController : UIViewController
+@interface LogoutViewController : BaseViewController
 
 @end

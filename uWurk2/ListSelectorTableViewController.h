@@ -12,7 +12,7 @@
 #import "AppDelegate.h"
 
 @protocol ListSelectorTableViewControllerProtocol <NSObject>
--(void)SelectionMade:(NSString *)passThru withDict:(NSDictionary *)dict displayString:(NSString *)displayString;
+- (void)SelectionMade:(NSString *)passThru withDict:(NSDictionary *)dict displayString:(NSString *)displayString;
 @end
 
 @interface ListSelectorTableViewController : UITableViewController

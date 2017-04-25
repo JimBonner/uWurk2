@@ -52,7 +52,10 @@
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-        self.viewCool.layer.cornerRadius = 5;
+    
+    NSLog(@"\nEmployee Profile Edit Step 3:\n%@",self.appDelegate.user);
+
+    self.viewCool.layer.cornerRadius = 5;
     if([[self.appDelegate.user objectForKey:@"has_drivers_license"] intValue] == 1)
         self.btnDLYes.selected = TRUE;
     else if([[self.appDelegate.user objectForKey:@"has_drivers_license"] intValue] == 0)
@@ -252,4 +255,10 @@
         }
     }
 }
+
+- (void)SelectionMade:(NSString *)passThru withDict:(NSDictionary *)dict displayString:(NSString *)displayString;
+{
+    
+}
+
 @end

@@ -31,6 +31,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSLog(@"\nEmployee Profile Edit Preferences:\n%@",self.appDelegate.user);
+    
+}
+
 /*
 #pragma mark - Navigation
 

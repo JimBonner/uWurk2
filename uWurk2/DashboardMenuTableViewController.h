@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseTableViewController.h"
 
-@interface DashboardMenuTableViewController : UITableViewController
+@interface DashboardMenuTableViewController : BaseTableViewController
 
 @property (nonatomic, retain) UINavigationController *delegateNavigationController;
 @property (nonatomic, retain) NSString *menuFileName;

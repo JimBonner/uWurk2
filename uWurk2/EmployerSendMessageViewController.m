@@ -34,8 +34,12 @@
 
 @implementation EmployerSendMessageViewController
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
+    
+    NSLog(@"\nEmployer Send Message:\n%@",self.appDelegate.user);
+    
     self.tblView.separatorColor = [UIColor clearColor];
     self.userID = [[self.appDelegate user] objectForKey:@"id"];
     self.tblView.rowHeight = UITableViewAutomaticDimension;

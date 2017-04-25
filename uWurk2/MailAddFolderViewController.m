@@ -21,6 +21,14 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSLog(@"\nMail Add Folder:\n%@",self.appDelegate.user);
+    
+}
+
 - (IBAction)addFolder:(id)sender {
     AFHTTPRequestOperationManager *manager = [self getManager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];

@@ -20,6 +20,13 @@
 
 @implementation EmployerDashboardRecentSearchesViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSLog(@"\nEmployer Dashboard Recent Searches:\n%@",self.appDelegate.user);
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     

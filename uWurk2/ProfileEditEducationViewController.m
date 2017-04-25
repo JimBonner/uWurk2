@@ -46,8 +46,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) viewWillAppear:(BOOL)animated{
+- (void) viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
+    
+    NSLog(@"\nEmployee Profile Edit Education:\n%@",self.appDelegate.user);
+    
     self.params = [[NSMutableDictionary alloc] init];
     self.viewEduTip.layer.cornerRadius = 10;
     NSString *SchoolStatus1;

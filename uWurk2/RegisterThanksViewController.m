@@ -29,6 +29,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    NSLog(@"\nRegister Thanks:\n%@",self.appDelegate.user);
 }
 
 - (IBAction)pressReEnter:(id)sender

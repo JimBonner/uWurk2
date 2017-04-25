@@ -46,8 +46,12 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void) viewWillAppear:(BOOL)animated{
+- (void) viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
+    
+    NSLog(@"\nEmployee Profile Edit Experience:\n%@",self.appDelegate.user);
+    
     self.params = [[NSMutableDictionary alloc] init];
     self.viewExpTip.layer.cornerRadius = 10;
     NSString *JobLength1;

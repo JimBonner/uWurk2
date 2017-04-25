@@ -31,8 +31,12 @@
 //    [self.view addGestureRecognizer:signInLongPress];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
+    
+    NSLog(@"\nEmployee Profile Edit Photos:\n%@",self.appDelegate.user);
+
     self.viewPhotoTip.layer.cornerRadius = 10;
     
     [self alignUserPhotoArray];

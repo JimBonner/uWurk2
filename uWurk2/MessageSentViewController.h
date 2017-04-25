@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface MessageSentViewController : UIViewController
+@interface MessageSentViewController : BaseViewController
 
 @property (strong, nonatomic) NSDictionary *searchUserDict;
 

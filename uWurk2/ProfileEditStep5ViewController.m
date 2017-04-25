@@ -36,8 +36,12 @@
 
 @implementation ProfileEditStep5ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    
+    NSLog(@"\nEmployee Profile Edit Step 5:\n%@",self.appDelegate.user);
+    
     self.params = [[NSMutableDictionary alloc] init];
     NSArray *experienceArray = [self.appDelegate.user objectForKey:@"experience"];
     if ([self.expEditCount intValue] == 0) {
@@ -571,4 +575,10 @@
     }
 }
 }
+
+- (void)SelectionMade:(NSString *)passThru withDict:(NSDictionary *)dict displayString:(NSString *)displayString;
+{
+    
+}
+
 @end

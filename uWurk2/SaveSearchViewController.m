@@ -17,10 +17,18 @@
 
 @implementation SaveSearchViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.saveSearchView.layer.borderColor = [UIColor colorWithString:@"0x1A1A1A"].CGColor;
     self.saveSearchView.layer.borderWidth = 1.0f;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSLog(@"\nSave Search:\n%@",self.appDelegate.user);
 }
 
 - (IBAction)savePress:(id)sender {

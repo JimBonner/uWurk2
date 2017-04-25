@@ -19,23 +19,25 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtPhone;
 @property (weak, nonatomic) IBOutlet RadioButton *btnGenderMale;
 @property (weak, nonatomic) IBOutlet RadioButton *btnGenderFemale;
-@property (weak, nonatomic) IBOutlet UIButton *btnEmail;
-@property (weak, nonatomic) IBOutlet UIButton *btnText;
-@property (weak, nonatomic) IBOutlet UIView   *viewTip;
-@property (weak, nonatomic) IBOutlet UIView   *viewCommunication;
-@property (weak, nonatomic) IBOutlet UIButton *btnSaveChanges;
+@property (weak, nonatomic) IBOutlet UIButton    *btnEmail;
+@property (weak, nonatomic) IBOutlet UIButton    *btnText;
+@property (weak, nonatomic) IBOutlet UIView      *viewTip;
+@property (weak, nonatomic) IBOutlet UIView      *viewCommunication;
+@property (weak, nonatomic) IBOutlet UIButton    *btnSaveChanges;
 
 @end
 
 @implementation ProfileEditStep1ViewController
 
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -46,6 +48,8 @@
     self.btnSaveChanges.enabled = NO;
     self.viewTip.layer.cornerRadius = 5;
     self.viewCommunication.layer.cornerRadius = 5;
+    
+    NSLog(@"\nEmployee Profile Edit Step 1:\n%@",self.appDelegate.user);
     
     [self assignValue:[self.appDelegate.user objectForKey:@"email"] control:self.txtEmail];
     [self assignValue:[self.appDelegate.user objectForKey:@"first_name"] control:self.txtFirstName];

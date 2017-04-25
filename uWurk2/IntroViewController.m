@@ -23,6 +23,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    NSLog(@"\nIntro:\n%@",self.appDelegate.user);
+    
     if(([self getUserDefault:@"api_auth_token"] != nil) &&
        ([[self.appDelegate.user objectForKey:@"register_complete"] isEqualToString:@"1"])) {
         LoginViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];

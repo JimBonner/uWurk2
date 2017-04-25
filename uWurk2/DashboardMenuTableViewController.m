@@ -30,9 +30,11 @@
     
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     
+    NSLog(@"\nDashboard Menu:\n%@",self.appDelegate.user);
 }
 
 

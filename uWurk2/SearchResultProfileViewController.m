@@ -50,8 +50,12 @@
     [super viewDidLoad];
 }
 
--(void) viewWillAppear:(BOOL)animated{
+-(void) viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
+    
+    NSLog(@"\nSearch Result Profile:\n%@",self.appDelegate.user);
+    
     if ([[self.searchedUserDict objectForKey:@"is_favorite"] intValue] == 1) {
         self.btnFavorite.selected = TRUE;
     }

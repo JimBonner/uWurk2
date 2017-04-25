@@ -15,10 +15,18 @@
 
 @implementation MessageSentViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.lblNameRespond.text = [NSString stringWithFormat:@"We will notify you when %@ responds.", [self.searchUserDict objectForKey:@"first_name"]];
     // Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    NSLog(@"\nMessage Sent:\n%@",self.appDelegate.user);
 }
 
 - (void)didReceiveMemoryWarning {

@@ -18,7 +18,8 @@
 
 @implementation MoveMessageViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -41,6 +42,13 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSLog(@"\nMove Messages:\n%@",self.appDelegate.user);
 }
 
 #pragma mark - Table view data source

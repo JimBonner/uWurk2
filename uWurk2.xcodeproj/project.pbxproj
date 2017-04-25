@@ -674,10 +674,10 @@
 		DC8185681BADA0A500EF2436 /* DashboardMenu */ = {
 			isa = PBXGroup;
 			children = (
-				DC8185691BADA0C100EF2436 /* DashboardMenuTableViewController.h */,
 				DC81856A1BADA0C100EF2436 /* DashboardMenuTableViewController.m */,
 				DC81856B1BADA0C100EF2436 /* employeeMenu.plist */,
 				DC81856C1BADA0C100EF2436 /* employerMenu.plist */,
+				DC8185691BADA0C100EF2436 /* DashboardMenuTableViewController.h */,
 			);
 			name = DashboardMenu;
 			sourceTree = "<group>";

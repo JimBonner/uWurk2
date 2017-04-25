@@ -27,8 +27,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
+    
+    NSLog(@"\nEmployer Edit Company:\n%@",self.appDelegate.user);
+    
     self.viewTipLogo.layer.cornerRadius = 10;
     [self assignValue:[self.appDelegate.user objectForKey:@"company"] control:self.txtCompanyName];
     [self assignValue:[self.appDelegate.user objectForKey:@"web_site_url"] control:self.txtWebsite];

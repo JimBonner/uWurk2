@@ -144,8 +144,12 @@
     self.txtHourly.text = [self.searchparms objectForKey:@"hourly_wage"];
     // Do any additional setup after loading the view.
 }
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
+    
+    NSLog(@"\nRefine Search:\n%@",self.appDelegate.user);
+    
     if(!self.langDict) {
         self.langDict = [NSMutableDictionary new];
         
