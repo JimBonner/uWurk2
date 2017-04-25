@@ -57,13 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "uWurk2/EmployerStep2ViewController.m"
-            timestampString = "514609455.469066"
+            filePath = "uWurk2/RegisterThanksViewController.m"
+            timestampString = "514766932.977445"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "-nextPress:"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "-pressReEnter:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,13 +73,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "uWurk2/EmployerStep2ViewController.m"
-            timestampString = "514609809.139133"
+            filePath = "uWurk2/LoginViewController.m"
+            timestampString = "514777489.44704"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "-nextPress:"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "-loginEmail:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -89,13 +89,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "uWurk2/IntroEmployerViewController.m"
-            timestampString = "514660162.093979"
+            filePath = "uWurk2/LoginViewController.m"
+            timestampString = "514777894.968745"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
-            landmarkName = "-pressEmailRegister:"
+            startingLineNumber = "310"
+            endingLineNumber = "310"
+            landmarkName = "-loginWithUser:password:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

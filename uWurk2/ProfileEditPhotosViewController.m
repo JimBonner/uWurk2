@@ -58,8 +58,6 @@
         
         [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
             NSLog(@"String: %@", operation.responseString);
-            
-            
             if([self validateResponse:responseObject]){
                 [self.navigationController popViewControllerAnimated:TRUE];
             }

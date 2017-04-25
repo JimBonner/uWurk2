@@ -15,8 +15,8 @@
 		1E0DC3E91E773A86009ECCB6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0DC3E81E773A86009ECCB6 /* Foundation.framework */; };
 		1E0DC3EB1E773A99009ECCB6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0DC3EA1E773A99009ECCB6 /* CoreGraphics.framework */; };
 		1E0DC3ED1E773AE5009ECCB6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0DC3EC1E773AE5009ECCB6 /* libPods.a */; };
-		1E1478721EADA44F00743969 /* RegisterThanksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1478711EADA44F00743969 /* RegisterThanksViewController.m */; };
 		1E4B94961E8D697A004ADCB9 /* NSMutableDictionary+CocoaFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4B94951E8D697A004ADCB9 /* NSMutableDictionary+CocoaFix.m */; };
+		1E51E0981EAE99140070BF54 /* RegisterThanksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E51E0971EAE99140070BF54 /* RegisterThanksViewController.m */; };
 		1E9CCB001E91B2C2008DBEE7 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9CCAFF1E91B2C2008DBEE7 /* Photos.framework */; };
 		1EAE1B901E78738100BE2C11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B497CA91BACA21300BE59B6 /* Main.storyboard */; };
 		1EE550A71E95750D007CA914 /* PhotoNotAvailable.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EE550A61E95750D007CA914 /* PhotoNotAvailable.png */; };
@@ -47,7 +47,6 @@
 		9B379CF31B97DF3A00EB4E2D /* IntroEmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B379CF21B97DF3A00EB4E2D /* IntroEmployeeViewController.m */; };
 		9B379CF61B97EAB800EB4E2D /* IntroEmployerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B379CF51B97EAB800EB4E2D /* IntroEmployerViewController.m */; };
 		9B379CF91B97F6E500EB4E2D /* EmployeeStep1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B379CF81B97F6E500EB4E2D /* EmployeeStep1ViewController.m */; };
-		9B3C29AB1C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C29AA1C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.m */; };
 		9B3C29AE1C41F55300EF0296 /* EmployerRegisterThanksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C29AD1C41F55300EF0296 /* EmployerRegisterThanksViewController.m */; };
 		9B3EE1471B9F4DFA001D3C37 /* ListSelectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EE1461B9F4DFA001D3C37 /* ListSelectorTableViewController.m */; };
 		9B3EE14A1B9F6D80001D3C37 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EE1491B9F6D80001D3C37 /* SearchViewController.m */; };
@@ -131,10 +130,10 @@
 		1E0DC3E81E773A86009ECCB6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1E0DC3EA1E773A99009ECCB6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		1E0DC3EC1E773AE5009ECCB6 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "../../Library/Developer/Xcode/DerivedData/uWurk2-diktffzfdgrxymgrefleqskkagsh/Build/Products/Debug-iphonesimulator/libPods.a"; sourceTree = "<group>"; };
-		1E1478701EAD410200743969 /* RegisterThanksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterThanksViewController.h; sourceTree = "<group>"; };
-		1E1478711EADA44F00743969 /* RegisterThanksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterThanksViewController.m; sourceTree = "<group>"; };
 		1E4B94941E8D697A004ADCB9 /* NSMutableDictionary+CocoaFix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+CocoaFix.h"; sourceTree = "<group>"; };
 		1E4B94951E8D697A004ADCB9 /* NSMutableDictionary+CocoaFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+CocoaFix.m"; sourceTree = "<group>"; };
+		1E51E0961EAE99040070BF54 /* RegisterThanksViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RegisterThanksViewController.h; path = uWurk2/RegisterThanksViewController.h; sourceTree = SOURCE_ROOT; };
+		1E51E0971EAE99140070BF54 /* RegisterThanksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegisterThanksViewController.m; path = uWurk2/RegisterThanksViewController.m; sourceTree = SOURCE_ROOT; };
 		1E9CCAFF1E91B2C2008DBEE7 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		1EE550A61E95750D007CA914 /* PhotoNotAvailable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PhotoNotAvailable.png; sourceTree = "<group>"; };
 		9B0452571C02B80C00B33526 /* EmployeeStep6ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeStep6ViewController.h; sourceTree = "<group>"; };
@@ -192,8 +191,6 @@
 		9B379CF51B97EAB800EB4E2D /* IntroEmployerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IntroEmployerViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9B379CF71B97F6E500EB4E2D /* EmployeeStep1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeStep1ViewController.h; sourceTree = "<group>"; };
 		9B379CF81B97F6E500EB4E2D /* EmployeeStep1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EmployeeStep1ViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		9B3C29A91C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeRegisterThanksViewController.h; sourceTree = "<group>"; };
-		9B3C29AA1C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeRegisterThanksViewController.m; sourceTree = "<group>"; };
 		9B3C29AC1C41F55300EF0296 /* EmployerRegisterThanksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerRegisterThanksViewController.h; sourceTree = "<group>"; };
 		9B3C29AD1C41F55300EF0296 /* EmployerRegisterThanksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerRegisterThanksViewController.m; sourceTree = "<group>"; };
 		9B3EE1451B9F4DFA001D3C37 /* ListSelectorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListSelectorTableViewController.h; path = ../uWurk2/ListSelectorTableViewController.h; sourceTree = "<group>"; };
@@ -366,8 +363,8 @@
 				9B3EE1461B9F4DFA001D3C37 /* ListSelectorTableViewController.m */,
 				9B3EE14E1BA367BE001D3C37 /* ReferralProgramViewController.h */,
 				9B3EE14F1BA367BE001D3C37 /* ReferralProgramViewController.m */,
-				1E1478701EAD410200743969 /* RegisterThanksViewController.h */,
-				1E1478711EADA44F00743969 /* RegisterThanksViewController.m */,
+				1E51E0961EAE99040070BF54 /* RegisterThanksViewController.h */,
+				1E51E0971EAE99140070BF54 /* RegisterThanksViewController.m */,
 			);
 			name = OtherViewControllers;
 			path = ../Pods;
@@ -622,8 +619,6 @@
 		9BEA1B261B9A4FD60017D87A /* Employee */ = {
 			isa = PBXGroup;
 			children = (
-				9B3C29A91C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.h */,
-				9B3C29AA1C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.m */,
 				9BBC0B6B1BD482D8003327ED /* EmployeeStepSetupViewController.h */,
 				9BBC0B6C1BD482D8003327ED /* EmployeeStepSetupViewController.m */,
 				9B379CF71B97F6E500EB4E2D /* EmployeeStep1ViewController.h */,
@@ -868,6 +863,7 @@
 				9B8B98F51BB37830005821EB /* SearchResultTableViewCell.m in Sources */,
 				9BD853831BB0F576003D1856 /* ProfileEditEducationViewController.m in Sources */,
 				9B89BE211C3E311F00B4262C /* EmployerStep0ViewController.m in Sources */,
+				1E51E0981EAE99140070BF54 /* RegisterThanksViewController.m in Sources */,
 				9BEA1B651B9E27160017D87A /* BaseViewController.m in Sources */,
 				9BEA1B1B1B9A32B00017D87A /* EmployeeStep2ViewController.m in Sources */,
 				9B379CF61B97EAB800EB4E2D /* IntroEmployerViewController.m in Sources */,
@@ -887,7 +883,6 @@
 				9B8B992D1BB47D7D005821EB /* BaseTableViewController.m in Sources */,
 				DC1BF10D1C0671F40036679F /* UIColor+uWurkColors.m in Sources */,
 				9B8B98EF1BB20133005821EB /* FPPopoverController.m in Sources */,
-				1E1478721EADA44F00743969 /* RegisterThanksViewController.m in Sources */,
 				9B04526B1C03CA7100B33526 /* ViewJobMessageViewController.m in Sources */,
 				9B3EE1851BAA2788001D3C37 /* ProfileEditStep1ViewController.m in Sources */,
 				9BEA1B211B9A4F810017D87A /* EmployeeStep4ViewController.m in Sources */,
@@ -913,7 +908,6 @@
 				9B3EE1881BAA27B2001D3C37 /* ProfileEditStep2ViewController.m in Sources */,
 				DC40DA021C4C51240037D612 /* EmployerDashboardSavedSearchesViewController.m in Sources */,
 				9B10F4EB1C4CB7D100616176 /* EmployerMessageDetailLeftTableViewCell.m in Sources */,
-				9B3C29AB1C41E5BF00EF0296 /* EmployeeRegisterThanksViewController.m in Sources */,
 				9B379C8E1B950FD500EB4E2D /* main.m in Sources */,
 				9B3EE18E1BAA27DB001D3C37 /* ProfileEditStep4ViewController.m in Sources */,
 				DC1BF10A1C0671E20036679F /* ColorUtils.m in Sources */,

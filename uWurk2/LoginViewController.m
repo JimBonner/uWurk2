@@ -35,7 +35,9 @@
     self.btnSend.layer.borderColor = [UIColor blackColor].CGColor;
     self.btnSend.layer.borderWidth = 1;
     [self.navigationController setNavigationBarHidden:false];
+    
     // Do any additional setup after loading the view.
+    
     UILongPressGestureRecognizer *signInLongPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(signInLongPress:)];
     [self.view addGestureRecognizer:signInLongPress];
     [self.view layoutIfNeeded];
@@ -45,10 +47,7 @@
 {
     [super viewWillAppear:animated];
     
-    if([self getUserDefault:@"api_auth_token"] != nil) {
-///        [self loginWithStoredToken];
-///        [self.view setHidden:TRUE];
-    }
+    NSLog(@"\nLogin - Init:\n%@",self.appDelegate.user);
 
 }
 
@@ -59,7 +58,6 @@
 
 - (IBAction)loginEmail:(id)sender
 {
-    
     NSString *emailRegEx = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,10}";
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
     if ([emailTest evaluateWithObject:self.txtEmail.text] == NO) {
@@ -73,7 +71,7 @@
                           handler:^(UIAlertAction *action)
                           {
                           }]];
-        [self.navigationController popViewControllerAnimated:TRUE];
+        [self presentViewController:alert animated:TRUE completion:nil];
         return;
     }
     if([self.txtPassword.text length] < 6) {
@@ -87,7 +85,7 @@
                           handler:^(UIAlertAction *action)
                           {
                           }]];
-        [self.navigationController popViewControllerAnimated:TRUE];
+        [self presentViewController:alert animated:TRUE completion:nil];
         return;
     }
     [self loginWithUser:self.txtEmail.text  password:self.txtPassword.text];
@@ -127,7 +125,8 @@
                               handler:^(UIAlertAction *action)
                               {
                               }]];
-            [self.navigationController popViewControllerAnimated:TRUE];
+            [self presentViewController:alert animated:TRUE completion:nil];
+            return;
         }];
 }
 
@@ -288,7 +287,8 @@
                                   handler:^(UIAlertAction *action)
                                   {
                                   }]];
-                [self.navigationController popViewControllerAnimated:TRUE];
+                [self presentViewController:alert animated:TRUE completion:nil];
+                return;
             }
         }
     }
@@ -300,41 +300,38 @@
 
 - (void)loginWithUser:(NSString*)user password:(NSString*)password
 {
-    AFHTTPRequestOperationManager *manager = [self getManagerNoAuth];
-    //NSDictionary *parameters = @{@"email": @"user@asdf.com",@"password": @"uwurk"};
-    NSDictionary *parameters = @{@"email": user,@"password": password};
     
-    //NSDictionary *parameters = @{@"email": self.txtEmail.text,@"password": self.txtPassword.text};
+    NSLog(@"\nLogin with user:\n%@",self.appDelegate.user);
+    
+    AFHTTPRequestOperationManager *manager = [self getManagerNoAuth];
+    NSDictionary *parameters = @{@"email": user,@"password": password};
     [manager POST:@"http://uwurk.tscserver.com/api/v1/login" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
         NSLog(@"JSON: %@", responseObject);
         BOOL bValid = [self validateResponse:responseObject];
         if(!bValid) {
-            
+            NSString *message = [NSString stringWithFormat:@"Unable to validate login\n\n%@",[responseObject objectForKey:@"message"]];
+            UIAlertController * alert = [UIAlertController
+                                         alertControllerWithTitle:@"Oops!"
+                                         message:message
+                                         preferredStyle:UIAlertControllerStyleActionSheet];
+            [alert addAction:[UIAlertAction
+                              actionWithTitle:@"OK"
+                              style:UIAlertActionStyleDefault
+                              handler:^(UIAlertAction *action)
+                              {
+                              }
+                              ]];
+            [self presentViewController:alert animated:TRUE completion:nil];
+            return;
+            return;
         }
         if([responseObject isKindOfClass:[NSDictionary class]]){
-            if([((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] != nil){
-                [self saveUserDefault:[((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] Key:@"api_auth_token"];
-                //                [self saveUserDefault:[((NSDictionary*)responseObject) valueForKey:@"status"] Key:@"status"];
-                //                [self saveUserDefault:[((NSDictionary*)responseObject) valueForKey:@"user_type"] Key:@"user_type"];
-                [self loginWithStoredToken];
-           }
-            else
-            {
-                UIAlertController * alert = [UIAlertController
-                                             alertControllerWithTitle:@"Oops!"
-                                             message:@"Unable to validate login"
-                                             preferredStyle:UIAlertControllerStyleActionSheet];
-                [alert addAction:[UIAlertAction
-                                  actionWithTitle:@"OK"
-                                  style:UIAlertActionStyleDefault
-                                  handler:^(UIAlertAction *action)
-                                  {
-                                  }]];
-                [self.navigationController popViewControllerAnimated:TRUE];
-            }
-        }
-        else{
+        if([((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] != nil){
+            [self saveUserDefault:[((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] Key:@"api_auth_token"];
+            //                [self saveUserDefault:[((NSDictionary*)responseObject) valueForKey:@"status"] Key:@"status"];
+            //                [self saveUserDefault:[((NSDictionary*)responseObject) valueForKey:@"user_type"] Key:@"user_type"];
+            [self loginWithStoredToken];
+       } else {
             UIAlertController * alert = [UIAlertController
                                          alertControllerWithTitle:@"Oops!"
                                          message:@"Unable to validate login"
@@ -345,9 +342,24 @@
                               handler:^(UIAlertAction *action)
                               {
                               }]];
-            [self.navigationController popViewControllerAnimated:TRUE];
-        }
-        
+           [self presentViewController:alert animated:TRUE completion:nil];
+           return;
+       }
+    } else {
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:@"Oops!"
+                                     message:@"Unable to validate login"
+                                     preferredStyle:UIAlertControllerStyleActionSheet];
+        [alert addAction:[UIAlertAction
+                          actionWithTitle:@"OK"
+                          style:UIAlertActionStyleDefault
+                          handler:^(UIAlertAction *action)
+                          {
+                          }]];
+        [self presentViewController:alert animated:TRUE completion:nil];
+        return;
+    }
+    
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         UIAlertController * alert = [UIAlertController
@@ -360,7 +372,8 @@
                           handler:^(UIAlertAction *action)
                           {
                           }]];
-        [self.navigationController popViewControllerAnimated:TRUE];
+        [self presentViewController:alert animated:TRUE completion:nil];
+        return;
     }];
 }
 
@@ -385,7 +398,8 @@
                                handler:^(UIAlertAction *action)
                                {
                                }]];
-             [self.navigationController popViewControllerAnimated:TRUE];
+             [self presentViewController:alert animated:TRUE completion:nil];
+             return;
          } else if (result.isCancelled) {
              UIAlertController * alert = [UIAlertController
                                           alertControllerWithTitle:@"Oops!"
@@ -397,8 +411,9 @@
                                handler:^(UIAlertAction *action)
                                {
                                }]];
-             [self.navigationController popViewControllerAnimated:TRUE];
+             [self presentViewController:alert animated:TRUE completion:nil];
              DLog(@"Cancelled");
+             return;
          } else {
              DLog(@"Logged in");
              
@@ -445,7 +460,8 @@
                                                     handler:^(UIAlertAction *action)
                                                     {
                                                     }]];
-                                  [self.navigationController popViewControllerAnimated:TRUE];
+                                  [self presentViewController:alert animated:TRUE completion:nil];
+                                  return;
                               }
                           }
                           else{
@@ -459,7 +475,8 @@
                                                 handler:^(UIAlertAction *action)
                                                 {
                                                 }]];
-                              [self.navigationController popViewControllerAnimated:TRUE];
+                              [self presentViewController:alert animated:TRUE completion:nil];
+                              return;
                           }
                           
                       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -474,7 +491,8 @@
                                             handler:^(UIAlertAction *action)
                                             {
                                             }]];
-                          [self.navigationController popViewControllerAnimated:TRUE];
+                          [self presentViewController:alert animated:TRUE completion:nil];
+                          return;
                       }];
                   }              
               }];

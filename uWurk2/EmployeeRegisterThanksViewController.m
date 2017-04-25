@@ -38,14 +38,4 @@
     [self.navigationController pushViewController:myController animated:TRUE];
 }
 
-- (IBAction)pressTryAgain:(id)sender
-{
-    
-}
-
-- (IBAction)pressLogout:(id)sender
-{
-    
-}
-
 @end

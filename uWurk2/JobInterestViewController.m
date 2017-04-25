@@ -60,7 +60,8 @@
                           handler:^(UIAlertAction *action)
                           {
                           }]];
-        [self.navigationController popViewControllerAnimated:TRUE];
+        [self presentViewController:alert animated:TRUE completion:nil];
+        return;
     }];
     }
     else{

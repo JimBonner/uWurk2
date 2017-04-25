@@ -126,7 +126,8 @@
                               handler:^(UIAlertAction *action)
                               {
                               }]];
-            [self.navigationController popViewControllerAnimated:TRUE];
+            [self presentViewController:alert animated:TRUE completion:nil];
+            return;
         }];
     }
 }
@@ -150,7 +151,8 @@
                                handler:^(UIAlertAction *action)
                                {
                                }]];
-             [self.navigationController popViewControllerAnimated:TRUE];
+             [self presentViewController:alert animated:TRUE completion:nil];
+             return;
          } else if (result.isCancelled) {
              UIAlertController * alert = [UIAlertController
                                           alertControllerWithTitle:@"Oops!"
@@ -162,7 +164,8 @@
                                handler:^(UIAlertAction *action)
                                {
                                }]];
-             [self.navigationController popViewControllerAnimated:TRUE];
+             [self presentViewController:alert animated:TRUE completion:nil];
+             return;
              DLog(@"Cancelled");
          } else {
              DLog(@"Logged in");
@@ -221,7 +224,8 @@
                                                 handler:^(UIAlertAction *action)
                                                 {
                                                 }]];
-                              [self.navigationController popViewControllerAnimated:TRUE];
+                              [self presentViewController:alert animated:TRUE completion:nil];
+                              return;
                           }
                       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                           NSLog(@"Error: %@", error);

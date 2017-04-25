@@ -66,7 +66,8 @@
                                   handler:^(UIAlertAction *action)
                                   {
                                   }]];
-                [self.navigationController popViewControllerAnimated:TRUE];
+                [self presentViewController:alert animated:TRUE completion:nil];
+                return;
             }];
 
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -81,7 +82,8 @@
                               handler:^(UIAlertAction *action)
                               {
                               }]];
-            [self.navigationController popViewControllerAnimated:TRUE];
+            [self presentViewController:alert animated:TRUE completion:nil];
+            return;
         }];
 }
 
@@ -168,7 +170,6 @@
                                      alertControllerWithTitle:@"Oops!"
                                      message:@"Are you sure you want to delete this folder?"
                                      preferredStyle:UIAlertControllerStyleActionSheet];
-        [self.navigationController popViewControllerAnimated:TRUE];
         UIAlertAction* ok = [UIAlertAction
                              actionWithTitle:@"OK"
                              style:UIAlertActionStyleDefault
@@ -214,7 +215,8 @@
                                                            handler:^(UIAlertAction *action)
                                                            {
                                                            }]];
-                                         [self.navigationController popViewControllerAnimated:TRUE];
+                                         [self presentViewController:alert animated:TRUE completion:nil];
+                                         return;
                                      }];
                                      
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

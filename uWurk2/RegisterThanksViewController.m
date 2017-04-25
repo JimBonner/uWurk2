@@ -10,9 +10,10 @@
 
 @interface RegisterThanksViewController ()
 
+@property (weak,nonatomic) IBOutlet UIButton *btnReEnter;
 @property (weak,nonatomic) IBOutlet UIButton *btnTryAgain;
 @property (weak,nonatomic) IBOutlet UIButton *btnLogout;
-@property (weak,nonatomic) id nextViewController;
+@property (weak,nonatomic) UILabel  *lblEmail;
 
 @end
 
@@ -21,11 +22,40 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.lblEmail setText:[self.appDelegate.user objectForKey:@"email"]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
+}
+
+- (IBAction)pressReEnter:(id)sender
+{
+    NSString *storyBoardId;
+    if([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"employee"]) {
+        storyBoardId = @"IntroEmployee";
+    } else {
+        storyBoardId = @"IntroEmployer";
+    }
+    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:storyBoardId];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController pushViewController:myController animated:TRUE];
+}
+
+- (IBAction)pressTryAgain:(id)sender
+{
+    [self getLatestUserDataFromDbmsWithCompletion:^(NSInteger result) {
+        if(result == 1) {
+            if([[self.appDelegate.user objectForKey:@"status"]integerValue] == 1) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }}}];
+}
+
+- (IBAction)pressLogout:(id)sender
+{
+    [self logout];
 }
 
 @end

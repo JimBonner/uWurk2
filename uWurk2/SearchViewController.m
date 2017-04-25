@@ -22,7 +22,7 @@
 #import "EditEmployerPreferencesViewController.h"
 #import "EditEmployerCompanyInfoViewController.h"
 #import "EditEmployerContactInfoViewController.h"
-
+#import "RegisterThanksViewController.h"
 
 @interface SearchViewController () <ExperienceFilterAddCollectionViewCellDelegate, ExperienceFilterExistingCollectionViewCellDelegate, EmployerDashboardSavedSearchesViewControllerProtocol, EmployerDashboardRecentSearchesViewControllerProtocol>
 @property (weak, nonatomic) IBOutlet UIButton *btnIndustry;
@@ -50,7 +50,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(receiveMenuNotification:)
@@ -79,8 +78,17 @@
     self.experienceFiltersCollectionView.layer.borderWidth = 2;
     self.experienceFiltersCollectionView.layer.borderColor = [UIColor grayColor].CGColor;
 
+    //    Modal VC to handle registration email adddress verification
+    if([[self.appDelegate.user objectForKey:@"status"]integerValue] != 1) {
+        RegisterThanksViewController *mvc = [self.storyboard instantiateViewControllerWithIdentifier:@"RegisterThanksViewController"];
+        mvc.modalPresentationStyle = UIModalPresentationFullScreen;
+        mvc.modalTransitionStyle  = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:mvc animated:YES completion:Nil];
+    }
 }
--(IBAction)menuPress{
+
+-(IBAction)menuPress
+{
     DashboardMenuTableViewController *controller = [[DashboardMenuTableViewController alloc] init];
     controller.menuFileName = @"employerMenu";
     
@@ -154,6 +162,9 @@
 
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    NSLog(@"\nSearch - Init:\n%@",self.appDelegate.user);
+
     if (self.btnHourly.isSelected)
        self.viewMaxHourly.alpha = 1;
     else
@@ -504,6 +515,11 @@
     }
 }
 
+- (void)removeExperience:(NSString*)experienceID
+{
+    
+}
+
 #pragma mark Collection View Methods
 
 //- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -579,8 +595,6 @@
     
     return UIEdgeInsetsMake(10, 20, 10, 20);
 }
-
-
 
 @end
 

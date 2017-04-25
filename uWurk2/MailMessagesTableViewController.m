@@ -51,9 +51,9 @@
                           handler:^(UIAlertAction *action)
                           {
                           }]];
-        [self.navigationController popViewControllerAnimated:TRUE];
+        [self presentViewController:alert animated:TRUE completion:nil];
+        return;
     }];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -170,8 +170,6 @@
                                                         handler:^(UIAlertAction *action)
                                                         {
                                                         }]];
-                                      [self.navigationController popViewControllerAnimated:TRUE];
-                                    
                                       UIAlertAction* ok = [UIAlertAction
                                                            actionWithTitle:@"OK"
                                                            style:UIAlertActionStyleDefault

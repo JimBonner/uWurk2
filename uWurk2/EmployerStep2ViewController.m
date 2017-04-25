@@ -32,14 +32,18 @@
 {
     [super viewWillAppear:animated];
     
-    NSLog(@"\nEmployer Step 2 - Init:\n%@",self.appDelegate.user);
-
     self.viewTipInner.layer.cornerRadius = 10;
+    
+    NSLog(@"\nEmployer Step 2 - Init:\n%@",self.appDelegate.user);
     
     if(self.performInit) {
         self.performInit = NO;
-        [self assignValue:[self.appDelegate.user objectForKey:@"company"] control:self.txtCompany];
-        [self assignValue:[self.appDelegate.user objectForKey:@"web_site_url"] control:self.txtWebsite];
+        if(![[self.appDelegate.user objectForKey:@"company"] isEqualToString:@""]) {
+            [self assignValue:[self.appDelegate.user objectForKey:@"company"] control:self.txtCompany];
+            [self assignValue:[self.appDelegate.user objectForKey:@"web_site_url"] control:self.txtWebsite];
+            [self.btnIndustry setTitle:[self.appDelegate.user objectForKey:@"industry"] forState:UIControlStateNormal];
+            [self.btnIndustry setTag:[[self.appDelegate.user objectForKey:@"industry_id"]intValue]];
+        }
     } else {
         [self restoreScreenData];
     }

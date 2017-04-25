@@ -3147,7 +3147,7 @@ If you don’t find quality candidates today, check back soon.</string>
         <!--Register Thanks View Controller-->
         <scene sceneID="enp-4Y-ObX">
             <objects>
-                <viewController storyboardIdentifier="RegisterThanksView" id="LRi-2F-atf" customClass="RegisterThanksViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegisterThanksViewController" id="LRi-2F-atf" customClass="RegisterThanksViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xL9-yK-PYr"/>
                         <viewControllerLayoutGuide type="bottom" id="Zbh-GI-6hf"/>
@@ -3208,7 +3208,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                                             <color key="titleColor" red="0.2666666667" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="pressReenter:" destination="LRi-2F-atf" eventType="touchUpInside" id="wHh-5b-kws"/>
+                                                            <action selector="pressReEnter:" destination="LRi-2F-atf" eventType="touchUpInside" id="pVt-c4-qR9"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -3244,7 +3244,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                                             <color key="titleColor" red="0.2666666667" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="pressReenter:" destination="LRi-2F-atf" eventType="touchUpInside" id="P93-oY-T1p"/>
+                                                            <action selector="pressTryAgain:" destination="LRi-2F-atf" eventType="touchUpInside" id="oCO-es-Ku6"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -3281,7 +3281,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                                             <color key="titleColor" red="0.2666666667" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="pressReenter:" destination="LRi-2F-atf" eventType="touchUpInside" id="k5y-Kj-Ld6"/>
+                                                            <action selector="pressLogout:" destination="LRi-2F-atf" eventType="touchUpInside" id="iZu-df-vkk"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -3343,17 +3343,19 @@ If you don’t find quality candidates today, check back soon.</string>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
+                        <outlet property="btnLogout" destination="vk4-hx-xrP" id="WLG-gJ-2lD"/>
+                        <outlet property="btnReEnter" destination="voW-hC-15d" id="RYl-3J-hC5"/>
+                        <outlet property="btnTryAgain" destination="Yne-2j-aay" id="KrU-FA-UdP"/>
                         <outlet property="lblEmail" destination="m1k-q4-eDA" id="yhq-bq-vlX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0WR-kJ-Zr8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2584" y="-556"/>
+            <point key="canvasLocation" x="-2584.5" y="-556.5"/>
         </scene>
         <!--Employer Register Thanks View Controller-->
         <scene sceneID="1ys-ni-AmC">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7zI-Hz-NaP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="EmployerRegisterThanksView" id="Gh3-Co-ae2" customClass="EmployerRegisterThanksViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="K3F-wc-ggi"/>
@@ -3471,6 +3473,7 @@ If you don’t find quality candidates today, check back soon.</string>
                         <outlet property="lblEmail" destination="yZE-n4-iIe" id="QP1-5B-FbJ"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7zI-Hz-NaP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1404" y="1184"/>
         </scene>
@@ -5144,7 +5147,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                 <rect key="frame" x="0.0" y="22" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="J4b-Gk-1ro" id="e4B-vu-dmO">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -5172,7 +5175,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                 <rect key="frame" x="0.0" y="22" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z1c-UI-qcC" id="eEv-u1-wRa">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -5200,7 +5203,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                 <rect key="frame" x="0.0" y="22" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Je5-GC-Yz1" id="Fw5-xu-o7I">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -7938,7 +7941,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RG0-uo-2ux" id="l8d-LX-Aae">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -7946,7 +7949,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eZg-NL-3sy" id="fL9-Ge-pJt">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -9660,7 +9663,6 @@ If you don’t find quality candidates today, check back soon.</string>
         <!--Employee Register Thanks View Controller-->
         <scene sceneID="fUF-Yu-xGg">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2Qr-ZS-V0k" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="EmployeeRegisterThanksView" id="ykf-7n-j1S" customClass="EmployeeRegisterThanksViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="n5T-FL-XIO"/>
@@ -9778,6 +9780,7 @@ If you don’t find quality candidates today, check back soon.</string>
                         <outlet property="lblEmail" destination="dhN-Eo-gCx" id="A1o-Ra-82K"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Qr-ZS-V0k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1812" y="1184"/>
         </scene>
