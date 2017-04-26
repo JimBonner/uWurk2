@@ -277,8 +277,20 @@ UIImage  *returnImage;
          }];
     } else {
         if(self.btnBioSkip.selected) {
-            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
-            [self.navigationController setViewControllers:@[myController] animated:YES];
+            [self saveStepNumber:6 completion:^(NSInteger result) {
+                if(result == 1) {
+                    [self saveProfileComplete:^(NSInteger result) {
+                        if(result == 1) {
+                            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
+                            [self.navigationController setViewControllers:@[myController] animated:YES];
+                        } else {
+                            return;
+                        }
+                    }];
+                } else {
+                    return;
+                }
+            }];
         } else {
             [self saveBioDataToDbms];
         }
@@ -294,8 +306,20 @@ UIImage  *returnImage;
         [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
              NSLog(@"\nEmployee Step 6 - Bio Json Response: %@", responseObject);
-             UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
-             [self.navigationController setViewControllers:@[myController] animated:YES];
+               [self saveStepNumber:6 completion:^(NSInteger result) {
+                   if(result == 1) {
+                       [self saveProfileComplete:^(NSInteger result) {
+                           if(result == 1) {
+                               UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
+                               [self.navigationController setViewControllers:@[myController] animated:YES];
+                           } else {
+                               return;
+                           }
+                       }];
+                   } else {
+                       return;
+                   }
+               }];
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              NSLog(@"Error: %@", error);
              UIAlertController * alert = [UIAlertController
@@ -311,8 +335,20 @@ UIImage  *returnImage;
              [self presentViewController:alert animated:TRUE completion:nil];
          }];
     } else {
-        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
-        [self.navigationController setViewControllers:@[myController] animated:YES];
+        [self saveStepNumber:6 completion:^(NSInteger result) {
+            if(result == 1) {
+                [self saveProfileComplete:^(NSInteger result) {
+                    if(result == 1) {
+                        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
+                        [self.navigationController setViewControllers:@[myController] animated:YES];
+                    } else {
+                        return;
+                    }
+                }];
+            } else {
+                return;
+            }
+        }];
     }
 }
 

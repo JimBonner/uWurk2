@@ -129,6 +129,7 @@
         if([wageArray count]) {
             [params setObject:wageArray forKey:@"wage_type"];
         }
+        [self updateParamDict:params value:@"2" key:@"setup_step"];
         if([params count])
         {
             AFHTTPRequestOperationManager *manager = [self getManager];

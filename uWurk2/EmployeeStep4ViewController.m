@@ -521,6 +521,7 @@
         [self updateParamDict:self.params value:@"" key:@"other_location[0]"];
         [self updateParamDict:self.params value:@"" key:@"other_school[0]"];
         [self updateParamDict:self.params value:@"0" key:@"remove[0]"];
+        [self updateParamDict:self.params value:@"4" key:@"setup_step"];
         if([self.params count]){
             AFHTTPRequestOperationManager *manager = [self getManager];
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params

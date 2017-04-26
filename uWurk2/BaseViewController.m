@@ -260,47 +260,43 @@
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     [params setObject:[@(stepNum)stringValue] forKey:@"setup_step"];
     AFHTTPRequestOperationManager *manager = [self getManager];
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  NSLog(@"JSON Response: %@", responseObject);
-                  if([self validateResponse:responseObject]) {
-                      completion(1);
-                  } else {
-                      completion(0);
-                      [self handleServerErrorUnableToPutData];
-                  }}
-              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  NSLog(@"Error: %@", error);
+    [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              NSLog(@"JSON Response: %@", responseObject);
+              if([self validateResponse:responseObject]) {
+                  completion(1);
+              } else {
                   completion(0);
                   [self handleServerErrorUnableToPutData];
-              }
-         ];
-    });
+              }}
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Error: %@", error);
+              completion(0);
+              [self handleServerErrorUnableToPutData];
+          }
+     ];
 }
 
 - (void)saveProfileComplete:(void(^)(NSInteger result))completion
 {
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
-    [params setObject:@"1" forKey:@"setup_step"];
+    [params setObject:@"1" forKey:@"profile_complete"];
     AFHTTPRequestOperationManager *manager = [self getManager];
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  NSLog(@"JSON Response: %@", responseObject);
-                  if([self validateResponse:responseObject]) {
-                      completion(1);
-                  } else {
-                      completion(0);
-                      [self handleServerErrorUnableToPutData];
-                  }}
-              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  NSLog(@"Error: %@", error);
+    [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              NSLog(@"JSON Response: %@", responseObject);
+              if([self validateResponse:responseObject]) {
+                  completion(1);
+              } else {
                   completion(0);
                   [self handleServerErrorUnableToPutData];
-              }
-         ];
-    });
+              }}
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Error: %@", error);
+              completion(0);
+              [self handleServerErrorUnableToPutData];
+          }
+     ];
 }
 
 #pragma mark -

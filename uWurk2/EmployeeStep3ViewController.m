@@ -232,6 +232,7 @@
                                   key:[NSString stringWithFormat:@"other_languages[%ld]",icnt]];
             }
         }
+        [self updateParamDict:params value:@"3" key:@"setup_step"];
         if([params count]){
             AFHTTPRequestOperationManager *manager = [self getManager];
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {

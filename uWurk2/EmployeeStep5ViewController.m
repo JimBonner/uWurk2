@@ -308,6 +308,7 @@
         [self.params setObjectOrNil:@"" forKey:@"position2"];
         [self.params setObjectOrNil:@"" forKey:@"other_position"];
     }
+    [self updateParamDict:self.params value:@"5" key:@"setup_step"];
     
     if([self.params count])
     {

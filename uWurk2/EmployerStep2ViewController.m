@@ -103,6 +103,8 @@
         [self updateParamDict:params value:self.txtCompany.text key:@"company"];
         [self updateParamDict:params value:self.txtWebsite.text key:@"web_site_url"];
         [self updateParamDict:params value:[@(self.btnIndustry.tag)stringValue] key:@"industry_id"];
+        [self updateParamDict:params value:@"2" key:@"setup_step"];
+        [self updateParamDict:params value:@"1" key:@"profile_complete"];
         if([params count]){
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 self.performInit = YES;

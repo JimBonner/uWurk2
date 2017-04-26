@@ -20,7 +20,7 @@
 @interface EmployeeViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lblName;
 @property (weak, nonatomic) IBOutlet UILabel *lblAgeWage;
-@property (strong, nonatomic) FPPopoverController *popover;
+@property (strong,nonatomic) FPPopoverController *popover;
 @property (weak, nonatomic) IBOutlet UILabel *lblExp1;
 @property (weak, nonatomic) IBOutlet UILabel *lblExp2;
 @property (weak, nonatomic) IBOutlet UILabel *lblExp3;

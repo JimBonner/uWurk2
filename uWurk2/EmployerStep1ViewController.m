@@ -86,6 +86,7 @@
         [self updateParamDict:params value:self.txtPassword.text key:@"password"];
         [self updateParamDict:params value:self.txtFirstName.text key:@"first_name"];
         [self updateParamDict:params value:self.txtLastName.text key:@"last_name"];
+        [self updateParamDict:params value:@"1" key:@"setup_step"];
         if([params count]){
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"\nEmployer Step 1 - Json Response: %@", responseObject);
@@ -93,6 +94,8 @@
                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerProfileSetup2"];
                     [self.navigationController setViewControllers:@[myController] animated:YES];
                     
+                } else {
+                    [self handleServerErrorUnableToContact];
                 }
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error: %@", error);

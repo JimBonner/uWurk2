@@ -142,6 +142,7 @@
             contact = contact | 2;
         }
         [self updateParamDict:params value:[[NSNumber numberWithInteger:contact]stringValue]  key:@"contact_method_id"];
+        [self updateParamDict:params value:@"1" key:@"setup_step"];
         if([params count]) {
             AFHTTPRequestOperationManager *manager = [self getManager];
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params
