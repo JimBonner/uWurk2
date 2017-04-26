@@ -35,58 +35,34 @@
 
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    
-    
-        [manager GET:@"http://uwurk.tscserver.com/api/v1/folders" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            self.json2 = [NSMutableArray arrayWithArray:[responseObject objectForKey:@"folders"]];
-            self.json = [[NSMutableArray alloc] init];
+    [manager GET:@"http://uwurk.tscserver.com/api/v1/folders" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        self.json2 = [NSMutableArray arrayWithArray:[responseObject objectForKey:@"folders"]];
+        self.json = [[NSMutableArray alloc] init];
 
-            if([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"user"]) {
-                [self.json addObject:@{@"id":@"0",@"name":@"From user"}];
-                [self.json addObject:@{@"id":@"1",@"name":@"From uWurk"}];
-            }
-            else {
-                [self.json addObject:@{@"id":@"0|yes",@"name":@"Yes"}];
-                [self.json addObject:@{@"id":@"0|no",@"name":@"No"}];
-            }
-            
-            [manager GET:@"http://uwurk.tscserver.com/api/v1/notifications" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"user"]) {
+            [self.json addObject:@{@"id":@"0",@"name":@"From user"}];
+            [self.json addObject:@{@"id":@"1",@"name":@"From uWurk"}];
+        }
+        else {
+            [self.json addObject:@{@"id":@"0|yes",@"name":@"Yes"}];
+            [self.json addObject:@{@"id":@"0|no",@"name":@"No"}];
+        }
+        
+        [manager GET:@"http://uwurk.tscserver.com/api/v1/notifications" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
-                self.countDict = [responseObject objectForKey:@"notifications"];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.tableView reloadData];
-                });
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"Error: %@", error);
-                UIAlertController * alert = [UIAlertController
-                                             alertControllerWithTitle:@"Oops!"
-                                             message:@"Unable to contact server"
-                                             preferredStyle:UIAlertControllerStyleActionSheet];
-                [alert addAction:[UIAlertAction
-                                  actionWithTitle:@"OK"
-                                  style:UIAlertActionStyleDefault
-                                  handler:^(UIAlertAction *action)
-                                  {
-                                  }]];
-                [self presentViewController:alert animated:TRUE completion:nil];
-                return;
-            }];
-
+            self.countDict = [responseObject objectForKey:@"notifications"];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+            });
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
-            UIAlertController * alert = [UIAlertController
-                                         alertControllerWithTitle:@"Oops!"
-                                         message:@"Unable to contact server"
-                                         preferredStyle:UIAlertControllerStyleActionSheet];
-            [alert addAction:[UIAlertAction
-                              actionWithTitle:@"OK"
-                              style:UIAlertActionStyleDefault
-                              handler:^(UIAlertAction *action)
-                              {
-                              }]];
-            [self presentViewController:alert animated:TRUE completion:nil];
-            return;
+            [self handleServerErrorUnableToContact];
         }];
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [self handleServerErrorUnableToContact];
+    }];
 }
 
 #pragma mark - Table view data source
@@ -207,22 +183,12 @@
                                          });
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                          NSLog(@"Error: %@", error);
-                                         UIAlertController * alert = [UIAlertController
-                                                                      alertControllerWithTitle:@"Oops!"
-                                                                      message:@"Unable to contact server"
-                                                                      preferredStyle:UIAlertControllerStyleActionSheet];
-                                         [alert addAction:[UIAlertAction
-                                                           actionWithTitle:@"OK"
-                                                           style:UIAlertActionStyleDefault
-                                                           handler:^(UIAlertAction *action)
-                                                           {
-                                                           }]];
-                                         [self presentViewController:alert animated:TRUE completion:nil];
-                                         return;
+                                         [self handleServerErrorUnableToContact];
                                      }];
                                      
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"Error: %@", error);
+                                     [self handleServerErrorUnableToContact];
                                  }];
                                  
                                  [alert dismissViewControllerAnimated:YES completion:nil];

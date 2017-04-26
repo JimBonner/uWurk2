@@ -69,7 +69,7 @@
                     [self saveUserDefault:@"employee" Key:@"user_type"];
                     [self saveUserDefault:[self.emailText text] Key:@"email"];
                     [self saveUserDefault:[responseObject objectForKey:@"api_auth_token"] Key:@"api_auth_token"];
-                    [self getLatestUserDataFromDbmsWithCompletion:^(NSInteger result) {
+                    [self getProfileDataFromDbmsWithCompletion:^(NSInteger result) {
                         if(result == 1) {
                             EmployeeStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeStep1ViewController"];
                             [self.navigationController pushViewController:myController animated:TRUE];
@@ -103,7 +103,7 @@
                                          handler:^(UIAlertAction * action)
                                          {
                                              [alert dismissViewControllerAnimated:YES completion:nil];
-                                             [self getLatestUserDataFromDbmsWithCompletion:^(NSInteger result) {
+                                             [self getProfileDataFromDbmsWithCompletion:^(NSInteger result) {
                                                  if(result == 1) {
                                                      EmployeeStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeStep1ViewController"];
                                                      [self.navigationController pushViewController:myController animated:TRUE];
@@ -116,17 +116,7 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error)
         {
             NSLog(@"Error: %@", error);
-            UIAlertController * alert = [UIAlertController
-                                         alertControllerWithTitle:@"Oops!"
-                                         message:@"Unable to contact server"
-                                         preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction
-                              actionWithTitle:@"OK"
-                              style:UIAlertActionStyleDefault
-                              handler:^(UIAlertAction *action)
-                              {
-                              }]];
-            [self presentViewController:alert animated:TRUE completion:nil];
+            [self handleServerErrorUnableToContact];
         }];
     }
 }

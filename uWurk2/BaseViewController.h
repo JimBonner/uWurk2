@@ -26,14 +26,17 @@
 - (BOOL)validateResponse:(NSDictionary*)response;
 - (AFHTTPRequestOperationManager*)getManager;
 - (AFHTTPRequestOperationManager*)getManagerNoAuth;
-- (void)setupUXforUser;
 - (void)assignValue:(NSString*)value control:(UITextField*)control;
 - (NSMutableDictionary*)updateParamDict:(NSMutableDictionary*)paramDict value:(NSString*)value key:(NSString*)key;
 - (NSMutableDictionary*)updateParamDictDefault:(NSMutableDictionary*)paramDict value:(NSString*)value key:(NSString*)key def:(NSString*)def;
 - (void)saveUserDataToDocumentsFile;
 - (void)getUserDataFromDocumentsFile;
 - (void)logout;
-- (void)getLatestUserDataFromDbmsWithCompletion:(void(^)(NSInteger result))completion;
+- (void)getProfileDataFromDbmsWithCompletion:(void(^)(NSInteger result))completion;
 - (NSURL *)serverUrlWith:(NSString *)postfix;
+- (void)handleServerErrorUnableToGetData;
+- (void)handleServerErrorUnableToContact;
+- (void)saveStepNumber:(NSInteger)stepNum completion:(void(^)(NSInteger result))completion;
+- (void)saveProfileComplete:(void(^)(NSInteger result))completion;
 
 @end

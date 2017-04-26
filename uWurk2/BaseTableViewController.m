@@ -284,4 +284,19 @@
     return [prefs stringForKey:key];
 }
 
+- (void)handleServerErrorUnableToContact
+{
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:@"Oops!"
+                                 message:@"Unable to contact server"
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction
+                      actionWithTitle:@"OK"
+                      style:UIAlertActionStyleDefault
+                      handler:^(UIAlertAction *action)
+                      {
+                      }]];
+    [self presentViewController:alert animated:TRUE completion:nil];
+}
+
 @end

@@ -48,7 +48,7 @@
 
 - (IBAction)pressTryAgain:(id)sender
 {
-    [self getLatestUserDataFromDbmsWithCompletion:^(NSInteger result) {
+    [self getProfileDataFromDbmsWithCompletion:^(NSInteger result) {
         if(result == 1) {
             if([[self.appDelegate.user objectForKey:@"status"]integerValue] == 1) {
                 [self dismissViewControllerAnimated:YES completion:nil];

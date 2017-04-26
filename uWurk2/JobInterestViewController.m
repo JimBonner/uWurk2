@@ -45,30 +45,19 @@
         [params setObject:@"1" forKey:@"interest"];
     }
     
-    if ([params count]) {
-        
-    [manager POST:@"http://uwurk.tscserver.com/api/v1/post_message" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    if ([params count])
+    {
+        [manager POST:@"http://uwurk.tscserver.com/api/v1/post_message" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReplySentView"];
+            [self.navigationController setViewControllers:@[myController] animated:TRUE];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+            [self handleServerErrorUnableToContact];
+            return;
+        }];
+    } else {
         UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReplySentView"];
         [self.navigationController setViewControllers:@[myController] animated:TRUE];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-        UIAlertController * alert = [UIAlertController
-                                     alertControllerWithTitle:@"Oops!"
-                                     message:@"Unable to contact server"
-                                     preferredStyle:UIAlertControllerStyleActionSheet];
-        [alert addAction:[UIAlertAction
-                          actionWithTitle:@"OK"
-                          style:UIAlertActionStyleDefault
-                          handler:^(UIAlertAction *action)
-                          {
-                          }]];
-        [self presentViewController:alert animated:TRUE completion:nil];
-        return;
-    }];
-    }
-    else{
-    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReplySentView"];
-    [self.navigationController setViewControllers:@[myController] animated:TRUE];
     }
 }
 
