@@ -337,48 +337,4 @@ UIImage *image;
     return image;
 }
 
-//- (UIImage *)loadPhotoImageUsingLocalIdentifier:(NSString *)localId
-//{
-//    returnImage = nil;
-//    PHAsset *asset = [[PHAsset fetchAssetsWithLocalIdentifiers:[NSArray arrayWithObject:localId]
-//                                                       options:nil]lastObject];
-//    if(asset != nil) {
-//        CGSize targetSize = CGSizeMake(300.0,300.0);
-//        PHImageRequestOptions *requestOptions = [[PHImageRequestOptions alloc]init];
-//        requestOptions.synchronous = YES;
-//        [[PHImageManager defaultManager]requestImageForAsset:asset targetSize:targetSize contentMode:PHImageContentModeAspectFit options:requestOptions resultHandler:^(UIImage *image, NSDictionary * info)
-//        {
-//            returnImage = image;
-//        }];
-//    }
-//    return returnImage;
-//}
-//
-//- (NSString *)localIdentifierFromAssetUrlString:(NSString *)photoUrlString
-//{
-//    returnString = nil;
-//    NSArray *urlArray = [NSArray arrayWithObject:[NSURL URLWithString:photoUrlString]];
-//    PHAsset *asset = [[PHAsset fetchAssetsWithALAssetURLs:urlArray options:nil]lastObject];
-//    if(asset != nil) {
-//        returnString = asset.localIdentifier;
-//    }
-//    return returnString;
-//}
-//
-//- (NSString *)localIdentifierOfLastPhotoAsset
-//{
-//    PHAsset *asset = nil;
-//    PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
-//    fetchOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
-//    PHFetchResult *fetchResult = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:fetchOptions];
-//    if (fetchResult != nil && fetchResult.count > 0) {
-//        asset = [fetchResult lastObject];
-//    }
-//    NSString *localID = nil;
-//    if (asset) {
-//        localID = asset.localIdentifier;
-//    }
-//    return localID;
-//}
-
 @end

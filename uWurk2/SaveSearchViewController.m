@@ -27,8 +27,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    NSLog(@"\nSave Search:\n%@",self.appDelegate.user);
 }
 
 - (IBAction)savePress:(id)sender {

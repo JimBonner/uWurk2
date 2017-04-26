@@ -44,15 +44,7 @@
     long len = 2000 - self.textView.text.length;
     self.charsRemaining.text=[NSString stringWithFormat:@"%li characters remaining",len];
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 -(void)textViewDidChange:(UITextView *)textView
 {
     long len = 2000 - self.textView.text.length;

@@ -23,8 +23,6 @@
 {
     [super viewWillAppear:animated];
     
-    NSLog(@"\nAdd Location:\n%@",self.appDelegate.user);
-    
     self.params = [[NSMutableDictionary alloc] init];
     self.btnSaveChanges.enabled = NO;
     NSArray *availabilityArray = [self.appDelegate.user objectForKey:@"availability"];

@@ -24,8 +24,6 @@
 {
     [super viewDidAppear:animated];
     
-    NSLog(@"\nEmployer Dashboard Saved Searches:\n%@",self.appDelegate.user);
-    
     AFHTTPRequestOperationManager *manager = [self getManager];
     
     [manager GET:@"http://uwurk.tscserver.com/api/v1/saved_searches" parameters: nil success:^(AFHTTPRequestOperation *operation, id responseObject) {

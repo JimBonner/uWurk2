@@ -148,8 +148,6 @@
 {
     [super viewWillAppear:animated];
     
-    NSLog(@"\nRefine Search:\n%@",self.appDelegate.user);
-    
     if(!self.langDict) {
         self.langDict = [NSMutableDictionary new];
         
@@ -502,15 +500,6 @@
     
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 - (IBAction)pressUpdate:(id)sender {
     if (self.btnHourly.selected == YES) {
         [self.params setObject:self.txtHourly.text forKey:@"hourly_wage"];
