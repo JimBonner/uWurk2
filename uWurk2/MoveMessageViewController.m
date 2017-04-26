@@ -47,8 +47,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    NSLog(@"\nMove Messages:\n%@",self.appDelegate.user);
 }
 
 #pragma mark - Table view data source

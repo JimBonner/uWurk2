@@ -25,8 +25,6 @@
 {
     [super viewWillAppear:animated];
     
-    NSLog(@"\nJob Interest:\n%@",self.appDelegate.user);
-    
     self.lblEmployer.text = [self.MailMessagedict objectForKey:@"company"];
     self.lblPosition.text = [self.MailMessagedict objectForKey:@"position"];
     self.lblLocation.text = [self.MailMessagedict objectForKey:@"location"];

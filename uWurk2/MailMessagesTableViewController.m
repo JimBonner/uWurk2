@@ -27,8 +27,6 @@
 {
     [super viewWillAppear:animated];
     
-    NSLog(@"\nMail Messages:\n%@",self.appDelegate.user);
-    
     self.lblFolderName.text = [[self.mailFolderDict objectForKey:@"name"]uppercaseString];
 }
 - (void)viewDidAppear:(BOOL)animated {

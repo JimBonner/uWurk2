@@ -24,9 +24,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    NSLog(@"\nMail Add Folder:\n%@",self.appDelegate.user);
-    
 }
 
 - (IBAction)addFolder:(id)sender {
