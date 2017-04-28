@@ -32,6 +32,8 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self saveStepNumber:1 completion:^(NSInteger result) { }];
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -114,17 +116,7 @@
         [Error appendString:@"\n\nPhone Number"];
     }
     if ((Error.length) > 50) {
-        UIAlertController * alert = [UIAlertController
-                                     alertControllerWithTitle:@"Oops!"
-                                     message:Error
-                                     preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction
-                          actionWithTitle:@"OK"
-                          style:UIAlertActionStyleDefault
-                          handler:^(UIAlertAction *action)
-                          {
-                          }]];
-        [self presentViewController:alert animated:TRUE completion:nil];
+        [self handleErrorWithMessage:Error];
     } else {
         NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
         [self updateParamDict:params value:self.txtEmail.text key:@"email"];
@@ -142,7 +134,6 @@
             contact = contact | 2;
         }
         [self updateParamDict:params value:[[NSNumber numberWithInteger:contact]stringValue]  key:@"contact_method_id"];
-        [self updateParamDict:params value:@"1" key:@"setup_step"];
         if([params count]) {
             AFHTTPRequestOperationManager *manager = [self getManager];
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params
@@ -152,6 +143,8 @@
                       {
                           UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup2"];
                           [self.navigationController pushViewController:myController animated:TRUE];
+                      } else {
+                          
                       }
                   }
                   failure:^(AFHTTPRequestOperation *operation, NSError *error) {

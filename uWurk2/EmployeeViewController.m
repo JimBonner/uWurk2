@@ -16,6 +16,7 @@
 #import "MailFoldersViewController.h"
 #import "UrlImageRequest.h"
 #import "IntroViewController.h"
+#import "RegisterThanksViewController.h"
 
 @interface EmployeeViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lblName;
@@ -69,6 +70,14 @@
                                                          action:@selector(pressRef:)];
     
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:btnMail, btnRef, nil];
+   
+    //    Modal VC to handle registration email adddress verification
+    if([[self.appDelegate.user objectForKey:@"status"]integerValue] != 1) {
+        RegisterThanksViewController *mvc = [self.storyboard instantiateViewControllerWithIdentifier:@"RegisterThanksViewController"];
+        mvc.modalPresentationStyle = UIModalPresentationFullScreen;
+        mvc.modalTransitionStyle  = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:mvc animated:YES completion:Nil];
+    }
 }
 
 - (IBAction)pressRef:(id)sender
@@ -81,6 +90,8 @@
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    NSLog(@"\nEmployee Landing - Init:\n%@",self.appDelegate.user);
     
     NSString *SchoolStatus1;
     NSString *JobStatus1;
@@ -145,6 +156,8 @@
         [self.btnBio setTitle:@"ADD BIO" forState:UIControlStateNormal];
         [self.btnBio setTitle:@"ADD BIO" forState:UIControlStateHighlighted];
         [self.btnBio setTitle:@"ADD BIO" forState:UIControlStateSelected];
+    } else if([[self.appDelegate.user objectForKey:@"biography"]length] > 0) {
+        
     }
     if([experienceArray count] == 0) {
         self.btnExp.alpha = 0;
@@ -193,7 +206,7 @@
     
     NSArray *photoArray = [[self.appDelegate user] objectForKey:@"photos"];
     for(NSDictionary *photoDict in photoArray) {
-        if([[photoDict objectForKey:@"for_profile"] intValue] == 1) {
+        if([[photoDict objectForKey:@"for_profile"] intValue] == 0) {
             NSURL *photoURL =[NSURL URLWithString:[NSString stringWithFormat:@"http://uwurk.tscserver.com%@",[photoDict objectForKey:@"url"]]];
             
             UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];

@@ -87,17 +87,7 @@
         [Error appendString:@"\n\nIndustry"];
     }
     if ((Error.length) > 50) {
-        UIAlertController * alert = [UIAlertController
-                                     alertControllerWithTitle:@"Oops!"
-                                     message:Error
-                                     preferredStyle:UIAlertControllerStyleActionSheet];
-        [alert addAction:[UIAlertAction
-                          actionWithTitle:@"OK"
-                          style:UIAlertActionStyleDefault
-                          handler:^(UIAlertAction *action)
-                          {
-                          }]];
-        [self presentViewController:alert animated:TRUE completion:nil];
+        [self handleErrorWithMessage:Error];
     } else {
         NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
         [self updateParamDict:params value:self.txtCompany.text key:@"company"];

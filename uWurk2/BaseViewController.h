@@ -34,9 +34,12 @@
 - (void)logout;
 - (void)getProfileDataFromDbmsWithCompletion:(void(^)(NSInteger result))completion;
 - (NSURL *)serverUrlWith:(NSString *)postfix;
-- (void)handleServerErrorUnableToGetData;
-- (void)handleServerErrorUnableToContact;
 - (void)saveStepNumber:(NSInteger)stepNum completion:(void(^)(NSInteger result))completion;
 - (void)saveProfileComplete:(void(^)(NSInteger result))completion;
+- (void)handleServerErrorUnableToGetData;
+- (void)handleServerErrorUnableToPutData;
+- (void)handleServerErrorUnableToContact;
+- (void)handleServerErrorUnableToSaveData:(NSString *)what;
+- (void)handleErrorWithMessage:(NSString *)message;
 
 @end

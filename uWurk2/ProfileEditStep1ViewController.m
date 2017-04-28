@@ -42,16 +42,20 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void) viewWillAppear:(BOOL)animated{
+-(void) viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     
     self.btnSaveChanges.enabled = NO;
     self.viewTip.layer.cornerRadius = 5;
-    self.viewCommunication.layer.cornerRadius = 5;
+    self.viewCommunication.layer.cornerRadius = 10;
     
     NSLog(@"\nEmployee Profile Edit Step 1:\n%@",self.appDelegate.user);
     
     [self assignValue:[self.appDelegate.user objectForKey:@"email"] control:self.txtEmail];
+    [self.txtEmail setAlpha:0.2];
+    [self.txtEmail setEnabled:NO];
+    
     [self assignValue:[self.appDelegate.user objectForKey:@"first_name"] control:self.txtFirstName];
     [self assignValue:[self.appDelegate.user objectForKey:@"last_name"] control:self.txtLastName];
     [self assignValue:[self.appDelegate.user objectForKey:@"birthdate"] control:self.txtBirthDate];
@@ -75,46 +79,17 @@
     }
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-- (IBAction)changeSave:(id)sender {
+- (IBAction)changeSave:(id)sender
+{
     self.btnSaveChanges.enabled = YES;
 }
+
 - (IBAction)changeCheckBox:(UIButton *)sender {
     [sender setSelected:!sender.selected];
     self.btnSaveChanges.enabled = YES;
 }
-- (IBAction)nextPress:(id)sender {
-    // Did data get updated?
-    
-    AFHTTPRequestOperationManager *manager = [self getManager];
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    
-    [self updateParamDict:params value:self.txtFirstName.text key:@"first_name"];
-    [self updateParamDict:params value:self.txtLastName.text key:@"last_name"];
-    [self updateParamDict:params value:self.txtEmail.text key:@"email"];
-    [self updateParamDict:params value:self.txtBirthDate.text key:@"birthdate"];
-    [self updateParamDict:params value:self.txtPhone.text key:@"cell_phone"];
-    [self updateParamDict:params value:self.btnGenderMale.selected ? @"m" : @"f" key:@"gender"];
-    if(self.btnEmail.isSelected && self.btnText.isSelected) {
-        [self updateParamDict:params value:@"3" key:@"contact_method_id"];
-    }
-    else if(self.btnText.isSelected) {
-        [self updateParamDict:params value:@"2" key:@"contact_method_id"];
-    }
-    else if(self.btnEmail.isSelected) {
-        [self updateParamDict:params value:@"1" key:@"contact_method_id"];
-    }
-    else {
-        [self updateParamDict:params value:@"0" key:@"contact_method_id"];
-    }
+- (IBAction)nextPress:(id)sender
+{
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
     if (self.txtEmail.text.length == 0) {
@@ -136,25 +111,38 @@
         [Error appendString:@"\n\nPhone Number"];
     }
     if ((Error.length) > 50) {
-        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"OOPS!"
-                                                         message:Error
-                                                        delegate:self
-                                               cancelButtonTitle:@"OK"
-                                               otherButtonTitles: nil];
-        [alert show];
-    }
-    else {
+        [self handleErrorWithMessage:Error];
+    } else {
+        NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+        [self updateParamDict:params value:self.txtFirstName.text key:@"first_name"];
+        [self updateParamDict:params value:self.txtLastName.text key:@"last_name"];
+        [self updateParamDict:params value:self.txtEmail.text key:@"email"];
+        [self updateParamDict:params value:self.txtBirthDate.text key:@"birthdate"];
+        [self updateParamDict:params value:self.txtPhone.text key:@"cell_phone"];
+        [self updateParamDict:params value:self.btnGenderMale.selected ? @"m" : @"f" key:@"gender"];
+        if(self.btnEmail.isSelected && self.btnText.isSelected) {
+            [self updateParamDict:params value:@"3" key:@"contact_method_id"];
+        }
+        else if(self.btnText.isSelected) {
+            [self updateParamDict:params value:@"2" key:@"contact_method_id"];
+        }
+        else if(self.btnEmail.isSelected) {
+            [self updateParamDict:params value:@"1" key:@"contact_method_id"];
+        }
+        else {
+            [self updateParamDict:params value:@"0" key:@"contact_method_id"];
+        }
     if([params count]){
+        AFHTTPRequestOperationManager *manager = [self getManager];
         [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
-            if([self validateResponse:responseObject]){
-                
-                // Update the user object
-                
-                
+            if([self validateResponse:responseObject])
+            {
                 UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                 [self.navigationController setViewControllers:@[myController] animated:TRUE];
                 
+            } else {
+                [self handleServerErrorUnableToContact];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);

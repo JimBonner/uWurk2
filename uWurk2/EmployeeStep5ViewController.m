@@ -45,6 +45,8 @@
     self.viewExpTip.layer.cornerRadius = 10;
     self.viewNoExpTip.layer.cornerRadius = 10;
     
+    [self saveStepNumber:5 completion:^(NSInteger result) { }];
+    
     self.performExperienceInit = YES;
 }
 
@@ -70,7 +72,8 @@
         self.params = [[NSMutableDictionary alloc]init];
         NSArray *expArray = [self.appDelegate.user objectForKey:@"experience"];
         NSDictionary *expDict = nil;
-        if([expArray count] > 0) {
+        if([expArray count] > 0)
+        {
             expDict = [expArray objectAtIndex:0];
             [self.params setObject:[expDict objectForKey:@"id"] forKey:self.expId];
             [self.btnIndustry setTitle:[expDict objectForKey:@"industry"] forState:UIControlStateNormal];
@@ -78,11 +81,9 @@
             [self.btnPosition setTitle:[expDict objectForKey:@"position"] forState:UIControlStateNormal];
             [self.btnPosition setTag:[[expDict objectForKey:@"position_id"]intValue]];
             [self.txtCompany  setText:[expDict objectForKey:@"company"]];
-            if([self.appDelegate.user objectForKey:@"has_experience"]) {
-                    self.btnExperienceNo.selected = YES;
-                } else {
-                    self.btnExperienceYes.selected = YES;
-                }
+            
+            [self.btnExperienceYes setSelected:YES];
+
             if([[expDict objectForKey:@"status"] intValue] == 1) {
                 self.btnCurrentJob.selected = TRUE;
             }
@@ -99,6 +100,7 @@
                 self.btnOver2Year.selected = TRUE;
             }
         } else {
+            [self.btnExperienceNo setSelected:YES];
             [self.params setObject:@"" forKey:self.expId];
             [self restoreScreenData];
         }
@@ -251,17 +253,7 @@
             [Error appendString:@"\n\nJob Length"];
         }
         if ((Error.length) > 50) {
-            UIAlertController * alert = [UIAlertController
-                                         alertControllerWithTitle:@"Oops!"
-                                         message:Error
-                                         preferredStyle:UIAlertControllerStyleActionSheet];
-            [alert addAction:[UIAlertAction
-                              actionWithTitle:@"OK"
-                              style:UIAlertActionStyleDefault
-                              handler:^(UIAlertAction *action)
-                              {
-                              }]];
-            [self presentViewController:alert animated:TRUE completion:nil];
+            [self handleErrorWithMessage:Error];
             return;
         }
     }
@@ -308,7 +300,6 @@
         [self.params setObjectOrNil:@"" forKey:@"position2"];
         [self.params setObjectOrNil:@"" forKey:@"other_position"];
     }
-    [self updateParamDict:self.params value:@"5" key:@"setup_step"];
     
     if([self.params count])
     {

@@ -41,6 +41,8 @@
 {
     [super viewDidLoad];
     
+    [self saveStepNumber:3 completion:^(NSInteger result) { }];
+
     self.performLanguagesInit = YES;
 }
 
@@ -202,17 +204,7 @@
         [Error appendString:@"\n\nSelect Body Art Type"];
     }
     if ((Error.length) > 50) {
-        UIAlertController * alert = [UIAlertController
-                                     alertControllerWithTitle:@"Oops!"
-                                     message:Error
-                                     preferredStyle:UIAlertControllerStyleActionSheet];
-        [alert addAction:[UIAlertAction
-                          actionWithTitle:@"OK"
-                          style:UIAlertActionStyleDefault
-                          handler:^(UIAlertAction *action)
-                          {
-                          }]];
-        [self presentViewController:alert animated:TRUE completion:nil];
+        [self handleErrorWithMessage:Error];
     } else {
         NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
         [self updateParamDict:params value:self.btnDLYes.selected ? @"1" : @"0" key:@"has_drivers_license"];
@@ -232,7 +224,6 @@
                                   key:[NSString stringWithFormat:@"other_languages[%ld]",icnt]];
             }
         }
-        [self updateParamDict:params value:@"3" key:@"setup_step"];
         if([params count]){
             AFHTTPRequestOperationManager *manager = [self getManager];
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {

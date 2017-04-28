@@ -38,21 +38,26 @@
     NSLog(@"\nEmployee Profile Edit Preferences:\n%@",self.appDelegate.user);
 }
 
-- (IBAction)pressRemoveJob:(id)sender {
+- (IBAction)pressRemoveJob:(id)sender
+{
     
 }
-- (IBAction)pressRemoveSchool:(id)sender {
+- (IBAction)pressRemoveSchool:(id)sender
+{
 
 }
-- (IBAction)pressRemovePhoto:(id)sender {
+- (IBAction)pressRemovePhoto:(id)sender
+{
 
 }
 
-- (IBAction)changeCheckBox:(UIButton *)sender {
+- (IBAction)changeCheckBox:(UIButton *)sender
+{
     [sender setSelected:!sender.selected];
     self.btnSaveChanges.enabled = YES;
 }
-- (IBAction)pressSave:(id)sender {
+- (IBAction)pressSave:(id)sender
+{
     [self saveUserDefault: self.btnPrefRemoveJob.isSelected?@"1":@"" Key:@"prefRemoveJob"];
     [self saveUserDefault:self.btnPrefRemoveSchool.isSelected?@"1":@"" Key:@"prefRemoveSchool"];
     [self saveUserDefault:self.btnPrefRemovePhoto.isSelected?@"1":@"" Key:@"prefRemovePhoto"];

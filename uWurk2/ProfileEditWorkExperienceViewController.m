@@ -65,7 +65,7 @@
     NSString *JobStatus4;
     NSString *JobStatus5;
     NSArray *expArray = [self.appDelegate.user objectForKey:@"experience"];
-    if([expArray count] >=1) {
+    if([expArray count] >= 1) {
         self.experienceCount = @"1";
         NSDictionary *firstExpItem = [expArray objectAtIndex:0];
         if ([[firstExpItem objectForKey:@"job_length"] intValue] == 1) {
@@ -100,7 +100,7 @@
         self.viewExp1.alpha = 0;
         
     }
-    if([expArray count] >=2) {
+    if([expArray count] >= 2) {
         self.experienceCount = @"2";
         NSDictionary *secondExpItem = [expArray objectAtIndex:1];
         if ([[secondExpItem objectForKey:@"job_length"] intValue] == 1) {
@@ -134,7 +134,7 @@
         self.exp2Height.constant = 0;
         self.viewExp2.alpha = 0;
     }
-    if([expArray count] >=3) {
+    if([expArray count] >= 3) {
         self.experienceCount = @"3";
         NSDictionary *thirdExpItem = [expArray objectAtIndex:2];
         if ([[thirdExpItem objectForKey:@"job_length"] intValue] == 1) {
@@ -167,7 +167,7 @@
         self.exp3Height.constant = 0;
         self.viewExp3.alpha = 0;
     }
-    if([expArray count] >=4) {
+    if([expArray count] >= 4) {
         self.experienceCount = @"4";
         NSDictionary *fourthExpItem = [expArray objectAtIndex:3];
         if ([[fourthExpItem objectForKey:@"job_length"] intValue] == 1) {
@@ -200,7 +200,7 @@
         self.exp4Height.constant = 0;
         self.viewExp4.alpha = 0;
     }
-    if([expArray count] >=5) {
+    if([expArray count] >= 5) {
         self.btnAddExp.enabled = NO;
         NSDictionary *fifthExpItem = [expArray objectAtIndex:4];
         if ([[fifthExpItem objectForKey:@"job_length"] intValue] == 1) {
@@ -238,23 +238,15 @@
     [self.view layoutIfNeeded];
 }
 
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-
-- (IBAction)btnAddExperience:(id)sender {
+- (IBAction)btnAddExperience:(id)sender
+{
     ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
     [self.navigationController pushViewController:myController animated:TRUE];
     [myController setExpCount:self.experienceCount];
 }
-- (IBAction)pressRemove:(UIButton *)sender {
+
+- (IBAction)pressRemove:(UIButton *)sender
+{
     if (sender.tag == 0) {
         [self.params setObject:@"1" forKey:@"remove[0]"];
         [UIView animateWithDuration:.3 animations:^{
@@ -331,7 +323,8 @@
          }];
     }
 }
-- (IBAction)pressEdit:(UIButton *)sender {
+- (IBAction)pressEdit:(UIButton *)sender
+{
     if (sender.tag == 0)
     {
         ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
@@ -363,18 +356,17 @@
         [myController setExpEditCount:@"4"];
     }
 }
-- (IBAction)nextPress:(id)sender {
+- (IBAction)nextPress:(id)sender
+{
     AFHTTPRequestOperationManager *manager = [self getManager];
     if([self.params count]){
         [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"JSON: %@", responseObject);
+            NSLog(@"Employee Profile Edit Experience Json Response: %@", responseObject);
             if([self validateResponse:responseObject]){
-                
-                // Update the user object
-                
-                
                 UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                 [self.navigationController setViewControllers:@[myController] animated:TRUE];
+            } else {
+                [self handleServerErrorUnableToContact];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);

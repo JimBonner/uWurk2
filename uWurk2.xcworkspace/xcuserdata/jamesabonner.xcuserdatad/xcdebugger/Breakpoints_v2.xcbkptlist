@@ -9,45 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "uWurk2/EmployeeStep6ViewController.m"
-            timestampString = "514581173.689994"
+            filePath = "uWurk2/ProfileEditStep1ViewController.m"
+            timestampString = "515042662.986038"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "250"
-            endingLineNumber = "250"
-            landmarkName = "-savePhotoDataToDbms"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "uWurk2/LoginViewController.m"
-            timestampString = "514777894.968745"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "310"
-            endingLineNumber = "310"
-            landmarkName = "-loginWithUser:password:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "uWurk2/BaseViewController.m"
-            timestampString = "514923159.071323"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "287"
-            endingLineNumber = "287"
-            landmarkName = "-saveProfileComplete:"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "-changeSave:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

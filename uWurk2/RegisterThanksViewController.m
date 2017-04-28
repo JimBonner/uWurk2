@@ -48,11 +48,17 @@
 
 - (IBAction)pressTryAgain:(id)sender
 {
+    [sender setAlpha:0.2];
     [self getProfileDataFromDbmsWithCompletion:^(NSInteger result) {
         if(result == 1) {
+            [sender setAlpha:1.0];
             if([[self.appDelegate.user objectForKey:@"status"]integerValue] == 1) {
                 [self dismissViewControllerAnimated:YES completion:nil];
-            }}}];
+            }
+        } else {
+            [sender setAlpha:1.0];
+        }
+    }];
 }
 
 - (IBAction)pressLogout:(id)sender

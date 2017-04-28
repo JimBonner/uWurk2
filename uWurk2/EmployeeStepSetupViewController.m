@@ -35,10 +35,6 @@
     self.viewSteps.layer.cornerRadius = 5;
 //    self.viewSteps.layer.masksToBounds = YES;
 }
-//-(void)viewWillDisappear:(BOOL)animated {
-//    [super viewWillDisappear:animated];
-//    [self logout];
-//}
 
 - (IBAction)pressGo:(id)sender {
     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup1"];

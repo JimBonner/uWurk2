@@ -43,6 +43,8 @@
 {
     [super viewDidLoad];
     
+    [self saveStepNumber:4 completion:^(NSInteger result) { }];
+    
     self.performEducationInit = YES;
 }
 
@@ -480,17 +482,7 @@
         [Error appendString:@"\n\nSelect School"];
     }
     if ((Error.length) > 50) {
-        UIAlertController * alert = [UIAlertController
-                                     alertControllerWithTitle:@"Oops!"
-                                     message:Error
-                                     preferredStyle:UIAlertControllerStyleActionSheet];
-        [alert addAction:[UIAlertAction
-                          actionWithTitle:@"OK"
-                          style:UIAlertActionStyleDefault
-                          handler:^(UIAlertAction *action)
-                          {
-                          }]];
-        [self presentViewController:alert animated:TRUE completion:nil];
+        [self handleErrorWithMessage:Error];
     } else {
         if (self.btnHighSchool.isSelected){
             [self updateParamDict:self.params value:@"high_school" key:@"school_level[0]"];
@@ -521,7 +513,6 @@
         [self updateParamDict:self.params value:@"" key:@"other_location[0]"];
         [self updateParamDict:self.params value:@"" key:@"other_school[0]"];
         [self updateParamDict:self.params value:@"0" key:@"remove[0]"];
-        [self updateParamDict:self.params value:@"4" key:@"setup_step"];
         if([self.params count]){
             AFHTTPRequestOperationManager *manager = [self getManager];
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params

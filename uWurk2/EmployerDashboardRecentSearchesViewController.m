@@ -31,7 +31,6 @@
     AFHTTPRequestOperationManager *manager = [self getManager];
     
     [manager GET:@"http://uwurk.tscserver.com/api/v1/recent_searches" parameters: nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
         self.json = [responseObject objectForKey:@"rows"];
         [self.tableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

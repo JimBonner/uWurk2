@@ -31,12 +31,12 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightBodyArt;
 @property (weak, nonatomic) IBOutlet UIView *viewCool;
 
-
 @end
 
 @implementation ProfileEditStep3ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     //    self.constraintBdyArtToTop.constant = self.constraintBdyArtToTop.constant;
     //    self.constraintApplyToBdyArt.priority = 500;
@@ -46,11 +46,13 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
 }
 
--(void) viewWillAppear:(BOOL)animated{
+-(void) viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     
     NSLog(@"\nEmployee Profile Edit Step 3:\n%@",self.appDelegate.user);
@@ -107,7 +109,7 @@
         NSString *displayString = @"";
         for(NSDictionary *dict in languages) {
             [self.langDict setObject:[dict objectForKey:@"description"] forKey:[dict objectForKey:@"id"]];
-            if([displayString length] >0) {
+            if([displayString length] > 0) {
                 displayString = [displayString stringByAppendingString:@", "];
             }
             displayString = [displayString stringByAppendingString:[dict objectForKey:@"description"]];
@@ -117,21 +119,11 @@
     if ([self.lblLanguages.text length] > 0) {
         [self.addLanguage setTitle:@"Modify Languages" forState:UIControlStateNormal];
     }
-    
 }
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
-- (IBAction)addLanguagePress:(id)sender {
+- (IBAction)addLanguagePress:(id)sender
+{
     ListMultiSelectorTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ListMultiSelector"];
-    
     
     [myController setParameters:nil];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/languages"];
@@ -146,15 +138,18 @@
     
 }
 
--(void) SelectionMade:(NSMutableDictionary *)dict displayString:(NSString *)displayString {
+-(void) SelectionMade:(NSMutableDictionary *)dict displayString:(NSString *)displayString
+{
     self.lblLanguages.text = displayString;
     self.langDict = dict;
 }
 
 
-- (IBAction)changeCheckBox:(UIButton *)sender {
+- (IBAction)changeCheckBox:(UIButton *)sender
+{
     [sender setSelected:!sender.selected];
 }
+
 - (IBAction)pressYesBdyArt:(id)sender {
     self.heightBodyArt.constant = 333;
     [UIView animateWithDuration:.3 animations:^{
@@ -170,7 +165,9 @@
      }];
     
 }
-- (IBAction)pressNoBdyArt:(id)sender {
+
+- (IBAction)pressNoBdyArt:(id)sender
+{
     self.btnEarGauges.selected = FALSE;
     self.btnFacialPiercing.selected = FALSE;
     self.btnTattoo.selected = FALSE;
@@ -189,10 +186,8 @@
      }];
 }
 
-
-- (IBAction)nextPress:(id)sender {
-    // Did data get updated?
-    
+- (IBAction)nextPress:(id)sender
+{
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     
@@ -225,15 +220,8 @@
         [Error appendString:@"\n\nSelect Body Art Type"];
     }
     if ((Error.length) > 50) {
-        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"OOPS!"
-                                                         message:Error
-                                                        delegate:self
-                                               cancelButtonTitle:@"OK"
-                                               otherButtonTitles: nil];
-        [alert show];
-    }
-    else {
-        
+        [self handleErrorWithMessage:Error];
+    } else {
         if([params count]){
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"JSON: %@", responseObject);

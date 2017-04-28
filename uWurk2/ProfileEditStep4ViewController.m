@@ -837,12 +837,7 @@
         [Error appendString:@"\n\nSelect School"];
     }
     if ((Error.length) > 50) {
-        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"OOPS!"
-                                                         message:Error
-                                                        delegate:self
-                                               cancelButtonTitle:@"OK"
-                                               otherButtonTitles: nil];
-        [alert show];
+        [self handleErrorWithMessage:Error];
     }
     else {
 

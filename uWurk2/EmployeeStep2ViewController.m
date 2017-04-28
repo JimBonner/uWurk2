@@ -25,6 +25,8 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self saveStepNumber:2 completion:^(NSInteger result) { }];
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -97,17 +99,7 @@
         [Error appendString:@"\n\nSelect Wage Type"];
     }
     if ((Error.length) > 50) {
-        UIAlertController * alert = [UIAlertController
-                                     alertControllerWithTitle:@"Oops!"
-                                     message:Error
-                                     preferredStyle:UIAlertControllerStyleActionSheet];
-        [alert addAction:[UIAlertAction
-                          actionWithTitle:@"OK"
-                          style:UIAlertActionStyleDefault
-                          handler:^(UIAlertAction *action)
-                          {
-                          }]];
-        [self presentViewController:alert animated:TRUE completion:nil];
+        [self handleErrorWithMessage:Error];
     }
     else
     {
@@ -129,7 +121,6 @@
         if([wageArray count]) {
             [params setObject:wageArray forKey:@"wage_type"];
         }
-        [self updateParamDict:params value:@"2" key:@"setup_step"];
         if([params count])
         {
             AFHTTPRequestOperationManager *manager = [self getManager];

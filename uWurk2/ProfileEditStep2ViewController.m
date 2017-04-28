@@ -304,12 +304,7 @@
         [Error appendString:@"\n\nSelect Wage Type"];
     }
     if ((Error.length) > 50) {
-        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"OOPS!"
-                                                         message:Error
-                                                        delegate:self
-                                               cancelButtonTitle:@"OK"
-                                               otherButtonTitles: nil];
-        [alert show];
+        [self handleErrorWithMessage:Error];
     }
     else {
     if([params count]){

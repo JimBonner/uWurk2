@@ -11,6 +11,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "EmployeeStepSetupViewController.h"
+#import "RegisterThanksViewController.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *btnSend;
@@ -110,7 +111,7 @@
 {
     AFHTTPRequestOperationManager *manager = [self getManager];
         [manager POST:@"http://uwurk.tscserver.com/api/v1/forgot-password" parameters:self.txtForgotPass.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"JSON: %@", responseObject);
+            NSLog(@"\nLogin Json Response:\n%@", responseObject);
             if([self validateResponse:responseObject]){
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -204,45 +205,44 @@
     AFHTTPRequestOperationManager *manager = [self getManager];
     
     [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
-        NSLog(@"String: %@", operation.responseString);
+        NSLog(@"\nLogin Json Response:\n%@", responseObject);
         if([self validateResponse:responseObject]){
-            if([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"user"]) {
-                if([[[self.appDelegate user] objectForKey:@"profile_complete"] intValue] >= 100) {
+            if([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"employee"]) {
+                if([[[self.appDelegate user] objectForKey:@"profile_complete"] intValue] >= 1) {
                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                     [self.navigationController setViewControllers:@[myController] animated:YES];
-                }
-                else {
-                    if ([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] >= 0)
+                } else {
+                    if ([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] == 0)
                     {
                         UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup"];
                         [self.navigationController pushViewController:myController animated:FALSE];
                     }
-                    if ([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] >= 1)
+                    if ([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] == 1)
                     {
                         UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup1"];
                         [self.navigationController pushViewController:myController animated:FALSE];
                     }
-                    if ([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] >= 2)
+                    if ([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] == 2)
                     {
                         UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup2"];
                         [self.navigationController pushViewController:myController animated:FALSE];
                     }
-                    if ([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] >= 3)
+                    if ([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] == 3)
                     {
                         UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup3"];
                         [self.navigationController pushViewController:myController animated:FALSE];
                     }
-                    if ([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] >= 4)
+                    if ([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] == 4)
                     {
                         UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup4"];
                         [self.navigationController pushViewController:myController animated:FALSE];
                     }
-                    if ([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] >= 5)
+                    if ([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] == 5)
                     {
                         UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup5"];
                         [self.navigationController pushViewController:myController animated:FALSE];
                     }
-                    if ([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] >= 6)
+                    if ([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] == 6)
                     {
                         UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup6"];
                         [self.navigationController pushViewController:myController animated:FALSE];
@@ -254,12 +254,11 @@
                     
                 }
             }
-            else if([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"user"]) {
-                if([[[self.appDelegate user] objectForKey:@"profile_complete"] intValue] >= 100) {
+            else if([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"employer"]) {
+                if([[[self.appDelegate user] objectForKey:@"profile_complete"] intValue] >= 1) {
                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerLanding"];
                     [self.navigationController setViewControllers:@[myController] animated:YES];
-                }
-                else {
+                } else {
                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerProfileSetup0"];
                     [self.navigationController setViewControllers:@[myController] animated:YES];
                 }
@@ -295,9 +294,8 @@
     AFHTTPRequestOperationManager *manager = [self getManagerNoAuth];
     NSDictionary *parameters = @{@"email": user,@"password": password};
     [manager POST:@"http://uwurk.tscserver.com/api/v1/login" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
-        BOOL bValid = [self validateResponse:responseObject];
-        if(!bValid) {
+        NSLog(@"\nLogin Json Response:\n %@", responseObject);
+        if(![self validateResponse:responseObject]) {
             NSString *message = [NSString stringWithFormat:@"Unable to validate login\n\n%@",[responseObject objectForKey:@"message"]];
             UIAlertController * alert = [UIAlertController
                                          alertControllerWithTitle:@"Oops!"
@@ -311,8 +309,6 @@
                               }
                               ]];
             [self presentViewController:alert animated:TRUE completion:nil];
-            return;
-            return;
         }
         if([responseObject isKindOfClass:[NSDictionary class]]){
         if([((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] != nil){
@@ -332,7 +328,6 @@
                               {
                               }]];
            [self presentViewController:alert animated:TRUE completion:nil];
-           return;
        }
     } else {
         UIAlertController * alert = [UIAlertController
@@ -346,7 +341,6 @@
                           {
                           }]];
         [self presentViewController:alert animated:TRUE completion:nil];
-        return;
     }
     
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -362,7 +356,6 @@
                           {
                           }]];
         [self presentViewController:alert animated:TRUE completion:nil];
-        return;
     }];
 }
 

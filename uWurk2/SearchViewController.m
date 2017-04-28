@@ -48,7 +48,8 @@
 
 @implementation SearchViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -453,12 +454,7 @@
         [Error appendString:@"\n\nSelect Position"];
     }
     if ((Error.length) > 50) {
-        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"OOPS!"
-                                                         message:Error
-                                                        delegate:self
-                                               cancelButtonTitle:@"OK"
-                                               otherButtonTitles: nil];
-        [alert show];
+        [self handleErrorWithMessage:Error];
     }
     else {
         if(self.btnFullTime.isSelected) {
