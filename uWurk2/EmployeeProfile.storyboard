@@ -2402,6 +2402,7 @@
                     <size key="freeformSize" width="320" height="625"/>
                     <connections>
                         <outlet property="btnAddExp" destination="jAR-wu-MPj" id="zgu-Y3-EAz"/>
+                        <outlet property="btnSaveChanges" destination="2fj-0O-SY0" id="ae7-IL-abj"/>
                         <outlet property="exp1Height" destination="AVB-uT-KRQ" id="zFp-Vf-Lj6"/>
                         <outlet property="exp2Height" destination="2Lt-B7-qUy" id="ldG-yn-D2L"/>
                         <outlet property="exp3Height" destination="Kw1-eg-2mS" id="qXu-14-yOp"/>

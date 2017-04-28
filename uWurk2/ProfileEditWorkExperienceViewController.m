@@ -30,6 +30,7 @@
 @property (strong, nonatomic) NSMutableDictionary *params;
 @property (strong, nonatomic) NSString *experienceCount;
 @property (weak, nonatomic) IBOutlet UIButton *btnAddExp;
+@property (weak, nonatomic) IBOutlet UIButton *btnSaveChanges;
 
 
 
@@ -42,10 +43,12 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -54,6 +57,9 @@
     
     self.params = [[NSMutableDictionary alloc] init];
     self.viewExpTip.layer.cornerRadius = 10;
+    
+    self.btnSaveChanges.enabled = NO;
+    
     NSString *JobLength1;
     NSString *JobLength2;
     NSString *JobLength3;
@@ -195,8 +201,7 @@
         [self.params setObject:[fourthExpItem objectForKey:@"job_length"] forKey:@"job_length[3]"];
         [self.params setObject:@"0" forKey:@"remove[3]"];
         self.lblExperience4.text = [NSString stringWithFormat:@"%@: %@, %@", JobStatus4, [fourthExpItem objectForKey:@"company"], [fourthExpItem objectForKey:@"position"]];
-    }
-    else {
+    } else {
         self.exp4Height.constant = 0;
         self.viewExp4.alpha = 0;
     }
@@ -240,6 +245,8 @@
 
 - (IBAction)btnAddExperience:(id)sender
 {
+    [self changeSave:sender];
+
     ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
     [self.navigationController pushViewController:myController animated:TRUE];
     [myController setExpCount:self.experienceCount];
@@ -247,6 +254,8 @@
 
 - (IBAction)pressRemove:(UIButton *)sender
 {
+    [self changeSave:sender];
+    
     if (sender.tag == 0) {
         [self.params setObject:@"1" forKey:@"remove[0]"];
         [UIView animateWithDuration:.3 animations:^{
@@ -325,6 +334,8 @@
 }
 - (IBAction)pressEdit:(UIButton *)sender
 {
+    [self changeSave:sender];
+    
     if (sender.tag == 0)
     {
         ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
@@ -378,6 +389,11 @@
         [self.navigationController setViewControllers:@[myController] animated:TRUE];
     }
 
+}
+
+- (IBAction)changeSave:(id)sender
+{
+    self.btnSaveChanges.enabled = YES;
 }
 
 @end

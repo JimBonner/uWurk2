@@ -287,11 +287,13 @@
 
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
-    }
+}
 
-- (void) viewWillAppear:(BOOL)animated {
+- (void) viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     NSArray *experienceArray = [self.appDelegate.user objectForKey:@"experience"];
     if ([self.expCount intValue] == 0) {
@@ -455,17 +457,18 @@
         [self.params setObject:@"0" forKey:@"remove[3]"];
     }
 }
--(void) SelectionMade {
+-(void) SelectionMade
+{
     self.btnSaveChanges.enabled = YES;
 }
 
--(IBAction)changeValue:(id)sender {
+-(IBAction)changeValue:(id)sender
+{
     self.btnSaveChanges.enabled = YES;
 }
-- (IBAction)industryPress:(id)sender {
-    
+- (IBAction)industryPress:(id)sender
+{
     ListSelectorTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ListSelector"];
-    
     
     [myController setParameters:nil];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/industries"];
@@ -479,10 +482,9 @@
     [self.navigationController pushViewController:myController animated:TRUE];
     
 }
-- (IBAction)positionPress:(id)sender {
-    
+- (IBAction)positionPress:(id)sender
+{
     ListSelectorTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ListSelector"];
-    
     
     [myController setParameters:@{@"industry_id":[self.btnIndustry titleForState:UIControlStateSelected]}];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/positions"];
@@ -497,9 +499,8 @@
     
 }
 
-- (IBAction)nextPress:(id)sender {
-    // Did data get updated?
-    
+- (IBAction)nextPress:(id)sender
+{
     AFHTTPRequestOperationManager *manager = [self getManager];
     [self.params setObject:self.txtCompany.text forKey:self.company];
     [self.params setObject:[self.btnPosition titleForState:UIControlStateSelected] forKey:self.position];
@@ -541,29 +542,26 @@
     }
     if ((Error.length) > 50) {
         [self handleErrorWithMessage:Error];
+    } else {
+        if([self.params count]){
+            [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"\nProfile Edit Step 5 - Json Response:\n%@", responseObject);
+                if([self validateResponse:responseObject]){
+                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditExperienceList"];
+                    [self.navigationController setViewControllers:@[myController] animated:YES];
+                } else {
+                    [self handleServerErrorUnableToContact];
+                }
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Error: %@", error);
+                [self handleServerErrorUnableToContact];
+            }];
+        }
+        else{
+            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditExperienceList"];
+            [self.navigationController setViewControllers:@[myController] animated:YES];
+        }
     }
-    else {
-    if([self.params count]){
-        [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"JSON: %@", responseObject);
-            if([self validateResponse:responseObject]){
-                
-                // Update the user object
-                
-                
-                UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditExperienceList"];
-                [self.navigationController setViewControllers:@[myController] animated:YES];
-            }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
-            [self handleServerErrorUnableToContact];
-        }];
-    }
-    else{
-        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditExperienceList"];
-        [self.navigationController setViewControllers:@[myController] animated:YES];
-    }
-}
 }
 
 - (void)SelectionMade:(NSString *)passThru withDict:(NSDictionary *)dict displayString:(NSString *)displayString;
