@@ -10,14 +10,19 @@
 #import "AddLocationViewController.h"
 
 @interface AddLocationViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *txtMiles;
-@property (weak, nonatomic) IBOutlet UITextField *txtZipCode;
-@property (weak, nonatomic) IBOutlet UIButton *btnSaveChanges;
+@property (weak, nonatomic) IBOutlet UITextField  *txtMiles;
+@property (weak, nonatomic) IBOutlet UITextField  *txtZipCode;
+@property (weak, nonatomic) IBOutlet UIButton     *btnSaveChanges;
 @property (retain, nonatomic) NSMutableDictionary *params;
 
 @end
 
 @implementation AddLocationViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -66,36 +71,35 @@
     }
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)changeSave:(id)sender {
+- (IBAction)changeSave:(id)sender
+{
     self.btnSaveChanges.enabled = YES;
 }
-- (IBAction)nextPress:(id)sender {
-    AFHTTPRequestOperationManager *manager = [self getManager];
+- (IBAction)nextPress:(id)sender
+{
     [self.params setObject:self.txtMiles.text forKey:self.miles];
     [self.params setObject:self.txtZipCode.text forKey:self.zipCode];
     
     if([self.params count]){
+        AFHTTPRequestOperationManager *manager = [self getManager];
         [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
             if([self validateResponse:responseObject]){
-                
-                // Update the user object
-                
-                
                 UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditStep2"];
                 [self.navigationController setViewControllers:@[myController] animated:TRUE];
-                
+            } else {
+                [self handleErrorJsonResponse:@"AddLocation"];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
             [self handleServerErrorUnableToContact];
         }];
-    }
-    else{
+    } else {
         UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditStep2"];
         [self.navigationController setViewControllers:@[myController] animated:TRUE];
     }

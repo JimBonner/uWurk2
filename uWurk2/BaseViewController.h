@@ -41,5 +41,6 @@
 - (void)handleServerErrorUnableToContact;
 - (void)handleServerErrorUnableToSaveData:(NSString *)what;
 - (void)handleErrorWithMessage:(NSString *)message;
+- (void)handleErrorJsonResponse:(NSString *)who;
 
 @end

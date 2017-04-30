@@ -90,7 +90,7 @@
                 UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                 [self.navigationController setViewControllers:@[myController] animated:YES];
             } else {
-                [self handleServerErrorUnableToContact];
+                [self handleErrorJsonResponse:@"ProfileEditBio"];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);

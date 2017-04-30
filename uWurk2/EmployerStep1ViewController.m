@@ -83,9 +83,8 @@
                 if([self validateResponse:responseObject]){
                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerProfileSetup2"];
                     [self.navigationController setViewControllers:@[myController] animated:YES];
-                    
                 } else {
-                    [self handleServerErrorUnableToContact];
+                    [self handleErrorJsonResponse:@"EmployerStep1"];
                 }
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error: %@", error);

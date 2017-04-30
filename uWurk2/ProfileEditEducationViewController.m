@@ -60,7 +60,7 @@
     NSString *SchoolStatus4;
     NSString *SchoolStatus5;
     NSArray  *eduArray = [self.appDelegate.user objectForKey:@"education"];
-    if([eduArray count] >=1) {
+    if([eduArray count] >= 1) {
         self.educationCount = @"2";
         NSDictionary *firstEduItem = [eduArray objectAtIndex:0];
         if ([[firstEduItem objectForKey:@"school_status_id"] intValue] == 1) {
@@ -82,14 +82,13 @@
         [self.params setObject:[firstEduItem objectForKey:@"other_school"] forKey:@"other_school[0]"];
         [self.params setObject:@"0" forKey:@"remove[0]"];
         self.lblEducation1.text = [NSString stringWithFormat:@"%@: %@", SchoolStatus1, [firstEduItem objectForKey:@"school"]];
-        
-    }
-    else{
+    } else {
         self.educationCount = @"1";
         self.edu1Height.constant = 0;
         self.viewEdu1.alpha = 0;
     }
-    if([eduArray count] >=2) {
+    
+    if([eduArray count] >= 2) {
         self.educationCount = @"3";
         NSDictionary *secondEduItem = [eduArray objectAtIndex:1];
         if ([[secondEduItem objectForKey:@"school_status_id"] intValue] == 1) {
@@ -111,13 +110,12 @@
         [self.params setObject:[secondEduItem objectForKey:@"other_school"] forKey:@"other_school[1]"];
         [self.params setObject:@"0" forKey:@"remove[1]"];
         self.lblEducation2.text = [NSString stringWithFormat:@"%@: %@", SchoolStatus2, [secondEduItem objectForKey:@"school"]];
-        
-    }
-    else{
+    } else {
         self.edu2Height.constant = 0;
-       self.viewEdu2.alpha = 0;
+        self.viewEdu2.alpha = 0;
     }
-    if([eduArray count] >=3) {
+    
+    if([eduArray count] >= 3) {
         self.educationCount = @"4";
         NSDictionary *thirdEduItem = [eduArray objectAtIndex:2];
         if ([[thirdEduItem objectForKey:@"school_status_id"] intValue] == 1) {
@@ -145,7 +143,8 @@
         self.edu3Height.constant = 0;
         self.viewEdu3.alpha = 0;
     }
-    if([eduArray count] >=4) {
+    
+    if([eduArray count] >= 4) {
         self.educationCount = @"5";
         NSDictionary *fourthEduItem = [eduArray objectAtIndex:3];
         if ([[fourthEduItem objectForKey:@"school_status_id"] intValue] == 1) {
@@ -214,14 +213,13 @@
         [self.params setObject:@"1" forKey:@"remove[0]"];
         [UIView animateWithDuration:.3 animations:^{
             self.viewEdu1.alpha = 0;
-            }
-         
-                         completion:^ (BOOL finished)
-         {
-             if (finished) {
-                 [UIView animateWithDuration:.3 animations:^{
-                     self.edu1Height.constant = 0;
-                     [self.view layoutIfNeeded];}];
+        }
+        completion:^ (BOOL finished)
+        {
+            if (finished) {
+                [UIView animateWithDuration:.3 animations:^{
+                    self.edu1Height.constant = 0;
+                    [self.view layoutIfNeeded];}];
              }
          }];
     }
@@ -230,13 +228,12 @@
         [UIView animateWithDuration:.3 animations:^{
             self.viewEdu2.alpha = 0;
         }
-         
-                         completion:^ (BOOL finished)
-         {
-             if (finished) {
-                 [UIView animateWithDuration:.3 animations:^{
-                     self.edu2Height.constant = 0;
-                     [self.view layoutIfNeeded];}];
+        completion:^ (BOOL finished)
+        {
+            if (finished) {
+                [UIView animateWithDuration:.3 animations:^{
+                    self.edu2Height.constant = 0;
+                    [self.view layoutIfNeeded];}];
              }
          }];
     }
@@ -245,14 +242,13 @@
         [UIView animateWithDuration:.3 animations:^{
             self.viewEdu3.alpha = 0;
         }
-         
-                         completion:^ (BOOL finished)
-         {
-             if (finished) {
-                 [UIView animateWithDuration:.3 animations:^{
-                     self.edu3Height.constant = 0;
-                     [self.view layoutIfNeeded];}];
-             }
+        completion:^ (BOOL finished)
+        {
+            if (finished) {
+                [UIView animateWithDuration:.3 animations:^{
+                    self.edu3Height.constant = 0;
+                    [self.view layoutIfNeeded];}];
+            }
          }];
     }
     if (sender.tag == 3) {
@@ -260,8 +256,7 @@
         [UIView animateWithDuration:.3 animations:^{
             self.viewEdu4.alpha = 0;
         }
-         
-                         completion:^ (BOOL finished)
+         completion:^ (BOOL finished)
          {
              if (finished) {
                  [UIView animateWithDuration:.3 animations:^{
@@ -275,8 +270,7 @@
         [UIView animateWithDuration:.3 animations:^{
             self.viewEdu5.alpha = 0;
         }
-         
-                         completion:^ (BOOL finished)
+         completion:^ (BOOL finished)
          {
              if (finished) {
                  [UIView animateWithDuration:.3 animations:^{
@@ -318,27 +312,26 @@
         [myController setEduEditCount:@"4"];
     }
 }
-- (IBAction)nextPress:(id)sender {
+- (IBAction)nextPress:(id)sender
+{
     AFHTTPRequestOperationManager *manager = [self getManager];
     if([self.params count]){
         [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
             if([self validateResponse:responseObject]){
-                
-                // Update the user object
-                
-                
                 UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                 [self.navigationController setViewControllers:@[myController] animated:TRUE];
+            } else {
+                [self handleErrorJsonResponse:@"ProfileEditEducation"];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
             [self handleServerErrorUnableToContact];
         }];
-    }
-    else{
+    } else {
         UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
         [self.navigationController setViewControllers:@[myController] animated:TRUE];
     }
 }
+
 @end

@@ -23,7 +23,8 @@
 
 @implementation ProfileEditPhotosViewController 
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
@@ -43,8 +44,8 @@
     [self.imagesCollection reloadData];
     
 }
-- (IBAction)saveChanges:(id)sender {
-    
+- (IBAction)saveChanges:(id)sender
+{
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     
@@ -56,14 +57,14 @@
         [self updateParamDict:params value:[photoDict objectForKey:@"id"] key:[NSString stringWithFormat:@"photo[%d]", i]];
     }
     
-    
-    
     [manager POST:@"http://uwurk.tscserver.com/api/v1/photos" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
             NSLog(@"String: %@", operation.responseString);
             if([self validateResponse:responseObject]){
                 [self.navigationController popViewControllerAnimated:TRUE];
+            } else {
+                [self handleErrorJsonResponse:@"ProfileEditPhotos"];
             }
         }
               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -100,7 +101,8 @@
 //    }
 //}
 
-- (void)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath willMoveToIndexPath:(NSIndexPath *)toIndexPath {
+- (void)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath willMoveToIndexPath:(NSIndexPath *)toIndexPath
+{
     //NSDictionary *photoItem = [self.photoArray objectAtIndex:fromIndexPath.row];
     id object = [self.photoArray objectAtIndex:fromIndexPath.item];
     [self.photoArray removeObjectAtIndex:fromIndexPath.item];
@@ -122,23 +124,24 @@
     float n = self.photoArray.count +1;
     int nCount = ceil(n / 2);
     
-    
     self.imageCollectionViewHeight.constant = 260 + 20  + (((nCount) * 120) + 10);
 }
 
-- (void)addBoarder:(UIImageView*)view {
+- (void)addBoarder:(UIImageView*)view
+{
     view.layer.borderColor = [UIColor colorWithWhite:1.0f alpha:1.0f].CGColor;
     view.layer.borderWidth = 2.0f; //make border 1px thick
 }
 
 #pragma mark Collection View Methods
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
     return [self.photoArray count] + 1;
 }
 
-// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
     if(indexPath.row < [self.photoArray count] ) {
         ProfileExistingPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"EmployeePhotoCell" forIndexPath:indexPath];
         if (!cell) {
@@ -167,22 +170,21 @@
     }
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
     
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
     if(indexPath.row == 0)
         return CGSizeMake(260, 260);
     else
         return CGSizeMake(120, 120);
 }
-//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-//    
-//    return UIEdgeInsetsMake(10, 20, 10, 20);
-//}
 
-- (void)addImage {
+- (void)addImage
+{
     NSLog(@"Add Image Press");
     UIImagePickerController * picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
@@ -223,15 +225,16 @@
                       }]];
     
     [self presentViewController:alert animated:YES completion:nil];
-    
 }
 
 - (void)moveItemAtIndexPath:(NSIndexPath *)indexPath
-                toIndexPath:(NSIndexPath *)newIndexPath {
+                toIndexPath:(NSIndexPath *)newIndexPath
+{
     
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
     [self dismissViewControllerAnimated:YES completion:nil];
 
     // Send photo to server
@@ -240,14 +243,13 @@
         [formData appendPartWithFileData:UIImageJPEGRepresentation([info objectForKey:@"UIImagePickerControllerOriginalImage"], 0.5) name:@"photo_file" fileName:@"photo.jpg" mimeType:@"image/jpeg"];
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
       
-        
         [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
             NSLog(@"String: %@", operation.responseString);
-            
-            
             if([self validateResponse:responseObject]){
                 [self alignUserPhotoArray];
                 [self.imagesCollection reloadData];
+            } else {
+                [self handleErrorJsonResponse:@"ProfileEditPhotos"];
             }
         }
          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -262,10 +264,9 @@
 
 }
 
-- (void)removeImage: (NSString*)photoID {
-    
+- (void)removeImage: (NSString*)photoID
+{
     if([[self getUserDefault:@"prefRemovePhoto"] intValue] == 1) {
-    
     
     UIAlertController * alert=   [UIAlertController
                                   alertControllerWithTitle:nil
@@ -289,11 +290,11 @@
                               
                               [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
                                   NSLog(@"String: %@", operation.responseString);
-                                  
-                                  
                                   if([self validateResponse:responseObject]){
                                       [self alignUserPhotoArray];
                                       [self.imagesCollection reloadData];
+                                  } else {
+                                      [self handleErrorJsonResponse:@"ProfileEditPhotos"];
                                   }
                               }
                                     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -322,8 +323,7 @@
     
     [self presentViewController:alert animated:YES completion:nil];
 
-    }
-    else {
+    } else {
         // Send photo to server
         AFHTTPRequestOperationManager *manager = [self getManager];
         
@@ -334,11 +334,11 @@
             
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
                 NSLog(@"String: %@", operation.responseString);
-                
-                
                 if([self validateResponse:responseObject]){
                     [self alignUserPhotoArray];
                     [self.imagesCollection reloadData];
+                } else {
+                    [self handleErrorJsonResponse:@"ProfileEditPhotos"];
                 }
             }
                   failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -364,7 +364,8 @@
 @end
 
 @implementation ProfileExistingPhotoCollectionViewCell
-- (IBAction)removeButtonTapped:(id)sender {
+- (IBAction)removeButtonTapped:(id)sender
+{
     [self.delegate removeImage:self.photoID];
 }
 @end
@@ -375,7 +376,8 @@
 
 @implementation ProfileAddPhotoCollectionViewCell
 
-- (IBAction)addButtonTapped:(id)sender {
+- (IBAction)addButtonTapped:(id)sender
+{
     [self.delegate addImage];
 }
 

@@ -200,9 +200,7 @@
                               UINavigationController *nav = self.navigationController;
                               [nav popToRootViewControllerAnimated:FALSE];
                               [nav pushViewController:myController animated:TRUE];
-                          }
-                          else
-                          {
+                          } else {
                               UIAlertController * alert = [UIAlertController
                                                            alertControllerWithTitle:@"Oops!"
                                                            message:[responseObject objectForKey:@"message"]

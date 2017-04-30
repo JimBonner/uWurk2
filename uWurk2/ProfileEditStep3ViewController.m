@@ -227,6 +227,8 @@
                 NSLog(@"JSON: %@", responseObject);
                 if([self validateResponse:responseObject]){
                     [self.navigationController popViewControllerAnimated:YES];
+                } else {
+                    [self handleErrorJsonResponse:@"ProfileEditStep3"];
                 }
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 [self handleServerErrorUnableToContact];

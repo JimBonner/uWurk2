@@ -140,9 +140,8 @@
             {
                 UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                 [self.navigationController setViewControllers:@[myController] animated:TRUE];
-                
             } else {
-                [self handleServerErrorUnableToContact];
+                [self handleErrorJsonResponse:@"ProfileEditStep1"];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);

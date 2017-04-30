@@ -11,6 +11,7 @@
 #import "BaseViewController.h"
 
 @interface ProfileEditStep5ViewController : BaseViewController
+
 @property (strong, nonatomic) NSString *expCount;
 @property (strong, nonatomic) NSString *expEditCount;
 @end

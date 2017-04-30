@@ -261,8 +261,7 @@
         [UIView animateWithDuration:.3 animations:^{
             self.viewExp1.alpha = 0;
         }
-         
-                         completion:^ (BOOL finished)
+         completion:^ (BOOL finished)
          {
              if (finished) {
                  [UIView animateWithDuration:.3 animations:^{
@@ -276,8 +275,7 @@
         [UIView animateWithDuration:.3 animations:^{
             self.viewExp2.alpha = 0;
         }
-         
-                         completion:^ (BOOL finished)
+         completion:^ (BOOL finished)
          {
              if (finished) {
                  [UIView animateWithDuration:.3 animations:^{
@@ -291,8 +289,7 @@
         [UIView animateWithDuration:.3 animations:^{
             self.viewExp3.alpha = 0;
         }
-         
-                         completion:^ (BOOL finished)
+         completion:^ (BOOL finished)
          {
              if (finished) {
                  [UIView animateWithDuration:.3 animations:^{
@@ -306,8 +303,7 @@
         [UIView animateWithDuration:.3 animations:^{
             self.viewExp4.alpha = 0;
         }
-         
-                         completion:^ (BOOL finished)
+         completion:^ (BOOL finished)
          {
              if (finished) {
                  [UIView animateWithDuration:.3 animations:^{
@@ -321,8 +317,7 @@
         [UIView animateWithDuration:.3 animations:^{
             self.viewExp5.alpha = 0;
         }
-         
-                         completion:^ (BOOL finished)
+         completion:^ (BOOL finished)
          {
              if (finished) {
                  [UIView animateWithDuration:.3 animations:^{
@@ -332,6 +327,7 @@
          }];
     }
 }
+
 - (IBAction)pressEdit:(UIButton *)sender
 {
     [self changeSave:sender];
@@ -377,7 +373,7 @@
                 UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                 [self.navigationController setViewControllers:@[myController] animated:TRUE];
             } else {
-                [self handleServerErrorUnableToContact];
+                [self handleErrorJsonResponse:@"ProfileEditWorkExperience"];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);

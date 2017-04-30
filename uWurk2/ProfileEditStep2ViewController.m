@@ -48,13 +48,16 @@
 
 @implementation ProfileEditStep2ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 }
+
 -(NSMutableArray *)availabiltyarray1:(NSArray *)array
 {
     return [NSMutableArray arrayWithArray:array];
 }
+
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
@@ -78,7 +81,7 @@
     self.btnRemove5.alpha = 0;
     self.btnSaveChanges.enabled = NO;
     NSArray *availabilityArray = [self.appDelegate.user objectForKey:@"availability"];
-    if([availabilityArray count] >=1) {
+    if([availabilityArray count] >= 1) {
         NSDictionary *firstAvailabilityItem = [availabilityArray objectAtIndex:0];
         [self assignValue:[[firstAvailabilityItem objectForKey:@"miles"] stringValue] control:self.txtMiles1];
         [self assignValue:[firstAvailabilityItem objectForKey:@"zip"] control:self.txtZip1];
@@ -88,7 +91,7 @@
         self.zipcount = @"zip[1]";
         
     }
-    if([availabilityArray count] >=2) {
+    if([availabilityArray count] >= 2) {
         NSDictionary *secondAvailabilityItem = [availabilityArray objectAtIndex:1];
         [self assignValue:[[secondAvailabilityItem objectForKey:@"miles"] stringValue] control:self.txtMiles2];
         [self assignValue:[secondAvailabilityItem objectForKey:@"zip"] control:self.txtZip2];
@@ -102,7 +105,7 @@
         self.milescount = @"miles[2]";
         self.zipcount = @"zip[2]";
     }
-    if([availabilityArray count] >=3) {
+    if([availabilityArray count] >= 3) {
         NSDictionary *thirdAvailabilityItem = [availabilityArray objectAtIndex:2];
         [self assignValue:[[thirdAvailabilityItem objectForKey:@"miles"] stringValue] control:self.txtMiles3];
         [self assignValue:[thirdAvailabilityItem objectForKey:@"zip"] control:self.txtZip3];
@@ -111,7 +114,7 @@
         self.milescount = @"miles[3]";
         self.zipcount = @"zip[3]";
     }
-    if([availabilityArray count] >=4) {
+    if([availabilityArray count] >= 4) {
         NSDictionary *fourthAvailabilityItem = [availabilityArray objectAtIndex:3];
         [self assignValue:[[fourthAvailabilityItem objectForKey:@"miles"] stringValue] control:self.txtMiles4];
         [self assignValue:[fourthAvailabilityItem objectForKey:@"zip"] control:self.txtZip4];
@@ -120,7 +123,7 @@
         self.milescount = @"miles[4]";
         self.zipcount = @"zip[4]";
     }
-    if([availabilityArray count] >=5) {
+    if([availabilityArray count] >= 5) {
         NSDictionary *fifthAvailabilityItem = [availabilityArray objectAtIndex:4];
         [self assignValue:[fifthAvailabilityItem objectForKey:@"miles"] control:self.txtMiles5];
         [self assignValue:[fifthAvailabilityItem objectForKey:@"zip"] control:self.txtZip5];
@@ -152,7 +155,7 @@
             self.viewLoc1.alpha = 0;
             [self.view layoutIfNeeded];}
          
-                         completion:^ (BOOL finished)
+             completion:^ (BOOL finished)
          {
              if (finished) {
                  [UIView animateWithDuration:.3 animations:^{
@@ -167,8 +170,7 @@
         [UIView animateWithDuration:.3 animations:^{
             self.viewLoc2.alpha = 0;
             [self.view layoutIfNeeded];}
-         
-                         completion:^ (BOOL finished)
+             completion:^ (BOOL finished)
          {
              if (finished) {
                  [UIView animateWithDuration:.3 animations:^{
@@ -183,8 +185,7 @@
         [UIView animateWithDuration:.3 animations:^{
             self.viewLoc3.alpha = 0;
             [self.view layoutIfNeeded];}
-         
-                         completion:^ (BOOL finished)
+             completion:^ (BOOL finished)
          {
              if (finished) {
                  [UIView animateWithDuration:.3 animations:^{
@@ -199,8 +200,7 @@
         [UIView animateWithDuration:.3 animations:^{
             self.viewLoc4.alpha = 0;
             [self.view layoutIfNeeded];}
-         
-                         completion:^ (BOOL finished)
+             completion:^ (BOOL finished)
          {
              if (finished) {
                  [UIView animateWithDuration:.3 animations:^{
@@ -267,15 +267,12 @@
 }
 - (IBAction)addLoc:(id)sender {
     AddLocationViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddLocation"];
-    [myController setZipCode:self.zipcount];
     [myController setMiles:self.milescount];
+    [myController setZipCode:self.zipcount];
     [self.navigationController pushViewController:myController animated:TRUE];
 }
-- (IBAction)nextPress:(id)sender {
-    // Did data get updated?
-    
-    AFHTTPRequestOperationManager *manager = [self getManager];
-    
+- (IBAction)nextPress:(id)sender
+{
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:self.txtMiles1.text forKey:@"miles[0]"];
     [params setObject:self.txtZip1.text forKey:@"zip[0]"];
@@ -305,28 +302,26 @@
     }
     if ((Error.length) > 50) {
         [self handleErrorWithMessage:Error];
-    }
-    else {
-    if([params count]){
-        [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"JSON: %@", responseObject);
-            if([self validateResponse:responseObject]){
-                
-                // Update the user object
-                
-                
-                UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
-                [self.navigationController setViewControllers:@[myController] animated:TRUE];
-                
-            }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [self handleServerErrorUnableToContact];
-        }];
-    }
-    else{
-        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
-        [self.navigationController setViewControllers:@[myController] animated:TRUE];
+    } else {
+        if([params count]){
+            AFHTTPRequestOperationManager *manager = [self getManager];
+            [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"JSON: %@", responseObject);
+                if([self validateResponse:responseObject]){
+                    UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
+                    [self.navigationController setViewControllers:@[myController] animated:TRUE];
+                } else {
+                    [self handleErrorJsonResponse:@"ProfileEditStep2"];
+                }
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                [self handleServerErrorUnableToContact];
+            }];
+        }
+        else{
+            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
+            [self.navigationController setViewControllers:@[myController] animated:TRUE];
+        }
     }
 }
-}
+
 @end

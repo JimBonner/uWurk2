@@ -146,14 +146,11 @@
         if([params count]){
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"JSON: %@", responseObject);
-                if([self validateResponse:responseObject]){
-                    
-                    // Update the user object
-                    
-                    
+                if([self validateResponse:responseObject]) {
                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup2"];
                     [self.navigationController pushViewController:myController animated:TRUE];
-                    
+                } else {
+                    [self handleErrorJsonResponse:@"EditEmployeeCpntactInfo"];
                 }
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error: %@", error);

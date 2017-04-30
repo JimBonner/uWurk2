@@ -310,6 +310,8 @@
                 self.performExperienceInit = YES;
                 UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup6"];
                 [self.navigationController pushViewController:myController animated:YES];
+            } else {
+                [self handleErrorJsonResponse:@"EmployeeStep5"];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);

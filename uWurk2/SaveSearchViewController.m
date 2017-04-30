@@ -41,6 +41,8 @@
             NSLog(@"JSON: %@", responseObject);
             if([self validateResponse:responseObject]){
                 [self dismissViewControllerAnimated:YES completion:nil];
+            } else {
+                [self handleErrorJsonResponse:@"SaveSearch"];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);

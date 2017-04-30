@@ -845,12 +845,10 @@
         [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
             if([self validateResponse:responseObject]){
-                
-                // Update the user object
-                
-                
                 UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditEducationList"];
                 [self.navigationController pushViewController:myController animated:TRUE];
+            } else {
+                [self handleErrorJsonResponse:@"ProfileEditStep4"];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);

@@ -130,6 +130,8 @@
                       if([self validateResponse:responseObject]){
                            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup3"];
                           [self.navigationController pushViewController:myController animated:TRUE];
+                      } else {
+                          [self handleErrorJsonResponse:@"EmployeeStep2"];
                       }
                   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                       NSLog(@"Error: %@", error);

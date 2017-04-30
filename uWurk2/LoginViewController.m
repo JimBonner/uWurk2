@@ -112,7 +112,8 @@
     AFHTTPRequestOperationManager *manager = [self getManager];
         [manager POST:@"http://uwurk.tscserver.com/api/v1/forgot-password" parameters:self.txtForgotPass.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"\nLogin Json Response:\n%@", responseObject);
-            if([self validateResponse:responseObject]){
+            if(![self validateResponse:responseObject]){
+                [self handleErrorJsonResponse:@"Login"];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
@@ -288,7 +289,6 @@
 
 - (void)loginWithUser:(NSString*)user password:(NSString*)password
 {
-    
     NSLog(@"\nLogin with user:\n%@",self.appDelegate.user);
     
     AFHTTPRequestOperationManager *manager = [self getManagerNoAuth];
@@ -421,7 +421,8 @@
                           NSLog(@"JSON: %@", responseObject);
                           BOOL bValid = [self validateResponse:responseObject];
                           if(!bValid) {
-                              
+                              [self handleErrorJsonResponse:@"Login"];
+                              return;
                           }
                           if([responseObject isKindOfClass:[NSDictionary class]]){
                               if([((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] != nil){

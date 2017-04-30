@@ -522,6 +522,8 @@
                           self.performEducationInit = YES;
                           UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup5"];
                           [self.navigationController pushViewController:myController animated:TRUE];
+                      } else {
+                          [self handleErrorJsonResponse:@"EmployeeStep4"];
                       }}
                   failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                       NSLog(@"Error: %@", error);
