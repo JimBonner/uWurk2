@@ -70,7 +70,11 @@
     NSString *JobStatus3;
     NSString *JobStatus4;
     NSString *JobStatus5;
+    
     NSArray *expArray = [self.appDelegate.user objectForKey:@"experience"];
+    
+    self.experienceCount = [@([expArray count])stringValue];
+    
     if([expArray count] >= 1) {
         self.experienceCount = @"1";
         NSDictionary *firstExpItem = [expArray objectAtIndex:0];
@@ -206,6 +210,7 @@
         self.viewExp4.alpha = 0;
     }
     if([expArray count] >= 5) {
+        self.experienceCount = @"5";
         self.btnAddExp.enabled = NO;
         NSDictionary *fifthExpItem = [expArray objectAtIndex:4];
         if ([[fifthExpItem objectForKey:@"job_length"] intValue] == 1) {
@@ -248,8 +253,9 @@
     [self changeSave:sender];
 
     ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
-    [self.navigationController pushViewController:myController animated:TRUE];
     [myController setExpCount:self.experienceCount];
+    [myController setExpEditCount:self.experienceCount];
+    [self.navigationController pushViewController:myController animated:TRUE];
 }
 
 - (IBAction)pressRemove:(UIButton *)sender
@@ -335,38 +341,39 @@
     if (sender.tag == 0)
     {
         ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
-        [self.navigationController pushViewController:myController animated:TRUE];
         [myController setExpEditCount:@"0"];
+        [self.navigationController pushViewController:myController animated:TRUE];
     }
     if (sender.tag == 1)
     {
         ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
-        [self.navigationController pushViewController:myController animated:TRUE];
         [myController setExpEditCount:@"1"];
+        [self.navigationController pushViewController:myController animated:TRUE];
     }
     if (sender.tag == 2)
     {
         ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
-        [self.navigationController pushViewController:myController animated:TRUE];
         [myController setExpEditCount:@"2"];
+        [self.navigationController pushViewController:myController animated:TRUE];
     }
     if (sender.tag == 3)
     {
         ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
-        [self.navigationController pushViewController:myController animated:TRUE];
         [myController setExpEditCount:@"3"];
+        [self.navigationController pushViewController:myController animated:TRUE];
     }
     if (sender.tag == 4)
     {
         ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
-        [self.navigationController pushViewController:myController animated:TRUE];
         [myController setExpEditCount:@"4"];
+        [self.navigationController pushViewController:myController animated:TRUE];
     }
 }
+
 - (IBAction)nextPress:(id)sender
 {
-    AFHTTPRequestOperationManager *manager = [self getManager];
-    if([self.params count]){
+    if([self.params count]) {
+        AFHTTPRequestOperationManager *manager = [self getManager];
         [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"Employee Profile Edit Experience Json Response: %@", responseObject);
             if([self validateResponse:responseObject]){

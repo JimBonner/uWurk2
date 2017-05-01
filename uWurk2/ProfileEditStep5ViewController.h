@@ -12,6 +12,9 @@
 
 @interface ProfileEditStep5ViewController : BaseViewController
 
+@property (strong, nonatomic) NSString *mode;
+
 @property (strong, nonatomic) NSString *expCount;
 @property (strong, nonatomic) NSString *expEditCount;
+
 @end
