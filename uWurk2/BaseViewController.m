@@ -27,15 +27,20 @@
     
     if ([[self.parentViewController parentViewController] isKindOfClass:[UITabBarController class]]) {
         [self.parentViewController.navigationController setNavigationBarHidden:YES];
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BackArrow_LgWhite"]
-                                                                                 style:UIBarButtonItemStylePlain
-                                                                                target:self action:@selector(goBack)];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                                 initWithImage:[UIImage imageNamed:@"BackArrow_LgWhite"]
+                                                         style:UIBarButtonItemStylePlain
+                                                        target:self
+                                                        action:@selector(goBack)];
     } else {
-        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
-                                                                                 style:self.navigationItem.backBarButtonItem.style
-                                                                                target:nil action:nil];
-        [self.navigationController.navigationBar setBackIndicatorImage:[UIImage imageNamed:@"Back Arrow White"]];
-        [self.navigationController.navigationBar setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"BackArrow_LgWhite"]];
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]
+                                                 initWithTitle:@""
+                                                         style:self.navigationItem.backBarButtonItem.style
+                                                        target:nil
+                                                        action:nil];
+        self.navigationItem.hidesBackButton = NO;
+//        [self.navigationController.navigationBar setBackIndicatorImage:[UIImage imageNamed:@"Back Arrow White"]];
+//        [self.navigationController.navigationBar setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"BackArrow_LgWhite"]];
     }
 
 }

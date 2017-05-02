@@ -38,7 +38,8 @@
 
 @implementation ProfileEditWorkExperienceViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
@@ -253,6 +254,7 @@
     [self changeSave:sender];
 
     ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
+    [myController setMode:@"add"];
     [myController setExpCount:self.experienceCount];
     [myController setExpEditCount:self.experienceCount];
     [self.navigationController pushViewController:myController animated:TRUE];
@@ -341,31 +343,36 @@
     if (sender.tag == 0)
     {
         ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
-        [myController setExpEditCount:@"0"];
+        [myController setMode:@"edit"];
+        [myController setExpEditCount:@"1"];
         [self.navigationController pushViewController:myController animated:TRUE];
     }
     if (sender.tag == 1)
     {
         ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
-        [myController setExpEditCount:@"1"];
+        [myController setMode:@"edit"];
+        [myController setExpEditCount:@"2"];
         [self.navigationController pushViewController:myController animated:TRUE];
     }
     if (sender.tag == 2)
     {
         ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
-        [myController setExpEditCount:@"2"];
+        [myController setMode:@"edit"];
+        [myController setExpEditCount:@"3"];
         [self.navigationController pushViewController:myController animated:TRUE];
     }
     if (sender.tag == 3)
     {
         ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
-        [myController setExpEditCount:@"3"];
+        [myController setMode:@"edit"];
+        [myController setExpEditCount:@"4"];
         [self.navigationController pushViewController:myController animated:TRUE];
     }
     if (sender.tag == 4)
     {
         ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
-        [myController setExpEditCount:@"4"];
+        [myController setMode:@"edit"];
+        [myController setExpEditCount:@"5"];
         [self.navigationController pushViewController:myController animated:TRUE];
     }
 }
