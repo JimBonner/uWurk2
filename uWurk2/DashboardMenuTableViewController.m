@@ -38,20 +38,21 @@
 }
 
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return [self.menuArray count];
 }
 
@@ -71,7 +72,6 @@
         cell.textLabel.text = [@"   " stringByAppendingString:[d objectForKey:@"MenuText"]];
         
     }
-    // Configure the cell...
     
     return cell;
 }
@@ -128,19 +128,19 @@
 
 #pragma mark - Table view delegate
 
-// In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-    
-///    NSDictionary *d = [self.menuArray objectAtIndex:indexPath.row];
-    
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//    Navigation logic may go here, for example:
+//    Create the next view controller.
+//    
+//    NSDictionary *d = [self.menuArray objectAtIndex:indexPath.row];
+//    
 //    Class v = NSClassFromString([d objectForKey:@"ViewController"]);
 //    UIViewController *childViewControllerNew = nil;
 //    childViewControllerNew = [[v alloc] initWithNibName:[d objectForKey:@"ViewController"] bundle:nil];
 //    
 //    [self.navigationController pushViewController:childViewControllerNew animated:TRUE];
-
+//
     [[NSNotificationCenter defaultCenter]
      postNotificationName:@"MenuNotification"
      object:[self.menuArray objectAtIndex:indexPath.row]];

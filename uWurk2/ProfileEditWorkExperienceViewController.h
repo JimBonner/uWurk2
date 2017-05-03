@@ -10,6 +10,8 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface ProfileEditWorkExperienceViewController : BaseViewController
+@interface ProfileEditWorkExperienceViewController : BaseViewController 
+
+@property BOOL performInit;
 
 @end

@@ -88,9 +88,6 @@
                     }
                 }
 
-
-            
-            
             self.json = [responseObject objectForKey:@"user"];
 //            self.profileUser = [self.json objectAtIndex:0];
                 NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -173,15 +170,21 @@
 //        NSDictionary *attributes = @{NSForegroundColorAttributeName:[UIColor colorWithRed:(153.0f/255.0f) green:(204.0f/255.0f) blue:(204.0f/255.0f) alpha:(1.0f)]};
   
 }
-- (void)didReceiveMemoryWarning {
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)pressEditProfile:(id)sender {
+
+- (IBAction)pressEditProfile:(id)sender
+{
     UITableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditStep1"];
     [self.navigationController setViewControllers:@[myController] animated:YES];
 }
-- (IBAction)pressInfo:(id)sender {
+
+- (IBAction)pressInfo:(id)sender
+{
     NSString *BodyArt;
     NSString *DriversLicense;
     NSString *Language;
@@ -277,7 +280,9 @@
          }];
     }
 }
-- (IBAction)pressBio:(id)sender {
+
+- (IBAction)pressBio:(id)sender
+{
     self.lblInfoBio.text = [self.json objectForKey:@"biography"];
     self.btnInfo.selected = TRUE;
     self.lblInfoBio.alpha = 0;
@@ -316,7 +321,9 @@
          }];
     }
 }
-- (IBAction)pressMoreEdu:(id)sender {
+
+- (IBAction)pressMoreEdu:(id)sender
+{
     NSString *SchoolStatus2;
     NSString *SchoolStatus3;
     if (self.btnEdu.isSelected ==TRUE){
@@ -392,7 +399,8 @@
     }
 }
 
-- (IBAction)pressMoreExp:(id)sender {
+- (IBAction)pressMoreExp:(id)sender
+{
     NSString *JobLength1;
     NSString *JobLength2;
     NSString *JobLength3;
@@ -512,7 +520,9 @@
          }];
     }
 }
-- (IBAction)pressFavorite:(id)sender {
+
+- (IBAction)pressFavorite:(id)sender
+{
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     if (self.btnFavorite.selected == YES) {
@@ -543,10 +553,13 @@
     }
 }
 
-- (IBAction)changeCheckBox:(UIButton *)sender {
+- (IBAction)changeCheckBox:(UIButton *)sender
+{
     [sender setSelected:!sender.selected];
 }
-- (IBAction)pressContact:(id)sender {
+
+- (IBAction)pressContact:(id)sender
+{
     ContactProfileViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ContactView"];
     [myController setParamholder:self.paramholder];
     [myController setSearchUserDict:self.searchedUserDict];

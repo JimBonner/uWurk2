@@ -11,6 +11,7 @@
 #import "ProfileEditStep5ViewController.h"
 
 @interface ProfileEditWorkExperienceViewController ()
+
 @property (weak, nonatomic) IBOutlet UILabel *lblExperience1;
 @property (weak, nonatomic) IBOutlet UILabel *lblExperience2;
 @property (weak, nonatomic) IBOutlet UILabel *lblExperience3;
@@ -32,8 +33,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnAddExp;
 @property (weak, nonatomic) IBOutlet UIButton *btnSaveChanges;
 
-
-
 @end
 
 @implementation ProfileEditWorkExperienceViewController
@@ -41,25 +40,33 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.btnSaveChanges.enabled = NO;
+    
+    self.performInit = YES;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
+    if(self. performInit) {
+        [self refreshData];
+    }
+    self.performInit = NO;
+}
+
+- (void)refreshData
+{
     NSLog(@"\nEmployee Profile Edit Experience:\n%@",self.appDelegate.user);
     
     self.params = [[NSMutableDictionary alloc] init];
     self.viewExpTip.layer.cornerRadius = 10;
-    
-    self.btnSaveChanges.enabled = NO;
     
     NSString *JobLength1;
     NSString *JobLength2;
@@ -99,11 +106,24 @@
         [self.params setObject:[firstExpItem objectForKey:@"status"] forKey:@"status[0]"];
         [self.params setObject:[firstExpItem objectForKey:@"industry_id"] forKey:@"industry[0]"];
         [self.params setObject:[firstExpItem objectForKey:@"position_id"] forKey:@"position[0]"];
+        [self.params setObject:[firstExpItem objectForKey:@"job_length"] forKey:@"job_length[0]"];
         [self.params setObject:@"" forKey:@"position2[0]"];
         [self.params setObject:@"" forKey:@"other_position[0]"];
-        [self.params setObject:[firstExpItem objectForKey:@"job_length"] forKey:@"job_length[0]"];
         [self.params setObject:@"0" forKey:@"remove[0]"];
         self.lblExperience1.text = [NSString stringWithFormat:@"%@: %@, %@", JobStatus1, [firstExpItem objectForKey:@"company"], [firstExpItem objectForKey:@"position"]];
+        self.exp1Height.constant = 80;
+        [self.view layoutIfNeeded];
+        [UIView animateWithDuration:.3 animations:^{
+            [self.view layoutIfNeeded];
+        }
+                         completion:^ (BOOL finished)
+         {
+             if (finished) {
+                 self.lblExperience1.alpha = 1;
+                 [UIView animateWithDuration:.3 animations:^{
+                 }];
+             }
+         }];
     }
     else {
         self.experienceCount = @"0";
@@ -140,6 +160,19 @@
         [self.params setObject:[secondExpItem objectForKey:@"job_length"] forKey:@"job_length[1]"];
         [self.params setObject:@"0" forKey:@"remove[1]"];
         self.lblExperience2.text = [NSString stringWithFormat:@"%@: %@, %@", JobStatus2, [secondExpItem objectForKey:@"company"], [secondExpItem objectForKey:@"position"]];
+        self.exp2Height.constant = 80;
+        [self.view layoutIfNeeded];
+        [UIView animateWithDuration:.3 animations:^{
+            [self.view layoutIfNeeded];
+        }
+                         completion:^ (BOOL finished)
+         {
+             if (finished) {
+                 self.lblExperience2.alpha = 1;
+                 [UIView animateWithDuration:.3 animations:^{
+                 }];
+             }
+         }];
     }
     else {
         self.exp2Height.constant = 0;
@@ -173,6 +206,19 @@
         [self.params setObject:[thirdExpItem objectForKey:@"job_length"] forKey:@"job_length[2]"];
         [self.params setObject:@"0" forKey:@"remove[2]"];
         self.lblExperience3.text = [NSString stringWithFormat:@"%@: %@, %@", JobStatus3, [thirdExpItem objectForKey:@"company"], [thirdExpItem objectForKey:@"position"]];
+        self.exp3Height.constant = 80;
+        [self.view layoutIfNeeded];
+        [UIView animateWithDuration:.3 animations:^{
+            [self.view layoutIfNeeded];
+        }
+                         completion:^ (BOOL finished)
+         {
+             if (finished) {
+                 self.lblExperience3.alpha = 1;
+                 [UIView animateWithDuration:.3 animations:^{
+                 }];
+             }
+         }];
     }
     else {
         self.exp3Height.constant = 0;
@@ -206,6 +252,19 @@
         [self.params setObject:[fourthExpItem objectForKey:@"job_length"] forKey:@"job_length[3]"];
         [self.params setObject:@"0" forKey:@"remove[3]"];
         self.lblExperience4.text = [NSString stringWithFormat:@"%@: %@, %@", JobStatus4, [fourthExpItem objectForKey:@"company"], [fourthExpItem objectForKey:@"position"]];
+        self.exp4Height.constant = 80;
+        [self.view layoutIfNeeded];
+        [UIView animateWithDuration:.3 animations:^{
+            [self.view layoutIfNeeded];
+        }
+                         completion:^ (BOOL finished)
+         {
+             if (finished) {
+                 self.lblExperience4.alpha = 1;
+                 [UIView animateWithDuration:.3 animations:^{
+                 }];
+             }
+         }];
     } else {
         self.exp4Height.constant = 0;
         self.viewExp4.alpha = 0;
@@ -234,14 +293,26 @@
         [self.params setObject:[fifthExpItem objectForKey:@"status"] forKey:@"status[4]"];
         [self.params setObject:[fifthExpItem objectForKey:@"industry_id"] forKey:@"industry[4]"];
         [self.params setObject:[fifthExpItem objectForKey:@"position_id"] forKey:@"position[4]"];
+        [self.params setObject:[fifthExpItem objectForKey:@"job_length"] forKey:@"job_length[4]"];
         [self.params setObject:@"" forKey:@"position2[4]"];
         [self.params setObject:@"" forKey:@"other_position[4]"];
-        [self.params setObject:[fifthExpItem objectForKey:@"job_length"] forKey:@"job_length[4]"];
         [self.params setObject:@"0" forKey:@"remove[4]"];
         self.lblExperience5.text = [NSString stringWithFormat:@"%@: %@, %@", JobStatus5, [fifthExpItem objectForKey:@"company"], [fifthExpItem objectForKey:@"position"]];
-    }
-    
-    else {
+        self.exp5Height.constant = 80;
+        [self.view layoutIfNeeded];
+        [UIView animateWithDuration:.3 animations:^{
+            [self.view layoutIfNeeded];
+        }
+                         completion:^ (BOOL finished)
+         {
+             if (finished) {
+                 self.lblExperience5.alpha = 1;
+                 [UIView animateWithDuration:.3 animations:^{
+                 }];
+             }
+         }];
+
+    } else {
         self.exp5Height.constant = 0;
         self.viewExp5.alpha = 0;
     }
@@ -251,13 +322,15 @@
 
 - (IBAction)btnAddExperience:(id)sender
 {
-    [self changeSave:sender];
-
-    ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
-    [myController setMode:@"add"];
-    [myController setExpCount:self.experienceCount];
-    [myController setExpEditCount:self.experienceCount];
-    [self.navigationController pushViewController:myController animated:TRUE];
+    if([self.experienceCount integerValue] <= 5) {
+        ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
+        [myController setDelegate:self];
+        [myController setMode:@"add"];
+        [myController setExpEditCount:self.experienceCount];
+        [self.navigationController pushViewController:myController animated:TRUE];
+    } else {
+        [self handleErrorExperienceCountExceeded];
+    }
 }
 
 - (IBAction)pressRemove:(UIButton *)sender
@@ -334,15 +407,21 @@
              }
          }];
     }
+    [self removeDeletedItems:self.params withCompletion:^(NSInteger result) {
+        if(result == 1) {
+            self.params = [[NSMutableDictionary alloc]init];
+            NSArray *expArray = [self.appDelegate.user objectForKey:@"experience"];
+            self.experienceCount = [@([expArray count])stringValue];
+            self.btnAddExp.enabled = YES;
+        }}];
 }
 
 - (IBAction)pressEdit:(UIButton *)sender
 {
-    [self changeSave:sender];
-    
     if (sender.tag == 0)
     {
         ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
+        [myController setDelegate:self];
         [myController setMode:@"edit"];
         [myController setExpEditCount:@"1"];
         [self.navigationController pushViewController:myController animated:TRUE];
@@ -350,6 +429,7 @@
     if (sender.tag == 1)
     {
         ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
+        [myController setDelegate:self];
         [myController setMode:@"edit"];
         [myController setExpEditCount:@"2"];
         [self.navigationController pushViewController:myController animated:TRUE];
@@ -357,6 +437,7 @@
     if (sender.tag == 2)
     {
         ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
+        [myController setDelegate:self];
         [myController setMode:@"edit"];
         [myController setExpEditCount:@"3"];
         [self.navigationController pushViewController:myController animated:TRUE];
@@ -364,6 +445,7 @@
     if (sender.tag == 3)
     {
         ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
+        [myController setDelegate:self];
         [myController setMode:@"edit"];
         [myController setExpEditCount:@"4"];
         [self.navigationController pushViewController:myController animated:TRUE];
@@ -371,6 +453,7 @@
     if (sender.tag == 4)
     {
         ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
+        [myController setDelegate:self];
         [myController setMode:@"edit"];
         [myController setExpEditCount:@"5"];
         [self.navigationController pushViewController:myController animated:TRUE];
@@ -383,7 +466,8 @@
         AFHTTPRequestOperationManager *manager = [self getManager];
         [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"Employee Profile Edit Experience Json Response: %@", responseObject);
-            if([self validateResponse:responseObject]){
+            self.performInit = YES;
+            if([self validateResponse:responseObject]) {
                 UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                 [self.navigationController setViewControllers:@[myController] animated:TRUE];
             } else {
@@ -393,8 +477,7 @@
             NSLog(@"Error: %@", error);
             [self handleServerErrorUnableToContact];
         }];
-    }
-    else{
+    } else {
         UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
         [self.navigationController setViewControllers:@[myController] animated:TRUE];
     }
@@ -404,6 +487,28 @@
 - (IBAction)changeSave:(id)sender
 {
     self.btnSaveChanges.enabled = YES;
+}
+
+- (void)removeDeletedItems:(NSMutableDictionary *)params withCompletion:(void(^)(NSInteger result))completion
+{
+    if([self.params count]) {
+        AFHTTPRequestOperationManager *manager = [self getManager];
+        [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"Employee Profile Edit Experience Json Response: %@", responseObject);
+            if([self validateResponse:responseObject]){
+                completion(1);
+            } else {
+                completion(0);
+                [self handleErrorJsonResponse:@"ProfileEditWorkExperience"];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            completion(0);
+            NSLog(@"Error: %@", error);
+            [self handleServerErrorUnableToContact];
+        }];
+    } else {
+        completion(1);
+    }
 }
 
 @end

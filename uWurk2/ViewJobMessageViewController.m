@@ -3,6 +3,7 @@
 //  
 //
 //  Created by Avery Bonner on 11/23/15.
+//  Copyright (c) 2017 Jim Bonner. All rights reserved.
 //
 //
 
@@ -10,6 +11,7 @@
 #import "JobInterestViewController.h"
 
 @interface ViewJobMessageViewController ()
+
 @property (weak, nonatomic) IBOutlet UILabel *txtDate;
 
 @end
@@ -31,7 +33,9 @@
     format.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:[NSTimeZone localTimeZone].secondsFromGMT];
     self.txtDate.text = [format stringFromDate:date];
 }
-- (IBAction)pressGo:(id)sender {
+
+- (IBAction)pressGo:(id)sender
+{
     NSDictionary *dict = self.MailMessagedict;
     JobInterestViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"JobInterestView"];
     [self.navigationController setViewControllers:@[myController] animated:TRUE];

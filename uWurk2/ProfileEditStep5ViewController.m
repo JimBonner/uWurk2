@@ -12,6 +12,7 @@
 #import "ListSelectorTableViewController.h"
 
 @interface ProfileEditStep5ViewController () <ListSelectorTableViewControllerProtocol>
+
 @property (weak, nonatomic) IBOutlet UIButton *btnIndustry;
 @property (weak, nonatomic) IBOutlet UIButton *btnPosition;
 @property (weak, nonatomic) IBOutlet RadioButton *btnUnderYear;
@@ -58,6 +59,12 @@
     [super viewWillAppear:animated];
     
     NSLog(@"\nEmployee Profile Edit Step 5:\n%@",self.appDelegate.user);
+    
+    if(!self.performInit) {
+        return;
+    }
+    
+    self.performInit = NO;
 
     self.params = [[NSMutableDictionary alloc] init];
 
@@ -102,6 +109,7 @@
     if ([self.expEditCount intValue] == 2) {
         NSDictionary *firstExpItem = [experienceArray objectAtIndex:0];
         [self.params setObject:[firstExpItem objectForKey:@"id"] forKey:@"exp_id[0]"];
+        [self.params setObject:@"0" forKey:@"has_no_job_experience[0]"];
         [self.params setObject:[firstExpItem objectForKey:@"company"] forKey:@"company[0]"];
         [self.params setObject:[firstExpItem objectForKey:@"status"] forKey:@"status[0]"];
         [self.params setObject:[firstExpItem objectForKey:@"industry_id"] forKey:@"industry[0]"];
@@ -113,6 +121,7 @@
         if([self.mode isEqualToString:@"add"]) {
             NSDictionary *secondExpItem = [experienceArray objectAtIndex:1];
             [self.params setObject:[secondExpItem objectForKey:@"id"] forKey:@"exp_id[1]"];
+            [self.params setObject:@"0" forKey:@"has_no_job_experience[1]"];
             [self.params setObject:[secondExpItem objectForKey:@"company"] forKey:@"company[1]"];
             [self.params setObject:[secondExpItem objectForKey:@"status"] forKey:@"status[1]"];
             [self.params setObject:[secondExpItem objectForKey:@"industry_id"] forKey:@"industry[1]"];
@@ -153,6 +162,7 @@
     if ([self.expEditCount intValue] == 3) {
         NSDictionary *firstExpItem = [experienceArray objectAtIndex:0];
         [self.params setObject:[firstExpItem objectForKey:@"id"] forKey:@"exp_id[0]"];
+        [self.params setObject:@"0" forKey:@"has_no_job_experience[0]"];
         [self.params setObject:[firstExpItem objectForKey:@"company"] forKey:@"company[0]"];
         [self.params setObject:[firstExpItem objectForKey:@"status"] forKey:@"status[0]"];
         [self.params setObject:[firstExpItem objectForKey:@"industry_id"] forKey:@"industry[0]"];
@@ -163,6 +173,7 @@
         [self.params setObject:@"0" forKey:@"remove[0]"];
         NSDictionary *secondExpItem = [experienceArray objectAtIndex:1];
         [self.params setObject:[secondExpItem objectForKey:@"id"] forKey:@"exp_id[1]"];
+        [self.params setObject:@"0" forKey:@"has_no_job_experience[1]"];
         [self.params setObject:[secondExpItem objectForKey:@"company"] forKey:@"company[1]"];
         [self.params setObject:[secondExpItem objectForKey:@"status"] forKey:@"status[1]"];
         [self.params setObject:[secondExpItem objectForKey:@"industry_id"] forKey:@"industry[1]"];
@@ -174,6 +185,7 @@
         if([self.mode isEqualToString:@"add"]) {
             NSDictionary *thirdExpItem = [experienceArray objectAtIndex:2];
             [self.params setObject:[thirdExpItem objectForKey:@"id"] forKey:@"exp_id[2]"];
+            [self.params setObject:@"0" forKey:@"has_no_job_experience[2]"];
             [self.params setObject:[thirdExpItem objectForKey:@"company"] forKey:@"company[2]"];
             [self.params setObject:[thirdExpItem objectForKey:@"status"] forKey:@"status[2]"];
             [self.params setObject:[thirdExpItem objectForKey:@"industry_id"] forKey:@"industry[2]"];
@@ -214,26 +226,29 @@
     if ([self.expEditCount intValue] == 4) {
         NSDictionary *firstExpItem = [experienceArray objectAtIndex:0];
         [self.params setObject:[firstExpItem objectForKey:@"id"] forKey:@"exp_id[0]"];
+        [self.params setObject:@"0" forKey:@"has_no_job_experience[0]"];
         [self.params setObject:[firstExpItem objectForKey:@"company"] forKey:@"company[0]"];
         [self.params setObject:[firstExpItem objectForKey:@"status"] forKey:@"status[0]"];
         [self.params setObject:[firstExpItem objectForKey:@"industry_id"] forKey:@"industry[0]"];
         [self.params setObject:[firstExpItem objectForKey:@"position_id"] forKey:@"position[0]"];
+        [self.params setObject:[firstExpItem objectForKey:@"job_length"] forKey:@"job_length[0]"];
         [self.params setObject:@"" forKey:@"position2[0]"];
         [self.params setObject:@"" forKey:@"other_position[0]"];
-        [self.params setObject:[firstExpItem objectForKey:@"job_length"] forKey:@"job_length[0]"];
         [self.params setObject:@"0" forKey:@"remove[0]"];
         NSDictionary *secondExpItem = [experienceArray objectAtIndex:1];
         [self.params setObject:[secondExpItem objectForKey:@"id"] forKey:@"exp_id[1]"];
+        [self.params setObject:@"0" forKey:@"has_no_job_experience[1]"];
         [self.params setObject:[secondExpItem objectForKey:@"company"] forKey:@"company[1]"];
         [self.params setObject:[secondExpItem objectForKey:@"status"] forKey:@"status[1]"];
         [self.params setObject:[secondExpItem objectForKey:@"industry_id"] forKey:@"industry[1]"];
         [self.params setObject:[secondExpItem objectForKey:@"position_id"] forKey:@"position[1]"];
+        [self.params setObject:[secondExpItem objectForKey:@"job_length"] forKey:@"job_length[1]"];
         [self.params setObject:@"" forKey:@"position2[1]"];
         [self.params setObject:@"" forKey:@"other_position[1]"];
-        [self.params setObject:[secondExpItem objectForKey:@"job_length"] forKey:@"job_length[1]"];
         [self.params setObject:@"0" forKey:@"remove[1]"];
         NSDictionary *thirdExpItem = [experienceArray objectAtIndex:2];
         [self.params setObject:[thirdExpItem objectForKey:@"id"] forKey:@"exp_id[2]"];
+        [self.params setObject:@"0" forKey:@"has_no_job_experience[2]"];
         [self.params setObject:[thirdExpItem objectForKey:@"company"] forKey:@"company[2]"];
         [self.params setObject:[thirdExpItem objectForKey:@"status"] forKey:@"status[2]"];
         [self.params setObject:[thirdExpItem objectForKey:@"industry_id"] forKey:@"industry[2]"];
@@ -245,6 +260,7 @@
         if([self.mode isEqualToString:@"add"]) {
             NSDictionary *fourthExpItem = [experienceArray objectAtIndex:3];
             [self.params setObject:[fourthExpItem objectForKey:@"id"] forKey:@"exp_id[3]"];
+            [self.params setObject:@"0" forKey:@"has_no_job_experience[3]"];
             [self.params setObject:[fourthExpItem objectForKey:@"company"] forKey:@"company[3]"];
             [self.params setObject:[fourthExpItem objectForKey:@"status"] forKey:@"status[3]"];
             [self.params setObject:[fourthExpItem objectForKey:@"industry_id"] forKey:@"industry[3]"];
@@ -291,54 +307,59 @@
     }
         NSDictionary *firstExpItem = [experienceArray objectAtIndex:0];
         [self.params setObject:[firstExpItem objectForKey:@"id"] forKey:@"exp_id[0]"];
+        [self.params setObject:@"0" forKey:@"has_no_job_experience[0]"];
         [self.params setObject:[firstExpItem objectForKey:@"company"] forKey:@"company[0]"];
         [self.params setObject:[firstExpItem objectForKey:@"status"] forKey:@"status[0]"];
         [self.params setObject:[firstExpItem objectForKey:@"industry_id"] forKey:@"industry[0]"];
         [self.params setObject:[firstExpItem objectForKey:@"position_id"] forKey:@"position[0]"];
+        [self.params setObject:[firstExpItem objectForKey:@"job_length"] forKey:@"job_length[0]"];
         [self.params setObject:@"" forKey:@"position2[0]"];
         [self.params setObject:@"" forKey:@"other_position[0]"];
-        [self.params setObject:[firstExpItem objectForKey:@"job_length"] forKey:@"job_length[0]"];
         [self.params setObject:@"0" forKey:@"remove[0]"];
         NSDictionary *secondExpItem = [experienceArray objectAtIndex:1];
         [self.params setObject:[secondExpItem objectForKey:@"id"] forKey:@"exp_id[1]"];
+        [self.params setObject:@"0" forKey:@"has_no_job_experience[1]"];
         [self.params setObject:[secondExpItem objectForKey:@"company"] forKey:@"company[1]"];
         [self.params setObject:[secondExpItem objectForKey:@"status"] forKey:@"status[1]"];
         [self.params setObject:[secondExpItem objectForKey:@"industry_id"] forKey:@"industry[1]"];
         [self.params setObject:[secondExpItem objectForKey:@"position_id"] forKey:@"position[1]"];
+        [self.params setObject:[secondExpItem objectForKey:@"job_length"] forKey:@"job_length[1]"];
         [self.params setObject:@"" forKey:@"position2[1]"];
         [self.params setObject:@"" forKey:@"other_position[1]"];
-        [self.params setObject:[secondExpItem objectForKey:@"job_length"] forKey:@"job_length[1]"];
         [self.params setObject:@"0" forKey:@"remove[1]"];
         NSDictionary *thirdExpItem = [experienceArray objectAtIndex:2];
         [self.params setObject:[thirdExpItem objectForKey:@"id"] forKey:@"exp_id[2]"];
+        [self.params setObject:@"0" forKey:@"has_no_job_experience[2]"];
         [self.params setObject:[thirdExpItem objectForKey:@"company"] forKey:@"company[2]"];
         [self.params setObject:[thirdExpItem objectForKey:@"status"] forKey:@"status[2]"];
         [self.params setObject:[thirdExpItem objectForKey:@"industry_id"] forKey:@"industry[2]"];
         [self.params setObject:[thirdExpItem objectForKey:@"position_id"] forKey:@"position[2]"];
+        [self.params setObject:[thirdExpItem objectForKey:@"job_length"] forKey:@"job_length[2]"];
         [self.params setObject:@"" forKey:@"position2[2]"];
         [self.params setObject:@"" forKey:@"other_position[2]"];
-        [self.params setObject:[secondExpItem objectForKey:@"job_length"] forKey:@"job_length[2]"];
         [self.params setObject:@"0" forKey:@"remove[2]"];
         NSDictionary *fourthExpItem = [experienceArray objectAtIndex:3];
         [self.params setObject:[fourthExpItem objectForKey:@"id"] forKey:@"exp_id[3]"];
+        [self.params setObject:@"0" forKey:@"has_no_job_experience[3]"];
         [self.params setObject:[fourthExpItem objectForKey:@"company"] forKey:@"company[3]"];
         [self.params setObject:[fourthExpItem objectForKey:@"status"] forKey:@"status[3]"];
         [self.params setObject:[fourthExpItem objectForKey:@"industry_id"] forKey:@"industry[3]"];
         [self.params setObject:[fourthExpItem objectForKey:@"position_id"] forKey:@"position[3]"];
+        [self.params setObject:[fourthExpItem objectForKey:@"job_length"] forKey:@"job_length[3]"];
         [self.params setObject:@"" forKey:@"position2[3]"];
         [self.params setObject:@"" forKey:@"other_position[3]"];
-        [self.params setObject:[fourthExpItem objectForKey:@"job_length"] forKey:@"job_length[3]"];
         [self.params setObject:@"0" forKey:@"remove[3]"];
         if([self.mode isEqualToString:@"add"]) {
             NSDictionary *fifthExpItem = [experienceArray objectAtIndex:4];
             [self.params setObject:[fifthExpItem objectForKey:@"id"] forKey:@"exp_id[4]"];
+            [self.params setObject:@"0" forKey:@"has_no_job_experience[4]"];
             [self.params setObject:[fifthExpItem objectForKey:@"company"] forKey:@"company[4]"];
             [self.params setObject:[fifthExpItem objectForKey:@"status"] forKey:@"status[4]"];
             [self.params setObject:[fifthExpItem objectForKey:@"industry_id"] forKey:@"industry[4]"];
             [self.params setObject:[fifthExpItem objectForKey:@"position_id"] forKey:@"position[4]"];
+            [self.params setObject:[fifthExpItem objectForKey:@"job_length"] forKey:@"job_length[4]"];
             [self.params setObject:@"" forKey:@"position2[4]"];
             [self.params setObject:@"" forKey:@"other_position[4]"];
-            [self.params setObject:[fifthExpItem objectForKey:@"job_length"] forKey:@"job_length[4]"];
             [self.params setObject:@"0" forKey:@"remove[4]"];
             [self setupAttributesForIndex:5];
             [self.params setObject:@"" forKey:self.expId];
@@ -414,11 +435,11 @@
 {
     [self.params setObject:@"0" forKey:self.noExp];
     [self.params setObject:self.txtCompany.text forKey:self.company];
+    [self.params setObject:[@(self.btnIndustry.tag)stringValue] forKey:self.industry];
     [self.params setObject:[@(self.btnPosition.tag)stringValue] forKey:self.position];
     [self.params setObject:@"" forKey:self.position2];
     [self.params setObject:@"" forKey:self.otherPosition];
     [self.params setObject:@"0" forKey:self.remove];
-    [self.params setObject:[@(self.btnIndustry.tag)stringValue] forKey:self.industry];
     if(self.btnUnderYear.isSelected) {
         [self.params setObject:@"1" forKey:self.jobLength];
     }
@@ -459,9 +480,8 @@
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"\nProfile Edit Step 5 - Json Response:\n%@", responseObject);
                 if([self validateResponse:responseObject]){
-                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditExperienceList"];
-                    [self.navigationController setViewControllers:@[myController] animated:YES];
-//                    [self.navigationController popViewControllerAnimated:YES];
+                    [self.delegate setPerformInit:YES];
+                    [self.navigationController popViewControllerAnimated:YES];
                 } else {
                     [self handleErrorJsonResponse:@"ProfileEditStep5"];
                 }
@@ -469,10 +489,8 @@
                 NSLog(@"Error: %@", error);
                 [self handleServerErrorUnableToContact];
             }];
-        }
-        else{
-            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditExperienceList"];
-            [self.navigationController setViewControllers:@[myController] animated:YES];
+        } else {
+            [self.navigationController popViewControllerAnimated:YES];
         }
     }
 }
@@ -481,7 +499,7 @@
 {
     NSString *postFix = [NSString stringWithFormat:@"[%ld]",index];
     self.expId = [NSString stringWithFormat:@"exp_id%@",postFix];
-    self.noExp = [NSString stringWithFormat:@"has_no_experience%@",postFix];
+    self.noExp = [NSString stringWithFormat:@"has_no_job_experience%@",postFix];
     self.company = [NSString stringWithFormat:@"company%@",postFix];
     self.status = [NSString stringWithFormat:@"status%@",postFix];
     self.industry = [NSString stringWithFormat:@"industry%@",postFix];
