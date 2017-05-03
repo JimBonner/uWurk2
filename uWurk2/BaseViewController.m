@@ -403,11 +403,11 @@
     [self presentViewController:alert animated:TRUE completion:nil];
 }
 
-- (void)handleErrorExperienceCountExceeded
+- (void)handleErrorCountExceeded:(NSInteger)count
 {
     UIAlertController * alert = [UIAlertController
                                  alertControllerWithTitle:@"Oops!"
-                                 message:@"You are only allowed to have 5 job experiences."
+                                 message:[NSString stringWithFormat:@"You are only allowed to have %ld entrys.",count]
                                  preferredStyle:UIAlertControllerStyleActionSheet];
     [alert addAction:[UIAlertAction
                       actionWithTitle:@"OK"

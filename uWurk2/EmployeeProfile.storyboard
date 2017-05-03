@@ -1250,6 +1250,7 @@
                         <outlet property="btnGED" destination="hDL-l0-50a" id="cwQ-mk-8mX"/>
                         <outlet property="btnGraduated" destination="TIY-h5-63w" id="fbi-Gf-qCJ"/>
                         <outlet property="btnHighSchool" destination="cWa-VF-y7s" id="8hb-rU-eub"/>
+                        <outlet property="btnSaveChanges" destination="bFa-Gs-E9R" id="X9T-Cu-Jw8"/>
                         <outlet property="btnSchool" destination="O3N-YV-k6t" id="A2r-N8-ito"/>
                         <outlet property="btnState" destination="RHK-Sd-HrK" id="fM9-zM-EZy"/>
                         <outlet property="btnTradeSchool" destination="00e-x7-cEc" id="Pho-kF-CwZ"/>
@@ -1822,6 +1823,7 @@
                     <size key="freeformSize" width="320" height="625"/>
                     <connections>
                         <outlet property="btnAddSchool" destination="eZQ-7p-THI" id="OAd-Qw-cma"/>
+                        <outlet property="btnSaveChanges" destination="5iN-t5-COP" id="6lb-fT-UF2"/>
                         <outlet property="edu1Height" destination="QX9-wz-rZ2" id="fHY-BR-B2H"/>
                         <outlet property="edu2Height" destination="xLU-r1-bBn" id="fs6-C4-vbG"/>
                         <outlet property="edu3Height" destination="Sab-sU-5WB" id="AQF-DW-GE0"/>
@@ -1842,7 +1844,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NmX-Fd-GxQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4217" y="-2002.5"/>
+            <point key="canvasLocation" x="4287" y="-2023"/>
         </scene>
         <!--Profile Edit Work Experience View Controller-->
         <scene sceneID="eIS-Uo-pS1">

@@ -12,6 +12,6 @@
 
 @interface ProfileEditEducationViewController : BaseViewController
 
-@property (strong, nonatomic) NSString *arrayCount;
+@property BOOL performInit;
 
 @end

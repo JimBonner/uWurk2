@@ -119,8 +119,9 @@
                          completion:^ (BOOL finished)
          {
              if (finished) {
-                 self.lblExperience1.alpha = 1;
                  [UIView animateWithDuration:.3 animations:^{
+                     self.lblExperience1.alpha = 1;
+                     self.viewExp1.alpha = 1;
                  }];
              }
          }];
@@ -129,7 +130,6 @@
         self.experienceCount = @"0";
         self.exp1Height.constant = 0;
         self.viewExp1.alpha = 0;
-        
     }
     if([expArray count] >= 2) {
         self.experienceCount = @"2";
@@ -168,8 +168,9 @@
                          completion:^ (BOOL finished)
          {
              if (finished) {
-                 self.lblExperience2.alpha = 1;
                  [UIView animateWithDuration:.3 animations:^{
+                     self.lblExperience2.alpha = 1;
+                     self.viewExp2.alpha = 1;
                  }];
              }
          }];
@@ -214,8 +215,9 @@
                          completion:^ (BOOL finished)
          {
              if (finished) {
-                 self.lblExperience3.alpha = 1;
                  [UIView animateWithDuration:.3 animations:^{
+                     self.lblExperience3.alpha = 1;
+                     self.viewExp3.alpha = 1;
                  }];
              }
          }];
@@ -260,8 +262,9 @@
                          completion:^ (BOOL finished)
          {
              if (finished) {
-                 self.lblExperience4.alpha = 1;
                  [UIView animateWithDuration:.3 animations:^{
+                     self.lblExperience4.alpha = 1;
+                     self.viewExp4.alpha = 1;
                  }];
              }
          }];
@@ -306,8 +309,9 @@
                          completion:^ (BOOL finished)
          {
              if (finished) {
-                 self.lblExperience5.alpha = 1;
                  [UIView animateWithDuration:.3 animations:^{
+                     self.lblExperience5.alpha = 1;
+                     self.viewExp5.alpha = 1;
                  }];
              }
          }];
@@ -329,14 +333,12 @@
         [myController setExpEditCount:self.experienceCount];
         [self.navigationController pushViewController:myController animated:TRUE];
     } else {
-        [self handleErrorExperienceCountExceeded];
+        [self handleErrorCountExceeded:5];
     }
 }
 
 - (IBAction)pressRemove:(UIButton *)sender
 {
-    [self changeSave:sender];
-    
     if (sender.tag == 0) {
         [self.params setObject:@"1" forKey:@"remove[0]"];
         [UIView animateWithDuration:.3 animations:^{
@@ -413,6 +415,7 @@
             NSArray *expArray = [self.appDelegate.user objectForKey:@"experience"];
             self.experienceCount = [@([expArray count])stringValue];
             self.btnAddExp.enabled = YES;
+            [self changeSave:sender];
         }}];
 }
 

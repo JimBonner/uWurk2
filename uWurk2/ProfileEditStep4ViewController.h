@@ -10,7 +10,11 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface ProfileEditStep4ViewController : BaseViewController
-@property (strong, nonatomic) NSString *educount;
+@interface ProfileEditStep4ViewController : BaseViewController 
+
+@property (strong, nonatomic) id delegate;
+@property (strong, nonatomic) NSString *mode;
+
 @property (strong, nonatomic) NSString *eduEditCount;
+
 @end

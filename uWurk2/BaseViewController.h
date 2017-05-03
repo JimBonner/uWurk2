@@ -42,6 +42,6 @@
 - (void)handleServerErrorUnableToSaveData:(NSString *)what;
 - (void)handleErrorWithMessage:(NSString *)message;
 - (void)handleErrorJsonResponse:(NSString *)who;
-- (void)handleErrorExperienceCountExceeded;
+- (void)handleErrorCountExceeded:(NSInteger)count;
 
 @end

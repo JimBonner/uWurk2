@@ -63,7 +63,6 @@
     if(!self.performInit) {
         return;
     }
-    
     self.performInit = NO;
 
     self.params = [[NSMutableDictionary alloc] init];
@@ -74,7 +73,6 @@
         [self setupAttributesForIndex:0];
         [self.params setObject:@"" forKey:self.expId];
     }
-    
     if ([self.expEditCount intValue] == 1) {
         if([self.mode isEqualToString:@"add"]) {
             [self setupAttributesForIndex:1];
@@ -105,7 +103,6 @@
             }
         }
     }
-    
     if ([self.expEditCount intValue] == 2) {
         NSDictionary *firstExpItem = [experienceArray objectAtIndex:0];
         [self.params setObject:[firstExpItem objectForKey:@"id"] forKey:@"exp_id[0]"];
@@ -297,7 +294,6 @@
             }
         }
     }
-    
     if ([self.expEditCount intValue] == 5) {
         if([self.mode isEqualToString:@"add"]) {
         [self setupAttributesForIndex:4];
@@ -479,7 +475,8 @@
             AFHTTPRequestOperationManager *manager = [self getManager];
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"\nProfile Edit Step 5 - Json Response:\n%@", responseObject);
-                if([self validateResponse:responseObject]){
+                if([self validateResponse:responseObject]) {
+                    self.performInit = YES;
                     [self.delegate setPerformInit:YES];
                     [self.navigationController popViewControllerAnimated:YES];
                 } else {

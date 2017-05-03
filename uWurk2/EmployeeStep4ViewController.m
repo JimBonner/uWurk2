@@ -381,6 +381,7 @@
         [myController setBUseArray:TRUE];
     }
     
+    [myController setDelegate:self];
     [myController setDisplay:@"description"];
     [myController setKey:@"id"];
     [myController setDelegate:self];

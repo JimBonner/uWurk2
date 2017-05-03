@@ -31,6 +31,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightBodyArt;
 @property (weak, nonatomic) IBOutlet UIView *viewCool;
 
+@property BOOL performInit;
+
 @end
 
 @implementation ProfileEditStep3ViewController
@@ -38,12 +40,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //    self.constraintBdyArtToTop.constant = self.constraintBdyArtToTop.constant;
-    //    self.constraintApplyToBdyArt.priority = 500;
-    //    self.constraintBdyArtToTop.priority = 999;
-    //    self.viewBdyArt.alpha = 0;
-    //    [self.view layoutIfNeeded];
-    // Do any additional setup after loading the view.
+
+    self.performInit = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,53 +53,67 @@
 {
     [super viewWillAppear:animated];
     
+    if(self. performInit) {
+        [self refreshData];
+    }
+    self.performInit = NO;
+}
+
+- (void)refreshData
+{
     NSLog(@"\nEmployee Profile Edit Step 3:\n%@",self.appDelegate.user);
 
     self.viewCool.layer.cornerRadius = 5;
-    if([[self.appDelegate.user objectForKey:@"has_drivers_license"] intValue] == 1)
+    
+    if([[self.appDelegate.user objectForKey:@"has_drivers_license"] intValue] == 1) {
         self.btnDLYes.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"has_drivers_license"] intValue] == 0)
+    } else if([[self.appDelegate.user objectForKey:@"has_drivers_license"] intValue] == 0) {
         self.btnDLNo.selected = TRUE;
-    if([[self.appDelegate.user objectForKey:@"is_veteran"] intValue] == 1)
+    }
+    if([[self.appDelegate.user objectForKey:@"is_veteran"] intValue] == 1) {
         self.btnVetYes.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"is_veteran"] intValue] == 0)
+    } else if([[self.appDelegate.user objectForKey:@"is_veteran"] intValue] == 0) {
         self.btnVetNo.selected = TRUE;
-    if([[self.appDelegate.user objectForKey:@"fluent_english"] intValue] == 1)
+    }
+    if([[self.appDelegate.user objectForKey:@"fluent_english"] intValue] == 1) {
         self.btnFluEngYes.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"fluent_english"] intValue] == 0)
+    } else if([[self.appDelegate.user objectForKey:@"fluent_english"] intValue] == 0) {
         self.btnFluEngNo.selected = TRUE;
-    if([[self.appDelegate.user objectForKey:@"has_body_art"] intValue] == 1)
+    }
+    if([[self.appDelegate.user objectForKey:@"has_body_art"] intValue] == 1) {
         self.btnBodyArtYes.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"has_body_art"] intValue] == 0)
+    } else if([[self.appDelegate.user objectForKey:@"has_body_art"] intValue] == 0) {
         self.btnBodyArtNo.selected = TRUE;
-    if([[self.appDelegate.user objectForKey:@"has_ear_gauge"] intValue] == 1)
+    }
+    if([[self.appDelegate.user objectForKey:@"has_ear_gauge"] intValue] == 1) {
         self.btnEarGauges.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"has_ear_gauge"] intValue] == 0)
+    } else if([[self.appDelegate.user objectForKey:@"has_ear_gauge"] intValue] == 0) {
         self.btnEarGauges.selected = FALSE;
-    if([[self.appDelegate.user objectForKey:@"has_facial_piercing"] intValue] == 1)
+    }
+    if([[self.appDelegate.user objectForKey:@"has_facial_piercing"] intValue] == 1) {
         self.btnFacialPiercing.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"has_facial_piercing"] intValue] == 0)
+    } else if([[self.appDelegate.user objectForKey:@"has_facial_piercing"] intValue] == 0) {
         self.btnFacialPiercing.selected = FALSE;
-    if([[self.appDelegate.user objectForKey:@"has_tattoo"] intValue] == 1)
+    }
+    if([[self.appDelegate.user objectForKey:@"has_tattoo"] intValue] == 1) {
         self.btnTattoo.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"has_tattoo"] intValue] == 0)
+    } else if([[self.appDelegate.user objectForKey:@"has_tattoo"] intValue] == 0) {
         self.btnTattoo.selected = FALSE;
-    if([[self.appDelegate.user objectForKey:@"has_tongue_piercing"] intValue] == 1)
+    }
+    if([[self.appDelegate.user objectForKey:@"has_tongue_piercing"] intValue] == 1) {
         self.btnTonguePiercing.selected = TRUE;
-    else if([[self.appDelegate.user objectForKey:@"has_tongue_piercing"] intValue] == 0)
+    } else if([[self.appDelegate.user objectForKey:@"has_tongue_piercing"] intValue] == 0) {
         self.btnTonguePiercing.selected = FALSE;
+    }
     if (self.btnBodyArtYes.isSelected) {
         self.heightBodyArt.constant = 333;
         self.viewBdyArt.alpha = 1;
         [self.view layoutIfNeeded];
-    }
-    else if (self.btnBodyArtNo.isSelected)
-    {
+    } else if (self.btnBodyArtNo.isSelected) {
         self.heightBodyArt.constant = 0;
         self.viewBdyArt.alpha = 0;
         [self.view layoutIfNeeded];
     }
-    
     if(!self.langDict) {
         self.langDict = [NSMutableDictionary new];
 
@@ -133,9 +145,9 @@
     [myController setJsonGroup:@"languages"];
     [myController setTitle:@"Lauguages"];
     [myController setIdDict:self.langDict];
+    [myController setPassThru:@"languages"];
     
     [self.navigationController pushViewController:myController animated:TRUE];
-    
 }
 
 -(void) SelectionMade:(NSMutableDictionary *)dict displayString:(NSString *)displayString
@@ -144,13 +156,13 @@
     self.langDict = dict;
 }
 
-
 - (IBAction)changeCheckBox:(UIButton *)sender
 {
     [sender setSelected:!sender.selected];
 }
 
-- (IBAction)pressYesBdyArt:(id)sender {
+- (IBAction)pressYesBdyArt:(id)sender
+{
     self.heightBodyArt.constant = 333;
     [UIView animateWithDuration:.3 animations:^{
         [self.view layoutIfNeeded];}
@@ -163,7 +175,6 @@
                  [self.view layoutIfNeeded];}];
          }
      }];
-    
 }
 
 - (IBAction)pressNoBdyArt:(id)sender
@@ -188,7 +199,6 @@
 
 - (IBAction)nextPress:(id)sender
 {
-    AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     
     [self updateParamDict:params value:self.btnDLYes.selected ? @"1" : @"0" key:@"has_drivers_license"];
@@ -223,6 +233,7 @@
         [self handleErrorWithMessage:Error];
     } else {
         if([params count]){
+            AFHTTPRequestOperationManager *manager = [self getManager];
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"JSON: %@", responseObject);
                 if([self validateResponse:responseObject]){
@@ -240,7 +251,7 @@
     }
 }
 
-- (void)SelectionMade:(NSString *)passThru withDict:(NSDictionary *)dict displayString:(NSString *)displayString;
+- (void)SelectionMade:(NSString *)passThru withDict:(NSDictionary *)dict displayString:(NSString *)displayString
 {
     
 }
