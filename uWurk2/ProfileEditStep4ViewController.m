@@ -33,15 +33,15 @@
 @property (weak, nonatomic) IBOutlet UIView *viewAttended;
 @property (weak, nonatomic) IBOutlet UIButton *btnSaveChanges;
 @property (strong, nonatomic) NSMutableDictionary *params;
-@property (weak, nonatomic) NSString *eduId;
-@property (weak, nonatomic) NSString *schoolLevel;
-@property (weak, nonatomic) NSString *status;
-@property (weak, nonatomic) NSString *state;
-@property (weak, nonatomic) NSString *otherLocation;
-@property (weak, nonatomic) NSString *town;
-@property (weak, nonatomic) NSString *school;
-@property (weak, nonatomic) NSString *otherSchool;
-@property (weak, nonatomic) NSString *remove;
+@property (strong, nonatomic) NSString *eduId;
+@property (strong, nonatomic) NSString *schoolLevel;
+@property (strong, nonatomic) NSString *status;
+@property (strong, nonatomic) NSString *state;
+@property (strong, nonatomic) NSString *otherLocation;
+@property (strong, nonatomic) NSString *town;
+@property (strong, nonatomic) NSString *school;
+@property (strong, nonatomic) NSString *otherSchool;
+@property (strong, nonatomic) NSString *remove;
 
 @property BOOL performInit;
 
@@ -61,11 +61,16 @@
     [super viewWillAppear:animated];
 
     if(!self.performInit) {
-        return;
+        [self refreshData];
     }
     self.performInit = NO;
-   
+    
     self.btnSaveChanges.enabled = NO;
+}
+
+- (void)refreshData
+{
+    self.performInit = NO;
     
     NSLog(@"\nEmployee Profile Edit Step 4:\n%@",self.appDelegate.user);
     
@@ -457,19 +462,20 @@
 
 - (IBAction)highSchoolPress:(id)sender
 {
+    if(sender) {
+        self.btnEnrolled.selected = FALSE;
+        self.btnGraduated.selected = FALSE;
+        self.btnAttended.selected = FALSE;
+    }
+    [self.btnGraduated setTitle:@"Graduated" forState:UIControlStateNormal];
     self.cnstrntCityHeight.constant = 30;
+    self.heightAttended.constant = 100;
     self.cnstrntSchoolHeight.constant = 200;
     self.cnstrntStatusHeight.constant = 165;
     [UIView animateWithDuration:.3 animations:^{
         [self.btnSchool setTitle:@"Select School" forState:UIControlStateNormal];
-        [self.btnSchool setTitle:@"Select School" forState:UIControlStateHighlighted];
-        [self.btnSchool setTitle:@"Select School" forState:UIControlStateSelected];
         [self.btnCity setTitle:@"Select City" forState:UIControlStateNormal];
-        [self.btnCity setTitle:@"Select City" forState:UIControlStateHighlighted];
-        [self.btnCity setTitle:@"Select City" forState:UIControlStateSelected];
         [self.btnState setTitle:@"Select State" forState:UIControlStateNormal];
-        [self.btnState setTitle:@"Select State" forState:UIControlStateHighlighted];
-        [self.btnState setTitle:@"Select State" forState:UIControlStateSelected];
         [self.view layoutIfNeeded];}
                      completion:^ (BOOL finished)
      {
@@ -478,25 +484,27 @@
                  self.btnCity.alpha = 1;
                  self.viewSchool.alpha = 1;
                  self.viewCurrent.alpha = 1;
+                 self.viewAttended.alpha = 1;
                  [self.view layoutIfNeeded];}];
          }
      }];
 }
 - (IBAction)collegePress:(id)sender
 {
+    if(sender) {
+        self.btnEnrolled.selected = FALSE;
+        self.btnGraduated.selected = FALSE;
+        self.btnAttended.selected = FALSE;
+    }
+    [self.btnGraduated setTitle:@"Graduated" forState:UIControlStateNormal];
     self.btnCity.alpha = 0;
+    self.heightAttended.constant = 100;
     self.cnstrntSchoolHeight.constant = 200;
     self.cnstrntStatusHeight.constant = 165;
     [UIView animateWithDuration:.3 animations:^{
         [self.btnSchool setTitle:@"Select School" forState:UIControlStateNormal];
-        [self.btnSchool setTitle:@"Select School" forState:UIControlStateHighlighted];
-        [self.btnSchool setTitle:@"Select School" forState:UIControlStateSelected];
         [self.btnCity setTitle:@"Select City" forState:UIControlStateNormal];
-        [self.btnCity setTitle:@"Select City" forState:UIControlStateHighlighted];
-        [self.btnCity setTitle:@"Select City" forState:UIControlStateSelected];
         [self.btnState setTitle:@"Select State" forState:UIControlStateNormal];
-        [self.btnState setTitle:@"Select State" forState:UIControlStateHighlighted];
-        [self.btnState setTitle:@"Select State" forState:UIControlStateSelected];
         [self.view layoutIfNeeded];}
                      completion:^ (BOOL finished)
      {
@@ -505,6 +513,7 @@
                  self.cnstrntCityHeight.constant = 0;
                  self.viewSchool.alpha = 1;
                  self.viewCurrent.alpha = 1;
+                 self.viewAttended.alpha = 1;
                  [self.view layoutIfNeeded];}];
          }
      }];
@@ -512,19 +521,20 @@
 
 - (IBAction)tradeSchoolPress:(id)sender
 {
+    if(sender) {
+        self.btnEnrolled.selected = FALSE;
+        self.btnGraduated.selected = FALSE;
+        self.btnAttended.selected = FALSE;
+    }
+    [self.btnGraduated setTitle:@"Graduated" forState:UIControlStateNormal];
     self.btnCity.alpha = 0;
+    self.heightAttended.constant = 100;
     self.cnstrntSchoolHeight.constant = 200;
     self.cnstrntStatusHeight.constant = 165;
     [UIView animateWithDuration:.3 animations:^{
         [self.btnSchool setTitle:@"Select School" forState:UIControlStateNormal];
-        [self.btnSchool setTitle:@"Select School" forState:UIControlStateHighlighted];
-        [self.btnSchool setTitle:@"Select School" forState:UIControlStateSelected];
         [self.btnCity setTitle:@"Select City" forState:UIControlStateNormal];
-        [self.btnCity setTitle:@"Select City" forState:UIControlStateHighlighted];
-        [self.btnCity setTitle:@"Select City" forState:UIControlStateSelected];
         [self.btnState setTitle:@"Select State" forState:UIControlStateNormal];
-        [self.btnState setTitle:@"Select State" forState:UIControlStateHighlighted];
-        [self.btnState setTitle:@"Select State" forState:UIControlStateSelected];
         [self.view layoutIfNeeded];}
                      completion:^ (BOOL finished)
      {
@@ -533,6 +543,7 @@
                  self.cnstrntCityHeight.constant = 0;
                  self.viewSchool.alpha = 1;
                  self.viewCurrent.alpha = 1;
+                 self.viewAttended.alpha = 1;
                  [self.view layoutIfNeeded];}];
          }
      }];
@@ -540,25 +551,26 @@
 
 - (IBAction)gedPress:(id)sender
 {
+    if(sender) {
+        self.btnEnrolled.selected = FALSE;
+        self.btnGraduated.selected = FALSE;
+        self.btnAttended.selected = FALSE;
+    }
+    [self.btnGraduated setTitle:@"Completed GED" forState:UIControlStateNormal];
     self.viewSchool.alpha = 0;
-    self.viewCurrent.alpha = 0;
+    self.viewAttended.alpha = 0;
     [UIView animateWithDuration:.3 animations:^{
         [self.btnSchool setTitle:@"Select School" forState:UIControlStateNormal];
-        [self.btnSchool setTitle:@"Select School" forState:UIControlStateHighlighted];
-        [self.btnSchool setTitle:@"Select School" forState:UIControlStateSelected];
         [self.btnCity setTitle:@"Select City" forState:UIControlStateNormal];
-        [self.btnCity setTitle:@"Select City" forState:UIControlStateHighlighted];
-        [self.btnCity setTitle:@"Select City" forState:UIControlStateSelected];
         [self.btnState setTitle:@"Select State" forState:UIControlStateNormal];
         [self.btnState setTitle:@"Select State" forState:UIControlStateHighlighted];
-        [self.btnState setTitle:@"Select State" forState:UIControlStateSelected];
         [self.view layoutIfNeeded];}
                      completion:^ (BOOL finished)
      {
          if (finished) {
              [UIView animateWithDuration:.3 animations:^{
+                 self.heightAttended.constant = 0;
                  self.cnstrntSchoolHeight.constant = 0;
-                 self.cnstrntStatusHeight.constant = 0;
                  [self.view layoutIfNeeded];}];
          }
      }];
@@ -629,105 +641,114 @@
     [myController setParameters:nil];
     
     if (self.btnHighSchool.isSelected) {
-        [myController setUrl:@"http://uwurk.tscserver.com/user/form-options"];
+        [myController setUrl:@"http://uwurk.tscserver.com/api/v1/highschools"];
         [myController setParameters:@{@"city":[self.btnCity titleForState:UIControlStateNormal]}];
-        myController.bPost = TRUE;
-        myController.bUseArray = TRUE;
+        [myController setJsonGroup:@"highschools"];
+        [myController setBPost:FALSE];
+        [myController setBUseArray:TRUE];
     }
     if (self.btnCollege.isSelected) {
-        [myController setUrl:@"http://uwurk.tscserver.com/user/form-options"];
+        [myController setUrl:@"http://uwurk.tscserver.com/api/v1/colleges"];
         [myController setParameters:@{@"state":[@(self.btnState.tag)stringValue]}];
-        myController.bPost = TRUE;
-        myController.bUseArray = TRUE;
+        [myController setJsonGroup:@"colleges"];
+        [myController setBPost:FALSE];
+        [myController setBUseArray:TRUE];
     }
     if (self.btnTradeSchool.isSelected) {
-        [myController setUrl:@"http://uwurk.tscserver.com/api/v1/form-options"];
+        [myController setUrl:@"http://uwurk.tscserver.com/api/v1/trade_schools"];
         [myController setParameters:@{@"state":[@(self.btnState.tag)stringValue]}];
+        [myController setJsonGroup:@"schools"];
+        [myController setBPost:FALSE];
+        [myController setBUseArray:TRUE];
     }
     
     [myController setDelegate:self];
     [myController setDisplay:@"description"];
     [myController setKey:@"id"];
     [myController setDelegate:self];
-    [myController setJsonGroup:@"options"];
     [myController setSender:self.btnSchool];
     [myController setTitle:@"Schools"];
-    [myController setPassThru:@"schools"];
+    [myController setPassThru:@"selected_school"];
     
     [self.navigationController pushViewController:myController animated:TRUE];
 }
 
 - (IBAction)nextPress:(id)sender
 {
-    if (self.btnHighSchool.isSelected) {
-        [self.params setObject:@"high_school" forKey:self.schoolLevel];
-        [self.params setObject:[self.btnCity titleForState:UIControlStateNormal] forKey:self.town];
-    } else {
-        [self.params setObject:@"" forKey:self.town];
-    }
-    if (self.btnCollege.isSelected) {
-        [self.params setObject:@"college" forKey:self.schoolLevel];
-    }
-    if (self.btnTradeSchool.isSelected) {
-        [self.params setObject:@"trade_school" forKey:self.schoolLevel];
-    }
-    if (self.btnGED.isSelected) {
-        [self.params setObject:@"GED" forKey:self.schoolLevel];
-    }
-    if(self.btnEnrolled.isSelected) {
-        [self.params setObject:@"1" forKey:self.status];
-    }
-    if(self.btnGraduated.isSelected) {
-        [self.params setObject:@"2" forKey:self.status];
-    }
-    if(self.btnAttended.isSelected) {
-        [self.params setObject:@"3" forKey:self.status];
-    }
-    [self.params setObject:[@([self.btnState  tag])stringValue] forKey:self.state];
-    [self.params setObject:[@([self.btnSchool tag])stringValue] forKey:self.school];
-    [self.params setObject:@"" forKey:self.otherLocation];
-    [self.params setObject:@"" forKey:self.otherSchool];
-    [self.params setObject:@"0" forKey:self.remove];
-    
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
-    if (self.btnHighSchool.selected == NO && self.btnCollege.selected == NO && self.btnTradeSchool.selected == NO && self.btnGED.selected == NO) {
+    if (!self.btnHighSchool.isSelected &&
+        !self.btnCollege.isSelected &&
+        !self.btnTradeSchool.isSelected &&
+        !self.btnGED.isSelected) {
         [Error appendString:@"\n\nSchool"];
     }
-    if (self.btnEnrolled.selected == NO && self.btnGraduated.selected == NO && self.btnAttended.selected == NO) {
+    if (!self.btnEnrolled.isSelected &&
+        !self.btnGraduated.isSelected &&
+        !self.btnAttended.isSelected) {
         [Error appendString:@"\n\nCurrent Status"];
     }
-    if ((self.btnHighSchool.selected == YES && [[self.btnState titleForState:UIControlStateNormal]isEqualToString:@"Select State"])|| (self.btnCollege.selected == YES && [[self.btnState titleForState:UIControlStateNormal]isEqualToString:@"Select State"]) || (self.btnTradeSchool.selected == YES && [[self.btnState titleForState:UIControlStateNormal]isEqualToString:@"Select State"])) {
+    if ((self.btnHighSchool.isSelected && [self.btnState.titleLabel.text isEqualToString:@"Select State"]) || (self.btnCollege.isSelected && [self.btnState.titleLabel.text isEqualToString:@"Select State"]) ||
+        (self.btnTradeSchool.isSelected && [self.btnState.titleLabel.text isEqualToString:@"Select State"])) {
         [Error appendString:@"\n\nSelect State"];
     }
-    if (self.btnHighSchool.selected == YES && [[self.btnCity titleForState:UIControlStateNormal]isEqualToString:@"Select City"]) {
+    if (self.btnHighSchool.isSelected && [self.btnCity.titleLabel.text isEqualToString:@"Select City"]) {
         [Error appendString:@"\n\nSelect City"];
     }
-    if ((self.btnHighSchool.selected == YES && [[self.btnSchool titleForState:UIControlStateNormal]isEqualToString:@"Select School"])|| (self.btnCollege.selected == YES && [[self.btnSchool titleForState:UIControlStateNormal]isEqualToString:@"Select School"]) || (self.btnTradeSchool.selected == YES && [[self.btnSchool titleForState:UIControlStateNormal]isEqualToString:@"Select School"])) {
+    if ((self.btnHighSchool.isSelected && [self.btnSchool.titleLabel.text isEqualToString:@"Select School"]) ||
+        (self.btnCollege.isSelected && [self.btnSchool.titleLabel.text isEqualToString:@"Select School"]) ||
+        (self.btnTradeSchool.isSelected && [self.btnSchool.titleLabel.text isEqualToString:@"Select School"])) {
         [Error appendString:@"\n\nSelect School"];
     }
     if ((Error.length) > 50) {
         [self handleErrorWithMessage:Error];
     } else {
-        if([self.params count]) {
-            AFHTTPRequestOperationManager *manager = [self getManager];
-            [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"JSON: %@", responseObject);
-                if([self validateResponse:responseObject]) {
-                    self.performInit = YES;
-                    [self.delegate setPerformInit:YES];
-                    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditEducationList"];
-                    [self.navigationController pushViewController:myController animated:TRUE];
-                } else {
-                    [self handleErrorJsonResponse:@"ProfileEditStep4"];
-                }
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"Error: %@", error);
-                [self handleServerErrorUnableToContact];
-            }];
+        if (self.btnHighSchool.isSelected){
+            [self updateParamDict:self.params value:@"high_school" key:self.schoolLevel];
+            [self updateParamDict:self.params value:self.btnCity.titleLabel.text key:self.town];
         }
-        else{
-            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditEducationList"];
+        if (self.btnCollege.isSelected){
+            [self updateParamDict:self.params value:@"college" key:self.schoolLevel];
+        }
+        if (self.btnTradeSchool.isSelected){
+            [self updateParamDict:self.params value:@"trade_school" key:self.schoolLevel];
+        }
+        if (self.btnGED.isSelected){
+            [self updateParamDict:self.params value:@"GED" key:self.schoolLevel];
+        }
+        if(self.btnEnrolled.isSelected) {
+            [self updateParamDict:self.params value:@"1" key:self.status];
+        }
+        if(self.btnGraduated.isSelected) {
+            [self updateParamDict:self.params value:@"2" key:self.status];
+        }
+        if(self.btnAttended.isSelected) {
+            [self updateParamDict:self.params value:@"3" key:self.status];
+        }
+        [self updateParamDict:self.params value:[@(self.btnState.tag)stringValue] key:self.state];
+        [self updateParamDict:self.params value:[@(self.btnSchool.tag)stringValue] key:self.school];
+        [self updateParamDict:self.params value:@"" key:self.otherLocation];
+        [self updateParamDict:self.params value:@"" key:self.otherSchool];
+        [self updateParamDict:self.params value:@"0" key:self.remove];
+        if([self.params count]){
+            AFHTTPRequestOperationManager *manager = [self getManager];
+            [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params
+                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                      NSLog(@"\nEmployee Step 4 - Json Response: %@", responseObject);
+                      if([self validateResponse:responseObject]){
+                          [self setPerformInit:YES];
+                          [self.delegate setPerformInit:YES];
+                          [self refreshData];
+                          [self.navigationController popViewControllerAnimated:YES];
+                      } else {
+                          [self handleErrorJsonResponse:@"EmployeeStep4"];
+                      }}
+                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                      NSLog(@"Error: %@", error);
+                      [self handleServerErrorUnableToContact];
+                  }];
+        } else {
+            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup5"];
             [self.navigationController pushViewController:myController animated:TRUE];
         }
     }
@@ -736,7 +757,7 @@
 - (void)setupAttributesForIndex:(NSInteger)index
 {
     NSString *postFix = [NSString stringWithFormat:@"[%ld]",index];
-    self.eduId = [NSString stringWithFormat:@"exp_id%@",postFix];
+    self.eduId = [NSString stringWithFormat:@"edu_id%@",postFix];
     self.schoolLevel = [NSString stringWithFormat:@"school_level%@",postFix];
     self.status = [NSString stringWithFormat:@"status%@",postFix];
     self.state = [NSString stringWithFormat:@"state%@",postFix];

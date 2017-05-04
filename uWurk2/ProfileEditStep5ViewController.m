@@ -57,14 +57,21 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    if(!self.performInit) {
+        [self refreshData];
+    }
+    self.performInit = NO;
+    
+    self.btnSaveChanges.enabled = NO;
+}
+
+- (void)refreshData
+{
+    self.performInit = NO;
     
     NSLog(@"\nEmployee Profile Edit Step 5:\n%@",self.appDelegate.user);
     
-    if(!self.performInit) {
-        return;
-    }
-    self.performInit = NO;
-
     self.params = [[NSMutableDictionary alloc] init];
 
     NSArray *experienceArray = [self.appDelegate.user objectForKey:@"experience"];
@@ -155,7 +162,6 @@
             }
         }
     }
-    
     if ([self.expEditCount intValue] == 3) {
         NSDictionary *firstExpItem = [experienceArray objectAtIndex:0];
         [self.params setObject:[firstExpItem objectForKey:@"id"] forKey:@"exp_id[0]"];
@@ -219,7 +225,6 @@
             }
         }
     }
-    
     if ([self.expEditCount intValue] == 4) {
         NSDictionary *firstExpItem = [experienceArray objectAtIndex:0];
         [self.params setObject:[firstExpItem objectForKey:@"id"] forKey:@"exp_id[0]"];
@@ -429,28 +434,6 @@
 
 - (IBAction)nextPress:(id)sender
 {
-    [self.params setObject:@"0" forKey:self.noExp];
-    [self.params setObject:self.txtCompany.text forKey:self.company];
-    [self.params setObject:[@(self.btnIndustry.tag)stringValue] forKey:self.industry];
-    [self.params setObject:[@(self.btnPosition.tag)stringValue] forKey:self.position];
-    [self.params setObject:@"" forKey:self.position2];
-    [self.params setObject:@"" forKey:self.otherPosition];
-    [self.params setObject:@"0" forKey:self.remove];
-    if(self.btnUnderYear.isSelected) {
-        [self.params setObject:@"1" forKey:self.jobLength];
-    }
-    if(self.btnYear2Year.isSelected) {
-        [self.params setObject:@"2" forKey:self.jobLength];
-    }
-    if(self.btnOver2Year.isSelected) {
-        [self.params setObject:@"3" forKey:self.jobLength];
-    }
-    if (self.btnCurrentJob.isSelected) {
-        [self.params setObject:@"1" forKey:self.status];
-    }
-    if (self.btnPreviousJob.isSelected) {
-        [self.params setObject:@"2" forKey:self.status];
-    }
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
     if (self.txtCompany.text.length == 0) {
@@ -471,13 +454,36 @@
     if ((Error.length) > 50) {
         [self handleErrorWithMessage:Error];
     } else {
+        [self.params setObject:@"0" forKey:self.noExp];
+        [self.params setObject:self.txtCompany.text forKey:self.company];
+        [self.params setObject:[@(self.btnIndustry.tag)stringValue] forKey:self.industry];
+        [self.params setObject:[@(self.btnPosition.tag)stringValue] forKey:self.position];
+        [self.params setObject:@"" forKey:self.position2];
+        [self.params setObject:@"" forKey:self.otherPosition];
+        [self.params setObject:@"0" forKey:self.remove];
+        if(self.btnUnderYear.isSelected) {
+            [self.params setObject:@"1" forKey:self.jobLength];
+        }
+        if(self.btnYear2Year.isSelected) {
+            [self.params setObject:@"2" forKey:self.jobLength];
+        }
+        if(self.btnOver2Year.isSelected) {
+            [self.params setObject:@"3" forKey:self.jobLength];
+        }
+        if (self.btnCurrentJob.isSelected) {
+            [self.params setObject:@"1" forKey:self.status];
+        }
+        if (self.btnPreviousJob.isSelected) {
+            [self.params setObject:@"2" forKey:self.status];
+        }
         if([self.params count]){
             AFHTTPRequestOperationManager *manager = [self getManager];
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"\nProfile Edit Step 5 - Json Response:\n%@", responseObject);
                 if([self validateResponse:responseObject]) {
-                    self.performInit = YES;
+                    [self setPerformInit:YES];
                     [self.delegate setPerformInit:YES];
+                    [self refreshData];
                     [self.navigationController popViewControllerAnimated:YES];
                 } else {
                     [self handleErrorJsonResponse:@"ProfileEditStep5"];

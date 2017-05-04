@@ -191,7 +191,6 @@
         [self.btnCity setTitle:@"Select City" forState:UIControlStateNormal];
         [self.btnState setTitle:@"Select State" forState:UIControlStateNormal];
         [self.view layoutIfNeeded];}
-     
                      completion:^ (BOOL finished)
      {
          if (finished) {
@@ -287,7 +286,7 @@
      {
          if (finished) {
              [UIView animateWithDuration:.3 animations:^{
-                self.heightAttended.constant = 0;
+                 self.heightAttended.constant = 0;
                  self.cnstrntSchoolHeight.constant = 0;
                  [self.view layoutIfNeeded];}];
          }
@@ -488,8 +487,6 @@
         if (self.btnHighSchool.isSelected){
             [self updateParamDict:self.params value:@"high_school" key:@"school_level[0]"];
             [self updateParamDict:self.params value:self.btnCity.titleLabel.text key:@"town[0]"];
-        } else {
-            [self updateParamDict:self.params value:@"" key:@"town[0]"];
         }
         if (self.btnCollege.isSelected){
             [self updateParamDict:self.params value:@"college" key:@"school_level[0]"];

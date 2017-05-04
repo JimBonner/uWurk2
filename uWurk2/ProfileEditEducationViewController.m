@@ -62,9 +62,13 @@
 
 - (void)refreshData
 {
+    
+    self.performInit = NO;
+    
     NSLog(@"\nEmployee Profile Edit Education:\n%@",self.appDelegate.user);
     
     self.params = [[NSMutableDictionary alloc] init];
+    
     self.viewEduTip.layer.cornerRadius = 10;
     
     NSString *SchoolStatus1;
@@ -235,7 +239,7 @@
         self.edu4Height.constant = 0;
         self.viewEdu4.alpha = 0;
     }
-    if([eduArray count] >=5) {
+    if([eduArray count] >= 5) {
         self.educationCount = @"5";
         self.btnAddSchool.enabled = NO;
         NSDictionary *fifthEduItem = [eduArray objectAtIndex:4];
@@ -370,7 +374,8 @@
             NSArray *expArray = [self.appDelegate.user objectForKey:@"education"];
             self.educationCount = [@([expArray count])stringValue];
             self.btnAddSchool.enabled = YES;
-            [self changeSave:sender];
+            self.performInit = YES;
+            [self refreshData];
         }}];
 }
 
@@ -419,8 +424,8 @@
 }
 - (IBAction)nextPress:(id)sender
 {
-    AFHTTPRequestOperationManager *manager = [self getManager];
     if([self.params count]){
+        AFHTTPRequestOperationManager *manager = [self getManager];
         [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"Employee Profile Edit Education Json Response: %@", responseObject);
             NSLog(@"JSON: %@", responseObject);
@@ -450,19 +455,20 @@
 {
     if([self.params count]) {
         AFHTTPRequestOperationManager *manager = [self getManager];
-        [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"Employee Profile Edit Education Json Response: %@", responseObject);
-            if([self validateResponse:responseObject]){
-                completion(1);
-            } else {
+        [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  NSLog(@"Employee Profile Edit Education Json Response: %@", responseObject);
+                  if([self validateResponse:responseObject]){
+                      completion(1);
+                  } else {
+                      completion(0);
+                      [self handleErrorJsonResponse:@"ProfileEditEducation"];
+                  }
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 completion(0);
-                [self handleErrorJsonResponse:@"ProfileEditEducation"];
-            }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            completion(0);
-            NSLog(@"Error: %@", error);
-            [self handleServerErrorUnableToContact];
-        }];
+                NSLog(@"Error: %@", error);
+                [self handleServerErrorUnableToContact];
+            }];
     } else {
         completion(1);
     }

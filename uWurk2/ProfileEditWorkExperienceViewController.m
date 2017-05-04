@@ -415,7 +415,8 @@
             NSArray *expArray = [self.appDelegate.user objectForKey:@"experience"];
             self.experienceCount = [@([expArray count])stringValue];
             self.btnAddExp.enabled = YES;
-            [self changeSave:sender];
+            self.performInit = YES;
+            [self refreshData];
         }}];
 }
 
