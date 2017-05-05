@@ -64,8 +64,6 @@
         [self refreshData];
     }
     self.performInit = NO;
-    
-    self.btnSaveChanges.enabled = NO;
 }
 
 - (void)refreshData
@@ -127,7 +125,7 @@
     if ([self.eduEditCount intValue] == 2) {
         NSDictionary *firstEduItem = [eduArray objectAtIndex:0];
         [self.params setObject:[firstEduItem objectForKey:@"id"] forKey:@"edu_id[0]"];
-        [self.params setObject:[firstEduItem objectForKey:@"school"] forKey:@"school_level[0]"];
+        [self.params setObject:[firstEduItem objectForKey:@"type"] forKey:@"school_level[0]"];
         [self.params setObject:[firstEduItem objectForKey:@"school_status_id"] forKey:@"status[0]"];
         [self.params setObject:[firstEduItem objectForKey:@"state_id"] forKey:@"state[0]"];
         [self.params setObject:[firstEduItem objectForKey:@"other_location"] forKey:@"other_location[0]"];
@@ -138,7 +136,7 @@
         if([self.mode isEqualToString:@"add"]) {
             NSDictionary *secondEduItem = [eduArray objectAtIndex:1];
             [self.params setObject:[secondEduItem objectForKey:@"id"] forKey:@"edu_id[1]"];
-            [self.params setObject:[secondEduItem objectForKey:@"school"] forKey:@"school_level[1]"];
+            [self.params setObject:[secondEduItem objectForKey:@"type"] forKey:@"school_level[1]"];
             [self.params setObject:[secondEduItem objectForKey:@"school_status_id"] forKey:@"status[1]"];
             [self.params setObject:[secondEduItem objectForKey:@"state_id"] forKey:@"state[1]"];
             [self.params setObject:[secondEduItem objectForKey:@"other_location"] forKey:@"other_location[1]"];
@@ -195,7 +193,7 @@
     if ([self.eduEditCount intValue] == 3) {
         NSDictionary *firstEduItem = [eduArray objectAtIndex:0];
         [self.params setObject:[firstEduItem objectForKey:@"id"] forKey:@"edu_id[0]"];
-        [self.params setObject:[firstEduItem objectForKey:@"school"] forKey:@"school_level[0]"];
+        [self.params setObject:[firstEduItem objectForKey:@"type"] forKey:@"school_level[0]"];
         [self.params setObject:[firstEduItem objectForKey:@"school_status_id"] forKey:@"status[0]"];
         [self.params setObject:[firstEduItem objectForKey:@"state_id"] forKey:@"state[0]"];
         [self.params setObject:[firstEduItem objectForKey:@"other_location"] forKey:@"other_location[0]"];
@@ -205,7 +203,7 @@
         [self.params setObject:@"0" forKey:@"remove[0]"];
         NSDictionary *secondEduItem = [eduArray objectAtIndex:1];
         [self.params setObject:[secondEduItem objectForKey:@"id"] forKey:@"edu_id[1]"];
-        [self.params setObject:[secondEduItem objectForKey:@"school"] forKey:@"school_level[1]"];
+        [self.params setObject:[secondEduItem objectForKey:@"type"] forKey:@"school_level[1]"];
         [self.params setObject:[secondEduItem objectForKey:@"school_status_id"] forKey:@"status[1]"];
         [self.params setObject:[secondEduItem objectForKey:@"state_id"] forKey:@"state[1]"];
         [self.params setObject:[secondEduItem objectForKey:@"other_location"] forKey:@"other_location[1]"];
@@ -216,11 +214,11 @@
         if([self.mode isEqualToString:@"add"]) {
             NSDictionary *thirdEduItem = [eduArray objectAtIndex:2];
             [self.params setObject:[thirdEduItem objectForKey:@"id"] forKey:@"edu_id[2]"];
-            [self.params setObject:[thirdEduItem objectForKey:@"school"] forKey:@"school_level[2]"];
-            [self.params setObject:[thirdEduItem objectForKey:@"school_status_id"] forKey:@"status2"];
-            [self.params setObject:[thirdEduItem objectForKey:@"state_id"] forKey:@"state2"];
+            [self.params setObject:[thirdEduItem objectForKey:@"type"] forKey:@"school_level[2]"];
+            [self.params setObject:[thirdEduItem objectForKey:@"school_status_id"] forKey:@"status[2]"];
+            [self.params setObject:[thirdEduItem objectForKey:@"state_id"] forKey:@"state[2]"];
             [self.params setObject:[thirdEduItem objectForKey:@"other_location"] forKey:@"other_location[2]"];
-            [self.params setObject:[thirdEduItem objectForKey:@"city"] forKey:@"town2"];
+            [self.params setObject:[thirdEduItem objectForKey:@"city"] forKey:@"town[2]"];
             [self.params setObject:[thirdEduItem objectForKey:@"school_id"] forKey:@"school[2]"];
             [self.params setObject:[thirdEduItem objectForKey:@"other_school"] forKey:@"other_school[2]"];
             [self.params setObject:@"0" forKey:@"remove[2]"];
@@ -271,7 +269,7 @@
     if ([self.eduEditCount intValue] == 4) {
         NSDictionary *firstEduItem = [eduArray objectAtIndex:0];
         [self.params setObject:[firstEduItem objectForKey:@"id"] forKey:@"edu_id[0]"];
-        [self.params setObject:[firstEduItem objectForKey:@"school"] forKey:@"school_level[0]"];
+        [self.params setObject:[firstEduItem objectForKey:@"type"] forKey:@"school_level[0]"];
         [self.params setObject:[firstEduItem objectForKey:@"school_status_id"] forKey:@"status[0]"];
         [self.params setObject:[firstEduItem objectForKey:@"state_id"] forKey:@"state[0]"];
         [self.params setObject:[firstEduItem objectForKey:@"other_location"] forKey:@"other_location[0]"];
@@ -281,7 +279,7 @@
         [self.params setObject:@"0" forKey:@"remove[0]"];
         NSDictionary *secondEduItem = [eduArray objectAtIndex:1];
         [self.params setObject:[secondEduItem objectForKey:@"id"] forKey:@"edu_id[1]"];
-        [self.params setObject:[secondEduItem objectForKey:@"school"] forKey:@"school_level[1]"];
+        [self.params setObject:[secondEduItem objectForKey:@"type"] forKey:@"school_level[1]"];
         [self.params setObject:[secondEduItem objectForKey:@"school_status_id"] forKey:@"status[1]"];
         [self.params setObject:[secondEduItem objectForKey:@"state_id"] forKey:@"state[1]"];
         [self.params setObject:[secondEduItem objectForKey:@"other_location"] forKey:@"other_location[1]"];
@@ -291,7 +289,7 @@
         [self.params setObject:@"0" forKey:@"remove[1]"];
         NSDictionary *thirdEduItem = [eduArray objectAtIndex:2];
         [self.params setObject:[thirdEduItem objectForKey:@"id"] forKey:@"edu_id[2]"];
-        [self.params setObject:[thirdEduItem objectForKey:@"school"] forKey:@"school_level[2]"];
+        [self.params setObject:[thirdEduItem objectForKey:@"type"] forKey:@"school_level[2]"];
         [self.params setObject:[thirdEduItem objectForKey:@"school_status_id"] forKey:@"status[2]"];
         [self.params setObject:[thirdEduItem objectForKey:@"state_id"] forKey:@"state[2]"];
         [self.params setObject:[thirdEduItem objectForKey:@"other_location"] forKey:@"other_location[2]"];
@@ -302,7 +300,7 @@
         if([self.mode isEqualToString:@"add"]) {
             NSDictionary *fourthEduItem = [eduArray objectAtIndex:3];
             [self.params setObject:[fourthEduItem objectForKey:@"id"] forKey:@"edu_id[3]"];
-            [self.params setObject:[fourthEduItem objectForKey:@"school"] forKey:@"school_level[3]"];
+            [self.params setObject:[fourthEduItem objectForKey:@"type"] forKey:@"school_level[3]"];
             [self.params setObject:[fourthEduItem objectForKey:@"school_status_id"] forKey:@"status[3]"];
             [self.params setObject:[fourthEduItem objectForKey:@"state_id"] forKey:@"state[3]"];
             [self.params setObject:[fourthEduItem objectForKey:@"other_location"] forKey:@"other_location[3]"];
@@ -355,7 +353,7 @@
     if ([self.eduEditCount intValue] == 5) {
         NSDictionary *firstEduItem = [eduArray objectAtIndex:0];
         [self.params setObject:[firstEduItem objectForKey:@"id"] forKey:@"edu_id[0]"];
-        [self.params setObject:[firstEduItem objectForKey:@"school"] forKey:@"school_level[0]"];
+        [self.params setObject:[firstEduItem objectForKey:@"type"] forKey:@"school_level[0]"];
         [self.params setObject:[firstEduItem objectForKey:@"school_status_id"] forKey:@"status[0]"];
         [self.params setObject:[firstEduItem objectForKey:@"state_id"] forKey:@"state[0]"];
         [self.params setObject:[firstEduItem objectForKey:@"other_location"] forKey:@"other_location[0]"];
@@ -365,7 +363,7 @@
         [self.params setObject:@"0" forKey:@"remove[0]"];
         NSDictionary *secondEduItem = [eduArray objectAtIndex:1];
         [self.params setObject:[secondEduItem objectForKey:@"id"] forKey:@"edu_id[1]"];
-        [self.params setObject:[secondEduItem objectForKey:@"school"] forKey:@"school_level[1]"];
+        [self.params setObject:[secondEduItem objectForKey:@"type"] forKey:@"school_level[1]"];
         [self.params setObject:[secondEduItem objectForKey:@"school_status_id"] forKey:@"status[1]"];
         [self.params setObject:[secondEduItem objectForKey:@"state_id"] forKey:@"state[1]"];
         [self.params setObject:[secondEduItem objectForKey:@"other_location"] forKey:@"other_location[1]"];
@@ -375,7 +373,7 @@
         [self.params setObject:@"0" forKey:@"remove[1]"];
         NSDictionary *thirdEduItem = [eduArray objectAtIndex:2];
         [self.params setObject:[thirdEduItem objectForKey:@"id"] forKey:@"edu_id[2]"];
-        [self.params setObject:[thirdEduItem objectForKey:@"school"] forKey:@"school_level[2]"];
+        [self.params setObject:[thirdEduItem objectForKey:@"type"] forKey:@"school_level[2]"];
         [self.params setObject:[thirdEduItem objectForKey:@"school_status_id"] forKey:@"status[2]"];
         [self.params setObject:[thirdEduItem objectForKey:@"state_id"] forKey:@"state[2]"];
         [self.params setObject:[thirdEduItem objectForKey:@"other_location"] forKey:@"other_location[2]"];
@@ -385,7 +383,7 @@
         [self.params setObject:@"0" forKey:@"remove[2]"];
         NSDictionary *fourthEduItem = [eduArray objectAtIndex:3];
         [self.params setObject:[fourthEduItem objectForKey:@"id"] forKey:@"edu_id[3]"];
-        [self.params setObject:[fourthEduItem objectForKey:@"school"] forKey:@"school_level[3]"];
+        [self.params setObject:[fourthEduItem objectForKey:@"type"] forKey:@"school_level[3]"];
         [self.params setObject:[fourthEduItem objectForKey:@"school_status_id"] forKey:@"status[3]"];
         [self.params setObject:[fourthEduItem objectForKey:@"state_id"] forKey:@"state[3]"];
         [self.params setObject:[fourthEduItem objectForKey:@"other_location"] forKey:@"other_location[3]"];
@@ -396,7 +394,7 @@
         if([self.mode isEqualToString:@"add"]) {
             NSDictionary *fourthEduItem = [eduArray objectAtIndex:4];
             [self.params setObject:[fourthEduItem objectForKey:@"id"] forKey:@"edu_id[4]"];
-            [self.params setObject:[fourthEduItem objectForKey:@"school"] forKey:@"school_level[4]"];
+            [self.params setObject:[fourthEduItem objectForKey:@"type"] forKey:@"school_level[4]"];
             [self.params setObject:[fourthEduItem objectForKey:@"school_status_id"] forKey:@"status[4]"];
             [self.params setObject:[fourthEduItem objectForKey:@"state_id"] forKey:@"state[4]"];
             [self.params setObject:[fourthEduItem objectForKey:@"other_location"] forKey:@"other_location[4]"];
@@ -597,8 +595,8 @@
     [myController setTitle:@"States"];
     
     [self.navigationController pushViewController:myController animated:TRUE];
-    
 }
+
 - (IBAction)cityPress:(id)sender
 {
     [self.btnSchool setTitle:@"Select School" forState:UIControlStateNormal];
@@ -706,6 +704,8 @@
         if (self.btnHighSchool.isSelected){
             [self updateParamDict:self.params value:@"high_school" key:self.schoolLevel];
             [self updateParamDict:self.params value:self.btnCity.titleLabel.text key:self.town];
+        } else {
+            [self updateParamDict:self.params value:@"" key:self.town];
         }
         if (self.btnCollege.isSelected){
             [self updateParamDict:self.params value:@"college" key:self.schoolLevel];

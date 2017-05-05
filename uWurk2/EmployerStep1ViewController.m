@@ -33,7 +33,7 @@
     
     NSLog(@"\nEmployer Step 1 - Init:\n%@",self.appDelegate.user);
     
-    [self assignValue:[self getUserDefault:@"email"] control:self.txtEmail];
+    [self assignValue:[self.appDelegate.user objectForKey:@"email"] control:self.txtEmail];
     [self.txtEmail setAlpha:0.2];
     [self.txtEmail setEnabled:NO];
     [self assignValue:@"" control:self.txtPassword];

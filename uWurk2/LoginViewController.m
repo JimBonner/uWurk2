@@ -50,6 +50,7 @@
     
     NSLog(@"\nLogin - Init:\n%@",self.appDelegate.user);
 
+    [self.txtEmail setText:[self getUserDefault:@"email"]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -317,45 +318,15 @@
             //                [self saveUserDefault:[((NSDictionary*)responseObject) valueForKey:@"user_type"] Key:@"user_type"];
             [self loginWithStoredToken];
        } else {
-            UIAlertController * alert = [UIAlertController
-                                         alertControllerWithTitle:@"Oops!"
-                                         message:@"Unable to validate login"
-                                         preferredStyle:UIAlertControllerStyleActionSheet];
-            [alert addAction:[UIAlertAction
-                              actionWithTitle:@"OK"
-                              style:UIAlertActionStyleDefault
-                              handler:^(UIAlertAction *action)
-                              {
-                              }]];
-           [self presentViewController:alert animated:TRUE completion:nil];
+           [self handleErrorValidateLogin];
        }
     } else {
-        UIAlertController * alert = [UIAlertController
-                                     alertControllerWithTitle:@"Oops!"
-                                     message:@"Unable to validate login"
-                                     preferredStyle:UIAlertControllerStyleActionSheet];
-        [alert addAction:[UIAlertAction
-                          actionWithTitle:@"OK"
-                          style:UIAlertActionStyleDefault
-                          handler:^(UIAlertAction *action)
-                          {
-                          }]];
-        [self presentViewController:alert animated:TRUE completion:nil];
+        [self handleErrorValidateLogin];
     }
     
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-        UIAlertController * alert = [UIAlertController
-                                     alertControllerWithTitle:@"Oops!"
-                                     message:@"Unable to validate login"
-                                     preferredStyle:UIAlertControllerStyleActionSheet];
-        [alert addAction:[UIAlertAction
-                          actionWithTitle:@"OK"
-                          style:UIAlertActionStyleDefault
-                          handler:^(UIAlertAction *action)
-                          {
-                          }]];
-        [self presentViewController:alert animated:TRUE completion:nil];
+        [self handleErrorValidateLogin];
     }];
 }
 
@@ -433,49 +404,17 @@
                               }
                               else
                               {
-                                  UIAlertController * alert = [UIAlertController
-                                                               alertControllerWithTitle:@"Oops!"
-                                                               message:@"Unable to validate login"
-                                                               preferredStyle:UIAlertControllerStyleActionSheet];
-                                  [alert addAction:[UIAlertAction
-                                                    actionWithTitle:@"OK"
-                                                    style:UIAlertActionStyleDefault
-                                                    handler:^(UIAlertAction *action)
-                                                    {
-                                                    }]];
-                                  [self presentViewController:alert animated:TRUE completion:nil];
+                                  [self handleErrorValidateLogin];
                                   return;
                               }
                           }
                           else{
-                              UIAlertController * alert = [UIAlertController
-                                                           alertControllerWithTitle:@"Oops!"
-                                                           message:@"Unable to validate login"
-                                                           preferredStyle:UIAlertControllerStyleActionSheet];
-                              [alert addAction:[UIAlertAction
-                                                actionWithTitle:@"OK"
-                                                style:UIAlertActionStyleDefault
-                                                handler:^(UIAlertAction *action)
-                                                {
-                                                }]];
-                              [self presentViewController:alert animated:TRUE completion:nil];
-                              return;
+                              [self handleErrorValidateLogin];
                           }
                           
                       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                           NSLog(@"Error: %@", error);
-                          UIAlertController * alert = [UIAlertController
-                                                       alertControllerWithTitle:@"Oops!"
-                                                       message:@"Unable to validate login"
-                                                       preferredStyle:UIAlertControllerStyleActionSheet];
-                          [alert addAction:[UIAlertAction
-                                            actionWithTitle:@"OK"
-                                            style:UIAlertActionStyleDefault
-                                            handler:^(UIAlertAction *action)
-                                            {
-                                            }]];
-                          [self presentViewController:alert animated:TRUE completion:nil];
-                          return;
+                          [self handleErrorValidateLogin];
                       }];
                   }              
               }];

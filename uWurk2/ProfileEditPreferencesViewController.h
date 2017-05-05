@@ -12,4 +12,6 @@
 
 @interface ProfileEditPreferencesViewController : BaseViewController
 
+@property (strong, nonatomic) IBOutlet UIButton *btnLanguage;
+
 @end

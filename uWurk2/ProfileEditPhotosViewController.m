@@ -11,13 +11,17 @@
 #import "UrlImageRequest.h"
 #import "PhotoImageView.h"
 
-@interface ProfileEditPhotosViewController () <ProfileAddPhotoCollectionViewCellDelegate, ProfileExistingPhotoCollectionViewCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
-@property (weak, nonatomic) IBOutlet PhotoImageView *imgMain;
-@property (strong, nonatomic) NSMutableArray *photoArray;
-@property (weak, nonatomic) IBOutlet UICollectionView *imagesCollection;
+@interface ProfileEditPhotosViewController ()
+    <ProfileAddPhotoCollectionViewCellDelegate,
+     ProfileExistingPhotoCollectionViewCellDelegate,
+     UIImagePickerControllerDelegate,
+     UINavigationControllerDelegate>
+
+@property (weak, nonatomic) IBOutlet PhotoImageView     *imgMain;
+@property (weak, nonatomic) IBOutlet UICollectionView   *imagesCollection;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageCollectionViewHeight;
 @property (weak, nonatomic) IBOutlet UIView *viewPhotoTip;
-
+@property (strong, nonatomic) NSMutableArray *photoArray;
 
 @end
 
@@ -26,10 +30,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-//    UILongPressGestureRecognizer *signInLongPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-//    [self.view addGestureRecognizer:signInLongPress];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -41,12 +41,12 @@
     self.viewPhotoTip.layer.cornerRadius = 10;
     
     [self alignUserPhotoArray];
+    
     [self.imagesCollection reloadData];
     
 }
 - (IBAction)saveChanges:(id)sender
 {
-    AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     
     for(int i=0; i < [self.photoArray count]; ++i) {
@@ -56,7 +56,7 @@
         }
         [self updateParamDict:params value:[photoDict objectForKey:@"id"] key:[NSString stringWithFormat:@"photo[%d]", i]];
     }
-    
+    AFHTTPRequestOperationManager *manager = [self getManager];
     [manager POST:@"http://uwurk.tscserver.com/api/v1/photos" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
@@ -78,39 +78,16 @@
     }];
 }
 
-//-(void) handleLongPress:(UILongPressGestureRecognizer *) gesture {
-//    switch (gesture.state) {
-//        case UIGestureRecognizerStateBegan:{
-//            CGPoint point = [gesture locationInView:self.imagesCollection];
-//            NSIndexPath *p = [self.imagesCollection indexPathForItemAtPoint:point];
-//            [self.imagesCollection beginInteractiveMovementForItemAtIndexPath:p];
-//            NSLog (@"Handling - Start");
-//            break;
-//        }
-//        case UIGestureRecognizerStateChanged:
-//            [self.imagesCollection updateInteractiveMovementTargetPosition:[gesture locationInView:self.imagesCollection]];
-//            NSLog (@"Handling - Changed");
-//            break;
-//        case UIGestureRecognizerStateEnded:
-//            [self.imagesCollection endInteractiveMovement];
-//            NSLog (@"Handling - Ended");
-//            break;
-//        default:
-//            [self.imagesCollection cancelInteractiveMovement];
-//            NSLog (@"Handling - Default");
-//    }
-//}
-
 - (void)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath willMoveToIndexPath:(NSIndexPath *)toIndexPath
 {
-    //NSDictionary *photoItem = [self.photoArray objectAtIndex:fromIndexPath.row];
     id object = [self.photoArray objectAtIndex:fromIndexPath.item];
     [self.photoArray removeObjectAtIndex:fromIndexPath.item];
     [self.photoArray insertObject:object atIndex:toIndexPath.item];
 }
 
 
-- (void)alignUserPhotoArray {
+- (void)alignUserPhotoArray
+{
     self.photoArray = [NSMutableArray arrayWithArray:[[self.appDelegate user] objectForKey:@"photos"]];
     for(int i=0; i < [self.photoArray count]; ++i) {
         NSDictionary *photoDict = [self.photoArray objectAtIndex:i];
@@ -151,16 +128,14 @@
         NSDictionary *photoDict = [self.photoArray objectAtIndex:indexPath.row];
         NSURL *photoURL =[NSURL URLWithString:[NSString stringWithFormat:@"http://uwurk.tscserver.com%@",[photoDict objectForKey:@"url"]]];
         UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];
-        cell.photoID = [photoDict objectForKey:@"id"];
+        cell.photoID = [[photoDict objectForKey:@"id"]stringValue];
         [photoRequest startWithCompletion:^(UIImage *newImage, NSError *error) {
             if(newImage) {
                 [cell.img setImage:newImage];
             }
         }];
         return cell;
-    }
-    else {
-        
+    } else {
         ProfileAddPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"EmployeeAddPhotoCell" forIndexPath:indexPath];
         if (!cell) {
             cell = [[ProfileAddPhotoCollectionViewCell alloc] init];
@@ -177,10 +152,11 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row == 0)
+    if(indexPath.row == 0) {
         return CGSizeMake(260, 260);
-    else
+    } else {
         return CGSizeMake(120, 120);
+    }
 }
 
 - (void)addImage
@@ -189,11 +165,9 @@
     UIImagePickerController * picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     
-    UIAlertController * alert=   [UIAlertController
-                                  alertControllerWithTitle:nil
-                                  message:nil
-                                  preferredStyle:UIAlertControllerStyleActionSheet];
-    
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:nil
+                                                                    message:nil
+                                                             preferredStyle:UIAlertControllerStyleActionSheet];
     [alert addAction:[UIAlertAction
                       actionWithTitle:@"Photo Library"
                       style:UIAlertActionStyleDefault
@@ -223,7 +197,6 @@
                       {
                           [alert dismissViewControllerAnimated:YES completion:nil];
                       }]];
-    
     [self presentViewController:alert animated:YES completion:nil];
 }
 
@@ -236,13 +209,10 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-
-    // Send photo to server
     AFHTTPRequestOperationManager *manager = [self getManager];
     [manager POST:@"http://uwurk.tscserver.com/api/v1/photos" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileData:UIImageJPEGRepresentation([info objectForKey:@"UIImagePickerControllerOriginalImage"], 0.5) name:@"photo_file" fileName:@"photo.jpg" mimeType:@"image/jpeg"];
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-      
         [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
             NSLog(@"String: %@", operation.responseString);
             if([self validateResponse:responseObject]){
@@ -254,107 +224,85 @@
         }
          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              [self handleServerErrorUnableToContact];
-         }
-         ];
+        }];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         [self handleServerErrorUnableToContact];
     }];
-
 }
 
-- (void)removeImage: (NSString*)photoID
+- (void)removeImage:(NSString *)photoID
 {
     if([[self getUserDefault:@"prefRemovePhoto"] intValue] == 1) {
     
-    UIAlertController * alert=   [UIAlertController
-                                  alertControllerWithTitle:nil
-                                  message:@"Are you sure you want to delete this photo?"
-                                  preferredStyle:UIAlertControllerStyleAlert];
-    
-    [alert addAction:[UIAlertAction
-                      actionWithTitle:@"Remove"
-                      style:UIAlertActionStyleDefault
-                      handler:^(UIAlertAction * action)
-                      {
-                          NSLog(@"Remove Image Press");
-                          
-                          // Send photo to server
-                          AFHTTPRequestOperationManager *manager = [self getManager];
-                          
-                          NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-                          [self updateParamDict:params value:photoID key:@"delete[]"];
-                          
-                          [manager POST:@"http://uwurk.tscserver.com/api/v1/photos" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:nil
+                                                                        message:@"Are you sure you want to delete this photo?"
+                                                                 preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction
+                          actionWithTitle:@"Remove"
+                          style:UIAlertActionStyleDefault
+                          handler:^(UIAlertAction * action)
+                          {
+                              NSLog(@"Remove Image Press");
+                              AFHTTPRequestOperationManager *manager = [self getManager];
                               
-                              [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
-                                  NSLog(@"String: %@", operation.responseString);
-                                  if([self validateResponse:responseObject]){
-                                      [self alignUserPhotoArray];
-                                      [self.imagesCollection reloadData];
-                                  } else {
-                                      [self handleErrorJsonResponse:@"ProfileEditPhotos"];
+                              NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+                              [self updateParamDict:params value:photoID key:@"delete[]"];
+                              [manager POST:@"http://uwurk.tscserver.com/api/v1/photos" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                  [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
+                                      NSLog(@"String: %@", operation.responseString);
+                                      if([self validateResponse:responseObject]){
+                                          [self alignUserPhotoArray];
+                                          [self.imagesCollection reloadData];
+                                      } else {
+                                          [self handleErrorJsonResponse:@"ProfileEditPhotos"];
+                                      }
                                   }
-                              }
-                                    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                                                         message:@"Unable to validate login"
-                                                                                        delegate:self
-                                                                               cancelButtonTitle:@"OK"
-                                                                               otherButtonTitles: nil];
-                                        [alert show];
-                                    }
-                               ];
-                              
-                          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                              NSLog(@"Error: %@", error);
-                              [self handleServerErrorUnableToContact];
-                          }];
-
-                      }]];
-    [alert addAction:[UIAlertAction
-                      actionWithTitle:@"Cancel"
-                      style:UIAlertActionStyleCancel
-                      handler:^(UIAlertAction * action)
-                      {
-                          [alert dismissViewControllerAnimated:YES completion:nil];
-                      }]];
-    
-    [self presentViewController:alert animated:YES completion:nil];
-
+                                        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                            [self handleErrorValidateLogin];
+                                        }
+                                   ];
+                                  
+                              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                  NSLog(@"Error: %@", error);
+                                  [self handleServerErrorUnableToContact];
+                              }];
+                          }]];
+        [alert addAction:[UIAlertAction
+                          actionWithTitle:@"Cancel"
+                          style:UIAlertActionStyleCancel
+                          handler:^(UIAlertAction * action)
+                          {
+                              [alert dismissViewControllerAnimated:YES completion:nil];
+                          }]];
+        [self presentViewController:alert animated:YES completion:nil];
     } else {
-        // Send photo to server
-        AFHTTPRequestOperationManager *manager = [self getManager];
-        
         NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
         [self updateParamDict:params value:photoID key:@"delete[]"];
-        
-        [manager POST:@"http://uwurk.tscserver.com/api/v1/photos" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            
-            [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
-                NSLog(@"String: %@", operation.responseString);
-                if([self validateResponse:responseObject]){
-                    [self alignUserPhotoArray];
-                    [self.imagesCollection reloadData];
-                } else {
-                    [self handleErrorJsonResponse:@"ProfileEditPhotos"];
-                }
-            }
-                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                      UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                                       message:@"Unable to validate login"
-                                                                      delegate:self
-                                                             cancelButtonTitle:@"OK"
-                                                             otherButtonTitles: nil];
-                      [alert show];
-                  }
-             ];
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
-            [self handleServerErrorUnableToContact];
-        }];
+        AFHTTPRequestOperationManager *manager = [self getManager];
+        [manager POST:@"http://uwurk.tscserver.com/api/v1/photos" parameters:params
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil
+                      success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
+                          NSLog(@"Json: %@", responseObject);
+                          if([self validateResponse:responseObject]){
+                              [self alignUserPhotoArray];
+                              [self.imagesCollection reloadData];
+                          } else {
+                              [self handleErrorJsonResponse:@"ProfileEditPhotos"];
+                          }
+                       }
+                       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                           [self handleErrorValidateLogin];
+                       }
+                  ];
+             }
+             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                 NSLog(@"Error: %@", error);
+                 [self handleServerErrorUnableToContact];
+             }
+         ];
     }
 }
 
@@ -364,10 +312,12 @@
 @end
 
 @implementation ProfileExistingPhotoCollectionViewCell
+
 - (IBAction)removeButtonTapped:(id)sender
 {
     [self.delegate removeImage:self.photoID];
 }
+
 @end
 
 @interface ProfileAddPhotoCollectionViewCell()
@@ -380,6 +330,5 @@
 {
     [self.delegate addImage];
 }
-
 
 @end

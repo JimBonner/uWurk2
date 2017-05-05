@@ -15,10 +15,11 @@
 
 
 @protocol ProfileExistingPhotoCollectionViewCellDelegate <NSObject>
-- (void)removeImage:(NSString*)photoID;
+- (void)removeImage:(NSString *)photoID;
 @end
 
 @interface ProfileExistingPhotoCollectionViewCell : UICollectionViewCell
+
 @property (weak, nonatomic) id<ProfileExistingPhotoCollectionViewCellDelegate>delegate;
 @property (weak, nonatomic) IBOutlet UIImageView *img;
 @property (nonatomic, strong) NSString *photoID;

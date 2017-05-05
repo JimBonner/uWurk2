@@ -166,6 +166,9 @@
 - (void)postUserDefaults
 {
 //    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+//    for(id pref in prefs) {
+//        int k = 0;
+//    }
 }
 
 #pragma mark -
@@ -408,6 +411,21 @@
     UIAlertController * alert = [UIAlertController
                                  alertControllerWithTitle:@"Oops!"
                                  message:[NSString stringWithFormat:@"You are only allowed to have %ld entrys.",count]
+                                 preferredStyle:UIAlertControllerStyleActionSheet];
+    [alert addAction:[UIAlertAction
+                      actionWithTitle:@"OK"
+                      style:UIAlertActionStyleDefault
+                      handler:^(UIAlertAction *action)
+                      {
+                      }]];
+    [self presentViewController:alert animated:TRUE completion:nil];
+}
+
+- (void)handleErrorValidateLogin
+{
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:@"Oops!"
+                                 message:[NSString stringWithFormat:@"Unable to validate login"]
                                  preferredStyle:UIAlertControllerStyleActionSheet];
     [alert addAction:[UIAlertAction
                       actionWithTitle:@"OK"

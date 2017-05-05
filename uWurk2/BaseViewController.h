@@ -43,5 +43,6 @@
 - (void)handleErrorWithMessage:(NSString *)message;
 - (void)handleErrorJsonResponse:(NSString *)who;
 - (void)handleErrorCountExceeded:(NSInteger)count;
+- (void)handleErrorValidateLogin;
 
 @end

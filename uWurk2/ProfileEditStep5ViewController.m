@@ -13,12 +13,12 @@
 
 @interface ProfileEditStep5ViewController () <ListSelectorTableViewControllerProtocol>
 
-@property (weak, nonatomic) IBOutlet UIButton *btnIndustry;
-@property (weak, nonatomic) IBOutlet UIButton *btnPosition;
+@property (weak, nonatomic) IBOutlet UIButton    *btnIndustry;
+@property (weak, nonatomic) IBOutlet UIButton    *btnPosition;
 @property (weak, nonatomic) IBOutlet RadioButton *btnUnderYear;
 @property (weak, nonatomic) IBOutlet RadioButton *btnYear2Year;
 @property (weak, nonatomic) IBOutlet RadioButton *btnOver2Year;
-@property (weak, nonatomic) IBOutlet UIButton *btnSaveChanges;
+@property (weak, nonatomic) IBOutlet UIButton    *btnSaveChanges;
 @property (weak, nonatomic) IBOutlet UITextField *txtCompany;
 @property (weak, nonatomic) IBOutlet RadioButton *btnCurrentJob;
 @property (weak, nonatomic) IBOutlet RadioButton *btnPreviousJob;

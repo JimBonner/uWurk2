@@ -201,31 +201,11 @@
                               [nav popToRootViewControllerAnimated:FALSE];
                               [nav pushViewController:myController animated:TRUE];
                           } else {
-                              UIAlertController * alert = [UIAlertController
-                                                           alertControllerWithTitle:@"Oops!"
-                                                           message:[responseObject objectForKey:@"message"]
-                                                           preferredStyle:UIAlertControllerStyleActionSheet];
-                              [alert addAction:[UIAlertAction
-                                                actionWithTitle:@"OK"
-                                                style:UIAlertActionStyleDefault
-                                                handler:^(UIAlertAction *action)
-                                                {
-                                                }]];
-                              [self presentViewController:alert animated:TRUE completion:nil];
-                              return;
+                              [self handleErrorWithMessage:[responseObject objectForKey:@"message"]];
                           }
                       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                           NSLog(@"Error: %@", error);
-                          UIAlertController * alert = [UIAlertController
-                                                       alertControllerWithTitle:@"Oops!"
-                                                       message:@"Unable to validate login"
-                                                       preferredStyle:UIAlertControllerStyleActionSheet];
-                          [alert addAction:[UIAlertAction
-                                            actionWithTitle:@"OK"
-                                            style:UIAlertActionStyleDefault
-                                            handler:^(UIAlertAction *action)
-                                            {
-                                            }]];
+                          [self handleErrorValidateLogin];
                       }];
                   }
               }];

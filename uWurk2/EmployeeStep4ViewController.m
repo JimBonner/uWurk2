@@ -487,6 +487,8 @@
         if (self.btnHighSchool.isSelected){
             [self updateParamDict:self.params value:@"high_school" key:@"school_level[0]"];
             [self updateParamDict:self.params value:self.btnCity.titleLabel.text key:@"town[0]"];
+        } else {
+            [self updateParamDict:self.params value:@"" key:@"town[0]"];
         }
         if (self.btnCollege.isSelected){
             [self updateParamDict:self.params value:@"college" key:@"school_level[0]"];
