@@ -206,8 +206,8 @@
     
     NSArray *photoArray = [[self.appDelegate user] objectForKey:@"photos"];
     for(NSDictionary *photoDict in photoArray) {
-        if([[photoDict objectForKey:@"for_profile"] intValue] == 0) {
-            NSURL *photoURL =[NSURL URLWithString:[NSString stringWithFormat:@"http://uwurk.tscserver.com%@",[photoDict objectForKey:@"url"]]];
+        if([[photoDict objectForKey:@"for_profile"] intValue] == 1) {
+            NSURL *photoURL =[self serverUrlWith:[photoDict objectForKey:@"url"]];
             
             UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];
             

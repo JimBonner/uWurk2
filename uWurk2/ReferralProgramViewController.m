@@ -13,34 +13,68 @@
 
 
 @interface ReferralProgramViewController () <MFMailComposeViewControllerDelegate>
+
+@property (strong, nonatomic)IBOutlet UIImageView *imageView;
+
+@property BOOL performInit;
+
 @end
 
 @implementation ReferralProgramViewController
 
-- (IBAction)highlightIcon:(id)sender {
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.performInit = YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if(!self.performInit) {
+        return;
+    }
+    
+}
+
+- (IBAction)highlightIcon:(id)sender
+{
     [sender setHighlighted:UIControlStateHighlighted];
 }
 
-- (IBAction)pressFacebook:(id)sender {
+- (IBAction)pressFacebook:(id)sender
+{
     NSString *s = [NSString stringWithFormat:@"https://www.facebook.com/sharer/sharer.php?u=http://uwurk.tscserver.com/ref/%@",[self.appDelegate.user objectForKey:@"referral_code"]];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:s]];
 }
-- (IBAction)pressTwitter:(id)sender {
+
+- (IBAction)pressTwitter:(id)sender
+{
     NSString *s = [NSString stringWithFormat:@"https://twitter.com/intent/tweet?text=http://uwurk.tscserver.com/ref/%@&source=webclient",[self.appDelegate.user objectForKey:@"referral_code"]];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:s]];
 }
-- (IBAction)pressGooglePlus:(id)sender {
 
+- (IBAction)pressGooglePlus:(id)sender
+{
     NSString *s = [NSString stringWithFormat:@"https://plus.google.com/share?url=http://uwurk.tscserver.com/ref/%@",[self.appDelegate.user objectForKey:@"referral_code"]];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:s]];
 }
-- (IBAction)pressPinterest:(id)sender {
+
+- (IBAction)pressPinterest:(id)sender
+{
     NSString *s = [NSString stringWithFormat:@"https://www.pinterest.com/pin/create/button/?url=http://uwurk.tscserver.com/ref/%@&media=http://uwurk.tscserver.com/images/uWurk_referral-dog.jpg&description=uWurk, Where Jobs Look for U!",[self.appDelegate.user objectForKey:@"referral_code"]];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:s]];
 }
-- (IBAction)pressInstagram:(id)sender {
+
+- (IBAction)pressInstagram:(id)sender
+{
+    
 }
-- (IBAction)pressMail:(id)sender {
+
+- (IBAction)pressMail:(id)sender
+{
     if ([MFMailComposeViewController canSendMail]) {
         MFMailComposeViewController* composeVC = [[MFMailComposeViewController alloc] init];
         composeVC.mailComposeDelegate = self;
@@ -52,19 +86,18 @@
         
         // Present the view controller modally.
         [self presentViewController:composeVC animated:YES completion:nil];
-    }
-    else {
+    } else {
+        
     }
 }
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller
-          didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+          didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
     // Check the result or perform other tasks.
     
     // Dismiss the mail compose view controller.
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-
 
 @end

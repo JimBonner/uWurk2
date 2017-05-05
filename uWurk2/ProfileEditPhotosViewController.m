@@ -94,11 +94,10 @@
         if([[photoDict objectForKey:@"for_profile"] intValue] == 1) {
             NSURL *photoURL =[NSURL URLWithString:[NSString stringWithFormat:@"http://uwurk.tscserver.com%@",[photoDict objectForKey:@"url"]]];
             [self.imgMain loadPhoto:photoURL];
-            //[self.photoArray removeObjectAtIndex:i];
             break;
         }
     }
-    float n = self.photoArray.count +1;
+    float n = self.photoArray.count + 1;
     int nCount = ceil(n / 2);
     
     self.imageCollectionViewHeight.constant = 260 + 20  + (((nCount) * 120) + 10);

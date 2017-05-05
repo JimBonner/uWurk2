@@ -63,10 +63,8 @@
     if(self.performDbmsInit) {
         self.performDbmsInit = NO;
         NSMutableArray *photoArray = [self.appDelegate.user objectForKey:@"photos"];
-        NSMutableDictionary *photoDict = nil;
         if([photoArray count] > 0) {
-            photoDict = [photoArray objectAtIndex:0];
-            self.photoImage = [self loadPhotoImageFromServerUsingUrl:photoDict];
+            self.photoImage = [self loadPhotoImageFromServerUsingUrl:photoArray];
             self.photoImageView.image = self.photoImage;
         } else {
             self.photoImageView.image = [UIImage imageNamed:@"PhotoNotAvailable.png"];
@@ -80,6 +78,8 @@
 
     self.cnstrntBioTextHeight.constant = 173.0;
     self.bioTextView.alpha = 1.0;
+    
+    [self.view layoutIfNeeded];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -312,20 +312,22 @@ UIImage  *returnImage;
 
 UIImage *image;
 
-- (UIImage *)loadPhotoImageFromServerUsingUrl:(NSMutableDictionary *)photoDict
+- (UIImage *)loadPhotoImageFromServerUsingUrl:(NSMutableArray *)photoArray
 {
     image = nil;
     
-    if([[photoDict objectForKey:@"for_profile"] intValue] == 1) {
-        NSURL *photoURL =[self serverUrlWith:[photoDict objectForKey:@"url"]];
-        
-        UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];
-        
-        [photoRequest startWithCompletion:^(UIImage *newImage, NSError *error) {
-            if(newImage) {
-                image = newImage;
-            }
-        }];
+    for(NSDictionary *photoDict in photoArray) {
+        if([[photoDict objectForKey:@"for_profile"] intValue] == 1) {
+            NSURL *photoURL =[self serverUrlWith:[photoDict objectForKey:@"url"]];
+            
+            UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];
+            
+            [photoRequest startWithCompletion:^(UIImage *newImage, NSError *error) {
+                if(newImage) {
+                    image = newImage;
+                }
+            }];
+        }
     }
     
     return image;
