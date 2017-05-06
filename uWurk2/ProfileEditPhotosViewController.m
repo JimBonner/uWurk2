@@ -49,7 +49,7 @@
 {
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     
-    for(int i=0; i < [self.photoArray count]; ++i) {
+    for(int i = 0; i < [self.photoArray count]; ++i) {
         NSDictionary *photoDict = [self.photoArray objectAtIndex:i];
         if(i == 0) {
             [self updateParamDict:params value:[photoDict objectForKey:@"id"] key:@"profile_photo_id"];
@@ -59,14 +59,15 @@
     AFHTTPRequestOperationManager *manager = [self getManager];
     [manager POST:@"http://uwurk.tscserver.com/api/v1/photos" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
-            NSLog(@"String: %@", operation.responseString);
-            if([self validateResponse:responseObject]){
-                [self.navigationController popViewControllerAnimated:TRUE];
-            } else {
-                [self handleErrorJsonResponse:@"ProfileEditPhotos"];
-            }
-        }
+        [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil
+              success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
+                  NSLog(@"String: %@", operation.responseString);
+                  if([self validateResponse:responseObject]){
+                      [self.navigationController popViewControllerAnimated:TRUE];
+                  } else {
+                      [self handleErrorJsonResponse:@"ProfileEditPhotos"];
+                  }
+              }
               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                   [self handleServerErrorUnableToContact];
               }

@@ -248,6 +248,9 @@ UIImage  *returnImage;
          } success:^(AFHTTPRequestOperation *operation, id responseObject) {
              NSLog(@"\nEmployee Step 6 - Json Photo Response: %@", responseObject);
              if([self validateResponse:responseObject]) {
+                 NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+                 [params setObject:[responseObject objectForKey:@"photo_id"] forKey:@"profile_photo_id"];
+                 //post to db needed
                  if(self.btnBioSkip.selected == YES) {
                      UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                      [self.navigationController setViewControllers:@[myController] animated:YES];

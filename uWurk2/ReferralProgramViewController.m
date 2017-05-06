@@ -76,7 +76,7 @@
 - (IBAction)pressMail:(id)sender
 {
     if ([MFMailComposeViewController canSendMail]) {
-        MFMailComposeViewController* composeVC = [[MFMailComposeViewController alloc] init];
+        MFMailComposeViewController *composeVC = [[MFMailComposeViewController alloc] init];
         composeVC.mailComposeDelegate = self;
         
         // Configure the fields of the interface.

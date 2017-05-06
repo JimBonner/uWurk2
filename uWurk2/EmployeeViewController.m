@@ -208,9 +208,7 @@
     for(NSDictionary *photoDict in photoArray) {
         if([[photoDict objectForKey:@"for_profile"] intValue] == 1) {
             NSURL *photoURL =[self serverUrlWith:[photoDict objectForKey:@"url"]];
-            
             UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];
-            
             [photoRequest startWithCompletion:^(UIImage *newImage, NSError *error) {
                 if(newImage) {
                     [self.userImages setImage:newImage];
