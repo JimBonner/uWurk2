@@ -58,10 +58,9 @@
     }
     AFHTTPRequestOperationManager *manager = [self getManager];
     [manager POST:@"http://uwurk.tscserver.com/api/v1/photos" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
         [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil
               success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
-                  NSLog(@"String: %@", operation.responseString);
+                  NSLog(@"Profile Edit Profile - Json Response: %@", responseObject);
                   if([self validateResponse:responseObject]){
                       [self.navigationController popViewControllerAnimated:TRUE];
                   } else {

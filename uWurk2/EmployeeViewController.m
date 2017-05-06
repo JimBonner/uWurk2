@@ -216,7 +216,6 @@
             }];
         }
     }
-
     [self.view layoutIfNeeded];
 }
 
@@ -249,20 +248,7 @@
     }
     if ([[self.appDelegate.user objectForKey:@"has_tattoo"] intValue] == 1) {
         Tattoos = @"Tattoos";
-    }
-    if ([[self.appDelegate.user objectForKey:@"has_facial_piercing"] intValue] == 0) {
-        FacePierce = @"";
-    }
-    if ([[self.appDelegate.user objectForKey:@"has_facial_piercing"] intValue] == 1) {
-        FacePierce = @"Facial Piercings";
-    }
-    if ([[self.appDelegate.user objectForKey:@"has_tongue_piercing"] intValue] == 0) {
-        TonguePierce = @"";
-    }
-    if ([[self.appDelegate.user objectForKey:@"has_tongue_piercing"] intValue] == 1) {
-        TonguePierce = @"Tongue Piercing";
-    }
-    if ([[self.appDelegate.user objectForKey:@"has_ear_gauge"] intValue] == 0) {
+    }    if ([[self.appDelegate.user objectForKey:@"has_ear_gauge"] intValue] == 0) {
         Gauges = @"";
     }
     if ([[self.appDelegate.user objectForKey:@"has_ear_gauge"] intValue] == 1) {

@@ -79,7 +79,8 @@
 }
 
 -(NSMutableDictionary*)updateParamDict:(NSMutableDictionary*)paramDict value:(NSString*)value key:(NSString*)key{
-    NSString *trimmedValue = [value stringByTrimmingCharactersInSet:
+    NSString *string = [NSString stringWithFormat:@"%@",value];
+    NSString *trimmedValue = [string stringByTrimmingCharactersInSet:
                               [NSCharacterSet whitespaceCharacterSet]];
     if([trimmedValue length] > 0)
     {
@@ -302,12 +303,12 @@
                   completion(1);
               } else {
                   completion(0);
-                  [self handleServerErrorUnableToPutData];
+                  [self handleServerErrorUnableToSaveData:@"Profile Complete"];
               }}
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
               completion(0);
-              [self handleServerErrorUnableToPutData];
+              [self handleServerErrorUnableToSaveData:@"Profile Complete"];
           }
      ];
 }

@@ -75,10 +75,10 @@
     self.btnPhotoAdd.alpha = 1.0;
     self.cnstrntImageHeight.constant = 200.0;
     self.photoImageView.alpha = 1.0;
+    [self.view layoutIfNeeded];
 
     self.cnstrntBioTextHeight.constant = 173.0;
     self.bioTextView.alpha = 1.0;
-    
     [self.view layoutIfNeeded];
 }
 
@@ -248,18 +248,15 @@ UIImage  *returnImage;
          } success:^(AFHTTPRequestOperation *operation, id responseObject) {
              NSLog(@"\nEmployee Step 6 - Json Photo Response: %@", responseObject);
              if([self validateResponse:responseObject]) {
-                 NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
-                 [params setObject:[responseObject objectForKey:@"photo_id"] forKey:@"profile_photo_id"];
-                 //post to db needed
                  if(self.btnBioSkip.selected == YES) {
                      UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
-                     [self.navigationController setViewControllers:@[myController] animated:YES];
+                         [self.navigationController setViewControllers:@[myController] animated:YES];
+                     } else {
+                         [self saveBioDataToDbms];
+                     }
                  } else {
-                     [self saveBioDataToDbms];
+                     [self handleServerErrorUnableToSaveData:@"Photo ID"];
                  }
-             } else {
-                 [self handleServerErrorUnableToSaveData:@"Photo"];
-             }
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              NSLog(@"Error: %@", error.description);
              [self handleServerErrorUnableToSaveData:@"Photo"];

@@ -130,17 +130,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    Navigation logic may go here, for example:
-//    Create the next view controller.
-//    
-//    NSDictionary *d = [self.menuArray objectAtIndex:indexPath.row];
-//    
-//    Class v = NSClassFromString([d objectForKey:@"ViewController"]);
-//    UIViewController *childViewControllerNew = nil;
-//    childViewControllerNew = [[v alloc] initWithNibName:[d objectForKey:@"ViewController"] bundle:nil];
-//    
-//    [self.navigationController pushViewController:childViewControllerNew animated:TRUE];
-//
     [[NSNotificationCenter defaultCenter]
      postNotificationName:@"MenuNotification"
      object:[self.menuArray objectAtIndex:indexPath.row]];
