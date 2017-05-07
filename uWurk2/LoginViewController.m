@@ -288,7 +288,7 @@
     
 }
 
-- (void)loginWithUser:(NSString*)user password:(NSString*)password
+- (void)loginWithUser:(NSString *)user password:(NSString *)password
 {
     NSLog(@"\nLogin with user:\n%@",self.appDelegate.user);
     
@@ -311,23 +311,22 @@
                               ]];
             [self presentViewController:alert animated:TRUE completion:nil];
         }
-        if([responseObject isKindOfClass:[NSDictionary class]]){
-        if([((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] != nil){
-            [self saveUserDefault:[((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] Key:@"api_auth_token"];
-            //                [self saveUserDefault:[((NSDictionary*)responseObject) valueForKey:@"status"] Key:@"status"];
-            //                [self saveUserDefault:[((NSDictionary*)responseObject) valueForKey:@"user_type"] Key:@"user_type"];
-            [self loginWithStoredToken];
-       } else {
-           [self handleErrorValidateLogin];
-       }
-    } else {
-        [self handleErrorValidateLogin];
-    }
-    
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-        [self handleErrorValidateLogin];
-    }];
+        if([responseObject isKindOfClass:[NSDictionary class]]) {
+            [self saveUserDefault:user Key:@"email"];
+            if([((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] != nil){
+                [self saveUserDefault:[((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] Key:@"api_auth_token"];
+                [self loginWithStoredToken];
+           } else {
+               [self handleErrorValidateLogin];
+           }
+        } else {
+            [self handleErrorValidateLogin];
+        }
+        
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+            [self handleErrorValidateLogin];
+        }];
 }
 
 

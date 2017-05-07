@@ -18,12 +18,15 @@
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
     
     [[UINavigationBar appearance] setBarTintColor:[UIColor navBarBackground]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTranslucent:NO];
+    
+    CGRect  screenRect = [[UIScreen mainScreen] bounds];
+    self.screenSize = screenRect.size;
     
     self.serverAddress = @"http://uwurk.tscserver.com";
     

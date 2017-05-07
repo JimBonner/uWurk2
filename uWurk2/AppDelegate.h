@@ -16,6 +16,8 @@
 @property (strong, nonatomic) NSString *documentsDirectory;
 @property (strong, nonatomic) NSString *serverAddress;
 
+@property CGSize screenSize;
+
 -(NSString *)getDocumentsDirectory;
 
 @end
