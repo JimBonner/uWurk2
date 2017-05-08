@@ -82,7 +82,7 @@
                 NSLog(@"\nEmployer Step 1 - Json Response: %@", responseObject);
                 if([self validateResponse:responseObject]){
                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerProfileSetup2"];
-                    [self.navigationController setViewControllers:@[myController] animated:YES];
+                    [self.navigationController pushViewController:myController animated:YES];
                 } else {
                     [self handleErrorJsonResponse:@"EmployerStep1"];
                 }
@@ -92,7 +92,7 @@
             }];
         } else {
             UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerProfileSetup2"];
-            [self.navigationController setViewControllers:@[myController] animated:YES];
+            [self.navigationController pushViewController:myController animated:YES];
         }
     }
 }

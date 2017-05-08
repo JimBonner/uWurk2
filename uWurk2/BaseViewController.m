@@ -411,7 +411,7 @@
 {
     UIAlertController * alert = [UIAlertController
                                  alertControllerWithTitle:@"Oops!"
-                                 message:[NSString stringWithFormat:@"You are only allowed to have %ld entrys.",count]
+                                 message:[NSString stringWithFormat:@"You are only allowed to have %ld entrys.",(long)count]
                                  preferredStyle:UIAlertControllerStyleActionSheet];
     [alert addAction:[UIAlertAction
                       actionWithTitle:@"OK"

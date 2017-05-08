@@ -8,9 +8,9 @@
 //
 
 #import "ReferralProgramViewController.h"
+#import "UrlImageRequest.h"
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
-
 
 @interface ReferralProgramViewController () <MFMailComposeViewControllerDelegate>
 
@@ -36,7 +36,21 @@
     if(!self.performInit) {
         return;
     }
+    self.performInit = NO;
     
+    NSArray *photoArray = [[self.appDelegate user] objectForKey:@"photos"];
+    for(NSDictionary *photoDict in photoArray) {
+        if([[photoDict objectForKey:@"for_profile"] intValue] == 1) {
+            NSURL *photoURL =[self serverUrlWith:[photoDict objectForKey:@"url"]];
+            UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];
+            [photoRequest startWithCompletion:^(UIImage *newImage, NSError *error) {
+                if(newImage) {
+                    [self.imageView setImage:newImage];
+                }
+            }];
+        }
+    }
+    [self.view layoutIfNeeded];
 }
 
 - (IBAction)highlightIcon:(id)sender

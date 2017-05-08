@@ -600,7 +600,6 @@
     CGFloat popHigh = fmin(396.0,maxHigh);
     self.popover.contentSize = CGSizeMake(200,popHigh);
 
-    
     //the popover will be presented from the okButton view
     UIView *targetView = (UIView*)[self.navigationItem.leftBarButtonItem performSelector:@selector(view)];
     [self.popover presentPopoverFromView:targetView];

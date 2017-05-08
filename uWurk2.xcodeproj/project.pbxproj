@@ -427,10 +427,10 @@
 		9B0C71331C7770A6003DB760 /* EditEmployerProfile */ = {
 			isa = PBXGroup;
 			children = (
-				9B0C713D1C77714B003DB760 /* EditEmployerContactInfoViewController.h */,
-				9B0C713E1C77714B003DB760 /* EditEmployerContactInfoViewController.m */,
 				9B0C71371C777110003DB760 /* EditEmployerCompanyInfoViewController.h */,
 				9B0C71381C777110003DB760 /* EditEmployerCompanyInfoViewController.m */,
+				9B0C713D1C77714B003DB760 /* EditEmployerContactInfoViewController.h */,
+				9B0C713E1C77714B003DB760 /* EditEmployerContactInfoViewController.m */,
 				9B0C713A1C777128003DB760 /* EditEmployerPreferencesViewController.h */,
 				9B0C713B1C777128003DB760 /* EditEmployerPreferencesViewController.m */,
 			);
@@ -548,22 +548,22 @@
 		9B8B98F21BB37801005821EB /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				9B3EE1481B9F6D80001D3C37 /* SearchViewController.h */,
-				9B3EE1491B9F6D80001D3C37 /* SearchViewController.m */,
-				9B214CB41C2FCBB00063BC0E /* RefineSearchViewController.h */,
-				9B214CB51C2FCBB00063BC0E /* RefineSearchViewController.m */,
-				9B8B98F31BB37830005821EB /* SearchResultTableViewCell.h */,
-				9B8B98F41BB37830005821EB /* SearchResultTableViewCell.m */,
-				9B8B98F61BB378E3005821EB /* SearchResultsTableViewController.h */,
-				9B8B98F71BB378E3005821EB /* SearchResultsTableViewController.m */,
-				9B8B992E1BB7B104005821EB /* SearchResultProfileViewController.h */,
-				9B8B992F1BB7B104005821EB /* SearchResultProfileViewController.m */,
+				9B3760881C0C7DD900E9FB7D /* ContactProfileNotifyViewController.h */,
+				9B3760891C0C7DD900E9FB7D /* ContactProfileNotifyViewController.m */,
 				9B04525A1C03101900B33526 /* ContactProfileViewController.h */,
 				9B04525B1C03101900B33526 /* ContactProfileViewController.m */,
 				9B04525D1C03165800B33526 /* MessageSentViewController.h */,
 				9B04525E1C03165800B33526 /* MessageSentViewController.m */,
-				9B3760881C0C7DD900E9FB7D /* ContactProfileNotifyViewController.h */,
-				9B3760891C0C7DD900E9FB7D /* ContactProfileNotifyViewController.m */,
+				9B214CB41C2FCBB00063BC0E /* RefineSearchViewController.h */,
+				9B214CB51C2FCBB00063BC0E /* RefineSearchViewController.m */,
+				9B8B992E1BB7B104005821EB /* SearchResultProfileViewController.h */,
+				9B8B992F1BB7B104005821EB /* SearchResultProfileViewController.m */,
+				9B8B98F31BB37830005821EB /* SearchResultTableViewCell.h */,
+				9B8B98F41BB37830005821EB /* SearchResultTableViewCell.m */,
+				9B8B98F61BB378E3005821EB /* SearchResultsTableViewController.h */,
+				9B8B98F71BB378E3005821EB /* SearchResultsTableViewController.m */,
+				9B3EE1481B9F6D80001D3C37 /* SearchViewController.h */,
+				9B3EE1491B9F6D80001D3C37 /* SearchViewController.m */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -646,6 +646,8 @@
 		9BEA1B271B9A96B50017D87A /* Employer */ = {
 			isa = PBXGroup;
 			children = (
+				9B379CF41B97EAB800EB4E2D /* IntroEmployerViewController.h */,
+				9B379CF51B97EAB800EB4E2D /* IntroEmployerViewController.m */,
 				9B3C29AC1C41F55300EF0296 /* EmployerRegisterThanksViewController.h */,
 				9B3C29AD1C41F55300EF0296 /* EmployerRegisterThanksViewController.m */,
 				9B89BE1F1C3E311F00B4262C /* EmployerStep0ViewController.h */,
@@ -654,8 +656,6 @@
 				9BEA1B291B9A96D10017D87A /* EmployerStep1ViewController.m */,
 				9BEA1B2B1B9A96EC0017D87A /* EmployerStep2ViewController.h */,
 				9BEA1B2C1B9A96EC0017D87A /* EmployerStep2ViewController.m */,
-				9B379CF41B97EAB800EB4E2D /* IntroEmployerViewController.h */,
-				9B379CF51B97EAB800EB4E2D /* IntroEmployerViewController.m */,
 			);
 			name = Employer;
 			sourceTree = "<group>";

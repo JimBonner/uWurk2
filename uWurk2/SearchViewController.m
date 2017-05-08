@@ -88,6 +88,22 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSLog(@"\nSearch - Init:\n%@",self.appDelegate.user);
+    
+    if (self.btnHourly.isSelected)
+        self.viewMaxHourly.alpha = 1;
+    else
+        self.viewMaxHourly.alpha = 0;
+    if (self.btnExpYes.isSelected) {
+    }
+    [self.view layoutIfNeeded];
+    [self.experienceFiltersCollectionView reloadData];
+}
+
 -(IBAction)menuPress
 {
     DashboardMenuTableViewController *controller = [[DashboardMenuTableViewController alloc] init];
@@ -95,29 +111,31 @@
     
     //our popover
     self.popover = [[FPPopoverController alloc] initWithViewController:controller];
-    self.popover.contentSize = CGSizeMake(200,360);
     self.popover.border = FALSE;
     //popover.tint = FPPopoverWhiteTint;
     controller.delegateNavigationController = self.navigationController;
+    
+    CGRect    frame = self.navigationController.navigationBar.frame;
+    CGFloat maxHigh = self.appDelegate.screenSize.height - (frame.origin.y + frame.size.height) - 30.0;
+    CGFloat popHigh = fmin(288.0,maxHigh);
+    self.popover.contentSize = CGSizeMake(200,popHigh);
     
     //the popover will be presented from the okButton view
     UIView *targetView = (UIView*)[self.navigationItem.leftBarButtonItem performSelector:@selector(view)];
     [self.popover presentPopoverFromView:targetView];
 }
 
--(void)SelectionMade:(NSMutableDictionary *)dict {
-
+-(void)SelectionMade:(NSMutableDictionary *)dict
+{
     SearchResultsTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"employeeListID"];
     [myController setParameters:dict];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/search"];
     
-    
     [self.navigationController pushViewController:myController animated:TRUE];
-
 }
 
--(IBAction)receiveMenuNotification:(NSNotification*)sender{
-    
+-(IBAction)receiveMenuNotification:(NSNotification*)sender
+{
     if([[sender.object objectForKey:@"ViewController"] isEqualToString:@"LogoutViewController"]) {
         [self.popover dismissPopoverAnimated:FALSE];
         [self logout];
@@ -156,28 +174,14 @@
     
 }
 
-- (IBAction)pressMail:(id)sender {
+- (IBAction)pressMail:(id)sender
+{
     MailFoldersViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil] instantiateViewControllerWithIdentifier:@"MailFolders"];
     [self.navigationController pushViewController:myController animated:TRUE];
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (IBAction)pressHourly:(id)sender
 {
-    [super viewWillAppear:animated];
-    
-    NSLog(@"\nSearch - Init:\n%@",self.appDelegate.user);
-
-    if (self.btnHourly.isSelected)
-       self.viewMaxHourly.alpha = 1;
-    else
-    self.viewMaxHourly.alpha = 0;
-    if (self.btnExpYes.isSelected) {
-    }
-    [self.view layoutIfNeeded];
-    [self.experienceFiltersCollectionView reloadData];
-}
-
-- (IBAction)pressHourly:(id)sender {
     if (self.btnHourly.isSelected) {
         [UIView animateWithDuration:.3 animations:^{
             self.viewMaxHourly.alpha = 1;
@@ -190,10 +194,11 @@
             [self.view layoutIfNeeded];
         }];
     }
-    
 }
 
-- (IBAction)recentSearchPress:(id)sender {
+- (IBAction)recentSearchPress:(id)sender
+{
+
 }
 //- (IBAction)pressExpYes:(id)sender {
 //    self.cnstrntExpHeight.constant = 525;
@@ -230,10 +235,9 @@
 //}
 
 
-- (IBAction)industryPress:(id)sender {
-    
+- (IBAction)industryPress:(id)sender
+{
     ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
-    
     
     [myController setParameters:nil];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/industries"];
@@ -245,14 +249,14 @@
     [myController setTitle:@"Industries"];
     
     [self.navigationController pushViewController:myController animated:TRUE];
-    
+
 }
-- (IBAction)positionPress:(id)sender {
-    
+
+- (IBAction)positionPress:(id)sender
+{
     ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
     
-    
-    [myController setParameters:@{@"industry_id":[self.btnIndustry titleForState:UIControlStateSelected]}];
+    [myController setParameters:@{@"industry_id":[@(self.btnIndustry.tag)stringValue]}];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/positions"];
     [myController setDisplay:@"description"];
     [myController setKey:@"id"];
@@ -262,7 +266,6 @@
     [myController setTitle:@"Positions"];
     
     [self.navigationController pushViewController:myController animated:TRUE];
-    
 }
 //- (IBAction)expPositionPress:(id)sender {
 //    ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
@@ -370,7 +373,8 @@
 //    [self.navigationController pushViewController:myController animated:TRUE];
 //}
 
-- (IBAction)changeCheckBox:(UIButton *)sender {
+- (IBAction)changeCheckBox:(UIButton *)sender
+{
     [sender setSelected:!sender.selected];
 }
 
@@ -431,8 +435,8 @@
 //}
 
 
-- (IBAction)searchPress:(id)sender {
-    NSMutableDictionary *parmdic = [[NSMutableDictionary alloc]init];
+- (IBAction)searchPress:(id)sender
+{
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
     if (self.btnHourly.selected == NO && self.btnTipped.selected == NO) {
@@ -444,7 +448,7 @@
     if ([[self.txtZip text] length] != 5) {
         [Error appendString:@"\n\nZip Code"];
     }
-    if (self.btnExpYes.selected == NO && self.btnExpYes.selected == NO) {
+    if (self.btnExpYes.selected == NO && self.btnExpNo.selected == NO) {
         [Error appendString:@"\n\nExperience Requirement"];
     }
     if ([[self.btnIndustry titleForState:UIControlStateNormal]isEqualToString:@"Select Industry"]) {
@@ -455,53 +459,50 @@
     }
     if ((Error.length) > 50) {
         [self handleErrorWithMessage:Error];
-    }
-    else {
+    } else {
+        NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
         if(self.btnFullTime.isSelected) {
-            [self updateParamDict:parmdic value:@"1" key:@"hours"];
+            [self updateParamDict:params value:@"1" key:@"hours"];
         }
         else if(self.btnPartTime.isSelected) {
-            [self updateParamDict:parmdic value:@"2" key:@"hours"];
+            [self updateParamDict:params value:@"2" key:@"hours"];
         }
-        // Experence
-        self.btnExpNo.isSelected == TRUE ? [self updateParamDict:parmdic value:@"0" key:@"exp_required"] : [self updateParamDict:parmdic value:@"1" key:@"exp_required"];
+        self.btnExpNo.isSelected == TRUE ? [self updateParamDict:params value:@"0" key:@"exp_required"] : [self updateParamDict:params value:@"1" key:@"exp_required"];
         
         if(self.btnHourly.isSelected) {
-            [self updateParamDict:parmdic value:@"1" key:@"wage_type_hourly"];
-            [self updateParamDict:parmdic value:self.txtHourly.text key:@"hourly_wage"];
+            [self updateParamDict:params value:@"1" key:@"wage_type_hourly"];
+            [self updateParamDict:params value:self.txtHourly.text key:@"hourly_wage"];
         }
         if (self.btnTipped.isSelected) {
             // FORCE BY ROB, field is not displaying
-            [self updateParamDict:parmdic value:@"1" key:@"wage_type_tipped"];
+            [self updateParamDict:params value:@"1" key:@"wage_type_tipped"];
             
         }
-        
-        [self updateParamDict:parmdic value:@"new" key:@"search_type"];
-        
+        [self updateParamDict:params value:@"new" key:@"search_type"];
         if(self.btnFullTime.isSelected && self.btnPartTime.isSelected)
         {
             
         }
-        [self updateParamDict:parmdic value:self.txtZip.text key:@"zip"];
-        
+        [self updateParamDict:params value:self.txtZip.text key:@"zip"];
+        [self updateParamDict:params value:[@(self.btnIndustry.tag)stringValue] key:@"industry"];
+        [self updateParamDict:params value:[@(self.btnPosition.tag)stringValue] key:@"position"];
+        [self updateParamDict:params value:[@(self.btnPosition.tag)stringValue] key:@"exp_positions[]"];
+
         SearchResultsTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"employeeListID"];
-        
-        if ([[self.btnIndustry titleForState:UIControlStateSelected] length] >0){
-            [parmdic setObject:[self.btnIndustry titleForState:UIControlStateSelected] forKey:@"industry"];
-        }
-        if ([[self.btnPosition titleForState:UIControlStateSelected] length] >0){
-            [parmdic setObject:[self.btnPosition titleForState:UIControlStateSelected] forKey:@"position"];
-        }
-        if ([[self.btnPosition titleForState:UIControlStateSelected] length] >0){
-            [parmdic setObject:[self.btnPosition titleForState:UIControlStateSelected] forKey:@"exp_positions[]"];
-        }
-    [myController setParameters:parmdic];
-    [myController setUrl:@"http://uwurk.tscserver.com/api/v1/search"];
-    
-    
-    [self.navigationController pushViewController:myController animated:TRUE];
-    
+        [myController setParameters:params];
+        [myController setUrl:@"http://uwurk.tscserver.com/api/v1/search"];
+        [self.navigationController pushViewController:myController animated:TRUE];
     }
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(100, 30);
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(10, 20, 10, 20);
 }
 
 - (void)removeExperience:(NSString*)experienceID
@@ -576,14 +577,6 @@
 //        [self.navigationController pushViewController:myController animated:TRUE];
 //    }
 //}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(100, 30);
-}
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    
-    return UIEdgeInsetsMake(10, 20, 10, 20);
-}
 
 @end
 

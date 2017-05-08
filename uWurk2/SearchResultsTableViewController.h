@@ -16,12 +16,12 @@
 
 @interface SearchResultsTableViewController : BaseTableViewController
 
+@property (nonatomic, assign) id delegate;
 @property (nonatomic, retain) NSString *jsonGroup;
 @property (nonatomic, retain) NSString *display;
 @property (nonatomic, retain) NSString *key;
 @property (nonatomic, retain) NSMutableDictionary *parameters;
 @property (nonatomic, retain) NSString *url;
-@property(nonatomic,assign)id delegate;
 @property (nonatomic, retain) UIButton *sender;
 
 @end
