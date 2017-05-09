@@ -11,8 +11,6 @@
 
 @interface EditEmployerContactInfoViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *txtEmail;
-@property (weak, nonatomic) IBOutlet UITextField *txtChangePassword;
-@property (weak, nonatomic) IBOutlet UITextField *txtVerifyPassword;
 @property (weak, nonatomic) IBOutlet UITextField *txtFirstName;
 @property (weak, nonatomic) IBOutlet UITextField *txtLastName;
 @property (weak, nonatomic) IBOutlet UITextField *txtPhone;
@@ -27,11 +25,15 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnOtherEmail;
 @property (weak, nonatomic) IBOutlet UIButton *btnOtherWebsite;
 
+@property (weak, nonatomic) NSMutableDictionary *paramHolder;
+@property (weak, nonatomic) NSMutableDictionary *searchUserDict;
+
 @end
 
 @implementation EditEmployerContactInfoViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
@@ -75,24 +77,22 @@
     }
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)changeCheckBox:(UIButton *)sender {
+- (IBAction)changeCheckBox:(UIButton *)sender
+{
     [sender setSelected:!sender.selected];
 }
-- (IBAction)pressSaveChanges:(id)sender {
-    // Did data get updated?
-    
+
+- (IBAction)pressSaveChanges:(id)sender
+{
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [self updateParamDict:params value:self.txtEmail.text key:@"email"];
-    if (self.txtChangePassword.text == self.txtVerifyPassword.text) {
-    [self updateParamDict:params value:self.txtPhone.text key:@"password"];
-    [self updateParamDict:params value:self.txtPhone.text key:@"password_confirmation"];
-    }
     [self updateParamDict:params value:self.txtFirstName.text key:@"first_name"];
     [self updateParamDict:params value:self.txtLastName.text key:@"last_name"];
     [self updateParamDict:params value:self.txtPhone.text key:@"cell_phone"];
@@ -134,9 +134,6 @@
     if (self.txtLastName.text.length == 0) {
         [Error appendString:@"\n\nLast Name"];
     }
-    if (self.txtChangePassword.text != self.txtVerifyPassword.text) {
-        [Error appendString:@"\n\nPasswords Do Not Match"];
-    }
     if ((self.btnPosText.selected == TRUE && self.txtPhone.text.length == 0) || (self.btnNegText.selected == TRUE && self.txtPhone.text.length == 0) || (self.btnOtherText.selected == TRUE && self.txtPhone.text.length == 0)) {
         [Error appendString:@"\n\nPhone Number"];
     }
@@ -147,19 +144,17 @@
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"JSON: %@", responseObject);
                 if([self validateResponse:responseObject]) {
-                    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup2"];
-                    [self.navigationController pushViewController:myController animated:TRUE];
+                    [self.navigationController popViewControllerAnimated:TRUE];
                 } else {
                     [self handleErrorJsonResponse:@"EditEmployeeCpntactInfo"];
                 }
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error: %@", error);
-                [self handleServerErrorUnableToContact];
+                [self handleErrorAccessError:error];
             }];
         }
         else{
-            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup2"];
-            [self.navigationController pushViewController:myController animated:TRUE];
+            [self.navigationController popViewControllerAnimated:TRUE];
         }
     }
 }

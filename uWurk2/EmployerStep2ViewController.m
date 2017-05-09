@@ -26,8 +26,11 @@
 {
     [super viewDidLoad];
     
+    [self saveStepNumber:2 completion:^(NSInteger result) { }];
+    
     self.performInit = YES;
 }
+
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -99,15 +102,19 @@
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 self.performInit = YES;
                 NSLog(@"\nEmployer Step 2 - Json Response: %@", responseObject);
-                if([self validateResponse:responseObject]){
-                    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerLanding"];
-                    [self.navigationController setViewControllers:@[myController] animated:YES];
-                } else {
-                    [self handleErrorJsonResponse:@"EmployerStep2"];
+                if([self validateResponse:responseObject]) {
+                    [self saveProfileComplete:^(NSInteger result) {
+                        if(result == 1) {
+                            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerLanding"];
+                            [self.navigationController pushViewController:myController animated:YES];
+                        } else {
+                            [self handleErrorJsonResponse:@"EmployerStep2"];
+                        }
+                    }];
                 }
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error: %@", error);
-                [self handleServerErrorUnableToContact];
+                [self handleErrorAccessError:error];
             }];
         }
         else{

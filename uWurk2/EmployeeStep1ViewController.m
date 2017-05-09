@@ -100,6 +100,9 @@
     if (self.txtVerifyPassword.text.length == 0) {
         [Error appendString:@"\n\nVerify Password"];
     }
+    if (![self.txtPassword.text isEqualToString:self.txtVerifyPassword.text]) {
+        [Error appendString:@"\n\nPasswords Do Not Match"];
+    }
     if (self.txtFirstName.text.length == 0) {
         [Error appendString:@"\n\nFirst Name"];
     }
@@ -149,7 +152,7 @@
                   }
                   failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                       NSLog(@"Error: %@", error);
-                      [self handleServerErrorUnableToContact];
+                      [self handleErrorAccessError:error];
                  }
              ];
         } else {

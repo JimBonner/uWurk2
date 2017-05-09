@@ -71,7 +71,6 @@
     
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:btnMail, btnRef, nil];
    
-    //    Modal VC to handle registration email adddress verification
     if([[self.appDelegate.user objectForKey:@"status"]integerValue] != 1) {
         RegisterThanksViewController *mvc = [self.storyboard instantiateViewControllerWithIdentifier:@"RegisterThanksViewController"];
         mvc.modalPresentationStyle = UIModalPresentationFullScreen;

@@ -57,17 +57,15 @@
     if ([[self.searchedUserDict objectForKey:@"is_favorite"] intValue] == 1) {
         self.btnFavorite.selected = TRUE;
     }
-    AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:self.profileID forKey:@"id"];
     
     if([params count]){
-        [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+       AFHTTPRequestOperationManager *manager = [self getManager];
+       [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
             
             dispatch_async(dispatch_get_main_queue(), ^{
-
-            
             
                 NSString *SchoolStatus1;
                 NSString *JobStatus1;
@@ -89,13 +87,7 @@
                 }
 
             self.json = [responseObject objectForKey:@"user"];
-//            self.profileUser = [self.json objectAtIndex:0];
-                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-                NSDate *birthday = [dateFormatter dateFromString:[self.json objectForKey:@"birthdate"]];
-                NSDate *now = [NSDate date];
-                NSDateComponents* ageComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitYear fromDate:birthday toDate:now options:0];
-                NSInteger age = [ageComponents year];
+            NSString *age = [[self.searchedUserDict objectForKey:@"age"]stringValue];
             
             self.lblName.text = [NSString stringWithFormat:@"%@ %@",[self.json objectForKey:@"first_name"], [self.json objectForKey:@"last_name"]];
             if ([[self.json objectForKey:@"tipped_position"] intValue] == 1) {
@@ -103,10 +95,10 @@
             }if ([[self.json objectForKey:@"tipped_position"] intValue] == 0) {
                 TipWork = @"";
             }
-            self.lblAgeWage.text = [NSString stringWithFormat:@"Age: %ld  |  $%@/hr %@",(long)age, [self.json objectForKey:@"hourly_wage"], TipWork];
+            self.lblAgeWage.text = [NSString stringWithFormat:@"Age: %@  |  $%@/hr %@", age, [self.json objectForKey:@"hourly_wage"], TipWork];
             
             NSArray *experienceArray = [self.json objectForKey:@"experience"];
-            if([experienceArray count] >0) {
+            if([experienceArray count] > 0) {
                 NSDictionary *firstExperienceItem = [experienceArray objectAtIndex:0];
                 if ([[firstExperienceItem objectForKey:@"status"] intValue] == 1) {
                     JobStatus1 = @"Current";
@@ -122,7 +114,7 @@
             }
             
             NSArray *educationArray = [self.json objectForKey:@"education"];
-            if([educationArray count] >0) {
+            if([educationArray count] > 0) {
                 NSDictionary *firstEducationItem = [educationArray objectAtIndex:0];
                 if ([[firstEducationItem objectForKey:@"school_status_id"] intValue] == 1) {
                     SchoolStatus1 = @"Enrolled";
@@ -135,10 +127,10 @@
                 }
                 self.lblEdu1.text = [NSString stringWithFormat:@"%@: %@", SchoolStatus1,[firstEducationItem objectForKey:@"school"]];
             }
-            if([experienceArray count] ==0) {
+            if([experienceArray count] == 0) {
                     self.btnExp.alpha = 0;
             }
-            if([educationArray count] <=1) {
+            if([educationArray count] <= 1) {
                     self.btnEdu.alpha = 0;
             }
             self.btnBio.selected = YES;
@@ -159,22 +151,16 @@
             
             [self.view layoutIfNeeded];
             });
-
-            
-            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
-            [self handleServerErrorUnableToContact];
+            [self handleErrorAccessError:error];
         }];
     }
-//        NSDictionary *attributes = @{NSForegroundColorAttributeName:[UIColor colorWithRed:(153.0f/255.0f) green:(204.0f/255.0f) blue:(204.0f/255.0f) alpha:(1.0f)]};
-  
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)pressEditProfile:(id)sender
@@ -261,8 +247,7 @@
                  }];
              }
          }];
-    }
-    else {
+    } else {
         self.lblInfoBio.alpha = 0;
         [self.btnInfo setBackgroundColor:[UIColor colorWithRed:(150/255.0) green:(212/255.0) blue:(210/255.0) alpha:1]];
         [UIView animateWithDuration:.3 animations:^{
@@ -303,8 +288,7 @@
                      [self.view layoutIfNeeded];}];
              }
          }];
-    }
-    else {
+    } else {
         [self.btnBio setBackgroundColor:[UIColor colorWithRed:(150/255.0) green:(212/255.0) blue:(210/255.0) alpha:1]];
         self.lblInfoBio.alpha = 0;
         [UIView animateWithDuration:.3 animations:^{
@@ -379,8 +363,7 @@
                  }
              }];
         }
-    }
-    else{
+    } else {
         self.lblEdu2.alpha = 0;
         self.lblEdu3.alpha = 0;
         [UIView animateWithDuration:.3 animations:^{
@@ -409,7 +392,7 @@
     NSString *JobStatus3;
     if (self.btnExp.isSelected ==TRUE) {
         NSArray *experienceArray = [self.json objectForKey:@"experience"];
-        if([experienceArray count] >0) {
+        if([experienceArray count] > 0) {
             NSDictionary *firstExperienceItem = [experienceArray objectAtIndex:0];
             if ([[firstExperienceItem objectForKey:@"job_length"] intValue] == 1) {
                 JobLength1 = @"Under 1 Year";
@@ -428,7 +411,7 @@
             }
             self.lblExp1.text = [NSString stringWithFormat:@"%@: %@, %@ [ %@ ]", JobStatus1,[firstExperienceItem objectForKey:@"company"], [firstExperienceItem objectForKey:@"position"], JobLength1];
         }
-        if([experienceArray count] >1) {
+        if([experienceArray count] > 1) {
             NSDictionary *secondExperienceItem = [experienceArray objectAtIndex:1];
             if ([[secondExperienceItem objectForKey:@"job_length"] intValue] == 1) {
                 JobLength2 = @"Under 1 Year";
@@ -459,7 +442,7 @@
                  }
              }];
         }
-        if([experienceArray count] >2) {
+        if([experienceArray count] > 2) {
             NSDictionary *thirdExperinceItem = [experienceArray objectAtIndex:2];
             if ([[thirdExperinceItem objectForKey:@"job_length"] intValue] == 1) {
                 JobLength3 = @"Under 1 Year";
@@ -490,10 +473,9 @@
                  }
              }];
         }
-    }
-    else{
+    } else {
         NSArray *experienceArray = [self.json objectForKey:@"experience"];
-        if([experienceArray count] >0) {
+        if([experienceArray count] > 0) {
             NSDictionary *firstExperienceItem = [experienceArray objectAtIndex:0];
             if ([[firstExperienceItem objectForKey:@"status"] intValue] == 1) {
                 JobStatus1 = @"Current";
@@ -528,26 +510,25 @@
     if (self.btnFavorite.selected == YES) {
         [params setObject:self.searchID forKey:@"search_id"];
         [params setObject:self.profileID forKey:@"user_id"];
-        if([params count]){
+///        [params setObject:[@(self.btnFavorite.selected)stringValue] forKey:@"is_favorite"];
+        if([params count]) {
             [manager POST:@"http://uwurk.tscserver.com/api/v1/add_favorite_employee" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"JSON: %@", responseObject);
-                
+                    NSLog(@"Add Favorite - Json Response: \n\n%@", responseObject);
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     NSLog(@"Error: %@", error);
-                    [self handleServerErrorUnableToContact];
+                    [self handleErrorAccessError:error];
                 }];
-    }
-    }
-    else {
+        }
+    } else {
         [params setObject:self.searchID forKey:@"search_id"];
         [params setObject:self.profileID forKey:@"user_id"];
         if([params count]){
-            [manager POST:@"http://uwurk.tscserver.com/api/v1/remove_favorite_employee" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"JSON: %@", responseObject);
-                
+            [manager POST:@"http://uwurk.tscserver.com/api/v1/remove_favorite_employee" parameters:params
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"Remove Favorite - Json Response: /n/n%@", responseObject);
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error: %@", error);
-                [self handleServerErrorUnableToContact];
+                [self handleErrorAccessError:error];
             }];
         }
     }
@@ -560,8 +541,8 @@
 
 - (IBAction)pressContact:(id)sender
 {
-    ContactProfileViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ContactView"];
-    [myController setParamholder:self.paramholder];
+    ContactProfileViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerDashboardContactViewController"];
+    [myController setParamHolder:self.paramHolder];
     [myController setSearchUserDict:self.searchedUserDict];
     [self.navigationController pushViewController:myController animated:TRUE];
 }

@@ -12,6 +12,6 @@
 @interface ContactProfileViewController : BaseViewController
 
 @property (strong, nonatomic) NSDictionary *searchUserDict;
-@property (strong, nonatomic) NSDictionary *paramholder;
+@property (strong, nonatomic) NSDictionary *paramHolder;
 
 @end

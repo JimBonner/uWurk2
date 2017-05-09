@@ -44,5 +44,6 @@
 - (void)handleErrorJsonResponse:(NSString *)who;
 - (void)handleErrorCountExceeded:(NSInteger)count;
 - (void)handleErrorValidateLogin;
+- (void)handleErrorAccessError:(NSError *)error;
 
 @end

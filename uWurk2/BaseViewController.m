@@ -254,7 +254,7 @@
     AFHTTPRequestOperationManager *manager = [self getManager];
     [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              NSLog(@"Latest JSON: %@", responseObject);
+              NSLog(@"Latest Profile Json: %@", responseObject);
               if([self validateResponse:responseObject]) {
                   completion(1);
               } else {
@@ -427,6 +427,22 @@
     UIAlertController * alert = [UIAlertController
                                  alertControllerWithTitle:@"Oops!"
                                  message:[NSString stringWithFormat:@"Unable to validate login"]
+                                 preferredStyle:UIAlertControllerStyleActionSheet];
+    [alert addAction:[UIAlertAction
+                      actionWithTitle:@"OK"
+                      style:UIAlertActionStyleDefault
+                      handler:^(UIAlertAction *action)
+                      {
+                      }]];
+    [self presentViewController:alert animated:TRUE completion:nil];
+}
+
+- (void)handleErrorAccessFailure:(NSError *)error
+{
+    NSString *message = [NSString stringWithFormat:@"Access error:\n\n%@",[error localizedDescription]];
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:@"Oops!"
+                                 message:message
                                  preferredStyle:UIAlertControllerStyleActionSheet];
     [alert addAction:[UIAlertAction
                       actionWithTitle:@"OK"

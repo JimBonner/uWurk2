@@ -41,6 +41,7 @@
         });
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
+        [self handleErrorAccessError:error];
     }];
 }
 
@@ -88,7 +89,7 @@
             [self.tableView reloadData];
         });
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
+        [self handleErrorAccessError:error];
     }];
 
 }

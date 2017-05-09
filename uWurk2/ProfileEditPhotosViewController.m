@@ -74,7 +74,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-        [self handleServerErrorUnableToContact];
+        [self handleErrorAccessError:error];
     }];
 }
 
@@ -227,7 +227,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-        [self handleServerErrorUnableToContact];
+        [self handleErrorAccessError:error];
     }];
 }
 
@@ -265,7 +265,7 @@
                                   
                               } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                   NSLog(@"Error: %@", error);
-                                  [self handleServerErrorUnableToContact];
+                                  [self handleErrorAccessError:error];
                               }];
                           }]];
         [alert addAction:[UIAlertAction
@@ -299,7 +299,7 @@
              }
              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                  NSLog(@"Error: %@", error);
-                 [self handleServerErrorUnableToContact];
+                 [self handleErrorAccessError:error];
              }
          ];
     }

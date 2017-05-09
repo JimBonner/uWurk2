@@ -438,7 +438,7 @@
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
-            [self handleServerErrorUnableToContact];
+            [self handleErrorAccessError:error];
         }];
     } else {
         UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
@@ -467,7 +467,7 @@
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 completion(0);
                 NSLog(@"Error: %@", error);
-                [self handleServerErrorUnableToContact];
+                [self handleErrorAccessError:error];
             }];
     } else {
         completion(1);

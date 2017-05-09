@@ -21,29 +21,32 @@
 
 @implementation ContactProfileViewController
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+}
+
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
     NSLog(@"\nContact Profile:\n%@",self.appDelegate.user);
 
-///    NSString *tips;
-///    NSString *time;
     self.lblEmployeeName.text = [NSString stringWithFormat:@"%@:",[self.searchUserDict objectForKey:@"first_name"]];
     self.lblNameInterest.text = [NSString stringWithFormat:@"Based on %@'s interest in this position, you will receive a YES or NO reply.",[self.searchUserDict objectForKey:@"first_name"]];
     self.lblEmployer.text = [self.appDelegate.user objectForKey:@"company"];
-    self.lblPosition.text = [self.paramholder objectForKey:@"position"];
-    self.lblLocation.text = [self.paramholder objectForKey:@"location"];
-    self.lblWage.text = [self.paramholder objectForKey:@"wage_type_tipped"];
+    self.lblPosition.text = [self.paramHolder objectForKey:@"position"];
+    self.lblLocation.text = [self.paramHolder objectForKey:@"location"];
+    self.lblWage.text     = [self.paramHolder objectForKey:@"wage_type_tipped"];
 }
 
 - (IBAction)pressReply:(UIButton *)sender {
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    [params setObject:[self.paramholder objectForKey:@"position"] forKey:@"position_id"];
+    [params setObject:[self.paramHolder objectForKey:@"position"] forKey:@"position_id"];
     [params setObject:[self.searchUserDict objectForKey:@"id"] forKey:@"contact_id"];
-    [params setObject:[self.paramholder objectForKey:@"hours"] forKey:@"hours"];
-    [params setObject:[self.paramholder objectForKey:@"zip"] forKey:@"zip"];
+    [params setObject:[self.paramHolder objectForKey:@"hours"] forKey:@"hours"];
+    [params setObject:[self.paramHolder objectForKey:@"zip"] forKey:@"zip"];
     [params setObject:@"" forKey:@"message"];
     
     
@@ -54,7 +57,7 @@
             [self.navigationController setViewControllers:@[myController] animated:TRUE];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
-            [self handleServerErrorUnableToContact];
+            [self handleErrorAccessError:error];
         }];
     }
     else{

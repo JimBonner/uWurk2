@@ -248,27 +248,31 @@ UIImage  *returnImage;
          } success:^(AFHTTPRequestOperation *operation, id responseObject) {
              NSLog(@"\nEmployee Step 6 - Json Photo Response: %@", responseObject);
              if([self validateResponse:responseObject]) {
-                 if(self.btnBioSkip.selected == YES) {
-                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
-                         [self.navigationController setViewControllers:@[myController] animated:YES];
-                     } else {
-                         [self saveBioDataToDbms];
-                     }
+                 if(self.btnBioSkip.selected == NO) {
+                     [self saveBioDataToDbms];
                  } else {
-                     [self handleServerErrorUnableToSaveData:@"Photo ID"];
+                     [self saveProfileComplete:^(NSInteger result) {
+                         if(result == 1) {
+                             UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
+                             [self.navigationController setViewControllers:@[myController] animated:YES];
+                         } else {
+                             [self handleServerErrorUnableToSaveData:@"Biography"];
+                         }
+                     }];
                  }
+             }
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              NSLog(@"Error: %@", error.description);
              [self handleServerErrorUnableToSaveData:@"Photo"];
          }];
     } else {
-        if(self.btnBioSkip.selected) {
+        if(self.btnBioSkip.selected == NO) {
             [self saveProfileComplete:^(NSInteger result) {
                 if(result == 1) {
                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                     [self.navigationController setViewControllers:@[myController] animated:YES];
                 } else {
-                    [self handleServerErrorUnableToSaveData:@"Photo"];
+                    [self handleServerErrorUnableToSaveData:@"Biography"];
                 }
             }];
         } else {
@@ -285,8 +289,8 @@ UIImage  *returnImage;
         AFHTTPRequestOperationManager *manager = [self getManager];
         [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             NSLog(@"\nEmployee Step 6 - Bio Json Response: %@", responseObject);
-                [self saveProfileComplete:^(NSInteger result) {
+               NSLog(@"\nEmployee Step 6 - Bio Json Response: %@", responseObject);
+               [self saveProfileComplete:^(NSInteger result) {
                    if(result == 1) {
                        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                        [self.navigationController setViewControllers:@[myController] animated:YES];
@@ -299,7 +303,7 @@ UIImage  *returnImage;
              [self handleServerErrorUnableToSaveData:@"Biography"];
          }];
     } else {
-        [self saveStepNumber:6 completion:^(NSInteger result) {
+        [self saveProfileComplete:^(NSInteger result) {
             if(result == 1) {
                 UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                 [self.navigationController setViewControllers:@[myController] animated:YES];

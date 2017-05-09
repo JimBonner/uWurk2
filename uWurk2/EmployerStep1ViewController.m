@@ -24,7 +24,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self saveStepNumber:1 completion:^(NSInteger result) { }];
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -62,6 +63,9 @@
     if (self.txtVerifyPassword.text.length == 0) {
         [Error appendString:@"\n\nVerify Password"];
     }
+    if (![self.txtPassword.text isEqualToString:self.txtVerifyPassword.text]) {
+        [Error appendString:@"\n\nPasswords Do Not Match"];
+    }
     if (self.txtFirstName.text.length == 0) {
         [Error appendString:@"\n\nFirst Name"];
     }
@@ -78,17 +82,18 @@
         [self updateParamDict:params value:self.txtLastName.text key:@"last_name"];
         [self updateParamDict:params value:@"1" key:@"setup_step"];
         if([params count]){
-            [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"\nEmployer Step 1 - Json Response: %@", responseObject);
-                if([self validateResponse:responseObject]){
-                    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerProfileSetup2"];
-                    [self.navigationController pushViewController:myController animated:YES];
-                } else {
-                    [self handleErrorJsonResponse:@"EmployerStep1"];
-                }
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params
+                success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    NSLog(@"\nEmployer Step 1 - Json Response: %@", responseObject);
+                    if([self validateResponse:responseObject]) {
+                        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerProfileSetup2"];
+                        [self.navigationController pushViewController:myController animated:YES];
+                    } else {
+                        [self handleServerErrorUnableToSaveData:@"EmployerStep1"];
+                    }
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error: %@", error);
-                [self handleServerErrorUnableToContact];
+                [self handleErrorAccessError:error];
             }];
         } else {
             UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerProfileSetup2"];

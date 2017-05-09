@@ -16,7 +16,7 @@
 
 
 @interface SearchResultsTableViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *lblResultNumber;
+@property (weak, nonatomic) IBOutlet UILabel  *lblResultNumber;
 @property (weak, nonatomic) IBOutlet UIButton *btnFavorite;
 @property (strong, nonatomic) NSArray *json;
 @property (strong, nonatomic) NSMutableDictionary *additionalJSON;
@@ -38,19 +38,22 @@
     [super viewWillAppear:animated];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
--(void)viewDidAppear:(BOOL)animated{
+-(void)viewDidAppear:(BOOL)animated
+{
     [super viewDidAppear:animated];
     
     AFHTTPRequestOperationManager *manager = [self getManager];
     //manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     
     
-    [manager POST:self.url parameters:self.parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:self.url parameters:self.parameters
+      success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.json = [responseObject objectForKey:@"rows"];
         self.searchID = [responseObject objectForKey:@"search_id"];
         self.additionalJSON = [NSMutableDictionary dictionaryWithDictionary:responseObject];
@@ -65,20 +68,22 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     // Return the number of rows in the section.
     return [self.json count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     SearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SearchResultCell" forIndexPath:indexPath];
     NSDictionary *dict = [self.json objectAtIndex:indexPath.row];
     if([dict objectForKey:@"photo_url"]) {
-    
             NSURL *photoURL =[NSURL URLWithString:[NSString stringWithFormat:@"http://uwurk.tscserver.com%@",[dict objectForKey:@"photo_url"]]];
             UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];
             [photoRequest startWithCompletion:^(UIImage *newImage, NSError *error) {
@@ -92,60 +97,56 @@
     cell.searchID = [_additionalJSON objectForKey:@"search_id"];
     cell.profileID = [dict objectForKey:@"id"];
 
-    [cell.btnFavorite setSelected: [[dict objectForKey:@"is_favorite"]  intValue] == 1];
+    [cell.btnFavorite setSelected:[[dict objectForKey:@"is_favorite"]intValue]];
+    
     NSString *tip;
     NSString *jobstatus;
-    if ([[dict objectForKey:@"job_status"] intValue] == 1){
+    if ([[dict objectForKey:@"job_status"] intValue] == 1) {
         jobstatus = @"Current";
-    }
-    else
+    } else {
         jobstatus = @"Previous";
-    if ([[dict objectForKey:@"tipped_position"] intValue] == 1){
-        tip = @"or Tips";
     }
-    else
+    if ([[dict objectForKey:@"tipped_position"] intValue] == 1) {
+        tip = @"or Tips";
+    } else {
         tip = @"";
+    }
     cell.line2.text = [NSString stringWithFormat:@"Age: %@ | $%@/hr %@",[dict objectForKey:@"age"], [dict objectForKey:@"hourly_wage"],tip];
     if ([dict objectForKey:@"experience"] == (id)[NSNull null] || [[dict objectForKey:@"experience"]length] == 0 ) {
         cell.line3.text = [NSString stringWithFormat:@"Education: %@",[dict objectForKey:@"education"]];
         cell.line4.text = @"";
+    } else {
+        cell.line3.text = [NSString stringWithFormat:@"%@: %@",jobstatus,[dict objectForKey:@"experience"]];
+        cell.line4.text = [NSString stringWithFormat:@"Education: %@",[dict objectForKey:@"education"]];
     }
-    else {
-    cell.line3.text = [NSString stringWithFormat:@"%@: %@",jobstatus,[dict objectForKey:@"experience"]];
     
-    cell.line4.text = [NSString stringWithFormat:@"Education: %@",[dict objectForKey:@"education"]];
-    }
+    [cell layoutIfNeeded];
     
     return cell;
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-    
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     NSDictionary *dict = [self.json objectAtIndex:indexPath.row];
     NSString *userID = [dict objectForKey:@"id"];
     SearchResultProfileViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileSearchResult"];
     [myController setProfileID:userID];
     [myController setSearchedUserDict:dict];
-    [myController setParamholder:self.parameters];
+    [myController setParamHolder:self.parameters];
     [myController setSearchID:self.searchID];
     
     [self.navigationController pushViewController:myController animated:TRUE];
-    
-    //    Class v = NSClassFromString([d objectForKey:@"ViewController"]);
-    //    UIViewController *childViewControllerNew = nil;
-    //    childViewControllerNew = [[v alloc] initWithNibName:[d objectForKey:@"ViewController"] bundle:nil];
-    //
-    //    [self.navigationController pushViewController:childViewControllerNew animated:TRUE];
-    
-    
 }
-- (IBAction)pressUpdateSearch:(id)sender {
+
+- (IBAction)pressUpdateSearch:(id)sender
+{
     RefineSearchViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"UpdateSearchViewController"];
     [self.navigationController pushViewController:myController animated:YES];
     [myController setSearchparms:self.parameters];
 }
-- (IBAction)pressSaveSearch:(id)sender {
+
+- (IBAction)pressSaveSearch:(id)sender
+{
     self.definesPresentationContext = YES; //self is presenting view controller
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"GeneralViews" bundle:nil];
     SaveSearchViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"SaveSearchViewController"];
@@ -159,7 +160,8 @@
     vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
 
     [self presentViewController:vc animated:YES completion:nil];
-    
+}
+
 //    
 //    UIAlertController *alertController = [UIAlertController
 //                                          alertControllerWithTitle:@"SAVE SEARCH"
@@ -193,7 +195,7 @@
 //    [alertController addAction:okAction];
     
 //    [self presentViewController:alertController animated:YES completion:nil];
-}
+//}
 
 /*
 // Override to support conditional editing of the table view.

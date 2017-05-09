@@ -97,7 +97,7 @@
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
-            [self handleServerErrorUnableToContact];
+            [self handleErrorAccessError:error];
         }];
     } else {
         UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditStep2"];
