@@ -99,27 +99,35 @@
         [self updateParamDict:params value:@"2" key:@"setup_step"];
         [self updateParamDict:params value:@"1" key:@"profile_complete"];
         if([params count]){
-            [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                self.performInit = YES;
-                NSLog(@"\nEmployer Step 2 - Json Response: %@", responseObject);
-                if([self validateResponse:responseObject]) {
-                    [self saveProfileComplete:^(NSInteger result) {
-                        if(result == 1) {
-                            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerLanding"];
-                            [self.navigationController pushViewController:myController animated:YES];
-                        } else {
-                            [self handleErrorJsonResponse:@"EmployerStep2"];
-                        }
-                    }];
+            [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params
+                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    self.performInit = YES;
+                    NSLog(@"\nEmployer Step 2 - Json Response: %@", responseObject);
+                    if([self validateResponse:responseObject]) {
+                        [self saveStepNumber:-1 completion:^(NSInteger result) {
+                            if(result == 1) {
+                                UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerLanding"];
+                                [self.navigationController setViewControllers:@[myController] animated:YES];
+                            } else {
+                                [self handleServerErrorUnableToSaveData:@"Step Number"];
+                            }
+                        }];
+                    } else {
+                        [self handleErrorJsonResponse:@"EmployerStep2"];
+                    }
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                        NSLog(@"Error: %@", error);
+                        [self handleErrorAccessError:error];
+                }];
+        } else {
+            [self saveStepNumber:-1 completion:^(NSInteger result) {
+                if(result == 1) {
+                    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerLanding"];
+                    [self.navigationController setViewControllers:@[myController] animated:YES];
+                } else {
+                    [self handleServerErrorUnableToSaveData:@"Step Number"];
                 }
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"Error: %@", error);
-                [self handleErrorAccessError:error];
             }];
-        }
-        else{
-            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerLanding"];
-            [self.navigationController setViewControllers:@[myController] animated:YES];
         }
     }
 }
