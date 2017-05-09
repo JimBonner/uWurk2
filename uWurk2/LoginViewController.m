@@ -255,8 +255,7 @@
                     self.navigationItem.rightBarButtonItem = logoutButton;
                     
                 }
-            }
-            else if([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"employer"]) {
+            } else if([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"employer"]) {
                 if([[[self.appDelegate user] objectForKey:@"profile_complete"] intValue] >= 1) {
                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerLanding"];
                     [self.navigationController setViewControllers:@[myController] animated:YES];
@@ -264,8 +263,7 @@
                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerProfileSetup0"];
                     [self.navigationController setViewControllers:@[myController] animated:YES];
                 }
-            }
-            else {
+            } else {
                 // All hell has broken loose
                 UIAlertController * alert = [UIAlertController
                                              alertControllerWithTitle:@"Oops!"

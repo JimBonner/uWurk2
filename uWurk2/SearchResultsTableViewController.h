@@ -12,8 +12,6 @@
 #import "AFNetworking.h"
 #import "BaseTableViewController.h"
 
-
-
 @interface SearchResultsTableViewController : BaseTableViewController
 
 @property (nonatomic, assign) id delegate;

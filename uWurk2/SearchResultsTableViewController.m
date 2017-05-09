@@ -49,9 +49,6 @@
     [super viewDidAppear:animated];
     
     AFHTTPRequestOperationManager *manager = [self getManager];
-    //manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    
-    
     [manager POST:self.url parameters:self.parameters
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.json = [responseObject objectForKey:@"rows"];
@@ -59,7 +56,7 @@
         self.additionalJSON = [NSMutableDictionary dictionaryWithDictionary:responseObject];
         [self.additionalJSON removeObjectForKey:@"rows"];
         [self.tableView reloadData];
-        NSUInteger er =[self.json count];
+        NSUInteger er = [self.json count];
         self.lblResultNumber.text = [NSString stringWithFormat:@"(%lu)", (unsigned long)er];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
@@ -75,7 +72,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
     return [self.json count];
 }
 
@@ -94,7 +90,7 @@
     }
     cell.lblName.text = [NSString stringWithFormat:@"%@ %@",[dict objectForKey:@"first_name"],[dict objectForKey:@"last_name"]];
     // Use attrib strings for the rest
-    cell.searchID = [_additionalJSON objectForKey:@"search_id"];
+    cell.searchID = [self.additionalJSON objectForKey:@"search_id"];
     cell.profileID = [dict objectForKey:@"id"];
 
     [cell.btnFavorite setSelected:[[dict objectForKey:@"is_favorite"]intValue]];

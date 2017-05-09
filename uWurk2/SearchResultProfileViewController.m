@@ -510,7 +510,6 @@
     if (self.btnFavorite.selected == YES) {
         [params setObject:self.searchID forKey:@"search_id"];
         [params setObject:self.profileID forKey:@"user_id"];
-///        [params setObject:[@(self.btnFavorite.selected)stringValue] forKey:@"is_favorite"];
         if([params count]) {
             [manager POST:@"http://uwurk.tscserver.com/api/v1/add_favorite_employee" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                     NSLog(@"Add Favorite - Json Response: \n\n%@", responseObject);
