@@ -9,19 +9,18 @@
 
 #import "SearchResultTableViewCell.h"
 #import "AFNetworking.h"
-
+#import "BaseTableViewController.h"
 
 @implementation SearchResultTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)awakeFromNib
+{
     [super awakeFromNib];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 -(NSString*)getUserDefault:(NSString*)key
@@ -47,8 +46,9 @@
                     });
 
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                    NSLog(@"Error: %@", error);                    
-                    UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
+                    NSLog(@"Error: %@", error);
+                    
+                    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:@"Oops!"
                                                                      message:@"Unable to contact server"
                                                                     delegate:self
                                                            cancelButtonTitle:@"OK"

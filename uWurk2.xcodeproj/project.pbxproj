@@ -1048,6 +1048,7 @@
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PREFIX_HEADER = "uWurk2/uWurk2-Info-prefix.pch";
 				INFOPLIST_FILE = uWurk2/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.uwurk.uwurk;
 				PRODUCT_NAME = uWurk;
@@ -1067,6 +1068,7 @@
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PREFIX_HEADER = "uWurk2/uWurk2-Info-prefix.pch";
 				INFOPLIST_FILE = uWurk2/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.uwurk.uwurk;
 				PRODUCT_NAME = uWurk;

@@ -22,5 +22,4 @@
 @property (nonatomic, strong) NSString *searchID;
 @property (nonatomic, strong) NSString *profileID;
 
-
 @end

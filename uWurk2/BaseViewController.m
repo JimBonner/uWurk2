@@ -437,7 +437,7 @@
     [self presentViewController:alert animated:TRUE completion:nil];
 }
 
-- (void)handleErrorAccessFailure:(NSError *)error
+- (void)handleErrorAccessError:(NSError *)error
 {
     NSString *message = [NSString stringWithFormat:@"Access error:\n\n%@",[error localizedDescription]];
     UIAlertController * alert = [UIAlertController

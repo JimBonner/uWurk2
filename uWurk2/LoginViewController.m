@@ -210,7 +210,7 @@
         NSLog(@"\nLogin Json Response:\n%@", responseObject);
         if([self validateResponse:responseObject]){
             if([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"employee"]) {
-                if([[[self.appDelegate user] objectForKey:@"profile_complete"] intValue] >= 1) {
+                if([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] == -1) {
                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                     [self.navigationController setViewControllers:@[myController] animated:YES];
                 } else {
@@ -256,7 +256,7 @@
                     
                 }
             } else if([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"employer"]) {
-                if([[[self.appDelegate user] objectForKey:@"profile_complete"] intValue] >= 1) {
+                if([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] == -1) {
                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerLanding"];
                     [self.navigationController setViewControllers:@[myController] animated:YES];
                 } else {

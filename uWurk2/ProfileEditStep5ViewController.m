@@ -500,7 +500,7 @@
 
 - (void)setupAttributesForIndex:(NSInteger)index
 {
-    NSString *postFix = [NSString stringWithFormat:@"[%ld]",index];
+    NSString *postFix = [NSString stringWithFormat:@"[%ld]",(long)index];
     self.expId = [NSString stringWithFormat:@"exp_id%@",postFix];
     self.noExp = [NSString stringWithFormat:@"has_no_job_experience%@",postFix];
     self.company = [NSString stringWithFormat:@"company%@",postFix];
