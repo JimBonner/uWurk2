@@ -78,6 +78,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SearchResultCell" forIndexPath:indexPath];
+    cell.searchViewController = self;
     NSDictionary *dict = [self.json objectAtIndex:indexPath.row];
     if([dict objectForKey:@"photo_url"]) {
             NSURL *photoURL =[NSURL URLWithString:[NSString stringWithFormat:@"http://uwurk.tscserver.com%@",[dict objectForKey:@"photo_url"]]];
@@ -143,7 +144,7 @@
 
 - (IBAction)pressSaveSearch:(id)sender
 {
-    self.definesPresentationContext = YES; //self is presenting view controller
+    self.definesPresentationContext = YES;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"GeneralViews" bundle:nil];
     SaveSearchViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"SaveSearchViewController"];
     
@@ -151,14 +152,29 @@
     vc.saveID = [self.additionalJSON objectForKey:@"search_id"];
     self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     
-    
     vc.view.backgroundColor = [UIColor clearColor];
     vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
 
     [self presentViewController:vc animated:YES completion:nil];
 }
 
-//    
+- (void)handleErrorAccessError:(NSError *)error
+{
+    NSString *message = [NSString stringWithFormat:@"Access error:\n\n%@",[error localizedDescription]];
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:@"Oops!"
+                                 message:message
+                                 preferredStyle:UIAlertControllerStyleActionSheet];
+    [alert addAction:[UIAlertAction
+                      actionWithTitle:@"OK"
+                      style:UIAlertActionStyleDefault
+                      handler:^(UIAlertAction *action)
+                      {
+                      }]];
+    [self presentViewController:alert animated:TRUE completion:nil];
+}
+
+//
 //    UIAlertController *alertController = [UIAlertController
 //                                          alertControllerWithTitle:@"SAVE SEARCH"
 //                                          message:@"Enter a description for this search:"

@@ -68,7 +68,7 @@
                   }
               }
               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  [self handleServerErrorUnableToContact];
+                  [self handleErrorAccessError:error];
               }
          ];
         
@@ -222,7 +222,7 @@
             }
         }
          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-             [self handleServerErrorUnableToContact];
+             [self handleErrorAccessError:error];
         }];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

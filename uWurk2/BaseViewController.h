@@ -36,10 +36,11 @@
 - (NSURL *)serverUrlWith:(NSString *)postfix;
 - (void)saveStepNumber:(NSInteger)stepNum completion:(void(^)(NSInteger result))completion;
 - (void)saveProfileComplete:(void(^)(NSInteger result))completion;
-- (void)handleServerErrorUnableToGetData;
-- (void)handleServerErrorUnableToPutData;
-- (void)handleServerErrorUnableToContact;
-- (void)handleServerErrorUnableToSaveData:(NSString *)what;
+
+- (void)handleErrorUnableToGetData;
+- (void)handleErrorUnableToPutData;
+- (void)handleErrorUnableToContact;
+- (void)handleErrorUnableToSaveData:(NSString *)what;
 - (void)handleErrorWithMessage:(NSString *)message;
 - (void)handleErrorJsonResponse:(NSString *)who;
 - (void)handleErrorCountExceeded:(NSInteger)count;

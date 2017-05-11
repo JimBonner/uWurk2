@@ -284,7 +284,7 @@
     return [prefs stringForKey:key];
 }
 
-- (void)handleServerErrorUnableToContact
+- (void)handleErrorUnableToContact
 {
     UIAlertController * alert = [UIAlertController
                                  alertControllerWithTitle:@"Oops!"

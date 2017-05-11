@@ -29,14 +29,14 @@
     [super viewWillAppear:animated];
 }
 
-- (IBAction)savePress:(id)sender {
-    
-    AFHTTPRequestOperationManager *manager = [self getManager];
+- (IBAction)savePress:(id)sender
+{
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:self.saveID forKey:@"id"];
     [params setObject:self.txtDescription.text forKey:@"description"];
     
     if([params count]){
+        AFHTTPRequestOperationManager *manager = [self getManager];
         [manager POST:@"http://uwurk.tscserver.com/api/v1/save_search" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
             if([self validateResponse:responseObject]){
@@ -46,18 +46,14 @@
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
-            UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Oops!"
-                                                             message:@"Unable to save search"
-                                                            delegate:self
-                                                   cancelButtonTitle:@"OK"
-                                                   otherButtonTitles: nil];
-            [alert show];
+            [self handleErrorUnableToSaveData:@"Search"];
         }];
     }
-   
 }
 
-- (IBAction)cancelPress:(id)sender {
+- (IBAction)cancelPress:(id)sender
+{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 @end

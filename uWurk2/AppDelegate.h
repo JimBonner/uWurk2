@@ -18,7 +18,7 @@
 
 @property CGSize screenSize;
 
--(NSString *)getDocumentsDirectory;
+- (NSString *)getDocumentsDirectory;
 
 @end
 

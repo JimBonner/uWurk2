@@ -756,7 +756,7 @@
 
 - (void)setupAttributesForIndex:(NSInteger)index
 {
-    NSString *postFix = [NSString stringWithFormat:@"[%ld]",index];
+    NSString *postFix = [NSString stringWithFormat:@"[%ld]",(long)index];
     self.eduId = [NSString stringWithFormat:@"edu_id%@",postFix];
     self.schoolLevel = [NSString stringWithFormat:@"school_level%@",postFix];
     self.status = [NSString stringWithFormat:@"status%@",postFix];

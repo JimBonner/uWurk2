@@ -256,7 +256,7 @@ UIImage  *returnImage;
                              UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerLanding"];
                              [self.navigationController setViewControllers:@[myController] animated:YES];
                          } else {
-                             [self handleServerErrorUnableToSaveData:@"Step Number"];
+                             [self handleErrorUnableToSaveData:@"Step Number"];
                          }
                      }];
                  }
@@ -265,7 +265,7 @@ UIImage  *returnImage;
              }
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              NSLog(@"Error: %@", error.description);
-             [self handleServerErrorUnableToSaveData:@"Photo"];
+             [self handleErrorUnableToSaveData:@"Photo"];
          }];
     } else {
         if(self.btnBioSkip.selected == NO) {
@@ -276,7 +276,7 @@ UIImage  *returnImage;
                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                     [self.navigationController setViewControllers:@[myController] animated:YES];
                 } else {
-                    [self handleServerErrorUnableToSaveData:@"Step Number"];
+                    [self handleErrorUnableToSaveData:@"Step Number"];
                 }
             }];
         }
@@ -297,12 +297,12 @@ UIImage  *returnImage;
                        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                        [self.navigationController setViewControllers:@[myController] animated:YES];
                    } else {
-                       [self handleServerErrorUnableToSaveData:@"Step Number"];
+                       [self handleErrorUnableToSaveData:@"Step Number"];
                    }
                }];
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              NSLog(@"Error: %@", error);
-             [self handleServerErrorUnableToSaveData:@"Biography"];
+             [self handleErrorUnableToSaveData:@"Biography"];
          }];
     }
 }

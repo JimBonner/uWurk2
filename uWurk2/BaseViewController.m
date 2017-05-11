@@ -259,12 +259,12 @@
                   completion(1);
               } else {
                   completion(0);
-                  [self handleServerErrorUnableToGetData];
+                  [self handleErrorUnableToGetData];
               }}
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
               completion(0);
-              [self handleServerErrorUnableToGetData];
+              [self handleErrorUnableToGetData];
           }
      ];
 }
@@ -281,12 +281,12 @@
                   completion(1);
               } else {
                   completion(0);
-                  [self handleServerErrorUnableToPutData];
+                  [self handleErrorUnableToPutData];
               }}
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
               completion(0);
-              [self handleServerErrorUnableToPutData];
+              [self handleErrorUnableToPutData];
           }
      ];
 }
@@ -303,20 +303,21 @@
                   completion(1);
               } else {
                   completion(0);
-                  [self handleServerErrorUnableToSaveData:@"Profile Complete"];
+                  [self handleErrorUnableToSaveData:@"Profile Complete"];
               }}
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
               completion(0);
-              [self handleServerErrorUnableToSaveData:@"Profile Complete"];
+              [self handleErrorUnableToSaveData:@"Profile Complete"];
           }
      ];
 }
 
+
 #pragma mark -
 #pragma mark Common Error Messsages
 
-- (void)handleServerErrorUnableToGetData
+- (void)handleErrorUnableToGetData
 {
     UIAlertController * alert = [UIAlertController
                                  alertControllerWithTitle:@"Oops!"
@@ -331,7 +332,7 @@
     [self presentViewController:alert animated:TRUE completion:nil];
 }
 
-- (void)handleServerErrorUnableToPutData
+- (void)handleErrorUnableToPutData
 {
     UIAlertController * alert = [UIAlertController
                                  alertControllerWithTitle:@"Oops!"
@@ -346,7 +347,7 @@
     [self presentViewController:alert animated:TRUE completion:nil];
 }
 
-- (void)handleServerErrorUnableToContact
+- (void)handleErrorUnableToContact
 {
     UIAlertController * alert = [UIAlertController
                                  alertControllerWithTitle:@"Oops!"
@@ -361,7 +362,7 @@
     [self presentViewController:alert animated:TRUE completion:nil];
 }
 
-- (void)handleServerErrorUnableToSaveData:(NSString *)what
+- (void)handleErrorUnableToSaveData:(NSString *)what
 {
     NSString *message = [NSString stringWithFormat:@"Unable to save %@ data",what];
     UIAlertController * alert = [UIAlertController
@@ -452,6 +453,7 @@
                       }]];
     [self presentViewController:alert animated:TRUE completion:nil];
 }
+
 
 //-(void)setupUXforUser{
 //

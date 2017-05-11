@@ -89,7 +89,7 @@
                         UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerProfileSetup2"];
                         [self.navigationController pushViewController:myController animated:YES];
                     } else {
-                        [self handleServerErrorUnableToSaveData:@"EmployerStep1"];
+                        [self handleErrorUnableToSaveData:@"EmployerStep1"];
                     }
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error: %@", error);

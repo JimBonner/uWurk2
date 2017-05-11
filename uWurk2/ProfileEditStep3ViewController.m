@@ -242,7 +242,7 @@
                     [self handleErrorJsonResponse:@"ProfileEditStep3"];
                 }
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                [self handleServerErrorUnableToContact];
+                [self handleErrorUnableToContact];
             }];
         }
         else{

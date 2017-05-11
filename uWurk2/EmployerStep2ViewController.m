@@ -109,7 +109,7 @@
                                 UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerLanding"];
                                 [self.navigationController setViewControllers:@[myController] animated:YES];
                             } else {
-                                [self handleServerErrorUnableToSaveData:@"Step Number"];
+                                [self handleErrorUnableToSaveData:@"Step Number"];
                             }
                         }];
                     } else {
@@ -125,7 +125,7 @@
                     UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerLanding"];
                     [self.navigationController setViewControllers:@[myController] animated:YES];
                 } else {
-                    [self handleServerErrorUnableToSaveData:@"Step Number"];
+                    [self handleErrorUnableToSaveData:@"Step Number"];
                 }
             }];
         }

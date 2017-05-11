@@ -8,6 +8,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SearchResultsTableViewController.h"
 
 @interface SearchResultTableViewCell : UITableViewCell
 
@@ -18,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageProfile;
 @property (weak, nonatomic) IBOutlet UILabel     *lblContacted;
 @property (weak, nonatomic) IBOutlet UIButton    *btnFavorite;
+
+@property (nonatomic, strong) SearchResultsTableViewController *searchViewController;
 
 @property (nonatomic, strong) NSString *searchID;
 @property (nonatomic, strong) NSString *profileID;

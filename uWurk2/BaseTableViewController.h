@@ -24,6 +24,6 @@
 -(void)assignValue:(NSString*)value control:(UITextField*)control;
 -(NSMutableDictionary*)updateParamDict:(NSMutableDictionary*)paramDict value:(NSString*)value key:(NSString*)key;
 -(NSMutableDictionary*)updateParamDictDefault:(NSMutableDictionary*)paramDict value:(NSString*)value key:(NSString*)key def:(NSString*)def;
-- (void)handleServerErrorUnableToContact;
+- (void)handleErrorUnableToContact;
 
 @end

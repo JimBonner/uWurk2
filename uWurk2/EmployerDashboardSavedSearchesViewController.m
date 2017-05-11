@@ -27,7 +27,6 @@
     AFHTTPRequestOperationManager *manager = [self getManager];
     
     [manager GET:@"http://uwurk.tscserver.com/api/v1/saved_searches" parameters: nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
         self.json = [responseObject objectForKey:@"rows"];
         [self.tableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -80,7 +79,6 @@
     return YES;
 }
 
-// Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {

@@ -22,4 +22,6 @@
 @property (nonatomic, retain) NSString *url;
 @property (nonatomic, retain) UIButton *sender;
 
+- (void)handleErrorAccessError:(NSError *)error;
+
 @end
