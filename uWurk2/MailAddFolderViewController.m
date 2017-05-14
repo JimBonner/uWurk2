@@ -10,15 +10,16 @@
 #import "MailAddFolderViewController.h"
 
 @interface MailAddFolderViewController ()
+
 @property (weak, nonatomic) IBOutlet UITextField *txtName;
 
 @end
 
 @implementation MailAddFolderViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -26,7 +27,8 @@
     [super viewWillAppear:animated];
 }
 
-- (IBAction)addFolder:(id)sender {
+- (IBAction)addFolder:(id)sender
+{
     AFHTTPRequestOperationManager *manager = [self getManager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     

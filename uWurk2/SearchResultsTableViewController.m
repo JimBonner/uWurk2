@@ -20,7 +20,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnFavorite;
 @property (strong, nonatomic) NSArray *json;
 @property (strong, nonatomic) NSMutableDictionary *additionalJSON;
+@property (strong, nonatomic) NSArray *favorites;
+@property (strong, nonatomic) NSString *userID;
 @property (strong, nonatomic) NSString *searchID;
+
+@property BOOL performInit;
 
 @end
 
@@ -31,6 +35,7 @@
     [super viewDidLoad];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 77.0;
+    self.performInit = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -48,15 +53,20 @@
 {
     [super viewDidAppear:animated];
     
+    if(self.performInit == NO) {
+        [self.searchParameters setObject:self.searchID forKey:@"search_id"];
+    }
+    self.performInit = NO;
     AFHTTPRequestOperationManager *manager = [self getManager];
-    [manager POST:self.url parameters:self.parameters
+    [manager POST:self.url parameters:self.searchParameters
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.json = [responseObject objectForKey:@"rows"];
         self.searchID = [responseObject objectForKey:@"search_id"];
+        self.favorites = [responseObject objectForKey:@"favorites"];
         self.additionalJSON = [NSMutableDictionary dictionaryWithDictionary:responseObject];
         [self.additionalJSON removeObjectForKey:@"rows"];
-        [self.tableView reloadData];
         NSUInteger er = [self.json count];
+        [self.tableView reloadData];
         self.lblResultNumber.text = [NSString stringWithFormat:@"(%lu)", (unsigned long)er];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
@@ -93,8 +103,15 @@
     // Use attrib strings for the rest
     cell.searchID = [self.additionalJSON objectForKey:@"search_id"];
     cell.profileID = [dict objectForKey:@"id"];
-
-    [cell.btnFavorite setSelected:[[dict objectForKey:@"is_favorite"]intValue]];
+    
+    BOOL is_favorite = NO;
+    for(NSDictionary *dict in self.favorites) {
+        if([[dict objectForKey:@"id"]integerValue] == [cell.profileID integerValue]) {
+            is_favorite = YES;
+            break;
+        }
+    }
+    cell.btnFavorite.selected = is_favorite;
     
     NSString *tip;
     NSString *jobstatus;
@@ -124,13 +141,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *dict = [self.json objectAtIndex:indexPath.row];
+    NSMutableDictionary *dict = [self.json objectAtIndex:indexPath.row];
     NSString *userID = [dict objectForKey:@"id"];
+    self.userID = userID;
     SearchResultProfileViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileSearchResult"];
-    [myController setProfileID:userID];
-    [myController setSearchedUserDict:dict];
-    [myController setParamHolder:self.parameters];
+    [myController setProfileID:self.userID];
     [myController setSearchID:self.searchID];
+    [myController setSearchedUserDict:dict];
+    [myController setParamHolder:self.searchParameters];
     
     [self.navigationController pushViewController:myController animated:TRUE];
 }
@@ -139,7 +157,7 @@
 {
     RefineSearchViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"UpdateSearchViewController"];
     [self.navigationController pushViewController:myController animated:YES];
-    [myController setSearchparms:self.parameters];
+    [myController setSearchparms:self.searchParameters];
 }
 
 - (IBAction)pressSaveSearch:(id)sender
@@ -157,6 +175,38 @@
 
     [self presentViewController:vc animated:YES completion:nil];
 }
+
+- (IBAction)pressFavorite:(SearchResultTableViewCell *)cell
+{
+    AFHTTPRequestOperationManager *manager = [self getManager];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:cell.searchID forKey:@"search_id"];
+    [params setObject:cell.profileID forKey:@"user_id"];
+    if (self.btnFavorite.selected == NO) {
+        if([params count]) {
+            [manager POST:@"http://uwurk.tscserver.com/api/v1/add_favorite_employee" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"\nAdd Favorite - Json Response: \n%@", responseObject);
+                cell.btnFavorite.selected = YES;
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Error: %@", error);
+                [self handleErrorAccessError:error];
+            }];
+        }
+    } else {
+        if([params count]){
+            [manager POST:@"http://uwurk.tscserver.com/api/v1/remove_favorite_employee" parameters:params
+                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                      NSLog(@"\nRemove Favorite - Json Response: \n%@", responseObject);
+                      cell.btnFavorite.selected = NO;
+                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                      NSLog(@"Error: %@", error);
+                      [self handleErrorAccessError:error];
+                  }
+             ];
+        }
+    }
+}
+
 
 - (void)handleErrorAccessError:(NSError *)error
 {

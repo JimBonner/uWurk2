@@ -66,7 +66,8 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(AFHTTPRequestOperationManager*)getManager{
+-(AFHTTPRequestOperationManager*)getManager
+{
     AFHTTPRequestOperationManager *manager = [self getManagerNoAuth];
     [manager.requestSerializer setValue:[self getUserDefault:@"api_auth_token"] forHTTPHeaderField:@"API-AUTH"];
     return manager;

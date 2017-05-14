@@ -10,8 +10,8 @@
 #import "SearchResultProfileViewController.h"
 #import "SearchResultsTableViewController.h"
 #import "ContactProfileViewController.h"
+#import "EditEmployerContactInfoViewController.h"
 #import "UrlImageRequest.h"
-
 
 @interface SearchResultProfileViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lblName;
@@ -46,17 +46,36 @@
 
 @implementation SearchResultProfileViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+
 }
 
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    if ([[self.searchedUserDict objectForKey:@"is_favorite"] intValue] == 1) {
-        self.btnFavorite.selected = TRUE;
-    }
+    [self.paramHolder setValue:self.searchID forKey:@"search_id"];
+    
+    AFHTTPRequestOperationManager *manager = [self getManager];
+    [manager POST:@"http://uwurk.tscserver.com/api/v1/search" parameters:self.paramHolder
+           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+               NSLog(@"\nSearch Result Favorite - Json: \n%@", responseObject);
+               BOOL is_favorite = NO;
+               for(NSDictionary *dict in [responseObject objectForKey:@"favorites"]) {
+                  if([[dict objectForKey:@"id"]integerValue] == [self.profileID integerValue]) {
+                      is_favorite = YES;
+                      break;
+                   }
+               }
+               self.btnFavorite.selected = is_favorite;
+          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Error: %@", error);
+              [self handleErrorAccessError:error];
+              return;
+          }];
+    
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:self.profileID forKey:@"id"];
     
@@ -507,24 +526,24 @@
 {
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    if (self.btnFavorite.selected == YES) {
-        [params setObject:self.searchID forKey:@"search_id"];
-        [params setObject:self.profileID forKey:@"user_id"];
+    [params setObject:self.searchID forKey:@"search_id"];
+    [params setObject:self.profileID forKey:@"user_id"];
+    if (self.btnFavorite.selected == NO) {
         if([params count]) {
             [manager POST:@"http://uwurk.tscserver.com/api/v1/add_favorite_employee" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    NSLog(@"Add Favorite - Json Response: \n\n%@", responseObject);
+                    NSLog(@"\nAdd Favorite - Json Response: \n%@", responseObject);
+                    self.btnFavorite.selected = YES;
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     NSLog(@"Error: %@", error);
                     [self handleErrorAccessError:error];
                 }];
         }
     } else {
-        [params setObject:self.searchID forKey:@"search_id"];
-        [params setObject:self.profileID forKey:@"user_id"];
         if([params count]){
             [manager POST:@"http://uwurk.tscserver.com/api/v1/remove_favorite_employee" parameters:params
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"Remove Favorite - Json Response: /n/n%@", responseObject);
+                NSLog(@"\nRemove Favorite - Json Response: \n%@", responseObject);
+                self.btnFavorite.selected = NO;
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error: %@", error);
                 [self handleErrorAccessError:error];
@@ -540,7 +559,7 @@
 
 - (IBAction)pressContact:(id)sender
 {
-    ContactProfileViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerDashboardContactViewController"];
+    EditEmployerContactInfoViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerDashboardContactViewController"];
     [myController setParamHolder:self.paramHolder];
     [myController setSearchUserDict:self.searchedUserDict];
     [self.navigationController pushViewController:myController animated:TRUE];

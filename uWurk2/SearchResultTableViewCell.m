@@ -28,7 +28,8 @@
     return [prefs stringForKey:key];
 }
 
-- (IBAction)pressFavorites:(id)sender {
+- (IBAction)pressFavorites:(id)sender
+{
     
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
     [manager.requestSerializer setValue:[self getUserDefault:@"api_auth_token"] forHTTPHeaderField:@"API-AUTH"];
@@ -39,9 +40,9 @@
             [params setObject:self.profileID forKey:@"user_id"];
             if([params count]){
                 [manager POST:@"http://uwurk.tscserver.com/api/v1/add_favorite_employee" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    NSLog(@"JSON: %@", responseObject);
+                    NSLog(@"\nAdd Favorite - Json Response:\n%@", responseObject);
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.btnFavorite setSelected:TRUE];
+                        [self.btnFavorite setSelected:YES];
                     });
 
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -55,9 +56,9 @@
             [params setObject:self.profileID forKey:@"user_id"];
             if([params count]){
                 [manager POST:@"http://uwurk.tscserver.com/api/v1/remove_favorite_employee" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    NSLog(@"JSON: %@", responseObject);
+                    NSLog(@"\nRemove Favorite - Json Response:\n%@", responseObject);
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.btnFavorite setSelected:FALSE];
+                        [self.btnFavorite setSelected:NO];
                     });
     
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

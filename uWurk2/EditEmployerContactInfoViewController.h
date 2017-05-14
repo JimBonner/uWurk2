@@ -12,4 +12,7 @@
 
 @interface EditEmployerContactInfoViewController : BaseViewController
 
+@property (weak, nonatomic) NSMutableDictionary *paramHolder;
+@property (weak, nonatomic) NSMutableDictionary *searchUserDict;
+
 @end

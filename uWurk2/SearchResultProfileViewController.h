@@ -12,9 +12,9 @@
 
 @interface SearchResultProfileViewController : BaseViewController
 
+@property (strong, nonatomic) NSMutableDictionary *searchedUserDict;
+@property (strong, nonatomic) NSMutableDictionary *paramHolder;
 @property (strong, nonatomic) NSString     *profileID;
-@property (strong, nonatomic) NSDictionary *searchedUserDict;
-@property (strong, nonatomic) NSDictionary *paramHolder;
 @property (strong, nonatomic) NSString     *searchID;
 
 @end

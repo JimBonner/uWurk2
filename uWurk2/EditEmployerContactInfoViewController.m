@@ -25,9 +25,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnOtherEmail;
 @property (weak, nonatomic) IBOutlet UIButton *btnOtherWebsite;
 
-@property (weak, nonatomic) NSMutableDictionary *paramHolder;
-@property (weak, nonatomic) NSMutableDictionary *searchUserDict;
-
 @end
 
 @implementation EditEmployerContactInfoViewController
@@ -48,33 +45,35 @@
     [self assignValue:[self.appDelegate.user objectForKey:@"first_name"] control:self.txtFirstName];
     [self assignValue:[self.appDelegate.user objectForKey:@"last_name"] control:self.txtLastName];
     [self assignValue:[self.appDelegate.user objectForKey:@"cell_phone"] control:self.txtPhone];
-    if([[self.appDelegate.user objectForKey:@"pos_replies_text"] intValue] == 1) {
-        
+    
+    if(([[self.appDelegate.user objectForKey:@"pos_replies_cmid"]intValue] & 1) == 1) {
+        self.btnPosText.selected = YES;
     }
-    if([[self.appDelegate.user objectForKey:@"pos_replies_email"] intValue] == 1) {
-        
+    if(([[self.appDelegate.user objectForKey:@"pos_replies_cmid"]intValue] & 2) == 2) {
+        self.btnPosEmail.selected = YES;
     }
-    if([[self.appDelegate.user objectForKey:@"pos_replies_text"] intValue] == 1) {
-        
+    if(([[self.appDelegate.user objectForKey:@"neg_replies_cmid"]intValue] & 1) == 1) {
+        self.btnNegText.selected = YES;
     }
-    if([[self.appDelegate.user objectForKey:@"pos_replies_text"] intValue] == 1) {
-        
+    if(([[self.appDelegate.user objectForKey:@"neg_replies_cmid"]intValue] & 2) == 2) {
+        self.btnNegEmail.selected = YES;
     }
-    if([[self.appDelegate.user objectForKey:@"neg_replies_email"] intValue] == 1) {
-        
+    if(([[self.appDelegate.user objectForKey:@"other_msgs_cmid"]intValue] & 1) == 1) {
+        self.btnOtherText.selected = YES;
     }
-    if([[self.appDelegate.user objectForKey:@"pos_replies_text"] intValue] == 1) {
-        
+    if(([[self.appDelegate.user objectForKey:@"other_msgs_cmid"]intValue] & 2) == 2) {
+        self.btnOtherEmail.selected = YES;
     }
-    if([[self.appDelegate.user objectForKey:@"pos_replies_text"] intValue] == 1) {
-        
-    }
-    if([[self.appDelegate.user objectForKey:@"pos_replies_text"] intValue] == 1) {
-        
-    }
-    if([[self.appDelegate.user objectForKey:@"pos_replies_text"] intValue] == 1) {
-        
-    }
+    self.btnPosWebsite.selected = YES;
+    self.btnPosWebsite.userInteractionEnabled = NO;
+    self.btnPosWebsite.alpha = 0.3;
+    self.btnNegWebsite.selected = YES;
+    self.btnNegWebsite.userInteractionEnabled = NO;
+    self.btnNegWebsite.alpha = 0.3;
+    self.btnOtherWebsite.selected = YES;
+    self.btnOtherWebsite.userInteractionEnabled = NO;
+    self.btnOtherWebsite.alpha = 0.3;
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,39 +89,6 @@
 
 - (IBAction)pressSaveChanges:(id)sender
 {
-    AFHTTPRequestOperationManager *manager = [self getManager];
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    [self updateParamDict:params value:self.txtEmail.text key:@"email"];
-    [self updateParamDict:params value:self.txtFirstName.text key:@"first_name"];
-    [self updateParamDict:params value:self.txtLastName.text key:@"last_name"];
-    [self updateParamDict:params value:self.txtPhone.text key:@"cell_phone"];
-    if (self.btnPosText.selected == TRUE) {
-        [params setValue:@"1" forKey:@"pos_replies_text"];
-    }
-    if (self.btnPosEmail.selected == TRUE) {
-        [params setValue:@"1" forKey:@"pos_replies_email"];
-    }
-    if (self.btnPosWebsite.selected == TRUE) {
-        [params setValue:@"1" forKey:@"pos_replies_website"];
-    }
-    if (self.btnNegText.selected == TRUE) {
-        [params setValue:@"1" forKey:@"neg_replies_text"];
-    }
-    if (self.btnNegEmail.selected == TRUE) {
-        [params setValue:@"1" forKey:@"neg_replies_email"];
-    }
-    if (self.btnNegWebsite.selected == TRUE) {
-        [params setValue:@"1" forKey:@"neg_replies_website"];
-    }
-    if (self.btnOtherText.selected == TRUE) {
-        [params setValue:@"1" forKey:@"other_msgs_text"];
-    }
-    if (self.btnOtherEmail.selected == TRUE) {
-        [params setValue:@"1" forKey:@"other_msgs_email"];
-    }
-    if (self.btnOtherWebsite.selected == TRUE) {
-        [params setValue:@"1" forKey:@"other_msgs_website"];
-    }
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
     if (self.txtEmail.text.length == 0) {
@@ -140,9 +106,33 @@
     if ((Error.length) > 50) {
         [self handleErrorWithMessage:Error];
     } else {
+        NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+        [self updateParamDict:params value:self.txtEmail.text key:@"email"];
+        [self updateParamDict:params value:self.txtFirstName.text key:@"first_name"];
+        [self updateParamDict:params value:self.txtLastName.text key:@"last_name"];
+        [self updateParamDict:params value:self.txtPhone.text key:@"cell_phone"];
+        if (self.btnPosText.selected == TRUE) {
+            [params setValue:@"1" forKey:@"pos_replies_text"];
+        }
+        if (self.btnPosEmail.selected == TRUE) {
+            [params setValue:@"1" forKey:@"pos_replies_email"];
+        }
+        if (self.btnNegText.selected == TRUE) {
+            [params setValue:@"1" forKey:@"neg_replies_text"];
+        }
+        if (self.btnNegEmail.selected == TRUE) {
+            [params setValue:@"1" forKey:@"neg_replies_email"];
+        }
+        if (self.btnOtherText.selected == TRUE) {
+            [params setValue:@"1" forKey:@"other_msgs_text"];
+        }
+        if (self.btnOtherEmail.selected == TRUE) {
+            [params setValue:@"1" forKey:@"other_msgs_email"];
+        }
         if([params count]){
+            AFHTTPRequestOperationManager *manager = [self getManager];
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"JSON: %@", responseObject);
+                NSLog(@"\nEdit Employer Contact Info - Json:/n%@", responseObject);
                 if([self validateResponse:responseObject]) {
                     [self.navigationController popViewControllerAnimated:TRUE];
                 } else {

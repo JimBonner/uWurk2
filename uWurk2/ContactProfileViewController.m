@@ -10,6 +10,7 @@
 #import "ContactProfileNotifyViewController.h"
 
 @interface ContactProfileViewController ()
+
 @property (weak, nonatomic) IBOutlet UILabel *lblEmployer;
 @property (weak, nonatomic) IBOutlet UILabel *lblPosition;
 @property (weak, nonatomic) IBOutlet UILabel *lblLocation;
@@ -40,7 +41,8 @@
     self.lblWage.text     = [self.paramHolder objectForKey:@"wage_type_tipped"];
 }
 
-- (IBAction)pressReply:(UIButton *)sender {
+- (IBAction)pressReply:(UIButton *)sender
+{
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:[self.paramHolder objectForKey:@"position"] forKey:@"position_id"];
@@ -49,18 +51,16 @@
     [params setObject:[self.paramHolder objectForKey:@"zip"] forKey:@"zip"];
     [params setObject:@"" forKey:@"message"];
     
-    
     if ([params count]) {
-        
         [manager POST:@"http://uwurk.tscserver.com/api/v1/contact" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"\nContact Profile - Json Response:\n%@",responseObject);
             UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ContactProfileNotifyView"];
             [self.navigationController setViewControllers:@[myController] animated:TRUE];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
             [self handleErrorAccessError:error];
         }];
-    }
-    else{
+    } else {
         ContactProfileNotifyViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ContactProfileNotifyView"];
         [self.navigationController setViewControllers:@[myController] animated:TRUE];
         [myController setSearchUserDict:self.searchUserDict];

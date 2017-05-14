@@ -38,7 +38,7 @@
     if([params count]){
         AFHTTPRequestOperationManager *manager = [self getManager];
         [manager POST:@"http://uwurk.tscserver.com/api/v1/save_search" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"JSON: %@", responseObject);
+            NSLog(@"\nSave Search - Json Response:\n%@", responseObject);
             if([self validateResponse:responseObject]){
                 [self dismissViewControllerAnimated:YES completion:nil];
             } else {
@@ -46,7 +46,7 @@
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
-            [self handleErrorUnableToSaveData:@"Search"];
+            [self handleErrorUnableToSaveData:@"SaveSearch"];
         }];
     }
 }

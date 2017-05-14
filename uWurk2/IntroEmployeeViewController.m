@@ -53,11 +53,11 @@
 
 - (IBAction)pressEmailRegister:(id)sender
 {
-    AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:self.emailText.text forKey:@"email"];
     [params setObject:@"employee" forKey:@"type"];
     if([params count]){
+        AFHTTPRequestOperationManager *manager = [self getManager];
         [manager POST:@"http://uwurk.tscserver.com/api/v1/register" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
         {
             NSLog(@"\nEmployee Email Register - Json Response:\n%@", responseObject);

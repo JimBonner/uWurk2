@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="uQy-3a-cs6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="uQy-3a-cs6">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -747,10 +747,10 @@
             </objects>
             <point key="canvasLocation" x="-142" y="2229.5"/>
         </scene>
-        <!--Item-->
+        <!--Employer View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="EmployeeLanding" id="BYZ-38-t0r" customClass="EmployeeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EmployeeLanding" title="Employer View Controller" id="BYZ-38-t0r" customClass="EmployeeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -1554,7 +1554,7 @@
                                                             <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                     </button>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="78750" borderStyle="roundedRect" placeholder="00000" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3SP-41-4G6" userLabel="ZipCode">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="00000" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3SP-41-4G6" userLabel="ZipCode">
                                                         <rect key="frame" x="90" y="103" width="55" height="30"/>
                                                         <fontDescription key="fontDescription" name="RobotoCondensed-Light" family="Roboto Condensed" pointSize="16"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
@@ -2937,7 +2937,7 @@ If you don’t find quality candidates today, check back soon.</string>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="llc-78-3Ki">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Search Results" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VmD-hu-4CT">
                                     <rect key="frame" x="10" y="8" width="91" height="21"/>
@@ -2984,7 +2984,6 @@ If you don’t find quality candidates today, check back soon.</string>
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="SearchResultCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchResultCell" rowHeight="77" id="tnM-QK-KKg" customClass="SearchResultTableViewCell">
@@ -3008,16 +3007,18 @@ If you don’t find quality candidates today, check back soon.</string>
                                             <color key="backgroundColor" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="iCi-cP-5hG" secondAttribute="bottom" constant="2" id="BaT-hz-aac"/>
+                                                <constraint firstAttribute="width" constant="71" id="D77-Kv-cBb"/>
                                                 <constraint firstItem="iCi-cP-5hG" firstAttribute="top" secondItem="Zc7-1R-ChW" secondAttribute="top" constant="2" id="moQ-Ej-tvx"/>
+                                                <constraint firstAttribute="height" constant="71" id="s9W-bG-Ug7"/>
                                                 <constraint firstItem="iCi-cP-5hG" firstAttribute="leading" secondItem="Zc7-1R-ChW" secondAttribute="leading" constant="2" id="uiw-YY-Xuf"/>
                                                 <constraint firstAttribute="trailing" secondItem="iCi-cP-5hG" secondAttribute="trailing" constant="2" id="ymX-3N-Fqt"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eQs-nC-i3T" userLabel="Black View">
-                                            <rect key="frame" x="102" y="3" width="265" height="21"/>
+                                            <rect key="frame" x="102" y="3" width="273" height="21"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Dt-fQ-JRE">
-                                                    <rect key="frame" x="8" y="1" width="257" height="18"/>
+                                                    <rect key="frame" x="8" y="1" width="265" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="fq5-oF-6Yb"/>
                                                     </constraints>
@@ -3035,10 +3036,10 @@ If you don’t find quality candidates today, check back soon.</string>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ybd-G2-mrH" userLabel="Green View">
-                                            <rect key="frame" x="102" y="24" width="265" height="50"/>
+                                            <rect key="frame" x="102" y="24" width="273" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age - Wage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8QU-fW-6wg">
-                                                    <rect key="frame" x="8" y="0.0" width="257" height="15"/>
+                                                    <rect key="frame" x="8" y="0.0" width="265" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="z2d-Cb-G3m"/>
                                                     </constraints>
@@ -3047,7 +3048,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Experience" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GlP-QN-Y0k">
-                                                    <rect key="frame" x="8" y="16" width="257" height="15"/>
+                                                    <rect key="frame" x="8" y="16" width="265" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="W6a-du-rQD"/>
                                                     </constraints>
@@ -3056,7 +3057,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Education" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J4G-LZ-Jfs">
-                                                    <rect key="frame" x="8" y="32" width="257" height="15"/>
+                                                    <rect key="frame" x="8" y="32" width="265" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="9dn-8M-EUn"/>
                                                     </constraints>
@@ -3075,12 +3076,13 @@ If you don’t find quality candidates today, check back soon.</string>
                                                 <constraint firstAttribute="trailing" secondItem="GlP-QN-Y0k" secondAttribute="trailing" id="QC0-r7-3Pk"/>
                                                 <constraint firstAttribute="trailing" secondItem="8QU-fW-6wg" secondAttribute="trailing" id="TY4-M0-P7N"/>
                                                 <constraint firstItem="GlP-QN-Y0k" firstAttribute="top" secondItem="8QU-fW-6wg" secondAttribute="bottom" constant="1" id="Z9W-Zu-lmA"/>
+                                                <constraint firstAttribute="trailing" secondItem="GlP-QN-Y0k" secondAttribute="trailing" id="ZtK-az-zYT"/>
                                                 <constraint firstAttribute="trailing" secondItem="J4G-LZ-Jfs" secondAttribute="trailing" id="e8t-aQ-hUH"/>
                                                 <constraint firstAttribute="bottom" secondItem="J4G-LZ-Jfs" secondAttribute="bottom" constant="3" id="ibN-Bb-4te"/>
                                             </constraints>
                                         </view>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn-view-black-min" translatesAutoresizingMaskIntoConstraints="NO" id="nPl-c8-eFP">
-                                            <rect key="frame" x="13" y="29" width="15" height="15"/>
+                                            <rect key="frame" x="13" y="35" width="15" height="15"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="15" id="ecA-qD-KX9"/>
                                                 <constraint firstAttribute="width" constant="15" id="ni6-u8-1Kl"/>
@@ -3101,21 +3103,20 @@ If you don’t find quality candidates today, check back soon.</string>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="7TI-cf-wLM" firstAttribute="leading" secondItem="yuQ-ak-kuG" secondAttribute="leadingMargin" constant="6" id="66c-RM-moM"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="Zc7-1R-ChW" secondAttribute="bottom" constant="-5" id="8Qx-Xe-egY"/>
                                         <constraint firstItem="ybd-G2-mrH" firstAttribute="leading" secondItem="Zc7-1R-ChW" secondAttribute="trailing" id="AXW-6u-xe1"/>
-                                        <constraint firstItem="eQs-nC-i3T" firstAttribute="trailing" secondItem="yuQ-ak-kuG" secondAttribute="trailingMargin" id="Bc0-qj-l7T"/>
+                                        <constraint firstItem="eQs-nC-i3T" firstAttribute="trailing" secondItem="yuQ-ak-kuG" secondAttribute="trailing" id="Bc0-qj-l7T"/>
                                         <constraint firstItem="nPl-c8-eFP" firstAttribute="leading" secondItem="yuQ-ak-kuG" secondAttribute="leadingMargin" constant="5" id="DIV-J4-Qnb"/>
-                                        <constraint firstItem="eQs-nC-i3T" firstAttribute="top" secondItem="yuQ-ak-kuG" secondAttribute="topMargin" constant="-5" id="FzX-sP-N6o"/>
+                                        <constraint firstItem="Zc7-1R-ChW" firstAttribute="leading" secondItem="nPl-c8-eFP" secondAttribute="trailing" constant="3" id="Fyf-5x-Gha"/>
+                                        <constraint firstItem="eQs-nC-i3T" firstAttribute="top" secondItem="yuQ-ak-kuG" secondAttribute="top" constant="3" id="FzX-sP-N6o"/>
                                         <constraint firstItem="ybd-G2-mrH" firstAttribute="top" secondItem="eQs-nC-i3T" secondAttribute="bottom" id="GlY-fi-X2K"/>
                                         <constraint firstItem="eQs-nC-i3T" firstAttribute="leading" secondItem="Zc7-1R-ChW" secondAttribute="trailing" id="NKP-QU-LnM"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="nPl-c8-eFP" secondAttribute="bottom" constant="25" id="RmW-73-BIy"/>
-                                        <constraint firstItem="Zc7-1R-ChW" firstAttribute="leading" secondItem="nPl-c8-eFP" secondAttribute="trailing" constant="3" id="UOj-CK-tRj"/>
-                                        <constraint firstItem="nPl-c8-eFP" firstAttribute="top" secondItem="7TI-cf-wLM" secondAttribute="bottom" constant="4" id="Ysf-oG-67R"/>
-                                        <constraint firstItem="ybd-G2-mrH" firstAttribute="trailing" secondItem="yuQ-ak-kuG" secondAttribute="trailingMargin" id="arZ-VY-vQY"/>
+                                        <constraint firstAttribute="trailing" secondItem="ybd-G2-mrH" secondAttribute="trailing" id="Y6N-lZ-s5T"/>
+                                        <constraint firstItem="nPl-c8-eFP" firstAttribute="top" secondItem="7TI-cf-wLM" secondAttribute="bottom" constant="10" id="Ysf-oG-67R"/>
+                                        <constraint firstItem="Zc7-1R-ChW" firstAttribute="top" secondItem="yuQ-ak-kuG" secondAttribute="top" constant="3" id="aBt-rj-xMB"/>
                                         <constraint firstItem="Zc7-1R-ChW" firstAttribute="leading" secondItem="7TI-cf-wLM" secondAttribute="trailing" constant="4" id="cLP-4a-QS3"/>
-                                        <constraint firstItem="Zc7-1R-ChW" firstAttribute="top" secondItem="yuQ-ak-kuG" secondAttribute="topMargin" constant="-5" id="cjH-ke-3Vx"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="ybd-G2-mrH" secondAttribute="bottom" constant="-5" id="rPL-43-KIc"/>
-                                        <constraint firstItem="7TI-cf-wLM" firstAttribute="top" secondItem="yuQ-ak-kuG" secondAttribute="topMargin" constant="-5" id="uGs-bv-zfo"/>
+                                        <constraint firstAttribute="bottom" secondItem="Zc7-1R-ChW" secondAttribute="bottom" constant="3" id="hUJ-bm-dgj"/>
+                                        <constraint firstAttribute="bottom" secondItem="ybd-G2-mrH" secondAttribute="bottom" constant="3" id="rPL-43-KIc"/>
+                                        <constraint firstItem="7TI-cf-wLM" firstAttribute="top" secondItem="yuQ-ak-kuG" secondAttribute="top" constant="3" id="uGs-bv-zfo"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -3129,6 +3130,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
+                        <sections/>
                         <connections>
                             <outlet property="dataSource" destination="vku-2C-MLj" id="lNh-gT-lgp"/>
                             <outlet property="delegate" destination="vku-2C-MLj" id="Brw-hR-JPK"/>
@@ -4480,9 +4482,6 @@ If you don’t find quality candidates today, check back soon.</string>
                                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <state key="selected" image="check-black"/>
-                                                <connections>
-                                                    <action selector="changeCheckBox:" destination="Xks-kj-hqs" eventType="touchUpInside" id="M2K-Ei-uQ4"/>
-                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Website" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8nq-li-anA">
                                                 <rect key="frame" x="229" y="427" width="58" height="16"/>
@@ -4527,9 +4526,6 @@ If you don’t find quality candidates today, check back soon.</string>
                                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <state key="selected" image="check-black"/>
-                                                <connections>
-                                                    <action selector="changeCheckBox:" destination="Xks-kj-hqs" eventType="touchUpInside" id="IA3-2M-cTd"/>
-                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Website" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Vl-Ur-fIt">
                                                 <rect key="frame" x="229" y="491" width="58" height="16"/>
@@ -4587,9 +4583,6 @@ If you don’t find quality candidates today, check back soon.</string>
                                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <state key="selected" image="check-black"/>
-                                                <connections>
-                                                    <action selector="changeCheckBox:" destination="Xks-kj-hqs" eventType="touchUpInside" id="vLY-o6-8Rp"/>
-                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Website" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ciw-nT-Ss5">
                                                 <rect key="frame" x="229" y="555" width="58" height="16"/>
@@ -8876,10 +8869,10 @@ If you don’t find quality candidates today, check back soon.</string>
             </objects>
             <point key="canvasLocation" x="-112" y="406"/>
         </scene>
-        <!--Item-->
+        <!--Search Result Profile View Controller-->
         <scene sceneID="eKl-et-jtU">
             <objects>
-                <viewController storyboardIdentifier="ProfileSearchResult" id="6VL-ry-Ykl" customClass="SearchResultProfileViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileSearchResult" id="6VL-ry-Ykl" userLabel="Search Result Profile View Controller" customClass="SearchResultProfileViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MSZ-Sf-N2U"/>
                         <viewControllerLayoutGuide type="bottom" id="bJN-Ko-zOU"/>
@@ -9092,7 +9085,6 @@ If you don’t find quality candidates today, check back soon.</string>
                                                         <state key="normal" backgroundImage="fav-flag-gray-min"/>
                                                         <state key="selected" backgroundImage="fav-flag-black-min"/>
                                                         <connections>
-                                                            <action selector="changeCheckBox:" destination="6VL-ry-Ykl" eventType="touchUpInside" id="edZ-vm-Imd"/>
                                                             <action selector="pressFavorite:" destination="6VL-ry-Ykl" eventType="touchUpInside" id="8tE-5S-ZbT"/>
                                                         </connections>
                                                     </button>

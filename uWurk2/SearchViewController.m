@@ -128,7 +128,7 @@
 -(void)SelectionMade:(NSMutableDictionary *)dict
 {
     SearchResultsTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"employeeListID"];
-    [myController setParameters:dict];
+    [myController setSearchParameters:dict];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/search"];
     
     [self.navigationController pushViewController:myController animated:TRUE];
@@ -490,7 +490,7 @@
         [self updateParamDict:params value:[@(self.btnPosition.tag)stringValue] key:@"exp_positions[]"];
 
         SearchResultsTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"employeeListID"];
-        [myController setParameters:params];
+        [myController setSearchParameters:params];
         [myController setUrl:@"http://uwurk.tscserver.com/api/v1/search"];
         [self.navigationController pushViewController:myController animated:TRUE];
     }

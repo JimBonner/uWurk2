@@ -18,7 +18,7 @@
 @property (nonatomic, retain) NSString *jsonGroup;
 @property (nonatomic, retain) NSString *display;
 @property (nonatomic, retain) NSString *key;
-@property (nonatomic, retain) NSMutableDictionary *parameters;
+@property (nonatomic, retain) NSMutableDictionary *searchParameters;
 @property (nonatomic, retain) NSString *url;
 @property (nonatomic, retain) UIButton *sender;
 

@@ -66,15 +66,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *dict = [self.json objectAtIndex:indexPath.row];
+    NSString *searchID = [[dict objectForKey:@"id"]stringValue];
     NSString *paramString = [dict objectForKey:@"params"];
     NSString *newStr = [paramString substringWithRange:NSMakeRange(1, [paramString length]-2)];
     newStr = [[@"{" stringByAppendingString:newStr] stringByAppendingString:@"}"];
     NSString *decodedString = [NSString stringWithUTF8String:[newStr cStringUsingEncoding:[NSString defaultCStringEncoding]]];
     NSError *error;
     NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:[decodedString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
-    
+    NSMutableDictionary *querryParams = [[NSMutableDictionary alloc]initWithDictionary:[dictionary objectForKey:@"query_params"]];
+    [querryParams setValue:searchID forKey:@"search_id"];
     if ( [self.delegate respondsToSelector:@selector(SelectionMade:)])
-        [self.delegate SelectionMade:[dictionary objectForKey:@"query_params"]];
+        [self.delegate SelectionMade:querryParams];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -82,7 +84,6 @@
     return YES;
 }
 
-// Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {

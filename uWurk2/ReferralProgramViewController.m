@@ -33,6 +33,8 @@
 {
     [super viewWillAppear:animated];
     
+    NSLog(@"\nReferral Program - Init:\n%@",self.appDelegate.user);
+    
     if(!self.performInit) {
         return;
     }
@@ -93,12 +95,9 @@
         MFMailComposeViewController *composeVC = [[MFMailComposeViewController alloc] init];
         composeVC.mailComposeDelegate = self;
         
-        // Configure the fields of the interface.
-//        [composeVC setToRecipients:@[@"address@example.com"]];
         [composeVC setSubject:@"uWurk!"];
-        [composeVC setMessageBody:@"Hello from uWurk!  Need to know what to put in the email." isHTML:NO];
+        [composeVC setMessageBody:@"Hello from uWurk development!\n\nNeed to know what to put in the email." isHTML:NO];
         
-        // Present the view controller modally.
         [self presentViewController:composeVC animated:YES completion:nil];
     } else {
         
@@ -108,9 +107,6 @@
 - (void)mailComposeController:(MFMailComposeViewController *)controller
           didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-    // Check the result or perform other tasks.
-    
-    // Dismiss the mail compose view controller.
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

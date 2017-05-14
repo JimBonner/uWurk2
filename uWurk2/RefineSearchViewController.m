@@ -9,7 +9,7 @@
 
 #import "RefineSearchViewController.h"
 #import "SearchResultsTableViewController.h"
-#import  "IndustryPositionViewController.h"
+#import "IndustryPositionViewController.h"
 #import "ListMultiSelectorTableViewController.h"
 
 @interface RefineSearchViewController ()
@@ -67,14 +67,21 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblLanguages;
 @property (nonatomic, strong) NSMutableDictionary *langDict;
 
-
-
 @end
 
 @implementation RefineSearchViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSLog(@"\nRefine Search - Init: \n%@",self.searchparms);
+    
     self.params = [[NSMutableDictionary alloc] init];
     self.btnAge1.selected = YES;
     self.btnAge2.selected = YES;
@@ -134,20 +141,15 @@
     if([[self.searchparms objectForKey:@"hours"] intValue] == 1) {
         self.btnHourly.selected = YES;
     }
-    else {
+    if([self.searchparms objectForKey:@"tipped"]) {
         self.btnTipped.selected = YES;
     }
+    self.txtHourly.text = [self.searchparms objectForKey:@"hourly_wage"];
+    
     [self.params setObject:[self.searchparms objectForKey:@"exp_positions[]"] forKey:@"exp_positions[]"];
     if ([[self.searchparms objectForKey:@"exp_required"] intValue] == 0) {
         // self.btnExpNo.selected = YES;
     }
-    self.txtHourly.text = [self.searchparms objectForKey:@"hourly_wage"];
-    // Do any additional setup after loading the view.
-}
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
     if(!self.langDict) {
         self.langDict = [NSMutableDictionary new];
         
@@ -160,7 +162,7 @@
             }
             displayString = [displayString stringByAppendingString:[dict objectForKey:@"description"]];
         }
-        [self SelectionMade:self.langDict displayString:displayString];
+        [self SelectionMade:@"languages" withDict:self.langDict displayString:displayString];
     }
     self.heightWage.constant = 0;
     self.viewWage.alpha = 0;
@@ -193,14 +195,18 @@
     [self.params setObject:@"1" forKey:@"refine"];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-- (IBAction)changeCheckBox:(UIButton *)sender {
+
+- (IBAction)changeCheckBox:(UIButton *)sender
+{
     [sender setSelected:!sender.selected];
 }
-- (IBAction)pressWage:(id)sender {
+
+- (IBAction)pressWage:(id)sender
+{
     if (self.btnWage.selected == YES) {
     self.heightWage.constant = 100;
     [UIView animateWithDuration:.15 animations:^{
@@ -230,7 +236,9 @@
          }];
     }
 }
-- (IBAction)pressAge:(id)sender {
+
+- (IBAction)pressAge:(id)sender
+{
     if (self.btnAge.selected == YES) {
     self.heightAge.constant = 100;
     [UIView animateWithDuration:.15 animations:^{
@@ -244,8 +252,7 @@
                  [self.view layoutIfNeeded];}];
          }
      }];
-    }
-    else {
+    } else {
         [UIView animateWithDuration:.15 animations:^{
             self.viewAge.alpha = 0;
             [self.view layoutIfNeeded];}
@@ -260,7 +267,9 @@
          }];
     }
 }
-- (IBAction)pressBodyArt:(id)sender {
+
+- (IBAction)pressBodyArt:(id)sender
+{
     if (self.btnBodyArt.selected == YES) {
     self.heightBodyArt.constant = 200;
     [UIView animateWithDuration:.15 animations:^{
@@ -274,8 +283,7 @@
                  [self.view layoutIfNeeded];}];
          }
      }];
-    }
-    else {
+    } else {
         [UIView animateWithDuration:.15 animations:^{
             self.viewBodyArt.alpha = 0;
             [self.view layoutIfNeeded];}
@@ -290,7 +298,9 @@
          }];
     }
 }
-- (IBAction)pressEducation:(id)sender {
+
+- (IBAction)pressEducation:(id)sender
+{
     self.heightSpecificSchool.constant = 0;
     self.txtSpecificSchool.alpha = 0;
     if (self.btnEducation.selected == YES) {
@@ -306,8 +316,7 @@
                  [self.view layoutIfNeeded];}];
          }
      }];
-    }
-    else {
+    } else {
         [UIView animateWithDuration:.15 animations:^{
             self.viewEducation.alpha = 0;
             [self.view layoutIfNeeded];}
@@ -322,7 +331,9 @@
          }];
     }
 }
-- (IBAction)pressOppYouth:(id)sender {
+
+- (IBAction)pressOppYouth:(id)sender
+{
     if (self.btnOppYouth.selected == YES) {
     self.heightOppYouth.constant = 100;
     [UIView animateWithDuration:.15 animations:^{
@@ -336,8 +347,7 @@
                  [self.view layoutIfNeeded];}];
          }
      }];
-    }
-    else {
+    } else {
         [UIView animateWithDuration:.15 animations:^{
             self.viewOppYouth.alpha = 0;
             [self.view layoutIfNeeded];}
@@ -352,7 +362,9 @@
          }];
     }
 }
-- (IBAction)pressLicense:(id)sender {
+
+- (IBAction)pressLicense:(id)sender
+{
     if (self.btnLicense.selected == YES) {
     self.heightLicense.constant = 100;
     [UIView animateWithDuration:.15 animations:^{
@@ -366,8 +378,7 @@
                  [self.view layoutIfNeeded];}];
          }
      }];
-    }
-    else {
+    } else {
         [UIView animateWithDuration:.15 animations:^{
             self.viewLicense.alpha = 0;
             [self.view layoutIfNeeded];}
@@ -382,7 +393,9 @@
          }];
     }
 }
-- (IBAction)pressVeteran:(id)sender {
+
+- (IBAction)pressVeteran:(id)sender
+{
     if (self.btnVeteran.selected == YES) {
     self.heightVeteran.constant = 100;
     [UIView animateWithDuration:.15 animations:^{
@@ -396,8 +409,7 @@
                  [self.view layoutIfNeeded];}];
          }
      }];
-    }
-    else {
+    } else {
         [UIView animateWithDuration:.15 animations:^{
             self.viewVeteran.alpha = 0;
             [self.view layoutIfNeeded];}
@@ -412,7 +424,9 @@
          }];
     }
 }
-- (IBAction)pressLanguage:(id)sender {
+
+- (IBAction)pressLanguage:(id)sender
+{
     if (self.btnLanguage.selected == YES) {
     self.heightLanguage.constant = 100;
     [UIView animateWithDuration:.15 animations:^{
@@ -426,8 +440,7 @@
                  [self.view layoutIfNeeded];}];
          }
      }];
-    }
-    else {
+    } else {
         [UIView animateWithDuration:.15 animations:^{
             self.viewLanguage.alpha = 0;
             [self.view layoutIfNeeded];}
@@ -442,9 +455,10 @@
          }];
     }
 }
-- (IBAction)addLanguagePress:(id)sender {
+
+- (IBAction)addLanguagePress:(id)sender
+{
     ListMultiSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListMultiSelector"];
-    
     
     [myController setParameters:nil];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/languages"];
@@ -456,14 +470,16 @@
     [myController setIdDict:self.langDict];
     
     [self.navigationController pushViewController:myController animated:TRUE];
-    
 }
 
--(void) SelectionMade:(NSMutableDictionary *)dict displayString:(NSString *)displayString {
+-(void)SelectionMade:(NSString *)passThru withDict:(NSMutableDictionary*)dict displayString:(NSString*)displayString
+{
     self.lblLanguages.text = displayString;
     self.langDict = dict;
 }
-- (IBAction)pressSpecificSchool:(id)sender {
+
+- (IBAction)pressSpecificSchool:(id)sender
+{
     if (self.btnSpecificSchool.selected == YES) {
         self.heightSpecificSchool.constant = 20;
         [UIView animateWithDuration:.15 animations:^{
@@ -476,8 +492,7 @@
                      self.txtSpecificSchool.alpha = 1;}];
              }
          }];
-    }
-    else {
+    } else {
         [UIView animateWithDuration:.15 animations:^{
             self.txtSpecificSchool.alpha = 0;
         }
@@ -492,15 +507,15 @@
          }];
     }
 }
-- (IBAction)pressExperience:(id)sender {
-    
+
+- (IBAction)pressExperience:(id)sender
+{
     UITableViewController *myController = [[UIStoryboard storyboardWithName:@"GeneralViews" bundle:nil] instantiateViewControllerWithIdentifier:@"IndustryPositionViewController"];
     [self.navigationController pushViewController:myController animated:YES];
-
-    
 }
 
-- (IBAction)pressUpdate:(id)sender {
+- (IBAction)pressUpdate:(id)sender
+{
     if (self.btnHourly.selected == YES) {
         [self.params setObject:self.txtHourly.text forKey:@"hourly_wage"];
         [self.params setObject:@"1" forKey:@"hours"];
@@ -542,8 +557,9 @@
     if([self.lblLanguages.text length] > 0) {
         [self.params setObject:self.langDict.allKeys forKey:@"languages"];
     }
+    
     SearchResultsTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"employeeListID"];
-    [myController setParameters:self.params];
+    [myController setSearchParameters:self.params];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/search"];
     [self.navigationController pushViewController:myController animated:TRUE];
 }

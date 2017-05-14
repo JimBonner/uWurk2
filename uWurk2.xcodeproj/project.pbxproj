@@ -197,8 +197,8 @@
 		9B3EE1461B9F4DFA001D3C37 /* ListSelectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListSelectorTableViewController.m; path = ../uWurk2/ListSelectorTableViewController.m; sourceTree = "<group>"; };
 		9B3EE1481B9F6D80001D3C37 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		9B3EE1491B9F6D80001D3C37 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
-		9B3EE14E1BA367BE001D3C37 /* ReferralProgramViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReferralProgramViewController.h; path = ../uWurk2/ReferralProgramViewController.h; sourceTree = "<group>"; };
-		9B3EE14F1BA367BE001D3C37 /* ReferralProgramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReferralProgramViewController.m; path = ../uWurk2/ReferralProgramViewController.m; sourceTree = "<group>"; };
+		9B3EE14E1BA367BE001D3C37 /* ReferralProgramViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferralProgramViewController.h; sourceTree = "<group>"; };
+		9B3EE14F1BA367BE001D3C37 /* ReferralProgramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReferralProgramViewController.m; sourceTree = "<group>"; };
 		9B3EE1831BAA2788001D3C37 /* ProfileEditStep1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileEditStep1ViewController.h; sourceTree = "<group>"; };
 		9B3EE1841BAA2788001D3C37 /* ProfileEditStep1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileEditStep1ViewController.m; sourceTree = "<group>"; };
 		9B3EE1861BAA27B2001D3C37 /* ProfileEditStep2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileEditStep2ViewController.h; sourceTree = "<group>"; };
@@ -337,6 +337,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E2636151EC8CF3A00A2EB63 /* Referral */ = {
+			isa = PBXGroup;
+			children = (
+				9B3EE14E1BA367BE001D3C37 /* ReferralProgramViewController.h */,
+				9B3EE14F1BA367BE001D3C37 /* ReferralProgramViewController.m */,
+			);
+			name = Referral;
+			sourceTree = "<group>";
+		};
 		1E4B94921E8D683E004ADCB9 /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -361,10 +370,6 @@
 				9BD16A571BE6E319006BAF69 /* ListSelectorStringsTableViewController.m */,
 				9B3EE1451B9F4DFA001D3C37 /* ListSelectorTableViewController.h */,
 				9B3EE1461B9F4DFA001D3C37 /* ListSelectorTableViewController.m */,
-				9B3EE14E1BA367BE001D3C37 /* ReferralProgramViewController.h */,
-				9B3EE14F1BA367BE001D3C37 /* ReferralProgramViewController.m */,
-				1E51E0961EAE99040070BF54 /* RegisterThanksViewController.h */,
-				1E51E0971EAE99140070BF54 /* RegisterThanksViewController.m */,
 			);
 			name = OtherViewControllers;
 			path = ../Pods;
@@ -459,20 +464,23 @@
 		9B379C8A1B950FD500EB4E2D /* uWurk2 */ = {
 			isa = PBXGroup;
 			children = (
+				9B379C8F1B950FD500EB4E2D /* AppDelegate.h */,
+				9B379C901B950FD500EB4E2D /* AppDelegate.m */,
 				1E4B94921E8D683E004ADCB9 /* Category */,
 				DC40D9FF1C4C51130037D612 /* EmployerMenu */,
 				DCA4AF721C4BE920007B7F1B /* General */,
 				DCA4AE701C41B57A007B7F1B /* Storyboards */,
 				9B8B98F21BB37801005821EB /* Search */,
-				9B379C8F1B950FD500EB4E2D /* AppDelegate.h */,
-				9B379C901B950FD500EB4E2D /* AppDelegate.m */,
 				9B379C981B950FD500EB4E2D /* Images.xcassets */,
 				1EE550A31E9540DC007CA914 /* Images */,
 				9BEA1B251B9A4FCA0017D87A /* Register */,
+				1E51E0961EAE99040070BF54 /* RegisterThanksViewController.h */,
+				1E51E0971EAE99140070BF54 /* RegisterThanksViewController.m */,
 				9B3EE1921BAA2860001D3C37 /* EditEmployeeProfile */,
 				9B0C71331C7770A6003DB760 /* EditEmployerProfile */,
 				DC8185681BADA0A500EF2436 /* DashboardMenu */,
 				9BD16A5C1BEC401E006BAF69 /* Mail */,
+				1E2636151EC8CF3A00A2EB63 /* Referral */,
 				1ED53B641E7736320054EFCA /* OtherViewControllers */,
 				9B379C8B1B950FD500EB4E2D /* Supporting Files */,
 			);
