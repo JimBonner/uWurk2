@@ -15,9 +15,9 @@
 
 @implementation EditEmployerPreferencesViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -27,24 +27,34 @@
     NSLog(@"\nEmployer Edit Preferences:\n%@",self.appDelegate.user);
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)pressRemoveEmployeeFav:(id)sender {
+- (IBAction)pressRemoveEmployeeFav:(id)sender
+{
 }
 
-- (IBAction)pressRemoveContact:(id)sender {
+- (IBAction)pressRemoveContact:(id)sender
+{
 }
 
-- (IBAction)pressRemovePhoto:(id)sender {
+- (IBAction)pressRemovePhoto:(id)sender
+{
 }
 
-- (IBAction)pressRemoveSavedSearch:(id)sender {
+- (IBAction)pressRemoveSavedSearch:(id)sender
+{
 }
 
-- (IBAction)changeCheckBox:(UIButton *)sender {
+- (IBAction)pressSave:(id)sender
+{
+    
+}
+
+- (IBAction)changeCheckBox:(UIButton *)sender
+{
     [sender setSelected:!sender.selected];
 }
 
