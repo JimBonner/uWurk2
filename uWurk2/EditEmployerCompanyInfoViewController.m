@@ -23,10 +23,11 @@
 
 @implementation EditEmployerCompanyInfoViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -40,9 +41,9 @@
     self.lblCharsRemain.text=[NSString stringWithFormat:@"%li characters remaining",len];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(void)textViewDidChange:(UITextView *)txtCompanyBio
@@ -66,10 +67,10 @@
     }
     return YES;
 }
-- (IBAction)industryPress:(id)sender {
-    
+
+- (IBAction)industryPress:(id)sender
+{
     ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
-    
     
     [myController setParameters:nil];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/industries"];
@@ -81,9 +82,10 @@
     [myController setTitle:@"Industries"];
     
     [self.navigationController pushViewController:myController animated:TRUE];
-    
 }
-- (IBAction)nextPress:(id)sender {
+
+- (IBAction)nextPress:(id)sender
+{
 //    AFHTTPRequestOperationManager *manager = [self getManager];
 //    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
 //    [self updateParamDict:params value:self.textView.text key:@"biography"];
@@ -153,4 +155,5 @@
 //        }
 //    }
 }
+
 @end

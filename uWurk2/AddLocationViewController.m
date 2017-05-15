@@ -74,8 +74,8 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)changeSave:(id)sender
 {
     self.btnSaveChanges.enabled = YES;
