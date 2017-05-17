@@ -117,7 +117,6 @@
         else {
             dict = [self.json objectAtIndex:indexPath.row];
             [self.sender setTitle:[dict objectForKey:self.display] forState:UIControlStateNormal];
-//            self.sender.titleLabel.text = [dict objectForKey:self.display];
             [self.sender setTag:[[dict objectForKey:self.key]intValue]];
         }
     }

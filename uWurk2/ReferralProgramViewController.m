@@ -46,9 +46,9 @@
             NSURL *photoURL =[self serverUrlWith:[photoDict objectForKey:@"url"]];
             UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];
             [photoRequest startWithCompletion:^(UIImage *newImage, NSError *error) {
-                if(newImage) {
+                dispatch_async(dispatch_get_main_queue(), ^{
                     [self.imageView setImage:newImage];
-                }
+                });
             }];
         }
     }

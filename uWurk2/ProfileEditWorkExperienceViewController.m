@@ -475,11 +475,11 @@
                 UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                 [self.navigationController setViewControllers:@[myController] animated:TRUE];
             } else {
-                [self handleErrorJsonResponse:@"ProfileEditWorkExperience"];
+                [self handleErrorJsonResponse:@"Profile Edit Work Experience"];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
-            [self handleErrorAccessError:error];
+            [self handleErrorAccessError:@"Profile Edit Work Experience" withError:error];
         }];
     } else {
         UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
@@ -503,12 +503,12 @@
                 completion(1);
             } else {
                 completion(0);
-                [self handleErrorJsonResponse:@"ProfileEditWorkExperience"];
+                [self handleErrorJsonResponse:@"Profile Edit Work Experience"];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             completion(0);
             NSLog(@"Error: %@", error);
-            [self handleErrorAccessError:error];
+            [self handleErrorAccessError:@"Profile Edit Work Experience" withError:error];
         }];
     } else {
         completion(1);

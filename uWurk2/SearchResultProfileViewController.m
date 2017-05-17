@@ -72,7 +72,7 @@
                self.btnFavorite.selected = is_favorite;
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
-              [self handleErrorAccessError:error];
+              [self handleErrorAccessError:@"Search Result Favorite" withError:error];
               return;
           }];
     
@@ -98,9 +98,9 @@
                         UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];
                         
                         [photoRequest startWithCompletion:^(UIImage *newImage, NSError *error) {
-                            if(newImage) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
                                 [self.userImages setImage:newImage];
-                            }
+                            });
                         }];
                     }
                 }
@@ -172,7 +172,7 @@
             });
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
-            [self handleErrorAccessError:error];
+            [self handleErrorAccessError:@"Search Result Profile" withError:error];
         }];
     }
 }
@@ -535,7 +535,7 @@
                     self.btnFavorite.selected = YES;
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     NSLog(@"Error: %@", error);
-                    [self handleErrorAccessError:error];
+                    [self handleErrorAccessError:@"Profile Add Favorite" withError:error];
                 }];
         }
     } else {
@@ -546,7 +546,7 @@
                 self.btnFavorite.selected = NO;
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error: %@", error);
-                [self handleErrorAccessError:error];
+                [self handleErrorAccessError:@"Profile Remove Favorite" withError:error];
             }];
         }
     }

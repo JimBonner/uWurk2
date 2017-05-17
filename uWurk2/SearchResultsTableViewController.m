@@ -94,9 +94,9 @@
             NSURL *photoURL =[NSURL URLWithString:[NSString stringWithFormat:@"http://uwurk.tscserver.com%@",[dict objectForKey:@"photo_url"]]];
             UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];
             [photoRequest startWithCompletion:^(UIImage *newImage, NSError *error) {
-                if(newImage) {
+                dispatch_async(dispatch_get_main_queue(), ^{
                     cell.imageProfile.image = newImage;
-                }
+                });
             }];
     }
     cell.lblName.text = [NSString stringWithFormat:@"%@ %@",[dict objectForKey:@"first_name"],[dict objectForKey:@"last_name"]];

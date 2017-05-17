@@ -36,6 +36,8 @@
 - (NSURL *)serverUrlWith:(NSString *)postfix;
 - (void)saveStepNumber:(NSInteger)stepNum completion:(void(^)(NSInteger result))completion;
 - (void)saveProfileComplete:(void(^)(NSInteger result))completion;
+- (void)loadPhotoImageFromServerUsingUrl:(NSMutableArray *)photoArray imageView:(UIImageView *)imageView;
+- (void)loadPhotoImageFromServerUsingUrlString:(NSString *)postFix imageView:(UIImageView *)imageView;
 
 - (void)handleErrorUnableToGetData;
 - (void)handleErrorUnableToPutData;
@@ -45,6 +47,6 @@
 - (void)handleErrorJsonResponse:(NSString *)who;
 - (void)handleErrorCountExceeded:(NSInteger)count;
 - (void)handleErrorValidateLogin;
-- (void)handleErrorAccessError:(NSError *)error;
+- (void)handleErrorAccessError:(NSString *)what withError:(NSError *)error;
 
 @end

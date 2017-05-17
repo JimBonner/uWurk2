@@ -57,12 +57,12 @@
             });
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
-            [self handleErrorAccessError:error];
+            [self handleErrorAccessError:@"Mail Folders" withError:error];
         }];
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-        [self handleErrorAccessError:error];
+        [self handleErrorAccessError:@"Mail Folders" withError:error];
     }];
 }
 
@@ -192,13 +192,13 @@
                                          });
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                          NSLog(@"Error: %@", error);
-                                         [self handleErrorAccessError:error];
+                                         [self handleErrorAccessError:@"Mail Folders" withError:error];
                                          return;
                                      }];
                                      
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"Error: %@", error);
-                                     [self handleErrorAccessError:error];
+                                     [self handleErrorAccessError:@"Mail Folders" withError:error];
                                      return;
                                  }];
                                  [alert dismissViewControllerAnimated:YES completion:nil];

@@ -141,11 +141,11 @@
                 UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                 [self.navigationController setViewControllers:@[myController] animated:TRUE];
             } else {
-                [self handleErrorJsonResponse:@"ProfileEditStep1"];
+                [self handleErrorJsonResponse:@"Profile Edit Step 1"];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
-            [self handleErrorAccessError:error];
+            [self handleErrorAccessError:@"Profile Edit Step 1" withError:error];
         }];
     }
     else{

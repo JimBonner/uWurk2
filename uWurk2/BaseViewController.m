@@ -9,6 +9,7 @@
 
 #import "BaseViewController.h"
 #import "IntroViewController.h"
+#import "UrlImageRequest.h"
 
 @interface BaseViewController ()
 
@@ -287,7 +288,7 @@
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
               completion(0);
-              [self handleErrorUnableToPutData];
+              [self handleErrorAccessError:@"Save Step Number" withError:error];
           }
      ];
 }
@@ -314,6 +315,33 @@
      ];
 }
 
+- (void)loadPhotoImageFromServerUsingUrl:(NSMutableArray *)photoArray imageView:(UIImageView *)imageView
+{
+    for(NSDictionary *photoDict in photoArray) {
+        if([[photoDict objectForKey:@"for_profile"] intValue] == 1) {
+            NSURL *photoURL =[self serverUrlWith:[photoDict objectForKey:@"url"]];
+            UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];
+            [photoRequest startWithCompletion:^(UIImage *newImage, NSError *error) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    imageView.image = newImage;
+                    imageView.tag   = 1;
+                });
+            }];
+        }
+    }
+}
+
+- (void)loadPhotoImageFromServerUsingUrlString:(NSString *)postFix imageView:(UIImageView *)imageView
+{
+    NSURL *photoURL = [self serverUrlWith:postFix];
+    UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];
+    [photoRequest startWithCompletion:^(UIImage *newImage, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            imageView.image = newImage;
+            imageView.tag   = 1;
+        });
+    }];
+}
 
 #pragma mark -
 #pragma mark Common Error Messsages
@@ -439,9 +467,9 @@
     [self presentViewController:alert animated:TRUE completion:nil];
 }
 
-- (void)handleErrorAccessError:(NSError *)error
+- (void)handleErrorAccessError:(NSString *)what withError:(NSError *)error
 {
-    NSString *message = [NSString stringWithFormat:@"Access error:\n\n%@",[error localizedDescription]];
+    NSString *message = [NSString stringWithFormat:@"%@ access error:\n\n%@",what,[error localizedDescription]];
     UIAlertController * alert = [UIAlertController
                                  alertControllerWithTitle:@"Oops!"
                                  message:message

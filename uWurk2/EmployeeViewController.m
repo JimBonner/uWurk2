@@ -187,21 +187,7 @@
     [face setImage:faceImage forState:UIControlStateNormal];
     UIBarButtonItem *faceBtn = [[UIBarButtonItem alloc] initWithCustomView:face];
     
-    //    [UIView animateWithDuration:0.5 animations:^(void) {
     [[self navigationItem] setLeftBarButtonItem:faceBtn];
-//    // Do any additional setup after loading the view.
-//    NSString *bio = [self.appDelegate.user objectForKey:@"biography"];
-//    if (self.cnstrntButtonToInfo.constant == 3){
-//    [self.btnBio setTitle:@"ADD BIO" forState:UIControlStateNormal];
-//        check for bio
-//    }
-    
-//    [self.userImages setDelay:3]; // Delay between transitions
-//    [self.userImages setTransitionDuration:1]; // Transition duration
-//    [self.userImages setTransitionType:KASlideShowTransitionSlide]; // Choose a transition type (fade or slide)
-//    [self.userImages setImagesContentMode:UIViewContentModeScaleAspectFill]; // Choose a content mode for images to display
-//  //  [self.userImages addImagesFromResources:@[@"test_1.jpeg",@"test_2.jpeg",@"test_3.jpeg"]]; // Add images from resources
-//    [self.userImages addGesture:KASlideShowGestureTap]; // Gesture to go previous/next directly on
     
     NSArray *photoArray = [[self.appDelegate user] objectForKey:@"photos"];
     for(NSDictionary *photoDict in photoArray) {
@@ -209,13 +195,13 @@
             NSURL *photoURL =[self serverUrlWith:[photoDict objectForKey:@"url"]];
             UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];
             [photoRequest startWithCompletion:^(UIImage *newImage, NSError *error) {
-                if(newImage) {
+                dispatch_async(dispatch_get_main_queue(), ^{
                     [self.userImages setImage:newImage];
-                }
+                    [self.view layoutIfNeeded];
+                });
             }];
         }
     }
-    [self.view layoutIfNeeded];
 }
 
 - (void)didReceiveMemoryWarning

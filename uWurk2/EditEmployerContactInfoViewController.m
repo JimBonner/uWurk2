@@ -140,11 +140,11 @@
                 if([self validateResponse:responseObject]) {
                     [self.navigationController popViewControllerAnimated:TRUE];
                 } else {
-                    [self handleErrorJsonResponse:@"EditEmployeeCpntactInfo"];
+                    [self handleErrorJsonResponse:@"Edit Employee Contact Info"];
                 }
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error: %@", error);
-                [self handleErrorAccessError:error];
+                [self handleErrorAccessError:@"Edit Employee Contact Info" withError:error];
             }];
         } else {
             [self.navigationController popViewControllerAnimated:TRUE];

@@ -21,6 +21,7 @@
 		1EAE1B901E78738100BE2C11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B497CA91BACA21300BE59B6 /* Main.storyboard */; };
 		1ECFB79B1EBC47C3004982EC /* EmployeeProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCA4AE731C41B6E6007B7F1B /* EmployeeProfile.storyboard */; };
 		1EE550A71E95750D007CA914 /* PhotoNotAvailable.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EE550A61E95750D007CA914 /* PhotoNotAvailable.png */; };
+		1EEF66601ECAB1C20095D538 /* NoPhotoAvailable.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EEF665F1ECAB1C20095D538 /* NoPhotoAvailable.png */; };
 		9B0452591C02B80C00B33526 /* EmployeeStep6ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0452581C02B80C00B33526 /* EmployeeStep6ViewController.m */; };
 		9B04525C1C03101900B33526 /* ContactProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B04525B1C03101900B33526 /* ContactProfileViewController.m */; };
 		9B04525F1C03165800B33526 /* MessageSentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B04525E1C03165800B33526 /* MessageSentViewController.m */; };
@@ -136,6 +137,7 @@
 		1E51E0971EAE99140070BF54 /* RegisterThanksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegisterThanksViewController.m; path = uWurk2/RegisterThanksViewController.m; sourceTree = SOURCE_ROOT; };
 		1E9CCAFF1E91B2C2008DBEE7 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		1EE550A61E95750D007CA914 /* PhotoNotAvailable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PhotoNotAvailable.png; sourceTree = "<group>"; };
+		1EEF665F1ECAB1C20095D538 /* NoPhotoAvailable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NoPhotoAvailable.png; sourceTree = "<group>"; };
 		9B0452571C02B80C00B33526 /* EmployeeStep6ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeStep6ViewController.h; sourceTree = "<group>"; };
 		9B0452581C02B80C00B33526 /* EmployeeStep6ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EmployeeStep6ViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9B04525A1C03101900B33526 /* ContactProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactProfileViewController.h; sourceTree = "<group>"; };
@@ -378,6 +380,8 @@
 		1EE550A31E9540DC007CA914 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9B379C981B950FD500EB4E2D /* Images.xcassets */,
+				1EEF665F1ECAB1C20095D538 /* NoPhotoAvailable.png */,
 				1EE550A61E95750D007CA914 /* PhotoNotAvailable.png */,
 			);
 			name = Images;
@@ -412,8 +416,8 @@
 		9B0924CC1BB0E1A100B4950D /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
-				DC3F06321C0C706C00223484 /* UrlImageRequest.m */,
 				DC3F06331C0C706C00223484 /* UrlImageRequest.h */,
+				DC3F06321C0C706C00223484 /* UrlImageRequest.m */,
 				DC1BF10B1C0671F40036679F /* UIColor+uWurkColors.h */,
 				DC1BF10C1C0671F40036679F /* UIColor+uWurkColors.m */,
 				DC1BF1081C0671E20036679F /* ColorUtils.h */,
@@ -471,7 +475,6 @@
 				DCA4AF721C4BE920007B7F1B /* General */,
 				DCA4AE701C41B57A007B7F1B /* Storyboards */,
 				9B8B98F21BB37801005821EB /* Search */,
-				9B379C981B950FD500EB4E2D /* Images.xcassets */,
 				1EE550A31E9540DC007CA914 /* Images */,
 				9BEA1B251B9A4FCA0017D87A /* Register */,
 				1E51E0961EAE99040070BF54 /* RegisterThanksViewController.h */,
@@ -813,6 +816,7 @@
 				DC81856F1BADA0C100EF2436 /* employerMenu.plist in Resources */,
 				DCA4AE721C41B592007B7F1B /* Mail.storyboard in Resources */,
 				DC6A07CF1C0B76FD007FDEE1 /* RobotoCondensed-Regular.ttf in Resources */,
+				1EEF66601ECAB1C20095D538 /* NoPhotoAvailable.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

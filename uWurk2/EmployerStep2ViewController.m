@@ -80,7 +80,6 @@
 
 - (IBAction)nextPress:(id)sender
 {
-    AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
     if (self.txtCompany.text.length == 0) {
@@ -99,10 +98,11 @@
         [self updateParamDict:params value:@"2" key:@"setup_step"];
         [self updateParamDict:params value:@"1" key:@"profile_complete"];
         if([params count]){
+            AFHTTPRequestOperationManager *manager = [self getManager];
             [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params
                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
                     self.performInit = YES;
-                    NSLog(@"\nEmployer Step 2 - Json Response: %@", responseObject);
+                    NSLog(@"\nEmployer Step 2 - Json Response:\n%@", responseObject);
                     if([self validateResponse:responseObject]) {
                         [self saveStepNumber:-1 completion:^(NSInteger result) {
                             if(result == 1) {
@@ -113,11 +113,11 @@
                             }
                         }];
                     } else {
-                        [self handleErrorJsonResponse:@"EmployerStep2"];
+                        [self handleErrorJsonResponse:@"Employer Step 2"];
                     }
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                         NSLog(@"Error: %@", error);
-                        [self handleErrorAccessError:error];
+                    [self handleErrorAccessError:@"Employee Step 2" withError:error];
                 }];
         } else {
             [self saveStepNumber:-1 completion:^(NSInteger result) {

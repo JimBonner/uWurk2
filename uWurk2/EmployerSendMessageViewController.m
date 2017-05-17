@@ -87,7 +87,7 @@
         //        });
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-        [self handleErrorAccessError:error];
+        [self handleErrorAccessError:@"Employer Send Message" withError:error];
     }];
     
 }
@@ -178,7 +178,7 @@
 //            [self.navigationController setViewControllers:@[myController] animated:TRUE];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
-            [self handleErrorAccessError:error];
+            [self handleErrorAccessError:@"Employer Send Message" withError:error];
         }];
     }
     else {

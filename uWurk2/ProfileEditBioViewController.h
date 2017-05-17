@@ -10,6 +10,6 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface ProfileEditBioViewController : BaseViewController
+@interface ProfileEditBioViewController : BaseViewController <UITextViewDelegate>
 
 @end

@@ -22,7 +22,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self.textView setDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -90,11 +91,11 @@
                 UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                 [self.navigationController setViewControllers:@[myController] animated:YES];
             } else {
-                [self handleErrorJsonResponse:@"ProfileEditBio"];
+                [self handleErrorJsonResponse:@"Profile Edit Bio"];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
-            [self handleErrorAccessError:error];
+            [self handleErrorAccessError:@"Profile Edit Bio" withError:error];
         }];
     }
     else{

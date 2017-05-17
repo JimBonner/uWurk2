@@ -118,7 +118,7 @@
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
-            [self handleErrorAccessError:error];
+            [self handleErrorAccessError:@"Login" withError:error];
         }];
 }
 
@@ -282,7 +282,7 @@
     }
       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           NSLog(@"Error: %@", error);
-          [self handleErrorAccessError:error];
+          [self handleErrorAccessError:@"Login" withError:error];
       }];
     
 }
@@ -324,7 +324,7 @@
         
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
-            [self handleErrorValidateLogin];
+            [self handleErrorAccessError:@"Login" withError:error];
         }];
 }
 

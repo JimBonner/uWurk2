@@ -147,12 +147,12 @@
                           UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup2"];
                           [self.navigationController pushViewController:myController animated:TRUE];
                       } else {
-                          [self handleErrorJsonResponse:@"EmployeeStep1"];
+                          [self handleErrorJsonResponse:@"Employee Step 1"];
                       }
                   }
                   failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                       NSLog(@"Error: %@", error);
-                      [self handleErrorAccessError:error];
+                      [self handleErrorAccessError:@"Employee Step 1" withError:error];
                  }
              ];
         } else {

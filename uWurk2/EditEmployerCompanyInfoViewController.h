@@ -9,7 +9,11 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <Photos/Photos.h>
 
-@interface EditEmployerCompanyInfoViewController : BaseViewController
+@interface EditEmployerCompanyInfoViewController : BaseViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UIButton *btnIndustry;
 
 @end

@@ -94,11 +94,11 @@
                 UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditStep2"];
                 [self.navigationController setViewControllers:@[myController] animated:TRUE];
             } else {
-                [self handleErrorJsonResponse:@"AddLocation"];
+                [self handleErrorJsonResponse:@"Add Location"];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
-            [self handleErrorAccessError:error];
+            [self handleErrorAccessError:@"Add Location" withError:error];
         }];
     } else {
         UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditStep2"];

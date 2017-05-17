@@ -41,12 +41,12 @@
 
 - (void)loadPhoto:(NSURL*)photoURL
 {
+    [self setImage:nil];
     UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];
-    
     [photoRequest startWithCompletion:^(UIImage *newImage, NSError *error) {
-        if(newImage) {
+        dispatch_async(dispatch_get_main_queue(), ^{
             [self setImage:newImage];
-        }
+        });
     }];
 }
 

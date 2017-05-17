@@ -31,7 +31,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cnstrntBioTipHeight;
 
 @property (weak, nonatomic) NSMutableDictionary *photoDict;
-@property (weak, nonatomic) UIImage  *photoImage;
 
 @property BOOL performDbmsInit;
 
@@ -64,10 +63,11 @@
         self.performDbmsInit = NO;
         NSMutableArray *photoArray = [self.appDelegate.user objectForKey:@"photos"];
         if([photoArray count] > 0) {
-            self.photoImage = [self loadPhotoImageFromServerUsingUrl:photoArray];
-            self.photoImageView.image = self.photoImage;
+            [self loadPhotoImageFromServerUsingUrl:photoArray imageView:self.photoImageView];
+            self.photoImageView.tag = 1;
         } else {
             self.photoImageView.image = [UIImage imageNamed:@"PhotoNotAvailable.png"];
+            self.photoImageView.tag = 0;
         }
         
         [self.bioTextView setText:[self.appDelegate.user objectForKey:@"biography"]];
@@ -135,14 +135,13 @@
 {
     NSLog(@"%@",info);
     [self dismissViewControllerAnimated:YES completion:nil];
-    self.photoImage = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-    [self.photoImageView setImage:self.photoImage];
-    self.photoImageView.alpha = 1.0;
+    [self.photoImageView setImage:[info objectForKey:@"UIImagePickerControllerOriginalImage"]];
+    self.photoImageView.tag = 1;
     [self.view layoutIfNeeded];
     if(picker.sourceType == UIImagePickerControllerSourceTypeSavedPhotosAlbum) {
 
     } else if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
-         UIImageWriteToSavedPhotosAlbum(self.photoImage,
+         UIImageWriteToSavedPhotosAlbum(self.photoImageView.image,
                                         self,
                                         @selector(image:didFinishSavingWithError:contextInfo:),
                                         nil);
@@ -217,7 +216,7 @@
 {
     NSMutableString *Error = [[NSMutableString alloc] init];
     [Error appendString:@"To continue, complete the missing information:"];
-    if ((self.btnPhotoSkip.selected == NO) && (self.photoImage == nil))
+    if ((self.btnPhotoSkip.selected == NO) && (self.photoImageView.tag == 0))
     {
         [Error appendString:@"\n\nSelect Photo or Select Skip"];
     }
@@ -238,8 +237,8 @@ UIImage  *returnImage;
 
 - (void)savePhotoDataToDbms
 {
-    if(self.btnPhotoSkip.selected == NO) {
-        NSData *imageData = UIImageJPEGRepresentation(self.photoImage, 0.5);
+    if((self.btnPhotoSkip.selected == NO) || (self.photoImageView.tag == 0)) {
+        NSData *imageData = UIImageJPEGRepresentation(self.photoImageView.image, 0.5);
         AFHTTPRequestOperationManager *manager = [self getManager];
         [manager POST:@"http://uwurk.tscserver.com/api/v1/photos"
            parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
@@ -261,7 +260,7 @@ UIImage  *returnImage;
                      }];
                  }
              } else {
-                 [self handleErrorJsonResponse:@"EmployerStep2"];
+                 [self handleErrorJsonResponse:@"EmployerStep6"];
              }
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              NSLog(@"Error: %@", error.description);
@@ -305,29 +304,6 @@ UIImage  *returnImage;
              [self handleErrorUnableToSaveData:@"Biography"];
          }];
     }
-}
-
-UIImage *image;
-
-- (UIImage *)loadPhotoImageFromServerUsingUrl:(NSMutableArray *)photoArray
-{
-    image = nil;
-    
-    for(NSDictionary *photoDict in photoArray) {
-        if([[photoDict objectForKey:@"for_profile"] intValue] == 1) {
-            NSURL *photoURL =[self serverUrlWith:[photoDict objectForKey:@"url"]];
-            
-            UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];
-            
-            [photoRequest startWithCompletion:^(UIImage *newImage, NSError *error) {
-                if(newImage) {
-                    image = newImage;
-                }
-            }];
-        }
-    }
-    
-    return image;
 }
 
 @end

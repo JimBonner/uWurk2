@@ -56,10 +56,12 @@ static int const kIMAGE_REQUEST_CACHE_LIMIT = 100;
     } else {
         [self.inflight setObject:[NSMutableArray arrayWithObject:completion] forKey:self.URL.absoluteString];
         
-        [NSURLConnection sendAsynchronousRequest:self queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-//        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-//        NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:(id)self delegateQueue:[NSOperationQueue mainQueue]];
-//        id foo = [session dataTaskWithRequest:self completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        NSURLRequest *request = [NSURLRequest requestWithURL:self.URL];
+//        [[NSURLSession sharedSession]
+//         dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+        
+        [NSURLConnection sendAsynchronousRequest:self queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+        {
             if (!error) {
                 // build an image, cache the result and run completion blocks for this request
                 UIImage *image = [UIImage imageWithData:data];
@@ -82,5 +84,29 @@ static int const kIMAGE_REQUEST_CACHE_LIMIT = 100;
         }];
     }
 }
+
+//        [NSURLConnection sendAsynchronousRequest:self queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+//            if (!error) {
+//                // build an image, cache the result and run completion blocks for this request
+//                UIImage *image = [UIImage imageWithData:data];
+//                [self.imageCache setObject:image forKey:self.URL.absoluteString];
+//                
+//                NSString *storePath= [NSTemporaryDirectory() stringByAppendingPathComponent:[self.URL.absoluteString stringByReplacingOccurrencesOfString:@"/" withString:@"_"]];
+//                [UIImagePNGRepresentation(image) writeToFile:storePath atomically:YES];
+//                
+//                
+//                id value = [self.inflight objectForKey:self.URL.absoluteString];
+//                [self.inflight removeObjectForKey:self.URL.absoluteString];
+//                
+//                for (CompletionBlock block in (NSMutableArray *)value) {
+//                    block(image, nil);
+//                }
+//            } else {
+//                [self.inflight removeObjectForKey:self.URL.absoluteString];
+//                completion(nil, error);
+//            }
+//        }];
+//    }
+//}
 
 @end

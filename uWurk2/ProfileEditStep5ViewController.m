@@ -486,11 +486,11 @@
                     [self refreshData];
                     [self.navigationController popViewControllerAnimated:YES];
                 } else {
-                    [self handleErrorJsonResponse:@"ProfileEditStep5"];
+                    [self handleErrorJsonResponse:@"Profile Edit Step 5"];
                 }
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error: %@", error);
-                [self handleErrorAccessError:error];
+                [self handleErrorAccessError:@"Profile Edit Step 5" withError:error];
             }];
         } else {
             [self.navigationController popViewControllerAnimated:YES];

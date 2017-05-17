@@ -64,17 +64,17 @@
                   if([self validateResponse:responseObject]){
                       [self.navigationController popViewControllerAnimated:TRUE];
                   } else {
-                      [self handleErrorJsonResponse:@"ProfileEditPhotos"];
+                      [self handleErrorJsonResponse:@"Profile Edit Photos"];
                   }
               }
               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  [self handleErrorAccessError:error];
+                  [self handleErrorAccessError:@"Profile Edit Photos" withError:error];
               }
          ];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-        [self handleErrorAccessError:error];
+        [self handleErrorAccessError:@"Profile Edit Photos" withError:error];
     }];
 }
 
@@ -129,9 +129,9 @@
         UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];
         cell.photoID = [[photoDict objectForKey:@"id"]stringValue];
         [photoRequest startWithCompletion:^(UIImage *newImage, NSError *error) {
-            if(newImage) {
+            dispatch_async(dispatch_get_main_queue(), ^{
                 [cell.img setImage:newImage];
-            }
+            });
         }];
         return cell;
     } else {
@@ -218,16 +218,16 @@
                 [self alignUserPhotoArray];
                 [self.imagesCollection reloadData];
             } else {
-                [self handleErrorJsonResponse:@"ProfileEditPhotos"];
+                [self handleErrorJsonResponse:@"Profile Edit Photos"];
             }
         }
          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-             [self handleErrorAccessError:error];
+             [self handleErrorAccessError:@"Profile Edit Photos" withError:error];
         }];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-        [self handleErrorAccessError:error];
+        [self handleErrorAccessError:@"Profile Edit Photos" withError:error];
     }];
 }
 
@@ -255,7 +255,7 @@
                                           [self alignUserPhotoArray];
                                           [self.imagesCollection reloadData];
                                       } else {
-                                          [self handleErrorJsonResponse:@"ProfileEditPhotos"];
+                                          [self handleErrorJsonResponse:@"Profile Edit Photos"];
                                       }
                                   }
                                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -265,7 +265,7 @@
                                   
                               } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                   NSLog(@"Error: %@", error);
-                                  [self handleErrorAccessError:error];
+                                  [self handleErrorAccessError:@"Profile Edit Photos" withError:error];
                               }];
                           }]];
         [alert addAction:[UIAlertAction
@@ -289,7 +289,7 @@
                               [self alignUserPhotoArray];
                               [self.imagesCollection reloadData];
                           } else {
-                              [self handleErrorJsonResponse:@"ProfileEditPhotos"];
+                              [self handleErrorJsonResponse:@"Profile Edit Photos"];
                           }
                        }
                        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -299,7 +299,7 @@
              }
              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                  NSLog(@"Error: %@", error);
-                 [self handleErrorAccessError:error];
+                 [self handleErrorAccessError:@"Profile Edit Photos" withError:error];
              }
          ];
     }

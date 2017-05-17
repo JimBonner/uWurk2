@@ -58,7 +58,7 @@
             [self.navigationController setViewControllers:@[myController] animated:TRUE];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
-            [self handleErrorAccessError:error];
+            [self handleErrorAccessError:@"Contact Profile" withError:error];
         }];
     } else {
         ContactProfileNotifyViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ContactProfileNotifyView"];

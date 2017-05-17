@@ -41,7 +41,7 @@
         [self.navigationController popViewControllerAnimated:TRUE];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
-            [self handleErrorAccessError:error];
+            [self handleErrorAccessError:@"Mail Add Folder" withError:error];
         }];
 }
 
