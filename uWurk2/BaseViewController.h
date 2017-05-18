@@ -16,6 +16,9 @@
 
 @property (nonatomic, retain) AppDelegate *appDelegate;
 
+- (void)flashStart:(UIView *)flashView;
+- (void)flashFinish;
+
 - (void)assignValueTextView:(NSString*)value control:(UITextView*)control;
 - (void)saveUserDefault:(id)object Key:(NSString*)key;
 - (id)getUserDefault:(NSString*)key;

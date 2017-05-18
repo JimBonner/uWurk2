@@ -606,7 +606,7 @@
                                                         <rect key="frame" x="8" y="52" width="244" height="78"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="ADD YOUR LOGO!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ez2-VQ-xXK">
-                                                                <rect key="frame" x="68" y="7" width="109" height="27"/>
+                                                                <rect key="frame" x="67.5" y="7" width="109" height="27"/>
                                                                 <fontDescription key="fontDescription" name="RobotoCondensed-BoldItalic" family="Roboto Condensed" pointSize="16"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -4884,7 +4884,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COMPANY INFO" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8PE-iU-owz">
-                                                        <rect key="frame" x="131" y="10.5" width="114.5" height="21"/>
+                                                        <rect key="frame" x="130.5" y="10.5" width="114.5" height="21"/>
                                                         <fontDescription key="fontDescription" name="RobotoCondensed-Bold" family="Roboto Condensed" pointSize="18"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -5114,7 +5114,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                 <rect key="frame" x="0.0" y="22" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="J4b-Gk-1ro" id="e4B-vu-dmO">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -5142,7 +5142,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                 <rect key="frame" x="0.0" y="22" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z1c-UI-qcC" id="eEv-u1-wRa">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -5170,7 +5170,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                 <rect key="frame" x="0.0" y="22" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Je5-GC-Yz1" id="Fw5-xu-o7I">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -6141,9 +6141,10 @@ If you don’t find quality candidates today, check back soon.</string>
                                                     <constraint firstAttribute="height" constant="20" id="xWa-Tz-wNw"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SdJ-90-HIC" userLabel="Facebook">
-                                                <rect key="frame" x="60" y="398" width="52" height="50"/>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SdJ-90-HIC" userLabel="Facebook">
+                                                <rect key="frame" x="60" y="398" width="50" height="50"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="4SQ-rJ-aCw"/>
                                                     <constraint firstAttribute="height" constant="50" id="dtg-eI-bv6"/>
                                                 </constraints>
                                                 <state key="normal" backgroundImage="social-facebook-gray-min"/>
@@ -6154,54 +6155,67 @@ If you don’t find quality candidates today, check back soon.</string>
                                                     <action selector="pressFacebook:" destination="RvN-bC-VYO" eventType="touchUpInside" id="qgO-4B-V7I"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9b7-9l-bgA" userLabel="Twitter">
-                                                <rect key="frame" x="134" y="397" width="52" height="52"/>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9b7-9l-bgA" userLabel="Twitter">
+                                                <rect key="frame" x="135" y="397" width="50" height="50"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="52" id="51R-Y9-d7U"/>
+                                                    <constraint firstAttribute="width" constant="50" id="BOe-cu-YWu"/>
+                                                    <constraint firstAttribute="height" constant="50" id="yYc-zs-szh"/>
                                                 </constraints>
-                                                <state key="normal" image="social-twitter-black-min"/>
+                                                <state key="normal" backgroundImage="social-twitter-gray-min"/>
+                                                <state key="highlighted" backgroundImage="social-twitter-black-min"/>
                                                 <connections>
+                                                    <action selector="highlightIcon:" destination="RvN-bC-VYO" eventType="touchDown" id="C3f-et-YJF"/>
                                                     <action selector="pressTwitter:" destination="RvN-bC-VYO" eventType="touchUpInside" id="PQ2-bc-cR4"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cFM-VZ-lR0" userLabel="Googleplus">
-                                                <rect key="frame" x="208" y="398" width="52" height="50"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cFM-VZ-lR0" userLabel="Googleplus">
+                                                <rect key="frame" x="210" y="398" width="50" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="6td-wa-O6E"/>
+                                                    <constraint firstAttribute="width" constant="50" id="Cg8-e3-5Mr"/>
                                                 </constraints>
-                                                <state key="normal" backgroundImage="social-google-gray-min"/>
+                                                <state key="normal" image="social-google-gray-min"/>
+                                                <state key="highlighted" image="social-google-black-min"/>
                                                 <connections>
                                                     <action selector="highlightIcon:" destination="RvN-bC-VYO" eventType="touchDown" id="ilk-SA-bi0"/>
                                                     <action selector="pressGooglePlus:" destination="RvN-bC-VYO" eventType="touchUpInside" id="MmZ-Ga-Me8"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5F-LI-y0D" userLabel="Pinterest">
-                                                <rect key="frame" x="60" y="477" width="52" height="50"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5F-LI-y0D" userLabel="Pinterest">
+                                                <rect key="frame" x="60" y="477" width="50" height="50"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="hTF-im-pwN"/>
+                                                    <constraint firstAttribute="width" constant="50" id="LD7-De-Abd"/>
                                                 </constraints>
-                                                <state key="normal" backgroundImage="social-pinterest-gray-min"/>
+                                                <state key="normal" image="social-pinterest-gray-min"/>
+                                                <state key="highlighted" image="social-pinterest-black-min"/>
                                                 <connections>
+                                                    <action selector="highlightIcon:" destination="RvN-bC-VYO" eventType="touchDown" id="xBy-V8-LGi"/>
                                                     <action selector="pressPinterest:" destination="RvN-bC-VYO" eventType="touchUpInside" id="ihf-Ts-cpa"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NZT-lw-Hcr" userLabel="Instagram">
-                                                <rect key="frame" x="134" y="477" width="52" height="50"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NZT-lw-Hcr" userLabel="Instagram">
+                                                <rect key="frame" x="135" y="476" width="50" height="50"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="BXb-cr-sgo"/>
                                                     <constraint firstAttribute="height" constant="50" id="FaT-ue-5Ke"/>
                                                 </constraints>
-                                                <state key="normal" backgroundImage="social-instagram-gray-min"/>
+                                                <state key="normal" image="social-instagram-gray-min"/>
+                                                <state key="highlighted" image="social-instagram-black-min"/>
                                                 <connections>
+                                                    <action selector="highlightIcon:" destination="RvN-bC-VYO" eventType="touchDown" id="GWP-vM-oUg"/>
                                                     <action selector="pressInstagram:" destination="RvN-bC-VYO" eventType="touchUpInside" id="reK-AR-dhz"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fNE-T1-GOh" userLabel="Mail">
-                                                <rect key="frame" x="208" y="477" width="52" height="50"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fNE-T1-GOh" userLabel="Mail">
+                                                <rect key="frame" x="210" y="477" width="50" height="50"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="On7-JE-0z0"/>
+                                                    <constraint firstAttribute="height" constant="50" id="IDi-bG-viL"/>
+                                                    <constraint firstAttribute="width" constant="50" id="NCp-tk-Ori"/>
                                                 </constraints>
-                                                <state key="normal" backgroundImage="social-email-gray-min"/>
+                                                <state key="normal" image="social-email-gray-min"/>
+                                                <state key="highlighted" image="social-email-black-min"/>
                                                 <connections>
+                                                    <action selector="highlightIcon:" destination="RvN-bC-VYO" eventType="touchDown" id="3zs-da-COS"/>
                                                     <action selector="pressMail:" destination="RvN-bC-VYO" eventType="touchUpInside" id="rHh-6c-hzA"/>
                                                 </connections>
                                             </button>
@@ -6223,38 +6237,35 @@ If you don’t find quality candidates today, check back soon.</string>
                                             <constraint firstAttribute="trailing" secondItem="3dA-jZ-QH8" secondAttribute="trailing" constant="60" id="2zm-Ji-cLU"/>
                                             <constraint firstItem="3dA-jZ-QH8" firstAttribute="top" secondItem="nAp-iW-zOx" secondAttribute="bottom" constant="8" id="3AW-CS-9MW"/>
                                             <constraint firstAttribute="trailing" secondItem="Zfn-2H-X55" secondAttribute="trailing" constant="60" id="5gb-fO-x3O"/>
-                                            <constraint firstItem="fNE-T1-GOh" firstAttribute="leading" secondItem="NZT-lw-Hcr" secondAttribute="trailing" constant="22" id="8ob-f7-OsR"/>
                                             <constraint firstItem="REn-rN-uRd" firstAttribute="leading" secondItem="Hts-kw-JEt" secondAttribute="leading" constant="60" id="9lI-dR-fXD"/>
                                             <constraint firstItem="cFM-VZ-lR0" firstAttribute="top" secondItem="Zfn-2H-X55" secondAttribute="bottom" constant="29" id="A0g-bg-7X6"/>
+                                            <constraint firstAttribute="trailing" secondItem="cFM-VZ-lR0" secondAttribute="trailing" constant="60" id="BGL-7g-ldz"/>
                                             <constraint firstItem="REn-rN-uRd" firstAttribute="top" secondItem="wWj-TK-5zs" secondAttribute="bottom" constant="46" id="BPH-oh-l2F"/>
                                             <constraint firstItem="nAp-iW-zOx" firstAttribute="leading" secondItem="Hts-kw-JEt" secondAttribute="leading" constant="60" id="Cbc-Vg-viq"/>
                                             <constraint firstAttribute="trailing" secondItem="gCA-af-wrU" secondAttribute="trailing" constant="150" id="CyQ-3p-3nr"/>
                                             <constraint firstItem="uIU-kU-6rf" firstAttribute="leading" secondItem="Hts-kw-JEt" secondAttribute="leading" id="D7P-1F-xYh"/>
-                                            <constraint firstItem="NZT-lw-Hcr" firstAttribute="top" secondItem="9b7-9l-bgA" secondAttribute="bottom" constant="28" id="ECJ-eN-nYD"/>
-                                            <constraint firstItem="NZT-lw-Hcr" firstAttribute="leading" secondItem="x5F-LI-y0D" secondAttribute="trailing" constant="22" id="EJl-h9-HyY"/>
+                                            <constraint firstItem="NZT-lw-Hcr" firstAttribute="top" secondItem="9b7-9l-bgA" secondAttribute="bottom" constant="29" id="ECJ-eN-nYD"/>
                                             <constraint firstItem="nAp-iW-zOx" firstAttribute="top" secondItem="x5F-LI-y0D" secondAttribute="bottom" constant="37" id="F9K-f2-IgB"/>
                                             <constraint firstItem="x5F-LI-y0D" firstAttribute="leading" secondItem="Hts-kw-JEt" secondAttribute="leading" constant="60" id="GTG-te-pvh"/>
                                             <constraint firstItem="SdJ-90-HIC" firstAttribute="leading" secondItem="Hts-kw-JEt" secondAttribute="leading" constant="60" id="SIt-N2-aHT"/>
                                             <constraint firstAttribute="trailing" secondItem="uIU-kU-6rf" secondAttribute="trailing" id="TNc-Mu-Mnb"/>
                                             <constraint firstItem="Zfn-2H-X55" firstAttribute="top" secondItem="gCA-af-wrU" secondAttribute="bottom" constant="10" id="VvV-Sf-3hH"/>
+                                            <constraint firstItem="NZT-lw-Hcr" firstAttribute="centerX" secondItem="Hts-kw-JEt" secondAttribute="centerX" id="XV4-JS-ePl"/>
                                             <constraint firstItem="uIU-kU-6rf" firstAttribute="top" secondItem="Hts-kw-JEt" secondAttribute="top" id="bad-eT-2Ca"/>
-                                            <constraint firstItem="nAp-iW-zOx" firstAttribute="top" secondItem="NZT-lw-Hcr" secondAttribute="bottom" constant="37" id="ciz-hH-Sjg"/>
                                             <constraint firstItem="fNE-T1-GOh" firstAttribute="top" secondItem="cFM-VZ-lR0" secondAttribute="bottom" constant="29" id="emk-CL-F0c"/>
                                             <constraint firstAttribute="trailing" secondItem="nAp-iW-zOx" secondAttribute="trailing" constant="60" id="gAs-on-xzm"/>
                                             <constraint firstAttribute="bottom" secondItem="3dA-jZ-QH8" secondAttribute="bottom" constant="77" id="hSz-Sv-hg4"/>
                                             <constraint firstAttribute="trailing" secondItem="fNE-T1-GOh" secondAttribute="trailing" constant="60" id="jB7-zd-j9X"/>
                                             <constraint firstAttribute="trailing" secondItem="wWj-TK-5zs" secondAttribute="trailing" constant="60" id="jpY-MF-gNo"/>
                                             <constraint firstItem="gCA-af-wrU" firstAttribute="top" secondItem="wWj-TK-5zs" secondAttribute="bottom" constant="96" id="kjD-Pt-oKc"/>
-                                            <constraint firstItem="cFM-VZ-lR0" firstAttribute="leading" secondItem="9b7-9l-bgA" secondAttribute="trailing" constant="22" id="kja-k4-piU"/>
                                             <constraint firstItem="wWj-TK-5zs" firstAttribute="leading" secondItem="Hts-kw-JEt" secondAttribute="leading" constant="60" id="mQr-TD-pza"/>
                                             <constraint firstItem="3dA-jZ-QH8" firstAttribute="leading" secondItem="Hts-kw-JEt" secondAttribute="leading" constant="60" id="mum-HO-vF9"/>
                                             <constraint firstItem="nAp-iW-zOx" firstAttribute="top" secondItem="fNE-T1-GOh" secondAttribute="bottom" constant="37" id="n8g-BG-PD5"/>
                                             <constraint firstItem="Zfn-2H-X55" firstAttribute="top" secondItem="REn-rN-uRd" secondAttribute="bottom" constant="24" id="nYd-ai-aS8"/>
-                                            <constraint firstAttribute="trailing" secondItem="cFM-VZ-lR0" secondAttribute="trailing" constant="60" id="nae-Sn-Iov"/>
                                             <constraint firstItem="gCA-af-wrU" firstAttribute="leading" secondItem="Hts-kw-JEt" secondAttribute="leading" constant="150" id="pcW-C7-J0n"/>
                                             <constraint firstItem="Zfn-2H-X55" firstAttribute="leading" secondItem="Hts-kw-JEt" secondAttribute="leading" constant="60" id="rBZ-7b-k54"/>
                                             <constraint firstItem="wWj-TK-5zs" firstAttribute="top" secondItem="uIU-kU-6rf" secondAttribute="bottom" constant="17" id="t1Z-ps-mOA"/>
-                                            <constraint firstItem="9b7-9l-bgA" firstAttribute="leading" secondItem="SdJ-90-HIC" secondAttribute="trailing" constant="22" id="vcY-XB-66f"/>
+                                            <constraint firstItem="9b7-9l-bgA" firstAttribute="centerX" secondItem="Hts-kw-JEt" secondAttribute="centerX" id="u75-cN-brH"/>
                                             <constraint firstItem="SdJ-90-HIC" firstAttribute="top" secondItem="Zfn-2H-X55" secondAttribute="bottom" constant="29" id="w6l-BE-elM"/>
                                         </constraints>
                                     </view>
@@ -7911,7 +7922,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RG0-uo-2ux" id="l8d-LX-Aae">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -7919,7 +7930,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eZg-NL-3sy" id="fL9-Ge-pJt">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -9462,9 +9473,10 @@ If you don’t find quality candidates today, check back soon.</string>
                                                 <connections>
                                                     <action selector="changeCheckBox:" destination="Jrb-9h-oZU" eventType="touchUpInside" id="KUV-W7-3VB"/>
                                                     <action selector="pressRemoveContact:" destination="Jrb-9h-oZU" eventType="touchUpInside" id="Tkj-Pb-OkM"/>
+                                                    <action selector="pressRemoveSchool:" destination="Jrb-9h-oZU" eventType="touchUpInside" id="HKg-Sb-woK"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Removing school" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y7Y-S1-aZY">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Removing School" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y7Y-S1-aZY">
                                                 <rect key="frame" x="54" y="224" width="291" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="ord-Gw-15N"/>
@@ -9488,7 +9500,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                                     <action selector="pressRemovePhoto:" destination="Jrb-9h-oZU" eventType="touchUpInside" id="jQj-uU-a7g"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Removing photo" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VbZ-p9-jyo">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Removing Photo" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VbZ-p9-jyo">
                                                 <rect key="frame" x="54" y="260" width="291" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="ttI-Jf-4jw"/>
@@ -9510,6 +9522,9 @@ If you don’t find quality candidates today, check back soon.</string>
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="pressLanguage:" destination="Jrb-9h-oZU" eventType="touchUpInside" id="GR7-Dc-b1O"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J6p-Gu-DfU" userLabel="Photo">
                                                 <rect key="frame" x="30" y="297" width="16" height="16"/>
@@ -9547,7 +9562,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                                     <action selector="pressSave:" destination="Jrb-9h-oZU" eventType="touchUpInside" id="Rlt-rh-X0j"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Removing photo" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRZ-qK-u48">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Removing A Saved Search" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRZ-qK-u48">
                                                 <rect key="frame" x="54" y="296" width="291" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="6HZ-HW-cNA"/>
@@ -9624,6 +9639,14 @@ If you don’t find quality candidates today, check back soon.</string>
                             <constraint firstItem="j5e-ge-m17" firstAttribute="width" secondItem="unf-Nn-PnM" secondAttribute="width" id="yVS-03-sJK"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btnLanguage" destination="np0-Rc-7kc" id="TLt-XF-khQ"/>
+                        <outlet property="btnRemoveFavorite" destination="b6R-ce-a8P" id="rFU-gF-bz8"/>
+                        <outlet property="btnRemovePhoto" destination="gGl-n7-TvJ" id="qyD-a9-QPF"/>
+                        <outlet property="btnRemoveSchool" destination="WiZ-Sv-kwI" id="QeW-Ha-cKo"/>
+                        <outlet property="btnRemoveSearch" destination="J6p-Gu-DfU" id="Uui-24-jgK"/>
+                        <outlet property="btnSaveChanges" destination="7aY-Xw-Yaw" id="pcB-T0-PMj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bL9-lH-QdD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -9792,13 +9815,18 @@ If you don’t find quality candidates today, check back soon.</string>
         <image name="smiley-facebook" width="360" height="170"/>
         <image name="smiley-tattoo" width="160" height="160"/>
         <image name="smiley-yellow" width="160" height="160"/>
+        <image name="social-email-black-min" width="52" height="52"/>
         <image name="social-email-gray-min" width="52" height="52"/>
         <image name="social-facebook-black-min" width="52" height="52"/>
         <image name="social-facebook-gray-min" width="52" height="52"/>
+        <image name="social-google-black-min" width="52" height="52"/>
         <image name="social-google-gray-min" width="52" height="52"/>
+        <image name="social-instagram-black-min" width="52" height="52"/>
         <image name="social-instagram-gray-min" width="52" height="52"/>
+        <image name="social-pinterest-black-min" width="52" height="52"/>
         <image name="social-pinterest-gray-min" width="52" height="52"/>
         <image name="social-twitter-black-min" width="52" height="52"/>
+        <image name="social-twitter-gray-min" width="52" height="52"/>
         <image name="tip-icon-blue" width="26" height="18"/>
         <image name="tip-icon-white" width="26" height="18"/>
         <image name="unchecked.png" width="20" height="20"/>

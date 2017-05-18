@@ -16,6 +16,7 @@
 @end
 
 @protocol LanguageSpokenCollectionViewCellDelegate <NSObject>
+
 @end
 
 @interface LanguageSpokenCollectionViewCell : UICollectionViewCell

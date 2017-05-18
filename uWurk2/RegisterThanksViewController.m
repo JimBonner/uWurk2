@@ -31,6 +31,8 @@
     [super viewWillAppear:animated];
 
     NSLog(@"\nRegister Thanks:\n%@",self.appDelegate.user);
+    
+    [self flashStart:self.btnTryAgain];
 }
 
 - (IBAction)pressReEnter:(id)sender
@@ -64,6 +66,12 @@
 - (IBAction)pressLogout:(id)sender
 {
     [self logout];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self flashFinish];
 }
 
 @end

@@ -372,6 +372,8 @@
 				9BD16A571BE6E319006BAF69 /* ListSelectorStringsTableViewController.m */,
 				9B3EE1451B9F4DFA001D3C37 /* ListSelectorTableViewController.h */,
 				9B3EE1461B9F4DFA001D3C37 /* ListSelectorTableViewController.m */,
+				1E51E0961EAE99040070BF54 /* RegisterThanksViewController.h */,
+				1E51E0971EAE99140070BF54 /* RegisterThanksViewController.m */,
 			);
 			name = OtherViewControllers;
 			path = ../Pods;
@@ -477,8 +479,6 @@
 				9B8B98F21BB37801005821EB /* Search */,
 				1EE550A31E9540DC007CA914 /* Images */,
 				9BEA1B251B9A4FCA0017D87A /* Register */,
-				1E51E0961EAE99040070BF54 /* RegisterThanksViewController.h */,
-				1E51E0971EAE99140070BF54 /* RegisterThanksViewController.m */,
 				9B3EE1921BAA2860001D3C37 /* EditEmployeeProfile */,
 				9B0C71331C7770A6003DB760 /* EditEmployerProfile */,
 				DC8185681BADA0A500EF2436 /* DashboardMenu */,

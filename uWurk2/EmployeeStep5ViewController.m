@@ -102,49 +102,7 @@
         } else {
             [self.btnExperienceNo setSelected:YES];
             [self.params setObject:@"" forKey:self.expId];
-            [self restoreScreenData];
         }
-    } else {
-        [self restoreScreenData];
-    }
-}
-
--(void)saveScreenData
-{
-    [self.appDelegate.user setObjectOrNil:self.btnExperienceYes.selected ? @"1" : @"0" forKey:@"exp_has_experience"];
-    [self.appDelegate.user setObjectOrNil:self.btnExperienceNo.selected ? @"1" : @"0" forKey:@"exp_has_no_experience"];
-    [self.appDelegate.user setObjectOrNil:self.txtCompany.text forKey:@"exp_company_names"];
-    [self.appDelegate.user setObjectOrNil:self.btnCurrentJob.selected ? @"1" : @"0" forKey:@"exp_current_job"];
-    [self.appDelegate.user setObjectOrNil:self.btnUnderYear.selected ? @"1" : @"0" forKey:@"exp_industry_tenure_underyear"];
-    [self.appDelegate.user setObjectOrNil:self.btnYear2Year.selected ? @"1" : @"0" forKey:@"exp_industry_tenure_year2year"];
-    [self.appDelegate.user setObjectOrNil:self.btnOver2Year.selected ? @"1" : @"0" forKey:@"exp_industry_tenure_over2year"];
-    [self.appDelegate.user setObjectOrNil:self.btnIndustry.titleLabel.text forKey:@"exp_industry_name"];
-    [self.appDelegate.user setObjectOrNil:[@(self.btnIndustry.tag)stringValue] forKey:@"exp_industry_id"];
-    [self.appDelegate.user setObjectOrNil:self.btnPosition.titleLabel.text forKey:@"exp_industry_position"];
-    [self.appDelegate.user setObjectOrNil:[@(self.btnPosition.tag)stringValue] forKey:@"exp_industry_position_id"];
-}
-
-- (void)restoreScreenData
-{
-    if(([self.appDelegate.user objectForKey:@"exp_has_experience"] == nil) &&
-       ([self.appDelegate.user objectForKey:@"exp_has_no_experience"] == nil)) {
-        [self pressNoExp:nil];
-        return;
-    }
-    if([self.appDelegate.user objectForKey:@"exp_has_experience"]) {
-        [self.btnExperienceYes setSelected:[[self.appDelegate.user objectForKey:@"exp_has_experience"]intValue]];
-    }
-    if([self.appDelegate.user objectForKey:@"exp_current_job"]) {
-        [self.btnCurrentJob setSelected:[[self.appDelegate.user objectForKey:@"exp_current_job"]intValue]];
-    }
-    if([self.appDelegate.user objectForKey:@"exp_industry_tenure_underyear"]) {
-        [self.btnUnderYear setSelected:[[self.appDelegate.user objectForKey:@"exp_industry_tenure_underyear"]intValue]];
-    }
-    if([self.appDelegate.user objectForKey:@"exp_industry_tenure_year2year"]) {
-        [self.btnYear2Year setSelected:[[self.appDelegate.user objectForKey:@"exp_industry_tenure_year2year"]intValue]];
-    }
-    if([self.appDelegate.user objectForKey:@"exp_industry_tenure_over2year"]) {
-        [self.btnOver2Year setSelected:[[self.appDelegate.user objectForKey:@"exp_industry_tenure_over2year"]intValue]];
     }
 }
 
@@ -187,8 +145,6 @@
 
 - (IBAction)industryPress:(id)sender
 {
-    [self saveScreenData];
-    
     ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
     
     [myController setParameters:nil];
@@ -206,8 +162,6 @@
 
 - (IBAction)positionPress:(id)sender
 {
-    [self saveScreenData];
-    
     ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
     
     [myController setParameters:@{@"industry_id":[@(self.btnIndustry.tag)stringValue]}];

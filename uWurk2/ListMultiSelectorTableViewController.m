@@ -20,8 +20,9 @@
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
     if(self.idDict == nil) {
         self.idDict = [[NSMutableDictionary alloc]init];
@@ -33,7 +34,6 @@
     if(self.bPost) {
         [manager POST:self.url parameters:self.parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             self.json = [NSMutableArray arrayWithArray:[responseObject objectForKey:self.jsonGroup]];
-            [self.json removeObjectAtIndex:0];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
             });
@@ -44,7 +44,6 @@
     else {
         [manager GET:self.url parameters:self.parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             self.json = [NSMutableArray arrayWithArray:[responseObject objectForKey:self.jsonGroup]];
-            [self.json removeObjectAtIndex:0];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
             });
@@ -81,8 +80,7 @@
         NSDictionary *row = [self.json objectAtIndex:indexPath.row];
         NSString *langId = [[NSNumber numberWithInt:[[row objectForKey:@"id"]intValue]]stringValue];
         cell.textLabel.text = [row objectForKey:self.display];
-        NSString *selected = [self.idDict objectForKey:langId];
-        if(selected != nil) {
+        if([self.idDict objectForKey:langId]) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
         } else {
             cell.accessoryType = UITableViewCellAccessoryNone;

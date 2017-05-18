@@ -49,27 +49,27 @@
     
     self.performInit = NO;
     
-    if(([self getUserDefault:@"interfaceLanguage"] != nil) &&
-      (![[self getUserDefault:@"interfaceLanguage"] isEqualToString:@"Select Language"])) {
-        [self.btnLanguage setTitle:[self getUserDefault:@"interfaceLanguage"] forState:UIControlStateNormal];
+    if(([self getUserDefault:@"EmployeePrefInterfaceLanguage"] != nil) &&
+      (![[self getUserDefault:@"EmployeePrefInterfaceLanguage"] isEqualToString:@"Select Language"])) {
+        [self.btnLanguage setTitle:[self getUserDefault:@"EmployeePrefInterfaceLanguage"] forState:UIControlStateNormal];
     } else {
         [self.btnLanguage setTitle:@"Select Language" forState:UIControlStateNormal];
     }
-    if(([self getUserDefault:@"prefRemoveJob"] != nil) &&
-      ([[self getUserDefault:@"prefRemoveJob"] isEqualToString:@"1"])) {
+    if(([self getUserDefault:@"EmployeePrefRemoveJob"] != nil) &&
+      ([[self getUserDefault:@"EmployeePrefRemoveJob"] isEqualToString:@"1"])) {
         [self.btnPrefRemoveJob setSelected:YES];
     } else {
         [self.btnPrefRemoveJob setSelected:NO];
         
     }
-    if(([self getUserDefault:@"prefRemoveSchool"] != nil) &&
-       [[self getUserDefault:@"prefRemoveSchool"] isEqualToString:@"1"]) {
+    if(([self getUserDefault:@"EmployeePrefRemoveSchool"] != nil) &&
+       [[self getUserDefault:@"EmployeePrefRemoveSchool"] isEqualToString:@"1"]) {
         [self.btnPrefRemoveSchool setSelected:YES];
     } else {
         [self.btnPrefRemoveSchool setSelected:NO];
     }
-    if(([self getUserDefault:@"prefRemovePhoto"] != nil) &&
-       ([[self getUserDefault:@"prefRemovePhoto"] isEqualToString:@"1"])) {
+    if(([self getUserDefault:@"EmployeePrefRemovePhoto"] != nil) &&
+       ([[self getUserDefault:@"EmployeePrefRemovePhoto"] isEqualToString:@"1"])) {
         [self.btnPrefRemovePhoto setSelected:YES];
     } else {
         [self.btnPrefRemovePhoto setSelected:NO];

@@ -56,6 +56,7 @@
     
     if(self.performEducationInit) {
         self.performEducationInit = NO;
+        
         self.eduId = @"edu_id[0]";
         self.params = [[NSMutableDictionary alloc]init];
         NSArray *eduArray = [self.appDelegate.user objectForKey:@"education"];
@@ -153,8 +154,6 @@
         } else {
             [self.params setObject:@"" forKey:self.eduId];
         }
-    } else {
-        [self restoreScreenData];
     }
 }
 
@@ -295,8 +294,6 @@
 
 - (IBAction)statePress:(id)sender
 {
-    [self saveScreenData];
-    
     [self.btnSchool setTitle:@"Select School" forState:UIControlStateNormal];
     [self.btnCity setTitle:@"Select City" forState:UIControlStateNormal];
     
@@ -318,8 +315,6 @@
 
 - (IBAction)cityPress:(id)sender
 {
-    [self saveScreenData];
-    
     [self.btnSchool setTitle:@"Select School" forState:UIControlStateNormal];
     
     if([self.btnState.titleLabel.text isEqualToString:@"Select State"]) {
@@ -354,8 +349,6 @@
 
 - (IBAction)schoolPress:(id)sender
 {
-    [self saveScreenData];
-    
     ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
     
     if (self.btnHighSchool.isSelected) {
@@ -389,69 +382,6 @@
     [myController setPassThru:@"selected_school"];
     
     [self.navigationController pushViewController:myController animated:TRUE];
-}
-
-- (void)saveScreenData
-{
-    if([self.btnHighSchool isSelected]) {
-        [self.appDelegate.user setObject:@"high_school" forKey:@"school_type"];
-    }
-    if([self.btnCollege isSelected]) {
-        [self.appDelegate.user setObject:@"college" forKey:@"school_type"];
-    }
-    if([self.btnTradeSchool isSelected]) {
-        [self.appDelegate.user setObject:@"trade_school" forKey:@"school_type"];
-    }
-    if([self.btnGED isSelected]) {
-        [self.appDelegate.user setObject:@"ged" forKey:@"school_type"];
-    }
-    if([self.btnEnrolled isSelected]) {
-        [self.appDelegate.user setObject:@"1" forKey:@"school_status_enrolled"];
-    } else {
-        [self.appDelegate.user setObject:@"0" forKey:@"school_status_enrolled"];
-    }
-    if([self.btnGraduated isSelected]) {
-        [self.appDelegate.user setObject:@"1" forKey:@"school_status_graduated"];
-    } else {
-        [self.appDelegate.user setObject:@"0" forKey:@"school_status_graduated"];
-    }
-    if([self.btnAttended isSelected]) {
-        [self.appDelegate.user setObject:@"1" forKey:@"school_status_attended"];
-    } else {
-        [self.appDelegate.user setObject:@"0" forKey:@"school_status_attended"];
-    }
-    [self.appDelegate.user setObject:self.btnState.titleLabel.text forKey:@"school_state"];
-    [self.appDelegate.user setObject:[@(self.btnState.tag)stringValue] forKey:@"school_state_id"];
-    [self.appDelegate.user setObject:self.btnCity.titleLabel.text forKey:@"school_city"];
-    [self.appDelegate.user setObject:self.btnSchool.titleLabel.text forKey:@"school_name"];
-    [self.appDelegate.user setObject:[@(self.btnSchool.tag)stringValue] forKey:@"school_name_id"];
-}
-
-- (void)restoreScreenData
-{
-    if([[self.appDelegate.user objectForKey:@"school_type"]isEqualToString:@"high_school"]) {
-        [self.btnHighSchool setSelected:YES];
-    } else {
-        [self.btnHighSchool setSelected:NO];
-    }
-    if([[self.appDelegate.user objectForKey:@"school_type"]isEqualToString:@"college"]) {
-        [self.btnCollege setSelected:YES];
-    } else {
-        [self.btnCollege setSelected:NO];
-    }
-    if([[self.appDelegate.user objectForKey:@"school_type"]isEqualToString:@"trade_school"]) {
-        [self.btnTradeSchool setSelected:YES];
-    } else {
-        [self.btnTradeSchool setSelected:NO];
-    }
-    if([[self.appDelegate.user objectForKey:@"school_type"]isEqualToString:@"ged"]) {
-        [self.btnGED setSelected:YES];
-    } else {
-        [self.btnGED setSelected:NO];
-    }
-    self.btnEnrolled.selected = [[self.appDelegate.user objectForKey:@"school_status_enrolled"]intValue];
-    self.btnGraduated.selected = [[self.appDelegate.user objectForKey:@"school_status_graduated"]intValue];
-    self.btnAttended.selected = [[self.appDelegate.user objectForKey:@"school_status_attended"]intValue];
 }
 
 - (IBAction)nextPress:(id)sender

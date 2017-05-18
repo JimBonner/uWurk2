@@ -9,7 +9,6 @@
 
 #import "ProfileEditStep3ViewController.h"
 #import "RadioButton.h"
-#import "ListMultiSelectorTableViewController.h"
 
 @interface ProfileEditStep3ViewController () <ListMultiSelectorTableViewControllerProtocol>
 @property (weak, nonatomic) IBOutlet RadioButton *btnDLYes;
@@ -27,7 +26,6 @@
 @property (weak, nonatomic) IBOutlet UIView *viewBdyArt;
 @property (weak, nonatomic) IBOutlet UIButton *addLanguage;
 @property (weak, nonatomic) IBOutlet UILabel *lblLanguages;
-@property (nonatomic, strong) NSMutableDictionary *langDict;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightBodyArt;
 @property (weak, nonatomic) IBOutlet UIView *viewCool;
 
@@ -115,18 +113,17 @@
         [self.view layoutIfNeeded];
     }
     if(!self.langDict) {
-        self.langDict = [NSMutableDictionary new];
+        self.langDict = [[NSMutableDictionary alloc]init];
 
-        NSArray *languages = [self.appDelegate.user objectForKey:@"languages"];
         NSString *displayString = @"";
-        for(NSDictionary *dict in languages) {
-            [self.langDict setObject:[dict objectForKey:@"description"] forKey:[dict objectForKey:@"id"]];
+        for(NSDictionary *dict in [self.appDelegate.user objectForKey:@"languages"]) {
+            [self.langDict setObject:[dict objectForKey:@"description"] forKey:[[NSNumber numberWithInt:[[dict objectForKey:@"id"]intValue]]stringValue]];
             if([displayString length] > 0) {
                 displayString = [displayString stringByAppendingString:@", "];
             }
             displayString = [displayString stringByAppendingString:[dict objectForKey:@"description"]];
         }
-        [self SelectionMade:self.langDict displayString:displayString];
+        self.lblLanguages.text = displayString;
     }
     if ([self.lblLanguages.text length] > 0) {
         [self.addLanguage setTitle:@"Modify Languages" forState:UIControlStateNormal];
@@ -244,16 +241,19 @@
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 [self handleErrorUnableToContact];
             }];
-        }
-        else{
+        } else {
             [self.navigationController popViewControllerAnimated:YES];
         }
     }
 }
 
-- (void)SelectionMade:(NSString *)passThru withDict:(NSDictionary *)dict displayString:(NSString *)displayString
+- (void)SelectionMade:(NSString *)passThru withDict:(NSMutableDictionary *)dict displayString:(NSString *)displayString
 {
-    
+    self.lblLanguages.text = displayString;
+    if([displayString length] > 0) {
+        [self.addLanguage setTitle:@"Modify Languages" forState:UIControlStateNormal];
+    }
+    self.langDict = dict;
 }
 
 @end

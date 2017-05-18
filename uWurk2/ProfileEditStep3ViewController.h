@@ -9,7 +9,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import "ListMultiSelectorTableViewController.h"
 
-@interface ProfileEditStep3ViewController : BaseViewController
+@interface ProfileEditStep3ViewController : BaseViewController <ListMultiSelectorTableViewControllerProtocol>
+
+@property (nonatomic, strong) NSMutableDictionary *langDict;
 
 @end

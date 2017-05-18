@@ -62,31 +62,32 @@
 
 - (IBAction)pressFacebook:(id)sender
 {
-    NSString *s = [NSString stringWithFormat:@"https://www.facebook.com/sharer/sharer.php?u=http://uwurk.tscserver.com/ref/%@",[self.appDelegate.user objectForKey:@"referral_code"]];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:s]];
+    NSString *stringURL = [NSString stringWithFormat:@"https://www.facebook.com/sharer/sharer.php?u=http://uwurk.tscserver.com/ref/%@",[self.appDelegate.user objectForKey:@"referral_code"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:stringURL]];
 }
 
 - (IBAction)pressTwitter:(id)sender
 {
-    NSString *s = [NSString stringWithFormat:@"https://twitter.com/intent/tweet?text=http://uwurk.tscserver.com/ref/%@&source=webclient",[self.appDelegate.user objectForKey:@"referral_code"]];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:s]];
+    NSString *stringURL = [NSString stringWithFormat:@"https://twitter.com/intent/tweet?text=http://uwurk.tscserver.com/ref/%@&source=webclient",[self.appDelegate.user objectForKey:@"referral_code"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:stringURL]];
 }
 
 - (IBAction)pressGooglePlus:(id)sender
 {
-    NSString *s = [NSString stringWithFormat:@"https://plus.google.com/share?url=http://uwurk.tscserver.com/ref/%@",[self.appDelegate.user objectForKey:@"referral_code"]];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:s]];
+    NSString *stringURL = [NSString stringWithFormat:@"https://plus.google.com/share?url=http://uwurk.tscserver.com/ref/%@",[self.appDelegate.user objectForKey:@"referral_code"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:stringURL]];
 }
 
 - (IBAction)pressPinterest:(id)sender
 {
-    NSString *s = [NSString stringWithFormat:@"https://www.pinterest.com/pin/create/button/?url=http://uwurk.tscserver.com/ref/%@&media=http://uwurk.tscserver.com/images/uWurk_referral-dog.jpg&description=uWurk, Where Jobs Look for U!",[self.appDelegate.user objectForKey:@"referral_code"]];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:s]];
+    NSString *stringURL = [NSString stringWithFormat:@"https://www.pinterest.com/pin/create/button/?url=http://uwurk.tscserver.com/ref/%@&media=http://uwurk.tscserver.com/images/uWurk_referral-dog.jpg&description=uWurk, Where Jobs Look for U!",[self.appDelegate.user objectForKey:@"referral_code"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:stringURL]];
 }
 
 - (IBAction)pressInstagram:(id)sender
 {
-    
+    NSString *stringURL = [NSString stringWithFormat:@"https://instragram.com"];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:stringURL]];
 }
 
 - (IBAction)pressMail:(id)sender

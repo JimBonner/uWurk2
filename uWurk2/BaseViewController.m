@@ -13,6 +13,8 @@
 
 @interface BaseViewController ()
 
+@property BOOL flasher;
+
 @end
 
 @implementation BaseViewController
@@ -43,7 +45,8 @@
 //        [self.navigationController.navigationBar setBackIndicatorImage:[UIImage imageNamed:@"Back Arrow White"]];
 //        [self.navigationController.navigationBar setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"BackArrow_LgWhite"]];
     }
-
+    
+    self.flasher = NO;
 }
 
 -(void)assignValue:(NSString*)value control:(UITextField *)control {
@@ -341,6 +344,42 @@
             imageView.tag   = 1;
         });
     }];
+}
+
+#pragma mark -
+#pragma mark Flasher On/Off
+
+- (void)flashStart:(UIView *)flashView
+{
+    self.flasher = YES;
+    [self flashOn:flashView];
+}
+
+- (void)flashFinish
+{
+    self.flasher = NO;
+}
+
+- (void)flashOff:(UIView *)flashView
+{
+    if(!self.flasher) {
+        return;
+    }
+    
+    [UIView animateWithDuration:.05
+                          delay:0
+                        options:UIViewAnimationOptionAllowUserInteraction
+                     animations:^ { flashView.alpha = 0.3; }
+                     completion:^ (BOOL finished) { [self flashOn:flashView]; }];
+}
+
+- (void)flashOn:(UIView *)flashView
+{
+    [UIView animateWithDuration:.05
+                          delay:0
+                        options:UIViewAnimationOptionAllowUserInteraction
+                     animations:^ { flashView.alpha = 1.0; }
+                     completion:^ (BOOL finished) { [self flashOff:flashView]; }];
 }
 
 #pragma mark -
