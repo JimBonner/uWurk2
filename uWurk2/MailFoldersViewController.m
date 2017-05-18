@@ -14,7 +14,7 @@
 @property (strong, nonatomic) NSMutableArray *json;
 @property (strong, nonatomic) NSMutableArray *json2;
 @property (strong, nonatomic) NSDictionary *countDict;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak,   nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -40,8 +40,8 @@
         self.json = [[NSMutableArray alloc] init];
 
         if([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"employee"]) {
-            [self.json addObject:@{@"id":@"0",@"fromEmployer":@"From Employer"}];
-            [self.json addObject:@{@"id":@"1",@"fromUwurk":@"From uWurk"}];
+            [self.json addObject:@{@"id":@"0",@"name":@"From Employer"}];
+            [self.json addObject:@{@"id":@"1",@"name":@"From uWurk"}];
         } else {
             [self.json addObject:@{@"id":@"0|yes",@"name":@"Yes"}];
             [self.json addObject:@{@"id":@"1|no",@"name":@"No"}];
