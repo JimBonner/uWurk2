@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 
 @interface EmployerMessageDetailRightTableViewCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UILabel *lblTime;
 @property (weak, nonatomic) IBOutlet UILabel *lblText;
 @property (weak, nonatomic) IBOutlet UIView *textBubbleView;

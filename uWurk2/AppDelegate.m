@@ -87,4 +87,20 @@
     return documentsDirectory;
 }
 
+- (void)setupUwurkStyle:(UITableView *)tableView cell:(UITableViewCell *)cell
+{
+    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
+    UIView *separator = [[UIView alloc]init];
+    CGRect frame = CGRectZero;
+    frame.origin = CGPointMake(cell.frame.origin.x, cell.frame.origin.y + cell.frame.size.height - 1.0);
+    frame.size   = CGSizeMake(cell.frame.size.width, 1.0);
+    separator.frame = frame;
+    
+    separator.backgroundColor = [UIColor blueColor];
+    separator.alpha = 0.3;
+    
+    [cell.contentView addSubview:separator];
+}
+
 @end

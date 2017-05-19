@@ -1,5 +1,5 @@
 //
-//  EmployeeDashboardMenuTableViewController.m
+//  DashboardMenuTableViewController.m
 //  uWurk
 //
 //  Created by Rob Bonner on 5/9/15.
@@ -23,6 +23,8 @@
     
     NSString *filePath = [[NSBundle mainBundle] pathForResource:self.menuFileName ofType:@"plist"];
     self.menuArray = [[NSArray alloc] initWithContentsOfFile:filePath];
+    
+//    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
     [self.tableView reloadData];
 }

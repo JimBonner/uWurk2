@@ -100,8 +100,8 @@
                 self.btnOver2Year.selected = TRUE;
             }
         } else {
-            [self.btnExperienceNo setSelected:YES];
             [self.params setObject:@"" forKey:self.expId];
+            [self pressNoExp:nil];
         }
     }
 }

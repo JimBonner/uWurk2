@@ -18,7 +18,6 @@
 @property (strong, nonatomic) NSArray *json;
 @property (weak, nonatomic) IBOutlet UILabel *lblFolderName;
 
-
 @end
 
 @implementation MailMessagesTableViewController

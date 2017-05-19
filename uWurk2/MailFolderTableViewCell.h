@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 
 @interface MailFolderTableViewCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UILabel *lblFolderName;
 
 @end

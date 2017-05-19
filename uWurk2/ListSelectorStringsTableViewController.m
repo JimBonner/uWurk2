@@ -9,9 +9,8 @@
 
 #import "ListSelectorStringsTableViewController.h"
 
-
-
 @interface ListSelectorStringsTableViewController ()
+
 @property (nonatomic, retain) NSArray *json;
 @end
 

@@ -14,7 +14,6 @@
 #import "SaveSearchViewController.h"
 #import "RefineSearchViewController.h"
 
-
 @interface SearchResultsTableViewController ()
 @property (weak, nonatomic) IBOutlet UILabel  *lblResultNumber;
 @property (weak, nonatomic) IBOutlet UIButton *btnFavorite;

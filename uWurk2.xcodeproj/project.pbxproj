@@ -17,6 +17,7 @@
 		1E0DC3ED1E773AE5009ECCB6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0DC3EC1E773AE5009ECCB6 /* libPods.a */; };
 		1E4B94961E8D697A004ADCB9 /* NSMutableDictionary+CocoaFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4B94951E8D697A004ADCB9 /* NSMutableDictionary+CocoaFix.m */; };
 		1E51E0981EAE99140070BF54 /* RegisterThanksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E51E0971EAE99140070BF54 /* RegisterThanksViewController.m */; };
+		1E58D5B71ECEB94B00B816E8 /* Spinner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E58D5B61ECEB94B00B816E8 /* Spinner.m */; };
 		1E9CCB001E91B2C2008DBEE7 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9CCAFF1E91B2C2008DBEE7 /* Photos.framework */; };
 		1EAE1B901E78738100BE2C11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B497CA91BACA21300BE59B6 /* Main.storyboard */; };
 		1ECFB79B1EBC47C3004982EC /* EmployeeProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCA4AE731C41B6E6007B7F1B /* EmployeeProfile.storyboard */; };
@@ -135,6 +136,8 @@
 		1E4B94951E8D697A004ADCB9 /* NSMutableDictionary+CocoaFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+CocoaFix.m"; sourceTree = "<group>"; };
 		1E51E0961EAE99040070BF54 /* RegisterThanksViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RegisterThanksViewController.h; path = uWurk2/RegisterThanksViewController.h; sourceTree = SOURCE_ROOT; };
 		1E51E0971EAE99140070BF54 /* RegisterThanksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegisterThanksViewController.m; path = uWurk2/RegisterThanksViewController.m; sourceTree = SOURCE_ROOT; };
+		1E58D5B51ECEB94B00B816E8 /* Spinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spinner.h; sourceTree = "<group>"; };
+		1E58D5B61ECEB94B00B816E8 /* Spinner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spinner.m; sourceTree = "<group>"; };
 		1E9CCAFF1E91B2C2008DBEE7 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		1EE550A61E95750D007CA914 /* PhotoNotAvailable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PhotoNotAvailable.png; sourceTree = "<group>"; };
 		1EEF665F1ECAB1C20095D538 /* NoPhotoAvailable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NoPhotoAvailable.png; sourceTree = "<group>"; };
@@ -183,8 +186,8 @@
 		9B379CA71B950FD500EB4E2D /* uWurk2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = uWurk2Tests.m; sourceTree = "<group>"; };
 		9B379CB31B95197600EB4E2D /* EmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeViewController.h; sourceTree = "<group>"; };
 		9B379CB41B95197600EB4E2D /* EmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeViewController.m; sourceTree = "<group>"; };
-		9B379CB91B95217700EB4E2D /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
-		9B379CBA1B95217700EB4E2D /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
+		9B379CB91B95217700EB4E2D /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroViewController.h; path = ../uWurk2/IntroViewController.h; sourceTree = "<group>"; };
+		9B379CBA1B95217700EB4E2D /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroViewController.m; path = ../uWurk2/IntroViewController.m; sourceTree = "<group>"; };
 		9B379CBC1B95247600EB4E2D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ../uWurk2/LoginViewController.h; sourceTree = "<group>"; };
 		9B379CBD1B95247600EB4E2D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = ../uWurk2/LoginViewController.m; sourceTree = "<group>"; };
 		9B379CF11B97DF3A00EB4E2D /* IntroEmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroEmployeeViewController.h; sourceTree = "<group>"; };
@@ -364,6 +367,8 @@
 				9BEA1B641B9E27160017D87A /* BaseViewController.m */,
 				9B8B992B1BB47D7D005821EB /* BaseTableViewController.h */,
 				9B8B992C1BB47D7D005821EB /* BaseTableViewController.m */,
+				9B379CB91B95217700EB4E2D /* IntroViewController.h */,
+				9B379CBA1B95217700EB4E2D /* IntroViewController.m */,
 				9B379CBC1B95247600EB4E2D /* LoginViewController.h */,
 				9B379CBD1B95247600EB4E2D /* LoginViewController.m */,
 				DCA4AE751C41CD53007B7F1B /* ListMultiSelectorTableViewController.h */,
@@ -493,6 +498,8 @@
 		9B379C8B1B950FD500EB4E2D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1E58D5B51ECEB94B00B816E8 /* Spinner.h */,
+				1E58D5B61ECEB94B00B816E8 /* Spinner.m */,
 				DC7322DB1C35F28A004EE713 /* PhotoImageView.h */,
 				DC7322DC1C35F28A004EE713 /* PhotoImageView.m */,
 				57BC6448572285618DFBB48F /* Pods */,
@@ -596,8 +603,6 @@
 				9B0452701C0564E000B33526 /* EmployeeSendMessageViewController.m */,
 				9B04526C1C04456700B33526 /* EmployerSendMessageViewController.h */,
 				9B04526D1C04456700B33526 /* EmployerSendMessageViewController.m */,
-				9B379CB91B95217700EB4E2D /* IntroViewController.h */,
-				9B379CBA1B95217700EB4E2D /* IntroViewController.m */,
 				9B0452651C03CA7100B33526 /* JobInterestViewController.h */,
 				9B0452661C03CA7100B33526 /* JobInterestViewController.m */,
 				DC191A631C026C7900314B6C /* MailAddFolderViewController.h */,
@@ -898,6 +903,7 @@
 				9B04526B1C03CA7100B33526 /* ViewJobMessageViewController.m in Sources */,
 				9B3EE1851BAA2788001D3C37 /* ProfileEditStep1ViewController.m in Sources */,
 				9BEA1B211B9A4F810017D87A /* EmployeeStep4ViewController.m in Sources */,
+				1E58D5B71ECEB94B00B816E8 /* Spinner.m in Sources */,
 				9B0452591C02B80C00B33526 /* EmployeeStep6ViewController.m in Sources */,
 				9B04525F1C03165800B33526 /* MessageSentViewController.m in Sources */,
 				9B0C713F1C77714B003DB760 /* EditEmployerContactInfoViewController.m in Sources */,

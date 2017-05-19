@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 
 @interface MailMessageTableViewCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UILabel *lblSubject;
 @property (weak, nonatomic) IBOutlet UILabel *lblPosition;
 @property (weak, nonatomic) IBOutlet UILabel *lblDateAndTime;

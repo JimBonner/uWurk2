@@ -10,7 +10,6 @@
 #import "EmployerDashboardRecentSearchesViewController.h"
 #import "AFNetworking.h"
 
-
 @interface EmployerDashboardRecentSearchesViewController ()
 
 @property (nonatomic, retain) NSMutableArray *json;

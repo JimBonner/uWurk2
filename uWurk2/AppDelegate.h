@@ -19,6 +19,7 @@
 @property CGSize screenSize;
 
 - (NSString *)getDocumentsDirectory;
+- (void)setupUwurkStyle:(UITableView *)tableView cell:(UITableViewCell *)cell;
 
 @end
 

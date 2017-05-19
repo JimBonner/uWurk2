@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -284,6 +284,7 @@
                                 <rect key="frame" x="0.0" y="114" width="375" height="509"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.47058823529999999" green="0.71372549019999998" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MailFolderViewCell" id="dSP-3w-uS9" customClass="MailFolderTableViewCell">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -411,6 +412,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="separatorColor" red="0.47058823529999999" green="0.71372549019999998" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <view key="tableHeaderView" clipsSubviews="YES" contentMode="scaleToFill" id="4ho-a7-UKZ" userLabel="Header">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -704,6 +706,7 @@
                                                 <rect key="frame" x="18" y="191" width="284" height="411"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <prototypes>
                                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="MailMoveToFolderCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="MailMoveToFolderCell" rowHeight="60" id="il0-09-0wP" userLabel="MailFolderCell" customClass="MailFolderTableViewCell">
                                                         <rect key="frame" x="0.0" y="22" width="284" height="60"/>
@@ -1689,6 +1692,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="251" id="dRY-5d-mHX"/>
                                                 </constraints>
+                                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EmployerMessageDetailLeftTableViewCell" rowHeight="71" id="19l-2L-PR8" userLabel="EmployerMessageDetailLeft" customClass="EmployerMessageDetailLeftTableViewCell">
                                                         <rect key="frame" x="0.0" y="22" width="304" height="71"/>
@@ -2131,6 +2135,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="251" id="2lA-vr-5Z5"/>
                                                 </constraints>
+                                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EmployeeMessageDetailLeftTableViewCell" rowHeight="71" id="z7n-bN-9Sk" customClass="EmployeeMessageDetailLeftTableViewCell">
                                                         <rect key="frame" x="0.0" y="22" width="304" height="71"/>
