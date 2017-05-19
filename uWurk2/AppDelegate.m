@@ -8,6 +8,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Spinner.h"
 #import "UIColor+uWurkColors.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
@@ -24,10 +25,7 @@
     [[UINavigationBar appearance] setBarTintColor:[UIColor navBarBackground]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTranslucent:NO];
-    
-    CGRect  screenRect = [[UIScreen mainScreen] bounds];
-    self.screenSize = screenRect.size;
-    
+        
     self.serverAddress = @"http://uwurk.tscserver.com";
     
     return  [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];

@@ -16,8 +16,6 @@
 @property (strong, nonatomic) NSString *documentsDirectory;
 @property (strong, nonatomic) NSString *serverAddress;
 
-@property CGSize screenSize;
-
 - (NSString *)getDocumentsDirectory;
 - (void)setupUwurkStyle:(UITableView *)tableView cell:(UITableViewCell *)cell;
 

@@ -12,6 +12,7 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "EmployeeStepSetupViewController.h"
 #import "RegisterThanksViewController.h"
+#import "Spinner.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *btnSend;
@@ -111,15 +112,15 @@
 - (IBAction)pressSend:(id)sender
 {
     AFHTTPRequestOperationManager *manager = [self getManager];
-        [manager POST:@"http://uwurk.tscserver.com/api/v1/forgot-password" parameters:self.txtForgotPass.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"\nLogin Json Response:\n%@", responseObject);
-            if(![self validateResponse:responseObject]){
-                [self handleErrorJsonResponse:@"Login"];
-            }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
-            [self handleErrorAccessError:@"Login" withError:error];
-        }];
+    [manager POST:@"http://uwurk.tscserver.com/api/v1/forgot-password" parameters:self.txtForgotPass.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"\nLogin Json Response:\n%@", responseObject);
+        if(![self validateResponse:responseObject]){
+            [self handleErrorJsonResponse:@"Login"];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [self handleErrorAccessError:@"Login" withError:error];
+    }];
 }
 
 - (void)signInLongPress:(UILongPressGestureRecognizer*)gesture {
@@ -205,7 +206,6 @@
 - (void)loginWithStoredToken
 {
     AFHTTPRequestOperationManager *manager = [self getManager];
-    
     [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
         NSLog(@"\nLogin Json Response:\n%@", responseObject);
         if([self validateResponse:responseObject]){

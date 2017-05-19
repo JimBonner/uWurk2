@@ -11,5 +11,8 @@
 
 @interface Spinner : NSObject
 
++(void)spinnerInitialize;
++(void)startSpinner;
++(void)stopSpinner;
 
 @end

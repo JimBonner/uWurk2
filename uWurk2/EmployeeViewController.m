@@ -580,9 +580,11 @@
     //popover.tint = FPPopoverWhiteTint;
     controller.delegateNavigationController = self.navigationController;
     
-    CGRect    frame = self.navigationController.navigationBar.frame;
-    CGFloat maxHigh = self.appDelegate.screenSize.height - (frame.origin.y + frame.size.height) - 30.0;
-    CGFloat popHigh = fmin(396.0,maxHigh);
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGSize screenSize = screenRect.size;
+    CGRect    frame   = self.navigationController.navigationBar.frame;
+    CGFloat maxHigh   = screenSize.height - (frame.origin.y + frame.size.height) - 30.0;
+    CGFloat popHigh   = fmin(396.0,maxHigh);
     self.popover.contentSize = CGSizeMake(200,popHigh);
 
     //the popover will be presented from the okButton view

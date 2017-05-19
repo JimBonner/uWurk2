@@ -115,9 +115,11 @@
     //popover.tint = FPPopoverWhiteTint;
     controller.delegateNavigationController = self.navigationController;
     
-    CGRect    frame = self.navigationController.navigationBar.frame;
-    CGFloat maxHigh = self.appDelegate.screenSize.height - (frame.origin.y + frame.size.height) - 30.0;
-    CGFloat popHigh = fmin(288.0,maxHigh);
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGSize screenSize = screenRect.size;
+    CGRect    frame   = self.navigationController.navigationBar.frame;
+    CGFloat maxHigh   = screenSize.height - (frame.origin.y + frame.size.height) - 30.0;
+    CGFloat popHigh   = fmin(288.0,maxHigh);
     self.popover.contentSize = CGSizeMake(200,popHigh);
     
     UIView *targetView = (UIView*)[self.navigationItem.leftBarButtonItem performSelector:@selector(view)];
