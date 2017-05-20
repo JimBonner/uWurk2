@@ -62,32 +62,53 @@
 
 - (IBAction)pressFacebook:(id)sender
 {
+//    public void onClickFacebook() {
+//        launchBrowser("https://www.facebook.com/sharer/sharer.php?u=" + getString(R.string.hostname) + "/ref/" + employee.getReferralCode());
+//    }
     NSString *stringURL = [NSString stringWithFormat:@"https://www.facebook.com/sharer/sharer.php?u=http://uwurk.tscserver.com/ref/%@",[self.appDelegate.user objectForKey:@"referral_code"]];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:stringURL]];
 }
 
 - (IBAction)pressTwitter:(id)sender
 {
-    NSString *stringURL = [NSString stringWithFormat:@"https://twitter.com/intent/tweet?text=http://uwurk.tscserver.com/ref/%@&source=webclient",[self.appDelegate.user objectForKey:@"referral_code"]];
+//    public void onClickTwitter() {
+//        launchBrowser("https://twitter.com/home?status=" + getString(R.string.hostname) + "/ref/" + employee.getReferralCode());
+//    }
+    NSString *stringURL = [NSString stringWithFormat:@"https://twitter.com/home?status=http://uwurk.tscserver.com/ref/%@",[self.appDelegate.user objectForKey:@"referral_code"]];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:stringURL]];
 }
 
 - (IBAction)pressGooglePlus:(id)sender
 {
+//    public void onClickGoodle() {
+//        launchBrowser("https://plus.google.com/share?url=" + getString(R.string.hostname) + "/ref/" + employee.getReferralCode());
+//    }
     NSString *stringURL = [NSString stringWithFormat:@"https://plus.google.com/share?url=http://uwurk.tscserver.com/ref/%@",[self.appDelegate.user objectForKey:@"referral_code"]];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:stringURL]];
 }
 
 - (IBAction)pressPinterest:(id)sender
 {
-    NSString *stringURL = [NSString stringWithFormat:@"https://www.pinterest.com/pin/create/button/?url=http://uwurk.tscserver.com/ref/%@&media=http://uwurk.tscserver.com/images/uWurk_referral-dog.jpg&description=uWurk, Where Jobs Look for U!",[self.appDelegate.user objectForKey:@"referral_code"]];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:stringURL]];
+//    public void onClickPinterest() {
+//        launchBrowser("https://pinterest.com/pin/create/button/?url=" + getString(R.string.hostname) + "/ref/"  + employee.getReferralCode() + "&media=" + getString(R.string.hostname) + "/images/uWurk_referral-dog.jpg&description=uWurk,%20Where%20Jobs%20Look%20for%20U!");
+//    }
+    NSURL *URL = [[NSURL alloc]initWithString:@"https://www.pinterest.com/pin/create/button/?url=http%3A%2F%2Fuwurk.tscserver.com%2Fref%2F(null)&media=http%3A%2F%2Fuwurk.tscserver.com%2Fimages%2FuWurk_referral-dog.jpg&description=uWurk%2C%20Where%20Jobs%20Look%20for%20U!"];
+    [[UIApplication sharedApplication] openURL:URL];
 }
 
 - (IBAction)pressInstagram:(id)sender
 {
-    NSString *stringURL = [NSString stringWithFormat:@"https://instragram.com"];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:stringURL]];
+//    public void onClickInstagram() {
+//        confirm(this, "SHARE TO INSTAGRAM", "Download the image and share with the link " + getString(R.string.hostname) + "/ref/" + employee.getReferralCode(),
+//                "DOWNLOAD", "CANCEL", new View.OnClickListener() {
+//                    @Override
+//   public void onClick(View v) {
+//                        launchBrowser(getString(R.string.hostname) + ServiceAPIImpl.API_PATH + "referralimage?type=instagram");
+//                    }
+//                });
+//    }
+    NSURL *URL = [[NSURL alloc]initWithString:@"https://www.instagram.com"];
+    [[UIApplication sharedApplication] openURL:URL];
 }
 
 - (IBAction)pressMail:(id)sender
