@@ -65,8 +65,9 @@
 //    public void onClickFacebook() {
 //        launchBrowser("https://www.facebook.com/sharer/sharer.php?u=" + getString(R.string.hostname) + "/ref/" + employee.getReferralCode());
 //    }
-    NSString *stringURL = [NSString stringWithFormat:@"https://www.facebook.com/sharer/sharer.php?u=http://uwurk.tscserver.com/ref/%@",[self.appDelegate.user objectForKey:@"referral_code"]];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:stringURL]];
+//
+    NSURL *URL = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"https://www.facebook.com/sharer/sharer.php?u=http://uwurk.tscserver.com/ref/%@",[self.appDelegate.user objectForKey:@"referral_code"]]];
+    [[UIApplication sharedApplication] openURL:URL];
 }
 
 - (IBAction)pressTwitter:(id)sender
@@ -74,8 +75,9 @@
 //    public void onClickTwitter() {
 //        launchBrowser("https://twitter.com/home?status=" + getString(R.string.hostname) + "/ref/" + employee.getReferralCode());
 //    }
-    NSString *stringURL = [NSString stringWithFormat:@"https://twitter.com/home?status=http://uwurk.tscserver.com/ref/%@",[self.appDelegate.user objectForKey:@"referral_code"]];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:stringURL]];
+//
+    NSURL *URL = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"https://twitter.com/home?status=http://uwurk.tscserver.com/ref/%@",[self.appDelegate.user objectForKey:@"referral_code"]]];
+    [[UIApplication sharedApplication] openURL:URL];
 }
 
 - (IBAction)pressGooglePlus:(id)sender
@@ -83,8 +85,9 @@
 //    public void onClickGoodle() {
 //        launchBrowser("https://plus.google.com/share?url=" + getString(R.string.hostname) + "/ref/" + employee.getReferralCode());
 //    }
-    NSString *stringURL = [NSString stringWithFormat:@"https://plus.google.com/share?url=http://uwurk.tscserver.com/ref/%@",[self.appDelegate.user objectForKey:@"referral_code"]];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:stringURL]];
+//
+    NSURL *URL = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"https://plus.google.com/share?url=http://uwurk.tscserver.com/ref/%@",[self.appDelegate.user objectForKey:@"referral_code"]]];
+    [[UIApplication sharedApplication] openURL:URL];
 }
 
 - (IBAction)pressPinterest:(id)sender
@@ -107,6 +110,8 @@
 //                    }
 //                });
 //    }
+//
+//
     NSURL *URL = [[NSURL alloc]initWithString:@"https://www.instagram.com"];
     [[UIApplication sharedApplication] openURL:URL];
 }

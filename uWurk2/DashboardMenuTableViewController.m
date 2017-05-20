@@ -93,9 +93,9 @@
      object:[self.menuArray objectAtIndex:indexPath.row]];
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return 35;
-    
 }
 
 @end

@@ -15,6 +15,7 @@
 #import "EmployeeSendMessageViewController.h"
 
 @interface MailMessagesTableViewController ()
+
 @property (strong, nonatomic) NSArray *json;
 @property (weak, nonatomic) IBOutlet UILabel *lblFolderName;
 
@@ -28,12 +29,13 @@
     
     self.lblFolderName.text = [[self.mailFolderDict objectForKey:@"name"]uppercaseString];
 }
-- (void)viewDidAppear:(BOOL)animated {
+
+- (void)viewDidAppear:(BOOL)animated
+{
     [super viewDidAppear:animated];
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:[self.mailFolderDict objectForKey:@"id"] forKey:@"fid"];
-    
     
     [manager POST:@"http://uwurk.tscserver.com/api/v1/messages" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
        self.json = [NSMutableArray arrayWithArray:[responseObject objectForKey:@"rows"]];
@@ -46,23 +48,26 @@
     }];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return [self.json count];
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     MailMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MailMessageCell" forIndexPath:indexPath];
     NSDictionary *parmdic = [self.json objectAtIndex:indexPath.row];
     if ([[parmdic objectForKey:@"discussion_status"] intValue] == 1) {
@@ -70,18 +75,14 @@
         cell.lblPosition.font = [UIFont fontWithName:@"RobotoCondensed-Bold" size:17];
         cell.lblSubject.text = @"NEW user!";
         cell.lblSubject.font = [UIFont fontWithName:@"RobotoCondensed-Bold" size:17];
+    } else {
+        cell.lblPosition.text = [parmdic objectForKey:@"position"];
+        if ([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"user"]) {
+            cell.lblSubject.text = [NSString stringWithFormat:@"%@ %@",[parmdic objectForKey:@"to_first_name"],[parmdic objectForKey:@"to_last_name"]];
+        } else {
+            cell.lblSubject.text = [parmdic objectForKey:@"company"];
+        }
     }
-    else {
-    cell.lblPosition.text = [parmdic objectForKey:@"position"];
-    if ([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"user"]) {
-        cell.lblSubject.text = [NSString stringWithFormat:@"%@ %@",[parmdic objectForKey:@"to_first_name"],[parmdic objectForKey:@"to_last_name"]];
-    }
-    else
-    cell.lblSubject.text = [parmdic objectForKey:@"company"];
-    }
-    
-    
-    
     
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateFormat:@"MMMM dd, yyyy"];
@@ -101,8 +102,7 @@
     if([[[self.appDelegate user] objectForKey:@"user_type"] isEqualToString:@"user"] && [parmdic objectForKey:@"employee_interest"] == (id)[NSNull null]) {
         [cell.imageYesNo setImage:imagenew];
         cell.viewYesNoWidth.constant = 17;
-    }
-    else {
+    } else {
         if ([parmdic objectForKey:@"employee_interest"] != (id)[NSNull null]  && [[parmdic objectForKey:@"employee_interest"] intValue] == 1) {
             [cell.imageYesNo setImage:imageyes];
         }
@@ -112,21 +112,20 @@
     }
     return cell;
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-        NSDictionary *dict = [self.json objectAtIndex:indexPath.row];
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *dict = [self.json objectAtIndex:indexPath.row];
     if ([[self.appDelegate.user objectForKey:@"user_type"]isEqualToString:@"user"]) {
         EmployerSendMessageViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerSendMessage"];
         [myController setMailMessagedict:dict];
         [self.navigationController pushViewController:myController animated:TRUE];
-    }
-    else {
+    } else {
         if ([[dict objectForKey:@"discussion_status"] intValue] == 1) {
             ViewJobMessageViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewJobMessage"];
             [myController setMailMessagedict:dict];
             [self.navigationController pushViewController:myController animated:TRUE];
-        }
-        else
-        {
+        } else {
             EmployeeSendMessageViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeSendMessage"];
             [myController setMailMessagedict:dict];
             [self.navigationController pushViewController:myController animated:TRUE];
@@ -134,12 +133,14 @@
     }
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return YES;
 }
 
 
--(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     __block NSDictionary *dict = [self.json objectAtIndex:indexPath.row];
     
     UITableViewRowAction *move = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Move" handler:^(UITableViewRowAction *action, NSIndexPath *ip)
@@ -244,7 +245,8 @@
     return @[delete, move];
 }
 
--(void) moveMessage:(NSDictionary*)dict {
+-(void) moveMessage:(NSDictionary*)dict
+{
     MoveMessageViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"MoveMessageView"];
     [myController setDict:dict];
     [self.navigationController pushViewController:myController animated:TRUE];

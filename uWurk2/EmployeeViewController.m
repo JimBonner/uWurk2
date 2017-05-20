@@ -60,14 +60,18 @@
                                              selector:@selector(receiveMenuNotification:)
                                                  name:@"MenuNotification"
                                                object:nil];
-    UIBarButtonItem *btnMail=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"btn-contact-white-min"]
-                                                          style:UIBarButtonItemStylePlain
-                                                         target:self
-                                                         action:@selector(pressMail:)];
-    UIBarButtonItem *btnRef=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"nav-referral-black-min"]
-                                                          style:UIBarButtonItemStylePlain
-                                                         target:self
-                                                         action:@selector(pressRef:)];
+    
+    UIBarButtonItem *btnMail = [[UIBarButtonItem alloc]
+                                initWithImage:[UIImage imageNamed:@"btn-contact-white-min"]
+                                        style:UIBarButtonItemStylePlain
+                                        target:self
+                                        action:@selector(pressMail:)];
+    
+    UIBarButtonItem *btnRef = [[UIBarButtonItem alloc]
+                               initWithImage:[UIImage imageNamed:@"nav-referral-black-min"]
+                                       style:UIBarButtonItemStylePlain
+                                      target:self
+                                      action:@selector(pressRef:)];
     
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:btnMail, btnRef, nil];
    
@@ -305,45 +309,43 @@
     if ([self.appDelegate.user objectForKey:@"biography"] == (id)[NSNull null] || [[self.appDelegate.user objectForKey:@"biography"]length] == 0 ) {
         UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditMyBio"];
         [self.navigationController pushViewController:myController animated:TRUE];
-    }
-    else {
-    self.lblInfoBio.text = [self.appDelegate.user objectForKey:@"biography"];
-    self.btnInfo.selected = TRUE;
-    self.lblInfoBio.alpha = 0;
-    if (self.btnBio.selected == FALSE) {
-        [self.btnInfo setBackgroundColor:[UIColor colorWithRed:(150/255.0) green:(212/255.0) blue:(210/255.0) alpha:1]];
-        self.infoDownArrow.alpha = 0;
-        [self.btnBio setBackgroundColor:[UIColor colorWithRed:(137/255.0) green:(194/255.0) blue:(193/255.0) alpha:1]];
-        self.bioDownArrow.alpha = 1;
-        self.cnstrntInfoBioViewHeight.constant = 500;
+    } else {
+        self.lblInfoBio.text = [self.appDelegate.user objectForKey:@"biography"];
+        self.btnInfo.selected = TRUE;
+        self.lblInfoBio.alpha = 0;
+        if (self.btnBio.selected == FALSE) {
+            [self.btnInfo setBackgroundColor:[UIColor colorWithRed:(150/255.0) green:(212/255.0) blue:(210/255.0) alpha:1]];
+            self.infoDownArrow.alpha = 0;
+            [self.btnBio setBackgroundColor:[UIColor colorWithRed:(137/255.0) green:(194/255.0) blue:(193/255.0) alpha:1]];
+            self.bioDownArrow.alpha = 1;
+            self.cnstrntInfoBioViewHeight.constant = 500;
+            [UIView animateWithDuration:.3 animations:^{
+                [self.view layoutIfNeeded];
+            }
+                             completion:^ (BOOL finished)
+             {
+                 if (finished) {
+                     [UIView animateWithDuration:.3 animations:^{
+                         self.lblInfoBio.alpha = 1;
+                         [self.view layoutIfNeeded];}];
+                 }
+             }];
+        } else {
+            [self.btnBio setBackgroundColor:[UIColor colorWithRed:(150/255.0) green:(212/255.0) blue:(210/255.0) alpha:1]];
         [UIView animateWithDuration:.3 animations:^{
+            self.lblInfoBio.alpha = 0;
             [self.view layoutIfNeeded];
         }
-                         completion:^ (BOOL finished)
-         {
-             if (finished) {
-                 [UIView animateWithDuration:.3 animations:^{
-                     self.lblInfoBio.alpha = 1;
-                     [self.view layoutIfNeeded];}];
-             }
-         }];
-    }
-    else {
-        [self.btnBio setBackgroundColor:[UIColor colorWithRed:(150/255.0) green:(212/255.0) blue:(210/255.0) alpha:1]];
-    [UIView animateWithDuration:.3 animations:^{
-        self.lblInfoBio.alpha = 0;
-        [self.view layoutIfNeeded];
-    }
-    completion:^ (BOOL finished)
-        {
-            if (finished) {
-                self.cnstrntInfoBioViewHeight.constant = 0;
-                [UIView animateWithDuration:.3 animations:^{
-                    self.bioDownArrow.alpha = 0;
-                    [self.view layoutIfNeeded];}];
-            }
-        }];
-    }
+        completion:^ (BOOL finished)
+            {
+                if (finished) {
+                    self.cnstrntInfoBioViewHeight.constant = 0;
+                    [UIView animateWithDuration:.3 animations:^{
+                        self.bioDownArrow.alpha = 0;
+                        [self.view layoutIfNeeded];}];
+                }
+            }];
+        }
     }
 }
 
@@ -404,8 +406,7 @@
              }
          }];
     }
-    }
-    else{
+    } else{
         self.lblEdu2.alpha = 0;
         self.lblEdu3.alpha = 0;
         [UIView animateWithDuration:.3 animations:^{
@@ -434,7 +435,7 @@
     NSString *JobStatus3;
     if (self.btnExp.isSelected ==TRUE) {
         NSArray *experienceArray = [self.appDelegate.user objectForKey:@"experience"];
-        if([experienceArray count] >0) {
+        if([experienceArray count] > 0) {
             NSDictionary *firstExperienceItem = [experienceArray objectAtIndex:0];
             if ([[firstExperienceItem objectForKey:@"job_length"] intValue] == 1) {
                 JobLength1 = @"Under 1 Year";
@@ -465,7 +466,7 @@
                      }
                  }];
         }
-    if([experienceArray count] >1) {
+    if([experienceArray count] > 1) {
         NSDictionary *secondExperienceItem = [experienceArray objectAtIndex:1];
         if ([[secondExperienceItem objectForKey:@"job_length"] intValue] == 1) {
             JobLength2 = @"Under 1 Year";
@@ -594,7 +595,6 @@
 
 - (IBAction)receiveMenuNotification:(NSNotification*)sender
 {
-    
     if([[sender.object objectForKey:@"ViewController"] isEqualToString:@"LogoutViewController"]) {
         [self logout];
     }
