@@ -458,7 +458,7 @@
 
 - (IBAction)addLanguagePress:(id)sender
 {
-    ListMultiSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListMultiSelector"];
+    ListMultiSelectorTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"ListMultiSelector"];
     
     [myController setParameters:nil];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/languages"];
@@ -558,7 +558,7 @@
         [self.params setObject:self.langDict.allKeys forKey:@"languages"];
     }
     
-    SearchResultsTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"employeeListID"];
+    SearchResultsTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"employeeListID"];
     [myController setSearchParameters:self.params];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/search"];
     [self.navigationController pushViewController:myController animated:TRUE];

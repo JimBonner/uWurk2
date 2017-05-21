@@ -117,16 +117,16 @@
 {
     NSDictionary *dict = [self.json objectAtIndex:indexPath.row];
     if ([[self.appDelegate.user objectForKey:@"user_type"]isEqualToString:@"user"]) {
-        EmployerSendMessageViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerSendMessage"];
+        EmployerSendMessageViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil]  instantiateViewControllerWithIdentifier:@"EmployerSendMessage"];
         [myController setMailMessagedict:dict];
         [self.navigationController pushViewController:myController animated:TRUE];
     } else {
         if ([[dict objectForKey:@"discussion_status"] intValue] == 1) {
-            ViewJobMessageViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewJobMessage"];
+            ViewJobMessageViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil] instantiateViewControllerWithIdentifier:@"ViewJobMessage"];
             [myController setMailMessagedict:dict];
             [self.navigationController pushViewController:myController animated:TRUE];
         } else {
-            EmployeeSendMessageViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeSendMessage"];
+            EmployeeSendMessageViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil]  instantiateViewControllerWithIdentifier:@"EmployeeSendMessage"];
             [myController setMailMessagedict:dict];
             [self.navigationController pushViewController:myController animated:TRUE];
         }
@@ -247,7 +247,7 @@
 
 -(void) moveMessage:(NSDictionary*)dict
 {
-    MoveMessageViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"MoveMessageView"];
+    MoveMessageViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil] instantiateViewControllerWithIdentifier:@"MoveMessageView"];
     [myController setDict:dict];
     [self.navigationController pushViewController:myController animated:TRUE];
 }

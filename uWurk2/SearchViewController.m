@@ -81,7 +81,7 @@
 
     //    Modal VC to handle registration email adddress verification
     if([[self.appDelegate.user objectForKey:@"status"]integerValue] != 1) {
-        RegisterThanksViewController *mvc = [self.storyboard instantiateViewControllerWithIdentifier:@"RegisterThanksViewController"];
+        RegisterThanksViewController *mvc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"RegisterThanksViewController"];
         mvc.modalPresentationStyle = UIModalPresentationFullScreen;
         mvc.modalTransitionStyle  = UIModalTransitionStyleCrossDissolve;
         [self presentViewController:mvc animated:YES completion:Nil];
@@ -128,7 +128,7 @@
 
 -(void)SelectionMade:(NSMutableDictionary *)dict
 {
-    SearchResultsTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"employeeListID"];
+    SearchResultsTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"employeeListID"];
     [myController setSearchParameters:dict];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/search"];
     
@@ -239,7 +239,7 @@
 
 - (IBAction)industryPress:(id)sender
 {
-    ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
+    ListSelectorTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"ListSelector"];
     
     [myController setParameters:nil];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/industries"];
@@ -256,7 +256,7 @@
 
 - (IBAction)positionPress:(id)sender
 {
-    ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
+    ListSelectorTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"ListSelector"];
     
     [myController setParameters:@{@"industry_id":[@(self.btnIndustry.tag)stringValue]}];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/positions"];
@@ -270,7 +270,7 @@
     [self.navigationController pushViewController:myController animated:TRUE];
 }
 //- (IBAction)expPositionPress:(id)sender {
-//    ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
+//    ListSelectorTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"ListSelector"];
 //    
 //    
 //    [myController setParameters:@{@"industry_id":[self.btnIndustry titleForState:UIControlStateSelected]}];
@@ -285,7 +285,7 @@
 //    [self.navigationController pushViewController:myController animated:TRUE];
 //}
 //- (IBAction)addExpIndustry1:(id)sender {
-//    ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
+//    ListSelectorTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"ListSelector"];
 //    
 //    
 //    [myController setParameters:nil];
@@ -300,7 +300,7 @@
 //    [self.navigationController pushViewController:myController animated:TRUE];
 //}
 //- (IBAction)addExpIndustry2:(id)sender {
-//    ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
+//    ListSelectorTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"ListSelector"];
 //    
 //    
 //    [myController setParameters:nil];
@@ -315,7 +315,7 @@
 //    [self.navigationController pushViewController:myController animated:TRUE];
 //}
 //- (IBAction)addExpIndustry3:(id)sender {
-//    ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
+//    ListSelectorTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"ListSelector"];
 //    
 //    
 //    [myController setParameters:nil];
@@ -330,7 +330,7 @@
 //    [self.navigationController pushViewController:myController animated:TRUE];
 //}
 //- (IBAction)addExpPosition1:(id)sender {
-//    ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
+//    ListSelectorTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"ListSelector"];
 //    
 //    
 //    [myController setParameters:@{@"industry_id":[self.btnAddExpIndustry1 titleForState:UIControlStateSelected]}];
@@ -345,7 +345,7 @@
 //    [self.navigationController pushViewController:myController animated:TRUE];
 //}
 //- (IBAction)addExpPosition2:(id)sender {
-//    ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
+//    ListSelectorTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"ListSelector"];
 //    
 //    
 //    [myController setParameters:@{@"industry_id":[self.btnAddExpIndustry2 titleForState:UIControlStateSelected]}];
@@ -360,7 +360,7 @@
 //    [self.navigationController pushViewController:myController animated:TRUE];
 //}
 //- (IBAction)addExpPosition3:(id)sender {
-//    ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
+//    ListSelectorTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"ListSelector"];
 //    
 //    
 //    [myController setParameters:@{@"industry_id":[self.btnAddExpIndustry3 titleForState:UIControlStateSelected]}];
@@ -490,7 +490,7 @@
         [self updateParamDict:params value:[@(self.btnPosition.tag)stringValue] key:@"position"];
         [self updateParamDict:params value:[@(self.btnPosition.tag)stringValue] key:@"exp_positions[]"];
 
-        SearchResultsTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"employeeListID"];
+        SearchResultsTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"employeeListID"];
         [myController setSearchParameters:params];
         [myController setUrl:@"http://uwurk.tscserver.com/api/v1/search"];
         [self.navigationController pushViewController:myController animated:TRUE];
@@ -564,7 +564,7 @@
 
 //- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 //    if(indexPath.row >= [self.experienceItems count]) {
-//        ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
+//        ListSelectorTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"ListSelector"];
 //        
 //        [myController setParameters:@{@"industry_id":[self.btnIndustry titleForState:UIControlStateSelected]}];
 //        [myController setUrl:@"http://uwurk.tscserver.com/api/v1/positions"];

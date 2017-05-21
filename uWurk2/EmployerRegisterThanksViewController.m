@@ -37,7 +37,7 @@
  }
  */
 - (IBAction)pressReenter:(id)sender {
-    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"IntroEmployer"];
+    UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"IntroEmployer"];
     [self.navigationController pushViewController:myController animated:TRUE];
 }
 

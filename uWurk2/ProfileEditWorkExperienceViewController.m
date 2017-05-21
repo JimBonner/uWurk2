@@ -327,7 +327,7 @@
 - (IBAction)btnAddExperience:(id)sender
 {
     if([self.experienceCount integerValue] <= 5) {
-        ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
+        ProfileEditStep5ViewController *myController = [[UIStoryboard storyboardWithName:@"EmployeeProfile" bundle:nil]  instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
         [myController setDelegate:self];
         [myController setMode:@"add"];
         [myController setExpEditCount:self.experienceCount];
@@ -424,7 +424,7 @@
 {
     if (sender.tag == 0)
     {
-        ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
+        ProfileEditStep5ViewController *myController = [[UIStoryboard storyboardWithName:@"EmployeeProfile" bundle:nil]  instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
         [myController setDelegate:self];
         [myController setMode:@"edit"];
         [myController setExpEditCount:@"1"];
@@ -432,7 +432,7 @@
     }
     if (sender.tag == 1)
     {
-        ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
+        ProfileEditStep5ViewController *myController = [[UIStoryboard storyboardWithName:@"EmployeeProfile" bundle:nil]  instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
         [myController setDelegate:self];
         [myController setMode:@"edit"];
         [myController setExpEditCount:@"2"];
@@ -440,7 +440,7 @@
     }
     if (sender.tag == 2)
     {
-        ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
+        ProfileEditStep5ViewController *myController = [[UIStoryboard storyboardWithName:@"EmployeeProfile" bundle:nil] instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
         [myController setDelegate:self];
         [myController setMode:@"edit"];
         [myController setExpEditCount:@"3"];
@@ -448,7 +448,7 @@
     }
     if (sender.tag == 3)
     {
-        ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
+        ProfileEditStep5ViewController *myController = [[UIStoryboard storyboardWithName:@"EmployeeProfile" bundle:nil]  instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
         [myController setDelegate:self];
         [myController setMode:@"edit"];
         [myController setExpEditCount:@"4"];
@@ -456,7 +456,7 @@
     }
     if (sender.tag == 4)
     {
-        ProfileEditStep5ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
+        ProfileEditStep5ViewController *myController = [[UIStoryboard storyboardWithName:@"EmployeeProfile" bundle:nil]  instantiateViewControllerWithIdentifier:@"ProfileEditAddExperience"];
         [myController setDelegate:self];
         [myController setMode:@"edit"];
         [myController setExpEditCount:@"5"];

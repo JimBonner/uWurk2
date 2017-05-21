@@ -145,7 +145,7 @@
 
 - (IBAction)industryPress:(id)sender
 {
-    ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
+    ListSelectorTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ListSelector"];
     
     [myController setParameters:nil];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/industries"];
@@ -162,7 +162,7 @@
 
 - (IBAction)positionPress:(id)sender
 {
-    ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
+    ListSelectorTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"ListSelector"];
     
     [myController setParameters:@{@"industry_id":[@(self.btnIndustry.tag)stringValue]}];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/positions"];
@@ -262,7 +262,7 @@
             NSLog(@"\nEmployee Step 5 - Json Response: %@", responseObject);
             if([self validateResponse:responseObject]){
                 self.performExperienceInit = YES;
-                UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup6"];
+                UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup6"];
                 [self.navigationController pushViewController:myController animated:YES];
             } else {
                 [self handleErrorJsonResponse:@"Employee Step 5"];
@@ -272,7 +272,7 @@
             [self handleErrorAccessError:@"Employee Step 5" withError:error];
         }];
     } else {
-        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup6"];
+        UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup6"];
         [self.navigationController pushViewController:myController animated:YES];
     }
 }

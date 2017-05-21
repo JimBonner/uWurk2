@@ -61,7 +61,7 @@
 {
     [self saveScreenData];
     
-    ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
+    ListSelectorTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"ListSelector"];
     
     
     [myController setParameters:nil];
@@ -106,7 +106,7 @@
                     if([self validateResponse:responseObject]) {
                         [self saveStepNumber:-1 completion:^(NSInteger result) {
                             if(result == 1) {
-                                UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerLanding"];
+                                UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployerLanding"];
                                 [self.navigationController setViewControllers:@[myController] animated:YES];
                             } else {
                                 [self handleErrorUnableToSaveData:@"Step Number"];
@@ -122,7 +122,7 @@
         } else {
             [self saveStepNumber:-1 completion:^(NSInteger result) {
                 if(result == 1) {
-                    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerLanding"];
+                    UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"EmployerLanding"];
                     [self.navigationController setViewControllers:@[myController] animated:YES];
                 } else {
                     [self handleErrorUnableToSaveData:@"Step Number"];

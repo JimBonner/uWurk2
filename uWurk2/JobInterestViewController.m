@@ -48,7 +48,7 @@
     if ([params count])
     {
         [manager POST:@"http://uwurk.tscserver.com/api/v1/post_message" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReplySentView"];
+            UIViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil] instantiateViewControllerWithIdentifier:@"ReplySentView"];
             [self.navigationController setViewControllers:@[myController] animated:TRUE];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
@@ -56,7 +56,7 @@
             return;
         }];
     } else {
-        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReplySentView"];
+        UIViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil] instantiateViewControllerWithIdentifier:@"ReplySentView"];
         [self.navigationController setViewControllers:@[myController] animated:TRUE];
     }
 }

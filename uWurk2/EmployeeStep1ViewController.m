@@ -144,7 +144,7 @@
                       NSLog(@"\nEmployee Step 1 - Json Response: %@", responseObject);
                       if([self validateResponse:responseObject])
                       {
-                          UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup2"];
+                          UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup2"];
                           [self.navigationController pushViewController:myController animated:TRUE];
                       } else {
                           [self handleErrorJsonResponse:@"Employee Step 1"];
@@ -156,7 +156,7 @@
                  }
              ];
         } else {
-            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup2"];
+            UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup2"];
             [self.navigationController pushViewController:myController animated:TRUE];
         }
     }

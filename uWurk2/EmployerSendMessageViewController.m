@@ -53,8 +53,7 @@
         self.lblInterested.text = [NSString stringWithFormat:@"%@ IS INTERESTED", [[self.MailMessagedict objectForKey:@"to_first_name"]uppercaseString]];
         self.heightTableView.constant = 0;
         self.tblView.alpha = 0;
-    }
-    else {
+    } else {
         self.lblIntroduction.alpha = 0;
         self.viewInterest.alpha = 0;
         self.cnstrntInterestHeight.constant = 0;
@@ -92,26 +91,33 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)pressProfile:(id)sender {
+
+- (IBAction)pressProfile:(id)sender
+{
     SearchResultProfileViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ProfileSearchResult"];
     [self.navigationController pushViewController:myController animated:TRUE];
     [myController setProfileID:[self.MailMessagedict objectForKey:@"to_user_id"]];
 }
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     // Return the number of rows in the section.
     return [self.json count];
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     
     
     NSDictionary *itemDict = [self.json objectAtIndex:indexPath.row];
@@ -134,8 +140,7 @@
         format.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:[NSTimeZone localTimeZone].secondsFromGMT];
         cell.lblTime.text = [format stringFromDate:date];
         return cell;
-    }
-    else {
+    } else {
         EmployerMessageDetailLeftTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EmployerMessageDetailLeftTableViewCell" forIndexPath:indexPath];
         cell.textBubbleView.layer.cornerRadius = 3;
         cell.textBubbleView.layer.masksToBounds = YES;
@@ -155,7 +160,8 @@
     }
 }
 
-- (IBAction)pressSend:(id)sender {
+- (IBAction)pressSend:(id)sender
+{
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:[self.MailMessagedict objectForKey:@"discussion_id"] forKey:@"discussion_id"];
@@ -174,14 +180,13 @@
                 self.tblView.alpha = 1;
                 [self.view layoutIfNeeded];
             }];
-//            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerSendMessage"];
+//            UIViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil]  instantiateViewControllerWithIdentifier:@"EmployerSendMessage"];
 //            [self.navigationController setViewControllers:@[myController] animated:TRUE];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
             [self handleErrorAccessError:@"Employer Send Message" withError:error];
         }];
-    }
-    else {
+    } else {
         return;
     }
 }

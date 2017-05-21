@@ -86,7 +86,7 @@
                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
                     NSLog(@"\nEmployer Step 1 - Json Response: %@", responseObject);
                     if([self validateResponse:responseObject]) {
-                        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerProfileSetup2"];
+                        UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"EmployerProfileSetup2"];
                         [self.navigationController pushViewController:myController animated:YES];
                     } else {
                         [self handleErrorUnableToSaveData:@"Employer Step 1"];
@@ -96,7 +96,7 @@
                     [self handleErrorAccessError:@"Employer Step 1" withError:error];
             }];
         } else {
-            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerProfileSetup2"];
+            UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"EmployerProfileSetup2"];
             [self.navigationController pushViewController:myController animated:YES];
         }
     }

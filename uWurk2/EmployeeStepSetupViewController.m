@@ -37,7 +37,7 @@
 }
 
 - (IBAction)pressGo:(id)sender {
-    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup1"];
+    UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup1"];
     [self.navigationController pushViewController:myController animated:TRUE];
 }
 

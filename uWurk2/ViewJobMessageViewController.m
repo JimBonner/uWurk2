@@ -37,7 +37,7 @@
 - (IBAction)pressGo:(id)sender
 {
     NSDictionary *dict = self.MailMessagedict;
-    JobInterestViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"JobInterestView"];
+    JobInterestViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil] instantiateViewControllerWithIdentifier:@"JobInterestView"];
     [self.navigationController setViewControllers:@[myController] animated:TRUE];
     [myController setMailMessagedict:dict];
 }

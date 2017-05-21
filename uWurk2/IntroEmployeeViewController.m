@@ -71,7 +71,7 @@
                     [self saveUserDefault:[responseObject objectForKey:@"api_auth_token"] Key:@"api_auth_token"];
                     [self getProfileDataFromDbmsWithCompletion:^(NSInteger result) {
                         if(result == 1) {
-                            EmployeeStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeStep1ViewController"];
+                            EmployeeStep1ViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeStep1ViewController"];
                             [self.navigationController pushViewController:myController animated:TRUE];
                         }}];
                 }
@@ -107,7 +107,7 @@
                                              [alert dismissViewControllerAnimated:YES completion:nil];
                                              [self getProfileDataFromDbmsWithCompletion:^(NSInteger result) {
                                                  if(result == 1) {
-                                                     EmployeeStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeStep1ViewController"];
+                                                     EmployeeStep1ViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeStep1ViewController"];
                                                      [self.navigationController pushViewController:myController animated:TRUE];
                                                  }}];
                                          }];
@@ -190,7 +190,7 @@
                                 NSLog(@"\nEmployee Facebook Register - Json Response:\n%@", responseObject);
                                 if([self validateResponse:responseObject]) {
                                     if([((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] != nil){
-                                        EmployeeStepSetupViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"IntroEmployee"];
+                                        EmployeeStepSetupViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"IntroEmployee"];
                                         UINavigationController *nav = self.navigationController;
                                         [nav popToRootViewControllerAnimated:FALSE];
                                         [nav pushViewController:myController animated:TRUE];

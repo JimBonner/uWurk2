@@ -130,12 +130,12 @@
 {
     if (indexPath.section == 0) {
         NSDictionary *dict = [self.json objectAtIndex:indexPath.row];
-        MailMessagesTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"MailMessages"];
+        MailMessagesTableViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil] instantiateViewControllerWithIdentifier:@"MailMessages"];
         [myController setMailFolderDict:dict];
         [self.navigationController pushViewController:myController animated:TRUE];
     } else {
         NSDictionary *dict = [self.json2 objectAtIndex:indexPath.row];
-        MailMessagesTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"MailMessages"];
+        MailMessagesTableViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil]  instantiateViewControllerWithIdentifier:@"MailMessages"];
         [myController setMailFolderDict:dict];
         [self.navigationController pushViewController:myController animated:TRUE];
     }

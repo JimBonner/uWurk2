@@ -286,7 +286,7 @@
 - (IBAction)btnAddSchool:(id)sender
 {
     if([self.educationCount integerValue] <= 5) {
-        ProfileEditStep4ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddSchool"];
+        ProfileEditStep4ViewController *myController = [[UIStoryboard storyboardWithName:@"EmployeeProfile" bundle:nil]  instantiateViewControllerWithIdentifier:@"ProfileEditAddSchool"];
         [myController setDelegate:self];
         [myController setMode:@"add"];
         [myController setEduEditCount:self.educationCount];
@@ -383,7 +383,7 @@
 {
     if (sender.tag == 0)
     {
-        ProfileEditStep4ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddSchool"];
+        ProfileEditStep4ViewController *myController = [[UIStoryboard storyboardWithName:@"EmployeeProfile" bundle:nil]  instantiateViewControllerWithIdentifier:@"ProfileEditAddSchool"];
         [myController setDelegate:self];
         [myController setMode:@"edit"];
         [myController setEduEditCount:@"1"];
@@ -391,7 +391,7 @@
     }
     if (sender.tag == 1)
     {
-        ProfileEditStep4ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddSchool"];
+        ProfileEditStep4ViewController *myController = [[UIStoryboard storyboardWithName:@"EmployeeProfile" bundle:nil]  instantiateViewControllerWithIdentifier:@"ProfileEditAddSchool"];
         [myController setDelegate:self];
         [myController setMode:@"edit"];
         [myController setEduEditCount:@"2"];
@@ -399,7 +399,7 @@
     }
     if (sender.tag == 2)
     {
-        ProfileEditStep4ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddSchool"];
+        ProfileEditStep4ViewController *myController = [[UIStoryboard storyboardWithName:@"EmployeeProfile" bundle:nil]  instantiateViewControllerWithIdentifier:@"ProfileEditAddSchool"];
         [myController setDelegate:self];
         [myController setMode:@"edit"];
         [myController setEduEditCount:@"3"];
@@ -407,7 +407,7 @@
     }
     if (sender.tag == 3)
     {
-        ProfileEditStep4ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddSchool"];
+        ProfileEditStep4ViewController *myController = [[UIStoryboard storyboardWithName:@"EmployeeProfile" bundle:nil]  instantiateViewControllerWithIdentifier:@"ProfileEditAddSchool"];
         [myController setDelegate:self];
         [myController setMode:@"edit"];
         [myController setEduEditCount:@"4"];
@@ -415,7 +415,7 @@
     }
     if (sender.tag == 4)
     {
-        ProfileEditStep4ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditAddSchool"];
+        ProfileEditStep4ViewController *myController = [[UIStoryboard storyboardWithName:@"EmployeeProfile" bundle:nil]  instantiateViewControllerWithIdentifier:@"ProfileEditAddSchool"];
         [myController setDelegate:self];
         [myController setMode:@"edit"];
         [myController setEduEditCount:@"5"];

@@ -211,42 +211,42 @@
         if([self validateResponse:responseObject]){
             if([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"employee"]) {
                 if([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] == -1) {
-                    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
+                    UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                     [self.navigationController setViewControllers:@[myController] animated:YES];
                 } else {
                     if ([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] == 0)
                     {
-                        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup"];
+                        UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup"];
                         [self.navigationController pushViewController:myController animated:FALSE];
                     }
                     if ([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] == 1)
                     {
-                        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup1"];
+                        UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup1"];
                         [self.navigationController pushViewController:myController animated:FALSE];
                     }
                     if ([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] == 2)
                     {
-                        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup2"];
+                        UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup2"];
                         [self.navigationController pushViewController:myController animated:FALSE];
                     }
                     if ([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] == 3)
                     {
-                        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup3"];
+                        UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup3"];
                         [self.navigationController pushViewController:myController animated:FALSE];
                     }
                     if ([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] == 4)
                     {
-                        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup4"];
+                        UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup4"];
                         [self.navigationController pushViewController:myController animated:FALSE];
                     }
                     if ([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] == 5)
                     {
-                        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup5"];
+                        UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup5"];
                         [self.navigationController pushViewController:myController animated:FALSE];
                     }
                     if ([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] == 6)
                     {
-                        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup6"];
+                        UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup6"];
                         [self.navigationController pushViewController:myController animated:FALSE];
                     }
 //                    [self.navigationController setViewControllers:viewControllers animated:YES];
@@ -257,10 +257,10 @@
                 }
             } else if([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"employer"]) {
                 if([[[self.appDelegate user] objectForKey:@"setup_step"] intValue] == -1) {
-                    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerLanding"];
+                    UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"EmployerLanding"];
                     [self.navigationController setViewControllers:@[myController] animated:YES];
                 } else {
-                    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerProfileSetup0"];
+                    UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployerProfileSetup0"];
                     [self.navigationController setViewControllers:@[myController] animated:YES];
                 }
             } else {

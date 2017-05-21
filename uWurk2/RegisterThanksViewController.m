@@ -43,7 +43,7 @@
     } else {
         storyBoardId = @"IntroEmployer";
     }
-    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:storyBoardId];
+    UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:storyBoardId];
     [self dismissViewControllerAnimated:YES completion:nil];
     [self.navigationController pushViewController:myController animated:TRUE];
 }

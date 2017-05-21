@@ -76,7 +76,7 @@
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:btnMail, btnRef, nil];
    
     if([[self.appDelegate.user objectForKey:@"status"]integerValue] != 1) {
-        RegisterThanksViewController *mvc = [self.storyboard instantiateViewControllerWithIdentifier:@"RegisterThanksViewController"];
+        RegisterThanksViewController *mvc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"RegisterThanksViewController"];
         mvc.modalPresentationStyle = UIModalPresentationFullScreen;
         mvc.modalTransitionStyle  = UIModalTransitionStyleCrossDissolve;
         [self presentViewController:mvc animated:YES completion:Nil];
@@ -85,7 +85,7 @@
 
 - (IBAction)pressRef:(id)sender
 {
-    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReferralProgram"];
+    UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"ReferralProgram"];
     [self.navigationController pushViewController:myController animated:TRUE];
 }
 
@@ -307,7 +307,7 @@
 - (IBAction)pressBio:(id)sender
 {
     if ([self.appDelegate.user objectForKey:@"biography"] == (id)[NSNull null] || [[self.appDelegate.user objectForKey:@"biography"]length] == 0 ) {
-        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditMyBio"];
+        UIViewController *myController = [[UIStoryboard storyboardWithName:@"EmployeeProfile" bundle:nil]  instantiateViewControllerWithIdentifier:@"ProfileEditMyBio"];
         [self.navigationController pushViewController:myController animated:TRUE];
     } else {
         self.lblInfoBio.text = [self.appDelegate.user objectForKey:@"biography"];
@@ -566,7 +566,7 @@
 
 - (IBAction)pressReferral:(id)sender
 {
-    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"WhatDoIDoView"];
+    UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"WhatDoIDoView"];
     [self.navigationController pushViewController:myController animated:YES];
 }
 

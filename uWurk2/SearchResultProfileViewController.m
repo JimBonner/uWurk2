@@ -184,7 +184,7 @@
 
 - (IBAction)pressEditProfile:(id)sender
 {
-    UITableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditStep1"];
+    UITableViewController *myController = [[UIStoryboard storyboardWithName:@"EmployeeProfile" bundle:nil] instantiateViewControllerWithIdentifier:@"ProfileEditStep1"];
     [self.navigationController setViewControllers:@[myController] animated:YES];
 }
 

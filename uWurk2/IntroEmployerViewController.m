@@ -72,7 +72,7 @@
                     [self saveUserDefault:[responseObject objectForKey:@"api_auth_token"] Key:@"api_auth_token"];
                     [self getProfileDataFromDbmsWithCompletion:^(NSInteger result) {
                         if(result == 1) {
-                            EmployerStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerStep1ViewController"];
+                            EmployerStep1ViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployerStep1ViewController"];
                             [self.navigationController pushViewController:myController animated:TRUE];
                         }}];
                 }
@@ -105,7 +105,7 @@
                                              [alert dismissViewControllerAnimated:YES completion:nil];
                                              [self getProfileDataFromDbmsWithCompletion:^(NSInteger result) {
                                                  if(result == 1) {
-                                                     EmployerStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerStep1ViewController"];
+                                                     EmployerStep1ViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployerStep1ViewController"];
                                                      [self.navigationController pushViewController:myController animated:TRUE];
                                                 }}];
                                          }];
@@ -195,7 +195,7 @@
                           {
                               [self saveUserDefault:[((NSDictionary*)responseObject) valueForKey:@"api_auth_token"] Key:@"api_auth_token"];
                               
-                              EmployerStep1ViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerStep1ViewController"];
+                              EmployerStep1ViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"EmployerStep1ViewController"];
                               
                               UINavigationController *nav = self.navigationController;
                               [nav popToRootViewControllerAnimated:FALSE];

@@ -75,7 +75,7 @@
  }
 
 - (IBAction)pressProfile:(id)sender {
-//    SearchResultProfileViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileSearchResult"];
+//    SearchResultProfileViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"ProfileSearchResult"];
 //    [self.navigationController pushViewController:myController animated:TRUE];
 //    [myController setProfileID:[self.MailMessagedict objectForKey:@"to_user_id"]];
 }
@@ -118,13 +118,13 @@
 //- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 //    if (indexPath.section == 0) {
 //        NSDictionary *dict = [self.json objectAtIndex:indexPath.row];
-//        MailMessagesTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"MailMessages"];
+//        MailMessagesTableViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil]  instantiateViewControllerWithIdentifier:@"MailMessages"];
 //        [myController setMailFolderDict:dict];
 //        [self.navigationController pushViewController:myController animated:TRUE];
 //    }
 //    else {
 //        NSDictionary *dict = [self.json2 objectAtIndex:indexPath.row];
-//        MailMessagesTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"MailMessages"];
+//        MailMessagesTableViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil]  instantiateViewControllerWithIdentifier:@"MailMessages"];
 //        [myController setMailFolderDict:dict];
 //        [self.navigationController pushViewController:myController animated:TRUE];
 //    }
@@ -143,7 +143,7 @@
             [self.tblView reloadData];
             [self.btnSend setEnabled:FALSE];
 
-//                        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeSendMessage"];
+//                        UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeSendMessage"];
 //                        [self.navigationController setViewControllers:@[myController] animated:TRUE];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);

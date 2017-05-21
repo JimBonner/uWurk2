@@ -91,7 +91,7 @@
         [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
             if([self validateResponse:responseObject]){
-                UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditStep2"];
+                UIViewController *myController = [[UIStoryboard storyboardWithName:@"EmployeeProfile" bundle:nil]  instantiateViewControllerWithIdentifier:@"ProfileEditStep2"];
                 [self.navigationController setViewControllers:@[myController] animated:TRUE];
             } else {
                 [self handleErrorJsonResponse:@"Add Location"];
@@ -101,7 +101,7 @@
             [self handleErrorAccessError:@"Add Location" withError:error];
         }];
     } else {
-        UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileEditStep2"];
+        UIViewController *myController = [[UIStoryboard storyboardWithName:@"EmployeeProfile" bundle:nil]  instantiateViewControllerWithIdentifier:@"ProfileEditStep2"];
         [self.navigationController setViewControllers:@[myController] animated:TRUE];
     }
 }

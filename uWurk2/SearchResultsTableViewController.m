@@ -143,7 +143,7 @@
     NSMutableDictionary *dict = [self.json objectAtIndex:indexPath.row];
     NSString *userID = [dict objectForKey:@"id"];
     self.userID = userID;
-    SearchResultProfileViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfileSearchResult"];
+    SearchResultProfileViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"ProfileSearchResult"];
     [myController setProfileID:self.userID];
     [myController setSearchID:self.searchID];
     [myController setSearchedUserDict:dict];
@@ -154,7 +154,7 @@
 
 - (IBAction)pressUpdateSearch:(id)sender
 {
-    RefineSearchViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"UpdateSearchViewController"];
+    RefineSearchViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"UpdateSearchViewController"];
     [self.navigationController pushViewController:myController animated:YES];
     [myController setSearchparms:self.searchParameters];
 }
@@ -162,8 +162,7 @@
 - (IBAction)pressSaveSearch:(id)sender
 {
     self.definesPresentationContext = YES;
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"GeneralViews" bundle:nil];
-    SaveSearchViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"SaveSearchViewController"];
+    SaveSearchViewController *vc = [[UIStoryboard storyboardWithName:@"GeneralViews" bundle:nil] instantiateViewControllerWithIdentifier:@"SaveSearchViewController"];
     
     vc.view.backgroundColor = [UIColor clearColor];
     vc.saveID = [self.additionalJSON objectForKey:@"search_id"];

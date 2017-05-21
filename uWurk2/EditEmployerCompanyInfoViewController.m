@@ -100,7 +100,7 @@
 
 - (IBAction)industryPress:(id)sender
 {
-    ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
+    ListSelectorTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"ListSelector"];
     
     [myController setDelegate:self];
     [myController setParameters:nil];
@@ -141,7 +141,7 @@
                   if([self validateResponse:responseObject]) {
                       if(self.photoImage == nil) {
                           self.performInit = YES;
-                          UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerLanding"];
+                          UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"EmployerLanding"];
                           [self.navigationController setViewControllers:@[myController] animated:YES];
                       } else {
                           NSData *imageData = UIImageJPEGRepresentation(self.photoImage, 0.5);
@@ -153,7 +153,7 @@
                                NSLog(@"\nEmployer Edit Company Photo - Json Response:\n%@", responseObject);
                                if([self validateResponse:responseObject]) {
                                    self.performInit = YES;
-                                   UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerLanding"];
+                                   UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployerLanding"];
                                    [self.navigationController setViewControllers:@[myController] animated:YES];
                                } else {
                                    [self handleErrorUnableToSaveData:@"Company Photo"];

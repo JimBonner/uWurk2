@@ -748,7 +748,7 @@
                       [self handleErrorAccessError:@"Employee Step 4" withError:error];
                   }];
         } else {
-            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup5"];
+            UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup5"];
             [self.navigationController pushViewController:myController animated:TRUE];
         }
     }

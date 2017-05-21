@@ -20,7 +20,7 @@
 }
 
 - (IBAction)pressReturn:(UIButton *)sender {
-    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
+    UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
     [self.navigationController setViewControllers:@[myController] animated:TRUE];
 }
 

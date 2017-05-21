@@ -128,7 +128,7 @@
                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
                       NSLog(@"\nEmployee Step 2 - Json Response: %@", responseObject);
                       if([self validateResponse:responseObject]){
-                           UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup3"];
+                           UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup3"];
                           [self.navigationController pushViewController:myController animated:TRUE];
                       } else {
                           [self handleErrorJsonResponse:@"Employee Step 2"];
@@ -141,7 +141,7 @@
         }
         else
         {
-            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup3"];
+            UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup3"];
             [self.navigationController pushViewController:myController animated:TRUE];
         }
     }

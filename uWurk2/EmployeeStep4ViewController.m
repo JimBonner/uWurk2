@@ -297,7 +297,7 @@
     [self.btnSchool setTitle:@"Select School" forState:UIControlStateNormal];
     [self.btnCity setTitle:@"Select City" forState:UIControlStateNormal];
     
-    ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
+    ListSelectorTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"ListSelector"];
     
     [myController setParameters:nil];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/states"];
@@ -332,7 +332,7 @@
         return;
     }
     
-    ListSelectorStringsTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelectorStrings"];
+    ListSelectorStringsTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"ListSelectorStrings"];
     
     [myController setParameters:@{@"state_id":[@(self.btnState.tag)stringValue]}];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/cities"];
@@ -349,7 +349,7 @@
 
 - (IBAction)schoolPress:(id)sender
 {
-    ListSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListSelector"];
+    ListSelectorTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ListSelector"];
     
     if (self.btnHighSchool.isSelected) {
         [myController setUrl:@"http://uwurk.tscserver.com/api/v1/highschools"];
@@ -450,7 +450,7 @@
                       NSLog(@"\nEmployee Step 4 - Json Response: %@", responseObject);
                       if([self validateResponse:responseObject]){
                           self.performEducationInit = YES;
-                          UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup5"];
+                          UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup5"];
                           [self.navigationController pushViewController:myController animated:TRUE];
                       } else {
                           [self handleErrorJsonResponse:@"Employee Step 4"];
@@ -460,7 +460,7 @@
                       [self handleErrorAccessError:@"Employee Step 4" withError:error];
                   }];
         } else {
-            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup5"];
+            UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup5"];
             [self.navigationController pushViewController:myController animated:TRUE];
         }
     }

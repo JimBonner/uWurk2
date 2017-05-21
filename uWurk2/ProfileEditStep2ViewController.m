@@ -266,7 +266,7 @@
     self.btnSaveChanges.enabled = YES;
 }
 - (IBAction)addLoc:(id)sender {
-    AddLocationViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddLocation"];
+    AddLocationViewController *myController = [[UIStoryboard storyboardWithName:@"EmployeeProfile" bundle:nil]  instantiateViewControllerWithIdentifier:@"AddLocation"];
     [myController setMiles:self.milescount];
     [myController setZipCode:self.zipcount];
     [self.navigationController pushViewController:myController animated:TRUE];
@@ -318,7 +318,7 @@
             }];
         }
         else{
-            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
+            UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
             [self.navigationController setViewControllers:@[myController] animated:TRUE];
         }
     }

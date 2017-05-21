@@ -252,7 +252,7 @@ UIImage  *returnImage;
                  } else {
                      [self saveStepNumber:-1 completion:^(NSInteger result) {
                          if(result == 1) {
-                             UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerLanding"];
+                             UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"EmployerLanding"];
                              [self.navigationController setViewControllers:@[myController] animated:YES];
                          } else {
                              [self handleErrorUnableToSaveData:@"Step Number"];
@@ -272,7 +272,7 @@ UIImage  *returnImage;
         } else {
             [self saveStepNumber:-1 completion:^(NSInteger result) {
                 if(result == 1) {
-                    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
+                    UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                     [self.navigationController setViewControllers:@[myController] animated:YES];
                 } else {
                     [self handleErrorUnableToSaveData:@"Step Number"];
@@ -293,7 +293,7 @@ UIImage  *returnImage;
                NSLog(@"\nEmployee Step 6 - Bio Json Response: %@", responseObject);
                [self saveStepNumber:-1 completion:^(NSInteger result) {
                    if(result == 1) {
-                       UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
+                       UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                        [self.navigationController setViewControllers:@[myController] animated:YES];
                    } else {
                        [self handleErrorUnableToSaveData:@"Step Number"];

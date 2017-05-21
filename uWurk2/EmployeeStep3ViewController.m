@@ -235,7 +235,7 @@
                 NSLog(@"\nEmployee Step 3 - Json Response: %@", responseObject);
                 if([self validateResponse:responseObject]){
                     self.performInit = YES;
-                    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup4"];
+                    UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup4"];
                     [self.navigationController pushViewController:myController animated:TRUE];
                 } else {
                     [self handleErrorJsonResponse:@"Employee Step 3"];
@@ -246,7 +246,7 @@
             }];
         }
         else{
-            UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup4"];
+            UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeProfileSetup4"];
             [self.navigationController pushViewController:myController animated:TRUE];
         }
     }
@@ -254,7 +254,7 @@
 
 - (IBAction)addLanguagePress:(id)sender
 { 
-    ListMultiSelectorTableViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ListMultiSelector"];
+    ListMultiSelectorTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"ListMultiSelector"];
     
     [myController setParameters:nil];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/languages"];

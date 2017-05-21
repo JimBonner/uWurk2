@@ -26,17 +26,17 @@
 }
 
 - (IBAction)pressProfile:(id)sender {
-    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
+    UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
     [self.navigationController pushViewController:myController animated:YES];
 }
 - (IBAction)pressRefer:(id)sender {
-    UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"ReferralProgram"];
+    UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ReferralProgram"];
     [self.navigationController pushViewController:myController animated:YES];
 }
 - (IBAction)pressLogOut:(id)sender {
 //    AFHTTPRequestOperationManager *manager = [self getManager];
 //        [manager POST:@"http://uwurk.tscserver.com/api/v1/logout" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                UIViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"InitialView"];
+//                UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"InitialView"];
 //                [self.navigationController pushViewController:myController animated:YES];
 //            }
 //        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
