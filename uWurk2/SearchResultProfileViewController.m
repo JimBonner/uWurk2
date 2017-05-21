@@ -559,7 +559,8 @@
 
 - (IBAction)pressContact:(id)sender
 {
-    EditEmployerContactInfoViewController *myController = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployerDashboardContactViewController"];
+    ContactProfileViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil] instantiateViewControllerWithIdentifier:@"ContactProfileViewController"];
+
     [myController setParamHolder:self.paramHolder];
     [myController setSearchUserDict:self.searchedUserDict];
     [self.navigationController pushViewController:myController animated:TRUE];

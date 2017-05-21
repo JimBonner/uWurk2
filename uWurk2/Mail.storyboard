@@ -183,7 +183,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4OV-Fg-4jt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1502" y="-2649"/>
+            <point key="canvasLocation" x="1398" y="-2650"/>
         </scene>
         <!--Mail Add Folder View Controller-->
         <scene sceneID="Nup-Ks-YVb">
@@ -876,6 +876,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ghc-YP-YgW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4683" y="1302"/>
+        </scene>
+        <!--Contact Profile View Controller-->
+        <scene sceneID="Jz6-gg-fel">
+            <objects>
+                <viewController storyboardIdentifier="ContactProfileViewController" id="BKI-2K-bgN" customClass="ContactProfileViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WLJ-mz-rju"/>
+                        <viewControllerLayoutGuide type="bottom" id="7iN-sH-RoS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TlF-PX-1Wb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e4a-UG-4uc">
+                                <rect key="frame" x="154" y="140" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="pressReply:" destination="BKI-2K-bgN" eventType="touchUpInside" id="Yyc-O2-5QP"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KiX-vc-Fd0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5131" y="1308"/>
         </scene>
         <!--Contact Profile Notify View Controller-->
         <scene sceneID="wf8-Eo-Tkv">
