@@ -16,9 +16,9 @@
 
 @implementation ContactProfileNotifyViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -26,18 +26,21 @@
     [super viewWillAppear:animated];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)changeCheckBox:(UIButton *)sender {
+- (IBAction)changeCheckBox:(UIButton *)sender
+{
     [sender setSelected:!sender.selected];
 }
-- (IBAction)pressNext:(id)sender {
+
+- (IBAction)pressNext:(id)sender
+{
     MessageSentViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil] instantiateViewControllerWithIdentifier:@"MessageSentView"];
-    [self.navigationController setViewControllers:@[myController] animated:TRUE];
     [myController setSearchUserDict:self.searchUserDict];
+    [self.navigationController pushViewController:myController animated:YES];
 }
 
 @end

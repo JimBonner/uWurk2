@@ -54,8 +54,9 @@
     if ([params count]) {
         [manager POST:@"http://uwurk.tscserver.com/api/v1/contact" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"\nContact Profile - Json Response:\n%@",responseObject);
-            UIViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil] instantiateViewControllerWithIdentifier:@"ContactProfileNotifyView"];
-            [self.navigationController setViewControllers:@[myController] animated:TRUE];
+            ContactProfileNotifyViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil] instantiateViewControllerWithIdentifier:@"ContactProfileNotifyView"];
+            [myController setSearchUserDict:self.searchUserDict];
+            [self.navigationController pushViewController:myController animated:TRUE];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
             [self handleErrorAccessError:@"Contact Profile" withError:error];
