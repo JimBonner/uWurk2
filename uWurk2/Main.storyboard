@@ -4381,11 +4381,17 @@ If you don’t find quality candidates today, check back soon.</string>
                                                 <rect key="frame" x="30" y="208" width="260" height="30"/>
                                                 <fontDescription key="fontDescription" name="RobotoCondensed-Light" family="Roboto Condensed" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES"/>
+                                                <connections>
+                                                    <action selector="dataChange:" destination="Xks-kj-hqs" eventType="editingChanged" id="0ek-ho-rDA"/>
+                                                </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="LXt-X6-dzv">
                                                 <rect key="frame" x="30" y="148" width="260" height="30"/>
                                                 <fontDescription key="fontDescription" name="RobotoCondensed-Light" family="Roboto Condensed" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES"/>
+                                                <connections>
+                                                    <action selector="dataChange:" destination="Xks-kj-hqs" eventType="editingChanged" id="8YK-xA-SHd"/>
+                                                </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W5v-k9-CGR">
                                                 <rect key="frame" x="30" y="63" width="260" height="22"/>
@@ -4424,6 +4430,9 @@ If you don’t find quality candidates today, check back soon.</string>
                                                 <rect key="frame" x="30" y="268" width="260" height="30"/>
                                                 <fontDescription key="fontDescription" name="RobotoCondensed-Light" family="Roboto Condensed" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <action selector="dataChange:" destination="Xks-kj-hqs" eventType="editingChanged" id="PDB-Ii-KAr"/>
+                                                </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOW WOULD YOU LIKE UWURK TO NOTIFY YOU WHEN CANDIDATES RESPOND?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="huF-G9-UpI">
                                                 <rect key="frame" x="30" y="330" width="260" height="60"/>
@@ -4454,6 +4463,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                                 </state>
                                                 <state key="selected" image="check-black"/>
                                                 <connections>
+                                                    <action selector="changeCheckBox:" destination="Xks-kj-hqs" eventType="editingChanged" id="021-ly-Mxo"/>
                                                     <action selector="changeCheckBox:" destination="Xks-kj-hqs" eventType="touchUpInside" id="vW5-2N-91O"/>
                                                 </connections>
                                             </button>
@@ -4476,6 +4486,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                                 </state>
                                                 <state key="selected" image="check-black"/>
                                                 <connections>
+                                                    <action selector="changeCheckBox:" destination="Xks-kj-hqs" eventType="editingChanged" id="JZI-oH-6mP"/>
                                                     <action selector="changeCheckBox:" destination="Xks-kj-hqs" eventType="touchUpInside" id="yBq-MT-VvM"/>
                                                 </connections>
                                             </button>
@@ -4527,6 +4538,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                                 <state key="selected" image="check-black"/>
                                                 <connections>
                                                     <action selector="changeCheckBox:" destination="Xks-kj-hqs" eventType="touchUpInside" id="HGQ-bW-mHJ"/>
+                                                    <action selector="changeCheckBox:" destination="Xks-kj-hqs" eventType="editingChanged" id="VaH-8h-qWJ"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWt-Oj-1os">
@@ -4568,6 +4580,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                                 <state key="selected" image="check-black"/>
                                                 <connections>
                                                     <action selector="changeCheckBox:" destination="Xks-kj-hqs" eventType="touchUpInside" id="1rH-n6-Sfu"/>
+                                                    <action selector="changeCheckBox:" destination="Xks-kj-hqs" eventType="editingChanged" id="SVs-bk-Xz1"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vgh-Sj-yyA">
@@ -4584,6 +4597,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                                 <state key="selected" image="check-black"/>
                                                 <connections>
                                                     <action selector="changeCheckBox:" destination="Xks-kj-hqs" eventType="touchUpInside" id="FXm-D1-dNt"/>
+                                                    <action selector="changeCheckBox:" destination="Xks-kj-hqs" eventType="editingChanged" id="Ycr-va-CmB"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3I-5U-7eL">
@@ -4671,8 +4685,9 @@ If you don’t find quality candidates today, check back soon.</string>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ncy-4b-gwx">
-                                                <rect key="frame" x="89" y="816" width="142" height="28"/>
+                                                <rect key="frame" x="70" y="816" width="180" height="28"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="width" constant="180" id="kgu-n4-HJR"/>
                                                     <constraint firstAttribute="height" constant="28" id="zrN-gU-vg8"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="20"/>
@@ -4696,6 +4711,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                                 <state key="selected" image="check-black"/>
                                                 <connections>
                                                     <action selector="changeCheckBox:" destination="Xks-kj-hqs" eventType="touchUpInside" id="Fxg-Ac-Pg5"/>
+                                                    <action selector="changeCheckBox:" destination="Xks-kj-hqs" eventType="editingChanged" id="jbg-lz-2J7"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -4753,7 +4769,6 @@ If you don’t find quality candidates today, check back soon.</string>
                                             <constraint firstAttribute="trailing" secondItem="hbu-k9-xJg" secondAttribute="trailing" constant="32" id="RN0-S7-L9x"/>
                                             <constraint firstItem="05J-uG-qhQ" firstAttribute="top" secondItem="FXc-TM-nHb" secondAttribute="bottom" constant="24" id="Rc7-3B-06l"/>
                                             <constraint firstItem="e1r-bq-Zj4" firstAttribute="top" secondItem="fTi-Ul-HYJ" secondAttribute="top" id="RqG-ds-PdX"/>
-                                            <constraint firstItem="Ncy-4b-gwx" firstAttribute="leading" secondItem="fTi-Ul-HYJ" secondAttribute="leading" constant="89" id="RzP-bF-bnn"/>
                                             <constraint firstItem="lqd-Ef-2au" firstAttribute="leading" secondItem="8x0-Ix-CpC" secondAttribute="trailing" constant="28" id="SU0-hn-PZt"/>
                                             <constraint firstItem="gxS-5H-h1d" firstAttribute="leading" secondItem="fTi-Ul-HYJ" secondAttribute="leading" constant="30" id="TKq-ns-kKC"/>
                                             <constraint firstAttribute="trailing" secondItem="Zfg-jQ-jXq" secondAttribute="trailing" constant="30" id="Udr-UY-3RD"/>
@@ -4773,6 +4788,7 @@ If you don’t find quality candidates today, check back soon.</string>
                                             <constraint firstItem="LXt-X6-dzv" firstAttribute="top" secondItem="hjP-wk-EUi" secondAttribute="bottom" constant="3" id="dEq-Mq-fdf"/>
                                             <constraint firstItem="Z8X-XY-Foy" firstAttribute="top" secondItem="gfc-VZ-zYp" secondAttribute="bottom" constant="3" id="dX8-oQ-mcL"/>
                                             <constraint firstItem="Ciw-nT-Ss5" firstAttribute="leading" secondItem="6Vl-Ur-fIt" secondAttribute="leading" id="de6-hp-GTw"/>
+                                            <constraint firstItem="Ncy-4b-gwx" firstAttribute="centerX" secondItem="fTi-Ul-HYJ" secondAttribute="centerX" id="dws-mQ-HWw"/>
                                             <constraint firstItem="e1r-bq-Zj4" firstAttribute="leading" secondItem="fTi-Ul-HYJ" secondAttribute="leading" id="f95-g2-T2w"/>
                                             <constraint firstItem="Dsf-se-TRp" firstAttribute="top" secondItem="Z8X-XY-Foy" secondAttribute="bottom" constant="24" id="fNJ-ib-94c"/>
                                             <constraint firstItem="Ciw-nT-Ss5" firstAttribute="top" secondItem="05J-uG-qhQ" secondAttribute="bottom" constant="3" id="fcl-hs-0mK"/>
@@ -4793,7 +4809,6 @@ If you don’t find quality candidates today, check back soon.</string>
                                             <constraint firstItem="huF-G9-UpI" firstAttribute="leading" secondItem="fTi-Ul-HYJ" secondAttribute="leading" constant="30" id="m7X-Kt-9QX"/>
                                             <constraint firstItem="FXc-TM-nHb" firstAttribute="leading" secondItem="Z8X-XY-Foy" secondAttribute="leading" id="mNA-W3-C9G"/>
                                             <constraint firstAttribute="trailing" secondItem="hjP-wk-EUi" secondAttribute="trailing" constant="30" id="mjH-LT-gvu"/>
-                                            <constraint firstAttribute="trailing" secondItem="Ncy-4b-gwx" secondAttribute="trailing" constant="89" id="nFq-qO-OdA"/>
                                             <constraint firstItem="huF-G9-UpI" firstAttribute="top" secondItem="xgt-Fh-Pnv" secondAttribute="bottom" constant="32" id="nV7-N1-kbD"/>
                                             <constraint firstItem="Dsf-se-TRp" firstAttribute="top" secondItem="8nq-li-anA" secondAttribute="bottom" constant="24" id="o2P-TT-hfk"/>
                                             <constraint firstItem="hbu-k9-xJg" firstAttribute="top" secondItem="Y3I-5U-7eL" secondAttribute="bottom" constant="24" id="oFe-OQ-jfh"/>
@@ -4848,6 +4863,7 @@ If you don’t find quality candidates today, check back soon.</string>
                         <outlet property="btnPosEmail" destination="bx1-tH-oPB" id="VTz-dU-3BP"/>
                         <outlet property="btnPosText" destination="WRl-bP-SUm" id="uQr-r9-eTS"/>
                         <outlet property="btnPosWebsite" destination="lqd-Ef-2au" id="pVt-U5-STs"/>
+                        <outlet property="btnSaveChanges" destination="Ncy-4b-gwx" id="UlY-ea-Vzd"/>
                         <outlet property="txtEmail" destination="gxS-5H-h1d" id="tLy-fh-fch"/>
                         <outlet property="txtFirstName" destination="LXt-X6-dzv" id="2H7-SE-kxf"/>
                         <outlet property="txtLastName" destination="t47-wQ-3b0" id="Cxa-WG-1kI"/>

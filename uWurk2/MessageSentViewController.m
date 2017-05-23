@@ -34,8 +34,8 @@
 
 - (IBAction)pressReturn:(id)sender
 {
-    UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployerLanding"];
-    [self.navigationController pushViewController:myController animated:TRUE];
+    UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"employeeListID"];
+    [self.navigationController setViewControllers:@[myController] animated:TRUE];
 }
 
 @end

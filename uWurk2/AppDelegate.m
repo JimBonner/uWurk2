@@ -28,6 +28,8 @@
         
     self.serverAddress = @"http://uwurk.tscserver.com";
     
+    self.lastSearchParameters = [[NSMutableDictionary alloc]init];
+    
     return  [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
 

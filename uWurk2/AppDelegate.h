@@ -15,6 +15,7 @@
 @property (strong, nonatomic) NSMutableDictionary *user;
 @property (strong, nonatomic) NSString *documentsDirectory;
 @property (strong, nonatomic) NSString *serverAddress;
+@property (strong, nonatomic) NSMutableDictionary *lastSearchParameters;
 
 - (NSString *)getDocumentsDirectory;
 - (void)setupUwurkStyle:(UITableView *)tableView cell:(UITableViewCell *)cell;

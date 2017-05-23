@@ -125,10 +125,10 @@
     if ((Error.length) > 50) {
         [self handleErrorWithMessage:Error];
     } else {
-        [self saveUserDefault:[self.btnLanguage titleForState:UIControlStateNormal] Key:@"interfaceLanguage"];
-        [self saveUserDefault:self.btnPrefRemoveJob.isSelected?@"1":@"0" Key:@"prefRemoveJob"];
-        [self saveUserDefault:self.btnPrefRemoveSchool.isSelected?@"1":@"0" Key:@"prefRemoveSchool"];
-        [self saveUserDefault:self.btnPrefRemovePhoto.isSelected?@"1":@"0" Key:@"prefRemovePhoto"];
+        [self saveUserDefault:[self.btnLanguage titleForState:UIControlStateNormal] Key:@"EmployeePrefInterfaceLanguage"];
+        [self saveUserDefault:self.btnPrefRemoveJob.isSelected?@"1":@"0" Key:@"EmployeePrefRemoveJob"];
+        [self saveUserDefault:self.btnPrefRemoveSchool.isSelected?@"1":@"0" Key:@"EmployeePrefRemoveSchool"];
+        [self saveUserDefault:self.btnPrefRemovePhoto.isSelected?@"1":@"0" Key:@"EmployeePrefRemovePhoto"];
     }
     
     UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeLanding"];

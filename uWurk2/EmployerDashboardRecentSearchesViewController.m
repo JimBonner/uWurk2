@@ -74,7 +74,7 @@
     NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:[decodedString dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
     NSMutableDictionary *querryParams = [[NSMutableDictionary alloc]initWithDictionary:[dictionary objectForKey:@"query_params"]];
     [querryParams setValue:searchID forKey:@"search_id"];
-    if ( [self.delegate respondsToSelector:@selector(SelectionMade:)])
+    if([self.delegate respondsToSelector:@selector(SelectionMade:)])
         [self.delegate SelectionMade:querryParams];
 }
 
