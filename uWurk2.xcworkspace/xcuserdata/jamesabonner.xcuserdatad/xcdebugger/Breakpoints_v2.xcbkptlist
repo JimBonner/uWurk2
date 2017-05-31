@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "uWurk2/SearchViewController.m"
-            timestampString = "517197772.835353"
+            timestampString = "517940960.523738"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "131"
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "uWurk2/EditEmployerContactInfoViewController.m"
-            timestampString = "517209285.284192"
+            timestampString = "517251809.245458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "-viewWillAppear:"
             landmarkType = "7">
          </BreakpointContent>
@@ -89,13 +89,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "uWurk2/EditEmployerContactInfoViewController.m"
-            timestampString = "517209326.89808"
+            filePath = "uWurk2/SearchViewController.m"
+            timestampString = "517944553.935726"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "-viewWillAppear:"
+            startingLineNumber = "494"
+            endingLineNumber = "494"
+            landmarkName = "-searchPress:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

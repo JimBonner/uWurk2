@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnFavorite;
 @property (strong, nonatomic) NSArray *json;
 @property (strong, nonatomic) NSMutableDictionary *additionalJSON;
+@property (strong, nonatomic) NSMutableDictionary *otherParams;
 @property (strong, nonatomic) NSArray *favorites;
 @property (strong, nonatomic) NSString *userID;
 @property (strong, nonatomic) NSString *searchID;
@@ -64,6 +65,11 @@
         self.favorites = [responseObject objectForKey:@"favorites"];
         self.additionalJSON = [NSMutableDictionary dictionaryWithDictionary:responseObject];
         [self.additionalJSON removeObjectForKey:@"rows"];
+        
+        self.otherParams = [[NSMutableDictionary alloc]init];
+        [self.otherParams setObject:[self.additionalJSON objectForKey:@"position"] forKey:@"position"];
+        [self.otherParams setObject:[self.additionalJSON objectForKey:@"location"] forKey:@"location"];
+          
         NSUInteger er = [self.json count];
         [self.tableView reloadData];
         self.lblResultNumber.text = [NSString stringWithFormat:@"(%lu)", (unsigned long)er];
@@ -143,11 +149,14 @@
     NSMutableDictionary *dict = [self.json objectAtIndex:indexPath.row];
     NSString *userID = [dict objectForKey:@"id"];
     self.userID = userID;
+    
     SearchResultProfileViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"ProfileSearchResult"];
+    
     [myController setProfileID:self.userID];
     [myController setSearchID:self.searchID];
     [myController setSearchedUserDict:dict];
-    [myController setParamHolder:self.searchParameters];
+    [myController setSearchParams:self.searchParameters];
+    [myController setOtherParams:self.otherParams];
     
     [self.navigationController pushViewController:myController animated:TRUE];
 }
@@ -155,8 +164,10 @@
 - (IBAction)pressUpdateSearch:(id)sender
 {
     RefineSearchViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"UpdateSearchViewController"];
-    [self.navigationController pushViewController:myController animated:YES];
+    
     [myController setSearchparms:self.searchParameters];
+
+    [self.navigationController pushViewController:myController animated:YES];
 }
 
 - (IBAction)pressSaveSearch:(id)sender

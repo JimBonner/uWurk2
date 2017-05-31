@@ -10,6 +10,7 @@
 #import "EditEmployerContactInfoViewController.h"
 
 @interface EditEmployerContactInfoViewController ()
+
 @property (weak, nonatomic) IBOutlet UITextField *txtEmail;
 @property (weak, nonatomic) IBOutlet UITextField *txtFirstName;
 @property (weak, nonatomic) IBOutlet UITextField *txtLastName;

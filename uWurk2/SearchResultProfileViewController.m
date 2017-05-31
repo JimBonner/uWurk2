@@ -56,10 +56,12 @@
 {
     [super viewWillAppear:animated];
     
-    [self.paramHolder setValue:self.searchID forKey:@"search_id"];
+    [self.userImages setAlpha:1.0];
+    
+    [self.searchParams setValue:self.searchID forKey:@"search_id"];
     
     AFHTTPRequestOperationManager *manager = [self getManager];
-    [manager POST:@"http://uwurk.tscserver.com/api/v1/search" parameters:self.paramHolder
+    [manager POST:@"http://uwurk.tscserver.com/api/v1/search" parameters:self.searchParams
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
                NSLog(@"\nSearch Result Favorite - Json: \n%@", responseObject);
                BOOL is_favorite = NO;
@@ -110,11 +112,11 @@
             
             self.lblName.text = [NSString stringWithFormat:@"%@ %@",[self.json objectForKey:@"first_name"], [self.json objectForKey:@"last_name"]];
             if ([[self.json objectForKey:@"tipped_position"] intValue] == 1) {
-                TipWork = @"or Tips";
+                TipWork = @"plus Tips";
             }if ([[self.json objectForKey:@"tipped_position"] intValue] == 0) {
                 TipWork = @"";
             }
-            self.lblAgeWage.text = [NSString stringWithFormat:@"Age: %@  |  $%@/hr %@", age, [self.json objectForKey:@"hourly_wage"], TipWork];
+            self.lblAgeWage.text = [NSString stringWithFormat:@"Age: %@  |  $%@ per hr %@", age, [self.json objectForKey:@"hourly_wage"], TipWork];
             
             NSArray *experienceArray = [self.json objectForKey:@"experience"];
             if([experienceArray count] > 0) {
@@ -167,7 +169,6 @@
             self.bioDownArrow.alpha = 0;
             self.lblInfoBio.alpha = 0;
             self.cnstrntInfoBio.constant = 500;
-            
             [self.view layoutIfNeeded];
             });
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -175,6 +176,7 @@
             [self handleErrorAccessError:@"Search Result Profile" withError:error];
         }];
     }
+    [self.view layoutIfNeeded];
 }
 
 - (void)didReceiveMemoryWarning
@@ -185,6 +187,7 @@
 - (IBAction)pressEditProfile:(id)sender
 {
     UITableViewController *myController = [[UIStoryboard storyboardWithName:@"EmployeeProfile" bundle:nil] instantiateViewControllerWithIdentifier:@"ProfileEditStep1"];
+    
     [self.navigationController setViewControllers:@[myController] animated:YES];
 }
 
@@ -561,8 +564,10 @@
 {
     ContactProfileViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil] instantiateViewControllerWithIdentifier:@"ContactProfileViewController"];
 
-    [myController setParamHolder:self.paramHolder];
+    [myController setSearchParams:self.searchParams];
     [myController setSearchUserDict:self.searchedUserDict];
+    [myController setOtherParams:self.otherParams];
+    
     [self.navigationController pushViewController:myController animated:TRUE];
 }
 

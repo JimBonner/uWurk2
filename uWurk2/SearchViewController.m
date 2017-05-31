@@ -129,6 +129,7 @@
 -(void)SelectionMade:(NSMutableDictionary *)dict
 {
     SearchResultsTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"employeeListID"];
+    
     [myController setSearchParameters:dict];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/search"];
     
@@ -465,10 +466,12 @@
         NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
         if(self.btnFullTime.isSelected) {
             [self updateParamDict:params value:@"1" key:@"hours"];
-        }
-        else if(self.btnPartTime.isSelected) {
+        } else if(self.btnPartTime.isSelected) {
             [self updateParamDict:params value:@"2" key:@"hours"];
+        } else if(self.btnTemporary.isSelected) {
+            [self updateParamDict:params value:@"3" key:@"hours"];
         }
+
         self.btnExpNo.isSelected == TRUE ? [self updateParamDict:params value:@"0" key:@"exp_required"] : [self updateParamDict:params value:@"1" key:@"exp_required"];
         
         if(self.btnHourly.isSelected) {
@@ -476,9 +479,7 @@
             [self updateParamDict:params value:self.txtHourly.text key:@"hourly_wage"];
         }
         if (self.btnTipped.isSelected) {
-            // FORCE BY ROB, field is not displaying
             [self updateParamDict:params value:@"1" key:@"wage_type_tipped"];
-            
         }
         [self updateParamDict:params value:@"new" key:@"search_type"];
         if(self.btnFullTime.isSelected && self.btnPartTime.isSelected)
@@ -491,8 +492,10 @@
         [self updateParamDict:params value:[@(self.btnPosition.tag)stringValue] key:@"exp_positions[]"];
 
         SearchResultsTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"employeeListID"];
+        
         [myController setSearchParameters:params];
         [myController setUrl:@"http://uwurk.tscserver.com/api/v1/search"];
+        
         [self.navigationController pushViewController:myController animated:TRUE];
     }
 }

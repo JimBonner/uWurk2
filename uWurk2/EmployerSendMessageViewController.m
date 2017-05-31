@@ -75,15 +75,10 @@
     
     self.json = [NSMutableArray new];
     
-    
     [manager POST:@"http://uwurk.tscserver.com/api/v1/discussion" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@",responseObject);
         self.json = [[responseObject objectForKey:@"discussion"] objectForKey:@"rows"];
         [self.tblView reloadData];
-        
-        //        dispatch_async(dispatch_get_main_queue(), ^{
-        //            [self.tableView reloadData];
-        //        });
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         [self handleErrorAccessError:@"Employer Send Message" withError:error];
@@ -94,14 +89,15 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)pressProfile:(id)sender
 {
     SearchResultProfileViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ProfileSearchResult"];
-    [self.navigationController pushViewController:myController animated:TRUE];
+    
     [myController setProfileID:[self.MailMessagedict objectForKey:@"to_user_id"]];
+    
+    [self.navigationController pushViewController:myController animated:TRUE];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

@@ -26,9 +26,7 @@
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTranslucent:NO];
         
-    self.serverAddress = @"http://uwurk.tscserver.com";
-    
-    self.lastSearchParameters = [[NSMutableDictionary alloc]init];
+    self.serverAddress = @"http://uwurk.tscserver.com/api/v1/";
     
     return  [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }

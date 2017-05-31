@@ -74,12 +74,6 @@
 
  }
 
-- (IBAction)pressProfile:(id)sender {
-//    SearchResultProfileViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"ProfileSearchResult"];
-//    [self.navigationController pushViewController:myController animated:TRUE];
-//    [myController setProfileID:[self.MailMessagedict objectForKey:@"to_user_id"]];
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
