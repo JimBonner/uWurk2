@@ -252,7 +252,7 @@ UIImage  *returnImage;
                  } else {
                      [self saveStepNumber:-1 completion:^(NSInteger result) {
                          if(result == 1) {
-                             UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"EmployerLanding"];
+                             UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
                              [self.navigationController setViewControllers:@[myController] animated:YES];
                          } else {
                              [self handleErrorUnableToSaveData:@"Step Number"];

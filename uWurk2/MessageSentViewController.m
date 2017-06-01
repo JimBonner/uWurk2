@@ -7,8 +7,10 @@
 //
 
 #import "MessageSentViewController.h"
+#import "SearchResultsTableViewController.h"
 
 @interface MessageSentViewController ()
+
 @property (weak, nonatomic) IBOutlet UILabel  *lblNameRespond;
 @property (weak, nonatomic) IBOutlet UIButton *btnReturn;
 
@@ -34,8 +36,19 @@
 
 - (IBAction)pressReturn:(id)sender
 {
-    UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"employeeListID"];
-    [self.navigationController setViewControllers:@[myController] animated:TRUE];
+    SearchResultsTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"employeeListID"];
+    
+    [myController setUrl:@"http://uwurk.tscserver.com/api/v1/search"];
+    [myController setSearchParameters:[NSMutableDictionary dictionaryWithDictionary:self.searchParams]];
+
+    NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[self.navigationController viewControllers]];
+    UIViewController *searchViewController = [viewControllers objectAtIndex:0];
+
+    [viewControllers removeAllObjects];
+    [viewControllers addObject:searchViewController];
+    [viewControllers addObject:myController];
+    
+    [self.navigationController setViewControllers:viewControllers animated:TRUE];
 }
 
 @end

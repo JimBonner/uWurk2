@@ -126,11 +126,11 @@
         jobstatus = @"Previous";
     }
     if ([[dict objectForKey:@"tipped_position"] intValue] == 1) {
-        tip = @"or Tips";
+        tip = @"plus Tips";
     } else {
         tip = @"";
     }
-    cell.line2.text = [NSString stringWithFormat:@"Age: %@ | $%@/hr %@",[dict objectForKey:@"age"], [dict objectForKey:@"hourly_wage"],tip];
+    cell.line2.text = [NSString stringWithFormat:@"Age: %@ | $%@ per hour %@",[dict objectForKey:@"age"], [dict objectForKey:@"hourly_wage"],tip];
     if ([dict objectForKey:@"experience"] == (id)[NSNull null] || [[dict objectForKey:@"experience"]length] == 0 ) {
         cell.line3.text = [NSString stringWithFormat:@"Education: %@",[dict objectForKey:@"education"]];
         cell.line4.text = @"";

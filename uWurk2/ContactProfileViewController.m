@@ -91,6 +91,7 @@
             NSLog(@"\nContact Profile - Json Response:\n%@",responseObject);
             ContactProfileNotifyViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil] instantiateViewControllerWithIdentifier:@"ContactProfileNotifyView"];
             [myController setSearchUserDict:self.searchUserDict];
+            [myController setSearchParams:self.searchParams];
             [self.navigationController pushViewController:myController animated:TRUE];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
@@ -98,8 +99,9 @@
         }];
     } else {
         ContactProfileNotifyViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil]  instantiateViewControllerWithIdentifier:@"ContactProfileNotifyView"];
-        [self.navigationController setViewControllers:@[myController] animated:TRUE];
         [myController setSearchUserDict:self.searchUserDict];
+        [myController setSearchParams:self.searchParams];
+        [self.navigationController setViewControllers:@[myController] animated:TRUE];
     }
 }
 

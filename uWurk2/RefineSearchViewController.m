@@ -559,8 +559,10 @@
     }
     
     SearchResultsTableViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"employeeListID"];
+    
     [myController setSearchParameters:self.params];
     [myController setUrl:@"http://uwurk.tscserver.com/api/v1/search"];
+    
     [self.navigationController pushViewController:myController animated:TRUE];
 }
 

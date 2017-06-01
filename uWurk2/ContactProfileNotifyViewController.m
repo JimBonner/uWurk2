@@ -39,7 +39,10 @@
 - (IBAction)pressNext:(id)sender
 {
     MessageSentViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil] instantiateViewControllerWithIdentifier:@"MessageSentView"];
+    
     [myController setSearchUserDict:self.searchUserDict];
+    [myController setSearchParams:self.searchParams];
+    
     [self.navigationController pushViewController:myController animated:YES];
 }
 

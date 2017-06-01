@@ -22,11 +22,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
 
     UIImage* logoImage = [UIImage imageNamed:@"UWURK-header-logo"];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:logoImage];
-    
-    self.appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     
     if ([[self.parentViewController parentViewController] isKindOfClass:[UITabBarController class]]) {
         [self.parentViewController.navigationController setNavigationBarHidden:YES];
@@ -42,8 +42,6 @@
                                                         target:nil
                                                         action:nil];
         self.navigationItem.hidesBackButton = NO;
-//        [self.navigationController.navigationBar setBackIndicatorImage:[UIImage imageNamed:@"Back Arrow White"]];
-//        [self.navigationController.navigationBar setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"BackArrow_LgWhite"]];
     }
     
     self.flasher = NO;
@@ -247,9 +245,15 @@
     }
 }
 
--(NSURL *)serverUrlWith:(NSString *)postfix;
+-(NSURL *)serverUrlWith:(NSString *)postFix;
 {
-    NSURL *serverURL =[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.appDelegate.serverAddress,postfix]];
+    NSString *pstFix = postFix;
+    NSString *first = [postFix substringToIndex:1];
+    if([first isEqualToString:@"/"]) {
+        pstFix = [postFix substringFromIndex:1];
+    }
+    
+    NSURL *serverURL =[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.appDelegate.serverAddress,pstFix]];
     
     return serverURL;
 }

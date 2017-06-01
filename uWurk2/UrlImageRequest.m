@@ -80,15 +80,23 @@ static int const kIMAGE_REQUEST_CACHE_LIMIT = 100;
 //            }
 //        }];
 //    }
-        
-        NSURLSessionDownloadTask *downloadTask =
-        [[NSURLSession sharedSession]
-         downloadTaskWithURL:self.URL
+    
+//        NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+//        sessionConfig.timeoutIntervalForRequest  = 30.0;
+//        sessionConfig.timeoutIntervalForResource = 60.0;
+//        NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue: [NSOperationQueue mainQueue]];
+//        NSURLSessionDownloadTask *downloadTask =
+//        [session downloadTaskWithURL:self.URL
+//                   completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error)
+
+        NSURLSession *session = [NSURLSession sharedSession];
+        NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithURL:self.URL 
          completionHandler:^(NSURL *location,NSURLResponse *response,NSError *error)
          {
              if(!error) {
-                 UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:location]];
+                 NSData  *data  = [NSData dataWithContentsOfURL:location];
                  dispatch_async(dispatch_get_main_queue(), ^{
+                     UIImage *image = [UIImage imageWithData:data];
                      
                      [self.imageCache setObject:image forKey:self.URL.absoluteString];
                      
