@@ -196,7 +196,7 @@
     NSArray *photoArray = [[self.appDelegate user] objectForKey:@"photos"];
     for(NSDictionary *photoDict in photoArray) {
         if([[photoDict objectForKey:@"for_profile"] intValue] == 1) {
-            NSURL *photoURL =[self serverUrlWith:[photoDict objectForKey:@"url"]];
+            NSURL *photoURL =[self photosUrlWith:[photoDict objectForKey:@"url"]];
             UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];
             [photoRequest startWithCompletion:^(UIImage *newImage, NSError *error) {
                 dispatch_async(dispatch_get_main_queue(), ^{

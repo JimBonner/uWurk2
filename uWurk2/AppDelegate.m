@@ -28,6 +28,8 @@
         
     self.serverAddress = @"http://uwurk.tscserver.com/api/v1/";
     
+    self.photosAddress = @"http://uwurk.tscserver.com/";
+    
     return  [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
 

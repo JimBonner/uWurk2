@@ -37,6 +37,7 @@
 - (void)logout;
 - (void)getProfileDataFromDbmsWithCompletion:(void(^)(NSInteger result))completion;
 - (NSURL *)serverUrlWith:(NSString *)postFix;
+- (NSURL *)photosUrlWith:(NSString *)postFix;
 - (void)saveStepNumber:(NSInteger)stepNum completion:(void(^)(NSInteger result))completion;
 - (void)saveProfileComplete:(void(^)(NSInteger result))completion;
 - (void)loadPhotoImageFromServerUsingUrl:(NSMutableArray *)photoArray imageView:(UIImageView *)imageView;

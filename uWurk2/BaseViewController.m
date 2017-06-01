@@ -258,6 +258,19 @@
     return serverURL;
 }
 
+-(NSURL *)photosUrlWith:(NSString *)postFix;
+{
+    NSString *pstFix = postFix;
+    NSString *first = [postFix substringToIndex:1];
+    if([first isEqualToString:@"/"]) {
+        pstFix = [postFix substringFromIndex:1];
+    }
+    
+    NSURL *photosURL =[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", self.appDelegate.photosAddress,pstFix]];
+    
+    return photosURL;
+}
+
 - (void)getProfileDataFromDbmsWithCompletion:(void(^)(NSInteger result))completion
 {
     AFHTTPRequestOperationManager *manager = [self getManager];
@@ -326,7 +339,7 @@
 {
     for(NSDictionary *photoDict in photoArray) {
         if([[photoDict objectForKey:@"for_profile"] intValue] == 1) {
-            NSURL *photoURL =[self serverUrlWith:[photoDict objectForKey:@"url"]];
+            NSURL *photoURL =[self photosUrlWith:[photoDict objectForKey:@"url"]];
             UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];
             [photoRequest startWithCompletion:^(UIImage *newImage, NSError *error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -340,7 +353,7 @@
 
 - (void)loadPhotoImageFromServerUsingUrlString:(NSString *)postFix imageView:(UIImageView *)imageView
 {
-    NSURL *photoURL = [self serverUrlWith:postFix];
+    NSURL *photoURL = [self photosUrlWith:postFix];
     UrlImageRequest *photoRequest = [[UrlImageRequest alloc]initWithURL:photoURL];
     [photoRequest startWithCompletion:^(UIImage *newImage, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
