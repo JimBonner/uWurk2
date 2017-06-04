@@ -93,7 +93,9 @@
                                          }];
                 [alert addAction:cancel];
                 
-                if([self getUserDefault:@"email"] &&
+                BOOL DEV = NO;
+                
+                if([self getUserDefault:@"email"] && DEV &&
                    [self getUserDefault:@"api_auth_token"] &&
                    [message containsString:@"email"] &&
                    [message containsString:@"taken"])

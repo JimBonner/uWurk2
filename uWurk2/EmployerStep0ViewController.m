@@ -15,17 +15,20 @@
 
 @implementation EmployerStep0ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)pressGo:(id)sender {
+- (IBAction)pressGo:(id)sender
+{
     UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"EmployerProfileSetup1"];
     [self.navigationController pushViewController:myController animated:TRUE];
 }

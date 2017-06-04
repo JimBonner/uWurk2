@@ -26,7 +26,6 @@
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 44.0; // set to whatever your "average" cell height is
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -37,16 +36,16 @@
     AFHTTPRequestOperationManager *manager = [self getManager];
     [manager GET:@"http://uwurk.tscserver.com/api/v1/folders" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.json2 = [NSMutableArray arrayWithArray:[responseObject objectForKey:@"folders"]];
-        self.json = [[NSMutableArray alloc] init];
+        self.json  = [[NSMutableArray alloc] init];
 
         if([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"employee"]) {
             [self.json addObject:@{@"id":@"0",@"name":@"From Employer"}];
             [self.json addObject:@{@"id":@"1",@"name":@"From uWurk"}];
         } else {
-            [self.json addObject:@{@"id":@"0|yes",@"name":@"Yes"}];
-            [self.json addObject:@{@"id":@"1|no",@"name":@"No"}];
-            [self.json addObject:@{@"id":@"2|pending",@"name":@"Pending"}];
-            [self.json addObject:@{@"id":@"3|fromUwurk",@"name":@"From uWurk"}];
+            [self.json addObject:@{@"id":@"0_yes",@"name":@"Yes"}];
+            [self.json addObject:@{@"id":@"1_no",@"name":@"No"}];
+            [self.json addObject:@{@"id":@"2_pending",@"name":@"Pending"}];
+            [self.json addObject:@{@"id":@"3_fromuwurk",@"name":@"From uWurk"}];
         }
         
         [manager GET:@"http://uwurk.tscserver.com/api/v1/notifications" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {

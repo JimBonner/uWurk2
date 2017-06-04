@@ -38,8 +38,8 @@
 {
     NSDictionary *dict = self.MailMessagedict;
     JobInterestViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil] instantiateViewControllerWithIdentifier:@"JobInterestView"];
-    [self.navigationController setViewControllers:@[myController] animated:TRUE];
     [myController setMailMessagedict:dict];
+    [self.navigationController setViewControllers:@[myController] animated:TRUE];
 }
 
 @end

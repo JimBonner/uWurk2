@@ -149,7 +149,7 @@
     NSMutableDictionary *dict = [self.json objectAtIndex:indexPath.row];
     NSString *userID = [dict objectForKey:@"id"];
     self.userID = userID;
-    
+   
     SearchResultProfileViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"ProfileSearchResult"];
     
     [myController setProfileID:self.userID];

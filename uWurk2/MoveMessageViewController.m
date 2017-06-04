@@ -10,9 +10,9 @@
 #import "MailFolderTableViewCell.h"
 
 @interface MoveMessageViewController ()
+
 @property (strong, nonatomic) NSMutableArray *json;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
 
 @end
 

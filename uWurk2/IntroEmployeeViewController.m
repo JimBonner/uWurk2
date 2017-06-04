@@ -92,7 +92,7 @@
                                          }];
                 [alert addAction:cancel];
                 
-                BOOL DEV = YES;
+                BOOL DEV = NO;
                 
                 if([self getUserDefault:@"email"] && DEV &&
                    [self getUserDefault:@"api_auth_token"] &&

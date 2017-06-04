@@ -84,7 +84,7 @@
     if([params count]){
        AFHTTPRequestOperationManager *manager = [self getManager];
        [manager POST:@"http://uwurk.tscserver.com/api/v1/profile" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"JSON: %@", responseObject);
+            NSLog(@"Profile Json: %@", responseObject);
             
             dispatch_async(dispatch_get_main_queue(), ^{
             
@@ -108,6 +108,7 @@
                 }
 
             self.json = [responseObject objectForKey:@"user"];
+                
             NSString *age = [[self.searchedUserDict objectForKey:@"age"]stringValue];
             
             self.lblName.text = [NSString stringWithFormat:@"%@ %@",[self.json objectForKey:@"first_name"], [self.json objectForKey:@"last_name"]];

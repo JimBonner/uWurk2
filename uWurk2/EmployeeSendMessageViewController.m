@@ -42,8 +42,22 @@
 
     self.lblName.text = [NSString stringWithFormat:@"%@ %@",[self.MailMessagedict objectForKey:@"to_first_name"],[self.MailMessagedict objectForKey:@"to_last_name"]];
     self.lblPosition.text = [self.MailMessagedict objectForKey:@"position"];
+    NSString *string = @"";
+    if([[self.MailMessagedict objectForKey:@"hours"]integerValue] == 1) {
+        string = @" - Full Time";
+    } else if([[self.MailMessagedict objectForKey:@"hours"]integerValue] == 2) {
+        string = @" - Part Time";
+    } else if([[self.MailMessagedict objectForKey:@"hours"]integerValue] == 3) {
+        string = @" - Temporary";
+    } else {
+        string = @" - Hours not available";
+    }
+    self.lblPosition.text = [self.lblPosition.text stringByAppendingString:string];
     self.lblLocation.text = [self.MailMessagedict objectForKey:@"location"];
     self.lblWage.text = [self.MailMessagedict objectForKey:@"wage"];
+    if([self.lblWage.text isEqualToString:@""]){
+        self.lblWage.text = [self.lblWage.text stringByAppendingString:@"Wage not available"];
+    }
     self.textViewMessage.layer.borderWidth = 1;
     self.textViewMessage.layer.borderColor = [UIColor blackColor].CGColor;
     
@@ -57,7 +71,6 @@
     [self updateParamDict:params value:[self.MailMessagedict objectForKey:@"discussion_id"] key:@"id"];
 
     self.json = [NSMutableArray new];
-
 
     [manager POST:@"http://uwurk.tscserver.com/api/v1/discussion" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@",responseObject);
@@ -76,31 +89,28 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return [self.json count];
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     NSDictionary *itemDict = [self.json objectAtIndex:indexPath.row];
-    
 
-    if([[itemDict objectForKey:@"from_user_id"] isEqualToString:self.userID]) {
+    if([itemDict objectForKey:@"from_user_id"] == self.userID) {
         EmployeeMessageDetailRightTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EmployeeMessageDetailRightTableViewCell" forIndexPath:indexPath];
         cell.textBubbleView.layer.cornerRadius = 3;
         cell.textBubbleView.layer.masksToBounds = YES;
         NSDictionary *itemDict = [self.json objectAtIndex:indexPath.row];
         cell.lblText.text = [itemDict objectForKey:@"message"];
         return cell;
-    }
-    else {
+    } else {
         EmployeeMessageDetailLeftTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EmployeeMessageDetailLeftTableViewCell" forIndexPath:indexPath];
         cell.textBubbleView.layer.cornerRadius = 3;
         cell.textBubbleView.layer.masksToBounds = YES;
@@ -109,6 +119,7 @@
         return cell;
     }
 }
+
 //- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 //    if (indexPath.section == 0) {
 //        NSDictionary *dict = [self.json objectAtIndex:indexPath.row];
@@ -124,7 +135,13 @@
 //    }
 //}
 
-- (IBAction)pressSend:(id)sender {
+- (IBAction)pressProfile:(id)sender
+{
+    
+}
+
+- (IBAction)pressSend:(id)sender
+{
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:[self.MailMessagedict objectForKey:@"discussion_id"] forKey:@"discussion_id"];

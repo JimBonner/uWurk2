@@ -1453,6 +1453,9 @@
                             <constraint firstAttribute="width" secondItem="bWZ-rb-nBL" secondAttribute="width" id="zHk-bI-Uki"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btnReturn" destination="ocz-4g-06o" id="zlg-SC-dxp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gi1-u6-j43" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -65,7 +65,6 @@
     return [self.json count];
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MailMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MailMessageCell" forIndexPath:indexPath];
@@ -77,6 +76,17 @@
         cell.lblSubject.font = [UIFont fontWithName:@"RobotoCondensed-Bold" size:17];
     } else {
         cell.lblPosition.text = [parmdic objectForKey:@"position"];
+        NSString *string = @"";
+        if([[parmdic objectForKey:@"hours"]integerValue] == 1) {
+            string = @" - Full Time";
+        } else if([[parmdic objectForKey:@"hours"]integerValue] == 2) {
+            string = @" - Part Time";
+        } else if([[parmdic objectForKey:@"hours"]integerValue] == 3) {
+            string = @" - Temporary";
+        } else {
+            string = @" - Hours not available";
+        }
+        cell.lblPosition.text = [cell.lblPosition.text stringByAppendingString:string];
         if ([[self.appDelegate.user objectForKey:@"user_type"] isEqualToString:@"user"]) {
             cell.lblSubject.text = [NSString stringWithFormat:@"%@ %@",[parmdic objectForKey:@"to_first_name"],[parmdic objectForKey:@"to_last_name"]];
         } else {

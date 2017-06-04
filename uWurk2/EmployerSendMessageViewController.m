@@ -12,6 +12,7 @@
 #import "EmployerMessageDetailRightTableViewCell.h"
 
 @interface EmployerSendMessageViewController ()
+
 @property (weak, nonatomic) IBOutlet UILabel *lblName;
 @property (weak, nonatomic) IBOutlet UILabel *lblPosition;
 @property (weak, nonatomic) IBOutlet UILabel *lblLocation;
@@ -64,8 +65,22 @@
     
     self.lblName.text = [NSString stringWithFormat:@"%@ %@",[self.MailMessagedict objectForKey:@"to_first_name"],[self.MailMessagedict objectForKey:@"to_last_name"]];
     self.lblPosition.text = [self.MailMessagedict objectForKey:@"position"];
+    NSString *string = @"";
+    if([[self.MailMessagedict objectForKey:@"hours"]integerValue] == 1) {
+        string = @" - Full Time";
+    } else if([[self.MailMessagedict objectForKey:@"hours"]integerValue] == 2) {
+        string = @" - Part Time";
+    } else if([[self.MailMessagedict objectForKey:@"hours"]integerValue] == 3) {
+        string = @" - Temporary";
+    } else {
+        string = @" - Hours not available";
+    }
+    self.lblPosition.text = [self.lblPosition.text stringByAppendingString:string];
     self.lblLocation.text = [self.MailMessagedict objectForKey:@"location"];
     self.lblWage.text = [self.MailMessagedict objectForKey:@"wage"];
+    if([self.lblWage.text isEqualToString:@""]) {
+        self.lblWage.text = [self.lblWage.text stringByAppendingString:@"Wage not available"];
+    }
     self.textViewMessage.layer.borderWidth = 1;
     self.textViewMessage.layer.borderColor = [UIColor blackColor].CGColor;
     AFHTTPRequestOperationManager *manager = [self getManager];

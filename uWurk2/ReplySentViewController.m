@@ -10,6 +10,8 @@
 
 @interface ReplySentViewController ()
 
+@property (strong, nonatomic) IBOutlet UIButton *btnReturn;
+
 @end
 
 @implementation ReplySentViewController
@@ -19,7 +21,8 @@
     [super viewWillAppear:animated];
 }
 
-- (IBAction)pressReturn:(UIButton *)sender {
+- (IBAction)pressReturn:(UIButton *)sender
+{
     UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]  instantiateViewControllerWithIdentifier:@"EmployeeLanding"];
     [self.navigationController setViewControllers:@[myController] animated:TRUE];
 }

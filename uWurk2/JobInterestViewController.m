@@ -27,11 +27,27 @@
     
     self.lblEmployer.text = [self.MailMessagedict objectForKey:@"company"];
     self.lblPosition.text = [self.MailMessagedict objectForKey:@"position"];
+    NSString *string = @"";
+    if([[self.MailMessagedict objectForKey:@"hours"]integerValue] == 1) {
+        string = @" - Full Time";
+    } else if([[self.MailMessagedict objectForKey:@"hours"]integerValue] == 2) {
+        string = @" - Part Time";
+    } else if([[self.MailMessagedict objectForKey:@"hours"]integerValue] == 3) {
+        string = @" - Temporary";
+    } else {
+        string = @" - Hours not available";
+    }
+    self.lblPosition.text = [self.lblPosition.text stringByAppendingString:string];
     self.lblLocation.text = [self.MailMessagedict objectForKey:@"location"];
+    self.lblLocation.text = [self.lblLocation.text stringByAppendingString:@" Zip not available"];
     self.lblWage.text = [self.MailMessagedict objectForKey:@"wage"];
+    if([self.lblWage.text isEqualToString:@""]) {
+        self.lblWage.text = @"Wage not available";
+    }
 }
 
-- (IBAction)pressReply:(UIButton *)sender {
+- (IBAction)pressReply:(UIButton *)sender
+{
     AFHTTPRequestOperationManager *manager = [self getManager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:[self.MailMessagedict objectForKey:@"discussion_id"] forKey:@"discussion_id"];

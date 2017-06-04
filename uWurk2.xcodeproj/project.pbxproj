@@ -20,6 +20,7 @@
 		1E51E0981EAE99140070BF54 /* RegisterThanksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E51E0971EAE99140070BF54 /* RegisterThanksViewController.m */; };
 		1E56A2881ED358FE00AD4526 /* Mail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCA4AE711C41B592007B7F1B /* Mail.storyboard */; };
 		1E58D5B71ECEB94B00B816E8 /* Spinner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E58D5B61ECEB94B00B816E8 /* Spinner.m */; };
+		1E5E7DC91EE488A900C70D0C /* EmployerSendMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B04526D1C04456700B33526 /* EmployerSendMessageViewController.m */; };
 		1E9CCB001E91B2C2008DBEE7 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9CCAFF1E91B2C2008DBEE7 /* Photos.framework */; };
 		1EAE1B901E78738100BE2C11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B497CA91BACA21300BE59B6 /* Main.storyboard */; };
 		1ECFB79B1EBC47C3004982EC /* EmployeeProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCA4AE731C41B6E6007B7F1B /* EmployeeProfile.storyboard */; };
@@ -32,7 +33,6 @@
 		9B0452691C03CA7100B33526 /* ReplySentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0452641C03CA7100B33526 /* ReplySentViewController.m */; };
 		9B04526A1C03CA7100B33526 /* JobInterestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0452661C03CA7100B33526 /* JobInterestViewController.m */; };
 		9B04526B1C03CA7100B33526 /* ViewJobMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0452681C03CA7100B33526 /* ViewJobMessageViewController.m */; };
-		9B04526E1C04456700B33526 /* EmployerSendMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B04526D1C04456700B33526 /* EmployerSendMessageViewController.m */; };
 		9B0452711C0564E000B33526 /* EmployeeSendMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0452701C0564E000B33526 /* EmployeeSendMessageViewController.m */; };
 		9B0C71391C777110003DB760 /* EditEmployerCompanyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0C71381C777110003DB760 /* EditEmployerCompanyInfoViewController.m */; };
 		9B0C713C1C777128003DB760 /* EditEmployerPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0C713B1C777128003DB760 /* EditEmployerPreferencesViewController.m */; };
@@ -278,7 +278,7 @@
 		DC1BF10B1C0671F40036679F /* UIColor+uWurkColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+uWurkColors.h"; sourceTree = "<group>"; };
 		DC1BF10C1C0671F40036679F /* UIColor+uWurkColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+uWurkColors.m"; sourceTree = "<group>"; };
 		DC3F062C1C0BA1C400223484 /* EmployeeMessageDetailLeftTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeMessageDetailLeftTableViewCell.h; sourceTree = "<group>"; };
-		DC3F062D1C0BA1C500223484 /* EmployeeMessageDetailLeftTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeMessageDetailLeftTableViewCell.m; sourceTree = "<group>"; };
+		DC3F062D1C0BA1C500223484 /* EmployeeMessageDetailLeftTableViewCell.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = EmployeeMessageDetailLeftTableViewCell.m; sourceTree = "<group>"; };
 		DC3F062F1C0BA27E00223484 /* EmployeeMessageDetailRightTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeMessageDetailRightTableViewCell.h; sourceTree = "<group>"; };
 		DC3F06301C0BA27E00223484 /* EmployeeMessageDetailRightTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeMessageDetailRightTableViewCell.m; sourceTree = "<group>"; };
 		DC3F06321C0C706C00223484 /* UrlImageRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UrlImageRequest.m; sourceTree = "<group>"; };
@@ -885,6 +885,7 @@
 				9BEA1B651B9E27160017D87A /* BaseViewController.m in Sources */,
 				9BEA1B1B1B9A32B00017D87A /* EmployeeStep2ViewController.m in Sources */,
 				9B379CF61B97EAB800EB4E2D /* IntroEmployerViewController.m in Sources */,
+				1E5E7DC91EE488A900C70D0C /* EmployerSendMessageViewController.m in Sources */,
 				9BD16A651BEC50D2006BAF69 /* MailFolderTableViewCell.m in Sources */,
 				9B37608D1C0C866A00E9FB7D /* EmployeeWhatDoIDoViewController.m in Sources */,
 				DC3F06341C0C706C00223484 /* UrlImageRequest.m in Sources */,
@@ -948,7 +949,6 @@
 				9B379CBB1B95217700EB4E2D /* IntroViewController.m in Sources */,
 				9B04526A1C03CA7100B33526 /* JobInterestViewController.m in Sources */,
 				9B214CB61C2FCBB00063BC0E /* RefineSearchViewController.m in Sources */,
-				9B04526E1C04456700B33526 /* EmployerSendMessageViewController.m in Sources */,
 				9B379CBE1B95247600EB4E2D /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -134,6 +134,7 @@
 
 - (void)logout
 {
+    [self saveUserDefault:@"" Key:@"email"];
     [self saveUserDefault:@"" Key:@"api_auth_token"];
     IntroViewController *introViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"InitialView"];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:introViewController];

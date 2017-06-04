@@ -97,11 +97,6 @@
             NSLog(@"Error: %@", error);
             [self handleErrorAccessError:@"Contact Profile" withError:error];
         }];
-    } else {
-        ContactProfileNotifyViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil]  instantiateViewControllerWithIdentifier:@"ContactProfileNotifyView"];
-        [myController setSearchUserDict:self.searchUserDict];
-        [myController setSearchParams:self.searchParams];
-        [self.navigationController setViewControllers:@[myController] animated:TRUE];
     }
 }
 
