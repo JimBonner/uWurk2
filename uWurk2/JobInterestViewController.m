@@ -39,7 +39,6 @@
     }
     self.lblPosition.text = [self.lblPosition.text stringByAppendingString:string];
     self.lblLocation.text = [self.MailMessagedict objectForKey:@"location"];
-    self.lblLocation.text = [self.lblLocation.text stringByAppendingString:@" Zip not available"];
     self.lblWage.text = [self.MailMessagedict objectForKey:@"wage"];
     if([self.lblWage.text isEqualToString:@""]) {
         self.lblWage.text = @"Wage not available";
