@@ -3,7 +3,6 @@
 #ifndef uWurk2_Info_prefix_pch
 #define uWurk2_Info_prefix_pch
 
-
 // Log in DEBUG build only
 #ifdef DEBUG
 #   define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);

@@ -120,21 +120,6 @@
     }
 }
 
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (indexPath.section == 0) {
-//        NSDictionary *dict = [self.json objectAtIndex:indexPath.row];
-//        MailMessagesTableViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil]  instantiateViewControllerWithIdentifier:@"MailMessages"];
-//        [myController setMailFolderDict:dict];
-//        [self.navigationController pushViewController:myController animated:TRUE];
-//    }
-//    else {
-//        NSDictionary *dict = [self.json2 objectAtIndex:indexPath.row];
-//        MailMessagesTableViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil]  instantiateViewControllerWithIdentifier:@"MailMessages"];
-//        [myController setMailFolderDict:dict];
-//        [self.navigationController pushViewController:myController animated:TRUE];
-//    }
-//}
-
 - (IBAction)pressProfile:(id)sender
 {
     
@@ -153,9 +138,6 @@
         [manager POST:@"http://uwurk.tscserver.com/api/v1/post_message" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [self.tblView reloadData];
             [self.btnSend setEnabled:FALSE];
-
-//                        UIViewController *myController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EmployeeSendMessage"];
-//                        [self.navigationController setViewControllers:@[myController] animated:TRUE];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
             [self handleErrorAccessError:@"Employee Send Message" withError:error];

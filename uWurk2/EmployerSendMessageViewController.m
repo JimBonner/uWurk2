@@ -191,8 +191,6 @@
                 self.tblView.alpha = 1;
                 [self.view layoutIfNeeded];
             }];
-//            UIViewController *myController = [[UIStoryboard storyboardWithName:@"Mail" bundle:nil]  instantiateViewControllerWithIdentifier:@"EmployerSendMessage"];
-//            [self.navigationController setViewControllers:@[myController] animated:TRUE];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
             [self handleErrorAccessError:@"Employer Send Message" withError:error];

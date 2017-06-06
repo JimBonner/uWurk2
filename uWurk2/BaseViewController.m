@@ -10,6 +10,7 @@
 #import "BaseViewController.h"
 #import "IntroViewController.h"
 #import "UrlImageRequest.h"
+#import "DebugViewController.h"
 
 @interface BaseViewController ()
 
@@ -45,6 +46,24 @@
     }
     
     self.flasher = NO;
+    
+    if(DEBUG && 0) {
+        UIButton *btnWhat = [[UIButton alloc]init];
+        btnWhat.frame = CGRectMake(0.0,0.0,30.0,30.0);
+        [btnWhat setImage:[UIImage imageNamed:@"gear_yellow"] forState:UIControlStateNormal];
+        [btnWhat addTarget:self action:@selector(whatButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
+        [self.parentViewController.view addSubview:btnWhat];
+
+    }
+}
+
+- (IBAction)whatButtonTouchDown:(id)sender
+{
+    DebugViewController *mvc = [[UIStoryboard storyboardWithName:@"GeneralViews" bundle:nil] instantiateViewControllerWithIdentifier:@"DebugViewController"];
+    mvc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    mvc.modalTransitionStyle  = UIModalTransitionStyleCrossDissolve;
+    mvc.viewController = self;
+    [self presentViewController:mvc animated:YES completion:Nil];
 }
 
 -(void)assignValue:(NSString*)value control:(UITextField *)control {
