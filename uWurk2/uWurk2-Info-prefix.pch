@@ -20,5 +20,6 @@
 #   define ULog(...)
 #endif
 
+#define DEVELOPMENT 1
 
 #endif 

@@ -92,7 +92,7 @@
                                          }];
                 [alert addAction:cancel];
                 
-                if([self getUserDefault:@"email"] && DEBUG &&
+                if([self getUserDefault:@"email"] && DEVELOPMENT &&
                    [self getUserDefault:@"api_auth_token"] &&
                    [message containsString:@"email"] &&
                    [message containsString:@"taken"])

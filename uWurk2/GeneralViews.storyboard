@@ -244,10 +244,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bXH-h9-XmA">
-                                <rect key="frame" x="-0.5" y="64" width="375" height="50"/>
+                                <rect key="frame" x="-0.5" y="64" width="375" height="58"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stroy Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jbz-Q2-9ad">
                                         <rect key="frame" x="38" y="10" width="300" height="16.5"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="300" id="cIK-d9-QxD"/>
                                         </constraints>
@@ -257,7 +258,7 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FjM-Re-gV7">
                                         <rect key="frame" x="37.5" y="31.5" width="300" height="16.5"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="300" id="E0h-lo-4yf"/>
                                         </constraints>
@@ -266,12 +267,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="FjM-Re-gV7" firstAttribute="centerX" secondItem="bXH-h9-XmA" secondAttribute="centerX" id="Yyi-V2-jKa"/>
                                     <constraint firstItem="jbz-Q2-9ad" firstAttribute="top" secondItem="bXH-h9-XmA" secondAttribute="top" constant="10" id="aXW-se-73s"/>
                                     <constraint firstItem="FjM-Re-gV7" firstAttribute="top" secondItem="jbz-Q2-9ad" secondAttribute="bottom" constant="5" id="brN-HD-lcy"/>
-                                    <constraint firstAttribute="height" constant="50" id="d4l-Gh-5LN"/>
+                                    <constraint firstAttribute="height" constant="58" id="d4l-Gh-5LN"/>
                                     <constraint firstItem="jbz-Q2-9ad" firstAttribute="centerX" secondItem="bXH-h9-XmA" secondAttribute="centerX" id="iVz-ym-vMk"/>
                                 </constraints>
                             </view>

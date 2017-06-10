@@ -52,7 +52,7 @@
 {
     [super viewWillAppear:animated];
 
-    if(DEBUG) {
+    if(DEVELOPMENT) {
         for(UIView *view in self.appDelegate.window.subviews) {
             if(view.tag == 12321) {
                 [view removeFromSuperview];

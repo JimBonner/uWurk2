@@ -44,7 +44,7 @@
 
     self.flasher = NO;
     
-    if(DEBUG) {
+    if(DEVELOPMENT) {
         UIView *sbView = nil;
         for(UIView *view in self.view.subviews) {
             if(view.tag == 1023) {
