@@ -44,16 +44,28 @@
 
     self.flasher = NO;
     
-    if(DEBUG && 0) {
-        UIButton *btnWhat = [[UIButton alloc]init];
-        btnWhat.frame = CGRectMake(0.0,0.0,30.0,30.0);
-        [btnWhat setImage:[UIImage imageNamed:@"gear_yellow"] forState:UIControlStateNormal];
-        [btnWhat addTarget:self action:@selector(whatButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
-        [self.parentViewController.view addSubview:btnWhat];
-        
+    if(DEBUG) {
+        UIView *sbView = nil;
+        for(UIView *view in self.view.subviews) {
+            if(view.tag == 1023) {
+                sbView = view;
+                break;
+            }
+        }
+        if(!sbView) {
+            CGRect sbFrame = [[UIApplication sharedApplication]statusBarFrame];
+            float imgS = sbFrame.size.height;
+            float imgX = (sbFrame.size.width  - imgS)/2.0;
+            float imgY = (sbFrame.size.height - imgS)/2.0;
+            UIButton *btnWhat = [[UIButton alloc]init];
+            btnWhat.tag = 1023;
+            btnWhat.frame = CGRectMake(imgX,imgY,imgS,imgS);
+            [btnWhat setImage:[UIImage imageNamed:@"gear_yellow"] forState:UIControlStateNormal];
+            [btnWhat addTarget:self action:@selector(whatButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
+            [self.view addSubview:btnWhat];
+        }
     }
 }
-
 
 - (IBAction)whatButtonTouchDown:(id)sender
 {

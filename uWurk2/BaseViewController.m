@@ -46,14 +46,32 @@
     }
     
     self.flasher = NO;
-    
-    if(DEBUG && 0) {
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    if(DEBUG) {
+        for(UIView *view in self.appDelegate.window.subviews) {
+            if(view.tag == 12321) {
+                [view removeFromSuperview];
+                break;
+            }
+        }
+        UIWindow *wind = self.appDelegate.window;
+        float imgS = 20.0;
+        float imgX = 1.0;
+        float imgY = [self.appDelegate topLayoutGuideHeight:self.navigationController] + 12.0;
         UIButton *btnWhat = [[UIButton alloc]init];
-        btnWhat.frame = CGRectMake(0.0,0.0,30.0,30.0);
+        btnWhat.tag = 12321;
+        btnWhat.frame = CGRectMake(imgX,imgY,imgS,imgS);
         [btnWhat setImage:[UIImage imageNamed:@"gear_yellow"] forState:UIControlStateNormal];
         [btnWhat addTarget:self action:@selector(whatButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
-        [self.parentViewController.view addSubview:btnWhat];
-
+        btnWhat.enabled = YES;
+        btnWhat.userInteractionEnabled = YES;
+        [wind addSubview:btnWhat];
+        [wind bringSubviewToFront:btnWhat];
     }
 }
 
@@ -61,9 +79,10 @@
 {
     DebugViewController *mvc = [[UIStoryboard storyboardWithName:@"GeneralViews" bundle:nil] instantiateViewControllerWithIdentifier:@"DebugViewController"];
     mvc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    mvc.modalTransitionStyle  = UIModalTransitionStyleCrossDissolve;
+    mvc.modalTransitionStyle   = UIModalTransitionStyleCrossDissolve;
     mvc.viewController = self;
     [self presentViewController:mvc animated:YES completion:Nil];
+    [self.appDelegate.window viewWithTag:12321].hidden = YES;
 }
 
 -(void)assignValue:(NSString*)value control:(UITextField *)control {

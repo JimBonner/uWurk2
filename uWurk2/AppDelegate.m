@@ -103,4 +103,18 @@
     [cell.contentView addSubview:separator];
 }
 
+- (float)topLayoutGuideHeight:(UINavigationController *)navController
+{
+    float sbHigh = 0.0;
+    if(![[UIApplication sharedApplication]isStatusBarHidden]) {
+        sbHigh = [[UIApplication sharedApplication]statusBarFrame].size.height;
+
+    }
+    float nbHigh = 0.0;
+    if(!navController.navigationBar.hidden) {
+        nbHigh = navController.navigationBar.frame.size.height;
+    }
+    return sbHigh + nbHigh;
+}
+
 @end

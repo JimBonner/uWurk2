@@ -10,6 +10,9 @@
 
 @interface DebugViewController ()
 
+@property (nonatomic,weak)IBOutlet UILabel *lblStoryName;
+@property (nonatomic,weak)IBOutlet UILabel *lblClassName;
+
 @end
 
 @implementation DebugViewController
@@ -24,8 +27,8 @@
     
     [self.view addGestureRecognizer:tapRecognizer];
     
-    NSString *className = NSStringFromClass([self.viewController class]);
-    NSString *storyName = [self.viewController.storyboard valueForKey:@"name"];
+    self.lblStoryName.text = [NSString stringWithFormat:@"Storyboard: %@",[self.viewController.storyboard valueForKey:@"name"]];
+    self.lblClassName.text = [NSString stringWithFormat:@"Class Name: %@",NSStringFromClass([self.viewController class])];
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,6 +38,9 @@
 
 - (void)handleTapGesture:(UIGestureRecognizer *)sender
 {
+    UIApplication *appDelegate = [UIApplication sharedApplication];
+    UIButton *button = [appDelegate.delegate.window viewWithTag:12321];
+    button.hidden = NO;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

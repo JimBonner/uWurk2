@@ -18,6 +18,7 @@
 @property (strong, nonatomic) NSString *photosAddress;
 
 - (NSString *)getDocumentsDirectory;
+- (float)topLayoutGuideHeight:(UINavigationController *)navController;
 - (void)setupUwurkStyle:(UITableView *)tableView cell:(UITableViewCell *)cell;
 
 @end
